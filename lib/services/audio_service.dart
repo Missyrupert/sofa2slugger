@@ -46,18 +46,24 @@ class AudioService {
     try {
       _currentSessionId = sessionId;
       
-      // Cache busting for Web: Append timestamp query param
-      // Note: On native, this might fail if strictly file path, but assets usually handled via AssetSource
-      // For just_audio with setAsset, it expects a key.
-      // If we are on web, we might need setUrl if we want params, OR we presume setAsset handles keys.
-      // Actually, setAsset uses the key from pubspec.
+      // CRITICAL FIX: Use URI parsing with unique timestamp to force browser to ignore cache.
+      // Flutter Web assets are served from the root. 'assets/session01.mp3' needs to be accessed 
+      // as a URI.
       
-      // If just_audio caches based on key, we might need a workaround.
-      // Let's try to verify if we are on web.
-        
-      await _player.setAsset(assetPath);
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      // On web, assets are often at 'assets/assets/...' but let's try standard asset key first with query param.
+      // If we use AudioSource.uri, we bypass the internal asset cache key logic of just_audio somewhat.
+      
+      final uriPath = "$assetPath?t=$timestamp";
+      
+      // We use Uri.parse. For local assets in Flutter, the scheme is usually 'asset:///' but 
+      // just_audio on web handles http/relative paths. 
+      // Note: 'assetPath' is "assets/session01.mp3".
+      
+      await _player.setAudioSource(AudioSource.uri(Uri.parse(uriPath)));
+      
       final duration = _player.duration;
-      print("AudioService: Asset loaded. Duration: $duration");
+      print("AudioService: Asset loaded via URI ($uriPath). Duration: $duration");
     } catch (e) {
       print("AudioService: Error loading audio asset: $e");
       _currentSessionId = null; 

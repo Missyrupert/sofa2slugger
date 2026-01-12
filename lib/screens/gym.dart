@@ -51,7 +51,7 @@ class GymScreen extends ConsumerWidget {
                       children: [
                         // Index
                         Text(
-                          index == 0 ? "M" : "$index", // M for Manifesto
+                          index == 0 ? "" : "$index", // Hidden for Manifesto
                           style: theme.textTheme.displaySmall?.copyWith(
                             color: isLocked ? Colors.grey : theme.colorScheme.primary,
                             fontWeight: FontWeight.bold,
