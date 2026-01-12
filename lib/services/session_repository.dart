@@ -16,23 +16,24 @@ class SessionRepository {
   late SharedPreferences _prefs;
 
   // Hardcoded Session Data
+  // Hardcoded Session Data
   final List<Session> _allSessions = [
     Session(
       id: 'manifesto', // Changed from orientation
       title: 'THE MANIFESTO', // Changed from Orientation
       description: 'Context & Safety. Required.',
-      audioPath: 'assets/orientation.mp3', 
+      audioPath: '/audio/orientation.mp3', 
     ),
-    Session(id: 'session01', title: 'Session 01', description: 'Foundations', audioPath: 'assets/session01.mp3'),
-    Session(id: 'session02', title: 'Session 02', description: 'Movement', audioPath: 'assets/session02.mp3'),
-    Session(id: 'session03', title: 'Session 03', description: 'Lead Side', audioPath: 'assets/session03.mp3'),
-    Session(id: 'session04', title: 'Session 04', description: 'Rear Side', audioPath: 'assets/session04.mp3'),
-    Session(id: 'session05', title: 'Session 05', description: 'Rhythm', audioPath: 'assets/session05.mp3'),
-    Session(id: 'session06', title: 'Session 06', description: 'Consistency', audioPath: 'assets/session06.mp3'),
-    Session(id: 'session07', title: 'Session 07', description: 'Targets', audioPath: 'assets/session07.mp3'),
-    Session(id: 'session08', title: 'Session 08', description: 'Distance', audioPath: 'assets/session08.mp3'),
-    Session(id: 'session09', title: 'Session 09', description: 'Defence', audioPath: 'assets/session09.mp3'),
-    Session(id: 'session10', title: 'Session 10', description: 'The Round', audioPath: 'assets/session10.mp3'),
+    Session(id: 'session01', title: 'Session 01', description: 'Foundations', audioPath: '/audio/session01.mp3'),
+    Session(id: 'session02', title: 'Session 02', description: 'Movement', audioPath: '/audio/session02.mp3'),
+    Session(id: 'session03', title: 'Session 03', description: 'Lead Side', audioPath: '/audio/session03.mp3'),
+    Session(id: 'session04', title: 'Session 04', description: 'Rear Side', audioPath: '/audio/session04.mp3'),
+    Session(id: 'session05', title: 'Session 05', description: 'Rhythm', audioPath: '/audio/session05.mp3'),
+    Session(id: 'session06', title: 'Session 06', description: 'Consistency', audioPath: '/audio/session06.mp3'),
+    Session(id: 'session07', title: 'Session 07', description: 'Targets', audioPath: '/audio/session07.mp3'),
+    Session(id: 'session08', title: 'Session 08', description: 'Distance', audioPath: '/audio/session08.mp3'),
+    Session(id: 'session09', title: 'Session 09', description: 'Defence', audioPath: '/audio/session09.mp3'),
+    Session(id: 'session10', title: 'Session 10', description: 'The Round', audioPath: '/audio/session10.mp3'),
   ];
 
   /* init handled lazily */

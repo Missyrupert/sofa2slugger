@@ -42,28 +42,19 @@ class AudioService {
   String? get currentSessionId => _currentSessionId;
 
   Future<void> loadSession(String assetPath, String sessionId) async {
-    print("AudioService: Attempting to load asset: $assetPath for session: $sessionId");
+    print("AudioService: Attempting to load static audio: $assetPath for session: $sessionId");
     try {
       _currentSessionId = sessionId;
       
-      // CRITICAL FIX: Use URI parsing with unique timestamp to force browser to ignore cache.
-      // Flutter Web assets are served from the root. 'assets/session01.mp3' needs to be accessed 
-      // as a URI.
+      // Stop previous playback to flush buffer
+      await _player.stop();
       
-      final timestamp = DateTime.now().millisecondsSinceEpoch;
-      // On web, assets are often at 'assets/assets/...' but let's try standard asset key first with query param.
-      // If we use AudioSource.uri, we bypass the internal asset cache key logic of just_audio somewhat.
-      
-      final uriPath = "$assetPath?t=$timestamp";
-      
-      // We use Uri.parse. For local assets in Flutter, the scheme is usually 'asset:///' but 
-      // just_audio on web handles http/relative paths. 
-      // Note: 'assetPath' is "assets/session01.mp3".
-      
-      await _player.setAudioSource(AudioSource.uri(Uri.parse(uriPath)));
+      // Load directly from URI (static file in /web/audio/)
+      // No timestamps, no cache hacks needed if serving as real static files.
+      await _player.setAudioSource(AudioSource.uri(Uri.parse(assetPath)));
       
       final duration = _player.duration;
-      print("AudioService: Asset loaded via URI ($uriPath). Duration: $duration");
+      print("AudioService: Loaded static asset ($assetPath). Duration: $duration");
     } catch (e) {
       print("AudioService: Error loading audio asset: $e");
       _currentSessionId = null; 
