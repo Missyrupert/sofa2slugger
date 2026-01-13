@@ -1,8 +1,0 @@
-file 'C:/Users/chris/.gemini/antigravity/scratch/sofa2slugger/web/audio/raw/session08_part_000_vance.mp3'
-file 'C:/Users/chris/.gemini/antigravity/scratch/sofa2slugger/web/audio/raw/session08_part_001_mac.mp3'
-file 'C:/Users/chris/.gemini/antigravity/scratch/sofa2slugger/web/audio/raw/session08_part_002_mac.mp3'
-file 'C:/Users/chris/.gemini/antigravity/scratch/sofa2slugger/web/audio/raw/session08_part_003_mac.mp3'
-file 'C:/Users/chris/.gemini/antigravity/scratch/sofa2slugger/web/audio/raw/session08_part_004_mac.mp3'
-file 'C:/Users/chris/.gemini/antigravity/scratch/sofa2slugger/web/audio/raw/session08_part_005_mac.mp3'
-file 'C:/Users/chris/.gemini/antigravity/scratch/sofa2slugger/web/audio/raw/session08_part_006_mac.mp3'
-file 'C:/Users/chris/.gemini/antigravity/scratch/sofa2slugger/web/audio/raw/session08_part_007_vance.mp3'
