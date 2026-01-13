@@ -35,7 +35,7 @@ class CornerScreen extends ConsumerWidget {
                 value: true, // Mocked as true for display, logic is handled in Repo
                 onChanged: (val) async {
                    final repo = ref.read(sessionRepositoryProvider);
-                   await repo.setPremium(val);
+                   repo.setPremium(val);
                    ref.refresh(sessionsProvider);
                    
                    if (context.mounted) {
