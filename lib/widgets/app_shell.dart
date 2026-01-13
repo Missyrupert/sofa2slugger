@@ -81,7 +81,7 @@ class AppShell extends ConsumerWidget {
 
   void _onItemTapped(int index, BuildContext context) {
     switch (index) {
-    switch (index) {
+
       case 0: GoRouter.of(context).go('/gym'); break;
       case 1: GoRouter.of(context).go('/tape'); break;
       case 2: GoRouter.of(context).go('/iq'); break;
