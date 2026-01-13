@@ -1,0 +1,13 @@
+{
+  "name": "sofa2slugger-audio-gen",
+  "version": "1.0.0",
+  "description": "Audio generation tools for Sofa2Slugger",
+  "scripts": {
+    "generate": "node generate_sessions.js"
+  },
+  "dependencies": {
+    "@cartesia/cartesia-js": "^2.0.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "dotenv": "^16.3.1"
+  }
+}

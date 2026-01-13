@@ -23,27 +23,62 @@ class TapeScreen extends ConsumerWidget {
         data: (sessions) {
           final completedCount = sessions.where((s) => s.isCompleted).length;
           final totalCount = sessions.length;
+          final progress = totalCount > 0 ? completedCount / totalCount : 0.0;
+          final estimatedMinutes = completedCount * 15; // Approx 15 mins per session
 
           return ListView(
             padding: const EdgeInsets.all(24),
             children: [
-              // Header Status
+              // premium Header Status
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
+                  color: const Color(0xFF111111),
+                  borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: Colors.white10),
-                  borderRadius: BorderRadius.circular(0),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
                   children: [
-                    Text("PROGRESS", style: theme.textTheme.labelMedium?.copyWith(color: Colors.grey)),
-                    Text(
-                      "$completedCount / $totalCount SESSIONS COMPLETED",
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        color: theme.colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("TOTAL PROGRESS", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
+                            const SizedBox(height: 4),
+                            Text(
+                              "${(progress * 100).toInt()}%",
+                              style: theme.textTheme.displayMedium?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text("TIME IN RING", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
+                            const SizedBox(height: 4),
+                            Text(
+                              "$estimatedMinutes MINS",
+                              style: theme.textTheme.headlineSmall?.copyWith(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    LinearProgressIndicator(
+                      value: progress,
+                      backgroundColor: Colors.grey[900],
+                      color: theme.colorScheme.primary,
+                      minHeight: 8,
+                      borderRadius: BorderRadius.circular(4),
                     ),
                   ],
                 ),

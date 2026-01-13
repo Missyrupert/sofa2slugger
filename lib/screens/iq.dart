@@ -1,63 +1,98 @@
 import 'package:flutter/material.dart';
 
 class IQScreen extends StatefulWidget {
+import 'package:sofa2slugger/data/glossary_data.dart';
+
+class IQScreen extends StatelessWidget {
   const IQScreen({super.key});
 
   @override
-  _IQScreenState createState() => _IQScreenState();
-}
-
-class _IQScreenState extends State<IQScreen> {
-  @override
   Widget build(BuildContext context) {
+    // Group items by category
+    final coreItems = glossaryData.where((i) => i.category == 'Core').toList();
+    final footworkItems = glossaryData.where((i) => i.category == 'Footwork').toList();
+    final defenseItems = glossaryData.where((i) => i.category == 'Defense').toList();
+    final conceptsItems = glossaryData.where((i) => i.category == 'Concept').toList();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'IQ',
-          style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 1.5),
+          'FIGHT IQ',
+          style: TextStyle(
+            fontWeight: FontWeight.w900, 
+            letterSpacing: 2.0,
+          ),
         ),
         centerTitle: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        surfaceTintColor: Colors.transparent, 
       ),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          _buildGlossaryItem(context, "STANCE", "The foundation.", "Feet shoulder-width apart, knees bent, hands up. This is your home.", "assets/images/stance.png"),
-          _buildGlossaryItem(context, "GUARD", "The shield.", "Hands covering the chin, elbows tucked in to protect the body.", "assets/images/guard.png"),
+          _buildSectionHeader(context, "THE PILLARS"),
+          ...coreItems.map((item) => _buildGlossaryItem(context, item)),
+          
           const Divider(height: 48, color: Colors.white10),
-          _buildGlossaryItem(context, "JAB (1)", "The range finder.", "Lead hand straight punch. Fast, snappy, sets up everything else.", "assets/images/jab.png"),
-          _buildGlossaryItem(context, "CROSS (2)", "The power.", "Rear hand straight punch. Rotates the hips and shoulders for maximum impact.", "assets/images/cross.png"),
-          _buildGlossaryItem(context, "HOOK (3/4)", "The corner.", "Circular punch. Elbow high, thumb up. Targets the side of the head or body.", "assets/images/hook.png"),
-          _buildGlossaryItem(context, "UPPERCUT (5/6)", "The lift.", "Vertical punch coming from underneath. Uses leg drive to lift the opponent's guard.", "assets/images/uppercut.png"),
+          _buildSectionHeader(context, "FOOTWORK"),
+          ...footworkItems.map((item) => _buildGlossaryItem(context, item)),
+
+          const Divider(height: 48, color: Colors.white10),
+          _buildSectionHeader(context, "DEFENSE"),
+          ...defenseItems.map((item) => _buildGlossaryItem(context, item)),
+
+          const Divider(height: 48, color: Colors.white10),
+          _buildSectionHeader(context, "CONCEPTS"),
+          ...conceptsItems.map((item) => _buildGlossaryItem(context, item)),
+          
+          const SizedBox(height: 48), // Bottom padding
         ],
       ),
     );
   }
 
-  Widget _buildGlossaryItem(BuildContext context, String term, String definition, String details, String imagePath) {
+  Widget _buildSectionHeader(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24.0, top: 8.0),
+      child: Text(
+        title,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.primary,
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.5,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGlossaryItem(BuildContext context, GlossaryItem item) {
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 48.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image Card
-          Container(
-            height: 200,
-            width: double.infinity,
-            margin: const EdgeInsets.only(bottom: 16),
-            decoration: BoxDecoration(
-              color: const Color(0xFF111111),
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: AssetImage(imagePath),
-                fit: BoxFit.cover,
+          // Image Card (Only if path exists)
+          if (item.imagePath != null)
+            Container(
+              height: 200,
+              width: double.infinity,
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF111111),
+                borderRadius: BorderRadius.circular(12),
+                image: DecorationImage(
+                  image: AssetImage(item.imagePath!),
+                  fit: BoxFit.cover,
+                ),
+                border: Border.all(color: Colors.white10),
               ),
-              border: Border.all(color: Colors.white10),
             ),
-          ),
           
           Text(
-            term,
+            item.term,
             style: theme.textTheme.headlineSmall?.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w900,
@@ -66,10 +101,10 @@ class _IQScreenState extends State<IQScreen> {
           ),
           const SizedBox(height: 8),
            // "WHAT"
-          _buildDetailRow(theme, "WHAT", definition),
+          _buildDetailRow(theme, "WHAT", item.definition),
            const SizedBox(height: 8),
-           // "WHY" / "HOW" could be merged or split. Using "WHY & HOW" logic from description.
-          _buildDetailRow(theme, "WHY & HOW", details),
+           // "WHY & HOW"
+          _buildDetailRow(theme, "WHY & HOW", item.details),
         ],
       ),
     );

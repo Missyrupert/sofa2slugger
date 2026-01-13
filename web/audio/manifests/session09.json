@@ -1,0 +1,70 @@
+[
+  {
+    "type": "speech",
+    "speaker": "VANCE",
+    "file": "session09_part_000_vance.mp3",
+    "text": "This is Session Nine. By now, the work should feel familiar. Not easy. But known. You’ve learned how to stand. How to move. How to strike. How to protect yourself. What remains is not new skill. It’s readiness. Next session, you’ll move through a full round. Not all punches. Not constant pressure. But the shape of it. The feeling of it. Today is about preparation. Here is Mac."
+  },
+  {
+    "type": "silence",
+    "duration": 4
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session09_part_001_mac.mp3",
+    "text": "Mac here. Session Nine. This is about getting comfortable with longer sequences. You won’t rush. You won’t empty the tank. You’ll work, then you’ll breathe. Just like a real round. Stay with me."
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session09_part_002_mac.mp3",
+    "text": "Start in stance. Hands up. We’re finding rhythm. Jab. Cross. Pause. After me. Set of four. Jab. Cross. Pause. One. Jab. Cross. Pause. Two. Jab. Cross. Pause. Three. Jab. Cross. Pause. Four. Again. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Stay loose."
+  },
+  {
+    "type": "silence",
+    "duration": 2
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session09_part_003_mac.mp3",
+    "text": "Now we add awareness. Slip. Cross. Reset. You respond, then you settle. After me. Set of four. Slip. Cross. Reset. One. Slip. Cross. Reset. Two. Slip. Cross. Reset. Three. Slip. Cross. Reset. Four. Again. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Hands down briefly."
+  },
+  {
+    "type": "silence",
+    "duration": 2
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session09_part_004_mac.mp3",
+    "text": "Now we stretch the sequence. Jab. Cross. Hook. Pause. Not speed. Control. After me. Set of four. Jab. Cross. Hook. Pause. One. Jab. Cross. Hook. Pause. Two. Jab. Cross. Hook. Pause. Three. Jab. Cross. Hook. Pause. Four. Reset. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Breathe."
+  },
+  {
+    "type": "silence",
+    "duration": 2
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session09_part_005_mac.mp3",
+    "text": "Now we move and work. Punch. Turn. Settle. You’re learning how not to rush back in. After me. Set of four. Jab. Pivot. Set. One. Jab. Pivot. Set. Two. Jab. Pivot. Set. Three. Jab. Pivot. Set. Four. Again. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Let the arms hang."
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session09_part_006_mac.mp3",
+    "text": "Take a breath. This wasn’t about pushing. It was about pacing. Next time, we put it all together. Well done."
+  },
+  {
+    "type": "silence",
+    "duration": 4
+  },
+  {
+    "type": "speech",
+    "speaker": "VANCE",
+    "file": "session09_part_007_vance.mp3",
+    "text": "Session Nine complete. You’ve done the preparation. You’ve built the habits. Next session is different. A full round. Start to finish. Guided the whole way. No pressure. Just presence. Rest well. Finish strong."
+  }
+]
