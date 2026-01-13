@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-class IQScreen extends StatefulWidget {
 import 'package:sofa2slugger/data/glossary_data.dart';
 
 class IQScreen extends StatelessWidget {
