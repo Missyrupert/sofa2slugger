@@ -42,14 +42,14 @@ const List<GlossaryItem> glossaryData = [
     category: "Core",
     definition: "The hammer.",
     details: "Rear hand straight punch. Rotate hips and shoulders. High power, long range.",
-    imagePath: "assets/images/cross.png",
+    imagePath: "assets/images/cross.jpg",
   ),
   GlossaryItem(
     term: "HOOK",
     category: "Core",
     definition: "The corner.",
     details: "Circular punch. Elbow high, thumb up. Targets the side of the head or body. devastating power.",
-    imagePath: "assets/images/hook.png",
+    imagePath: "assets/images/hook.jpg",
   ),
   GlossaryItem(
     term: "UPPERCUT",

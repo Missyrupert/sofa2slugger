@@ -74,15 +74,15 @@ class IQScreen extends StatelessWidget {
         children: [
           // Image Card (Only if path exists)
           // Image Card
-          if (item.imagePath != null)
+            if (item.imagePath != null)
             Center(
               child: Container(
-                height: 150, // Reduced from 220
-                width: MediaQuery.of(context).size.width * 0.85, // Constrain width (85%)
-                margin: const EdgeInsets.only(bottom: 20),
+                height: 200, // Reduced from 280 to be "not massive"
+                width: 200, 
+                margin: const EdgeInsets.only(bottom: 24),
                 decoration: BoxDecoration(
                   color: const Color(0xFF050505),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(12),
                   image: DecorationImage(
                     image: AssetImage(item.imagePath!),
                     fit: BoxFit.cover,
@@ -91,9 +91,9 @@ class IQScreen extends StatelessWidget {
                   border: Border.all(color: Colors.white12, width: 1),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.8),
-                      blurRadius: 12,
-                      offset: const Offset(0, 6),
+                      color: Colors.black.withOpacity(0.6),
+                      blurRadius: 16,
+                      offset: const Offset(0, 8),
                     ),
                   ],
                 ),

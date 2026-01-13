@@ -42,13 +42,13 @@ class GymScreen extends ConsumerWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFF0A0A0A), // Obsidian Black
                     border: Border.all(
-                      color: isLocked ? Colors.white10 : const Color(0xFFD4AF37), // Iron vs Gold
+                      color: isLocked ? Colors.white10 : const Color(0xFFB71C1C), // Iron vs Blood Red
                       width: isLocked ? 1 : 2,
                     ),
                     borderRadius: BorderRadius.circular(4), // Sharp/Brutalist
                     boxShadow: isLocked ? [] : [
                       BoxShadow(
-                        color: const Color(0xFFD4AF37).withOpacity(0.2),
+                        color: const Color(0xFFB71C1C).withOpacity(0.2),
                         blurRadius: 15,
                         offset: const Offset(0, 4),
                       )
@@ -74,10 +74,10 @@ class GymScreen extends ConsumerWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: isLocked ? Colors.white24 : const Color(0xFFD4AF37),
+                                  color: isLocked ? Colors.white24 : const Color(0xFFB71C1C),
                                   width: 2,
                                 ),
-                                color: isCompleted ? const Color(0xFFD4AF37) : Colors.transparent,
+                                color: isCompleted ? const Color(0xFFB71C1C) : Colors.transparent,
                               ),
                               child: Center(
                                 child: isLocked 
@@ -87,7 +87,7 @@ class GymScreen extends ConsumerWidget {
                                     : Text(
                                         "${index}", // Session Number
                                         style: const TextStyle(
-                                          color: Color(0xFFD4AF37),
+                                          color: Color(0xFFB71C1C),
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -127,7 +127,7 @@ class GymScreen extends ConsumerWidget {
                             if (!isLocked)
                               Icon(
                                 Icons.play_circle_fill,
-                                color: const Color(0xFFD4AF37),
+                                color: const Color(0xFFB71C1C),
                                 size: 32,
                               ),
                           ],

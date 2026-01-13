@@ -33,13 +33,13 @@ class CornerScreen extends ConsumerWidget {
                 margin: const EdgeInsets.only(bottom: 24),
                 decoration: BoxDecoration(
                   color: const Color(0xFF0A0A0A),
-                  border: Border.all(color: const Color(0xFFD4AF37).withOpacity(0.5)),
+                  border: Border.all(color: const Color(0xFFB71C1C).withOpacity(0.5)),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: SwitchListTile(
                   title: const Text('PREMIUM MODE', 
                     style: TextStyle(
-                      color: Color(0xFFD4AF37), 
+                      color: Color(0xFFB71C1C), 
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.0
                     )
@@ -57,7 +57,7 @@ class CornerScreen extends ConsumerWidget {
                        );
                      }
                   },
-                  activeColor: const Color(0xFFD4AF37),
+                  activeColor: const Color(0xFFB71C1C),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 ),
               );

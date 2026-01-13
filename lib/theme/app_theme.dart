@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static const Color _black = Color(0xFF0a0a0a);
   static const Color _surface = Color(0xFF1a1a1a);
-  static const Color _sluggerRed = Color(0xFFD00000);
+  static const Color _sluggerRed = Color(0xFFB71C1C); // Blood Red
   static const Color _white = Color(0xFFFFFFFF);
   static const Color _grey = Color(0xFF888888);
 

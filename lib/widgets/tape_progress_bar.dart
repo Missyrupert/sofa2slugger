@@ -12,7 +12,7 @@ class TapeProgressBar extends StatelessWidget {
     required this.progress,
     this.height = 48.0,
     this.baseColor = const Color(0xFFE0E0E0), // White/creamy tape
-    this.progressColor = const Color(0xFFFFD700), // Gold
+    this.progressColor = const Color(0xFFB71C1C), // Blood Red
   });
 
   @override
