@@ -29,23 +29,37 @@ class CornerScreen extends ConsumerWidget {
             builder: (context, ref, _) {
               // This is a mock toggle since we don't have real IAP yet.
               // We'll read the current state from repo if possible, or just default to on.
-              return SwitchListTile(
-                title: const Text('Premium Mode (Mock)', style: TextStyle(color: Colors.white)),
-                subtitle: const Text('Unlock all sessions', style: TextStyle(color: Colors.white54)),
-                value: true, // Mocked as true for display, logic is handled in Repo
-                onChanged: (val) async {
-                   final repo = ref.read(sessionRepositoryProvider);
-                   repo.setPremium(val);
-                   ref.refresh(sessionsProvider);
-                   
-                   if (context.mounted) {
-                     ScaffoldMessenger.of(context).showSnackBar(
-                       SnackBar(content: Text(val ? "Premium features unlocked." : "Premium features locked.")),
-                     );
-                   }
-                },
-                activeColor: theme.colorScheme.primary,
-                contentPadding: EdgeInsets.zero,
+              return Container(
+                margin: const EdgeInsets.only(bottom: 24),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF0A0A0A),
+                  border: Border.all(color: const Color(0xFFD4AF37).withOpacity(0.5)),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: SwitchListTile(
+                  title: const Text('PREMIUM MODE', 
+                    style: TextStyle(
+                      color: Color(0xFFD4AF37), 
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.0
+                    )
+                  ),
+                  subtitle: const Text('Unlock all sessions', style: TextStyle(color: Colors.white54, fontSize: 12)),
+                  value: true, 
+                  onChanged: (val) async {
+                     final repo = ref.read(sessionRepositoryProvider);
+                     repo.setPremium(val);
+                     ref.refresh(sessionsProvider);
+                     
+                     if (context.mounted) {
+                       ScaffoldMessenger.of(context).showSnackBar(
+                         SnackBar(content: Text(val ? "Premium features unlocked." : "Premium features locked.")),
+                       );
+                     }
+                  },
+                  activeColor: const Color(0xFFD4AF37),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                ),
               );
             },
           ),
@@ -121,13 +135,32 @@ class CornerScreen extends ConsumerWidget {
   }
 
   Widget _buildAdminTile(BuildContext context, String title, Widget destination) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      title: Text(title, style: const TextStyle(color: Colors.white70)),
-      trailing: const Icon(Icons.chevron_right, color: Colors.white24, size: 20),
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
-      },
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0A0A0A),
+        border: Border.all(color: Colors.white10),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          title: Text(
+            title.toUpperCase(), 
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1.0,
+            )
+          ),
+          trailing: const Icon(Icons.arrow_forward, color: Colors.white24, size: 16),
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
+          },
+        ),
+      ),
     );
   }
 
