@@ -21,14 +21,12 @@ const List<GlossaryItem> glossaryData = [
     category: "Core",
     definition: "The foundation.",
     details: "Feet shoulder-width apart, knees bent, hands up. This is your home. Everything starts and ends here.",
-    imagePath: "assets/images/stance.png",
   ),
   GlossaryItem(
     term: "GUARD",
     category: "Core",
     definition: "The shield.",
     details: "Hands covering the chin, elbows tucked in to protect the ribs. Eyes forward, chin down.",
-    imagePath: "assets/images/guard.png",
   ),
   GlossaryItem(
     term: "JAB",
