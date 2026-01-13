@@ -47,23 +47,23 @@ class AppShell extends ConsumerWidget {
         onTap: (index) => _onItemTapped(index, context),
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined), 
-            activeIcon: Icon(Icons.settings),
-            label: 'CORNER'
+            icon: Icon(Icons.sports_mma_outlined), 
+            activeIcon: Icon(Icons.sports_mma),
+            label: 'GYM'
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.show_chart), 
             label: 'PROGRESS'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.sports_mma_outlined), 
-            activeIcon: Icon(Icons.sports_mma),
-            label: 'GYM'
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.menu_book_outlined), 
             activeIcon: Icon(Icons.menu_book),
             label: 'IQ'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings_outlined), 
+            activeIcon: Icon(Icons.settings),
+            label: 'CORNER'
           ),
         ],
       ),
@@ -72,19 +72,20 @@ class AppShell extends ConsumerWidget {
 
   int _calculateSelectedIndex(BuildContext context) {
     final String location = GoRouterState.of(context).uri.toString();
-    if (location.startsWith('/corner')) return 0;
+    if (location.startsWith('/gym')) return 0;
     if (location.startsWith('/tape')) return 1;
-    if (location.startsWith('/gym')) return 2;
-    if (location.startsWith('/iq')) return 3;
-    return 0; // Default to Corner
+    if (location.startsWith('/iq')) return 2;
+    if (location.startsWith('/corner')) return 3;
+    return 0; // Default to Gym
   }
 
   void _onItemTapped(int index, BuildContext context) {
     switch (index) {
-      case 0: GoRouter.of(context).go('/corner'); break;
+    switch (index) {
+      case 0: GoRouter.of(context).go('/gym'); break;
       case 1: GoRouter.of(context).go('/tape'); break;
-      case 2: GoRouter.of(context).go('/gym'); break;
-      case 3: GoRouter.of(context).go('/iq'); break;
+      case 2: GoRouter.of(context).go('/iq'); break;
+      case 3: GoRouter.of(context).go('/corner'); break;
     }
   }
 }
