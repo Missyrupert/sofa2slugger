@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/session_repository.dart';
 import '../models/session.dart';
+import '../widgets/tape_progress_bar.dart';
 
 class TapeScreen extends ConsumerWidget {
   const TapeScreen({super.key});
@@ -24,75 +25,81 @@ class TapeScreen extends ConsumerWidget {
           final completedCount = sessions.where((s) => s.isCompleted).length;
           final totalCount = sessions.length;
           final progress = totalCount > 0 ? completedCount / totalCount : 0.0;
-          final estimatedMinutes = completedCount * 15; // Approx 15 mins per session
+          final estimatedMinutes = completedCount * 15;
 
-          return ListView(
-            padding: const EdgeInsets.all(24),
+          return Column(
             children: [
-              // premium Header Status
+              // THE TAPE (Progress Bar)
               Container(
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF111111),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.white10),
-                ),
+                color: const Color(0xFF111111),
+                padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 0),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("TOTAL PROGRESS", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
-                            const SizedBox(height: 4),
-                            Text(
-                              "${(progress * 100).toInt()}%",
-                              style: theme.textTheme.displayMedium?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text("TIME IN RING", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
-                            const SizedBox(height: 4),
-                            Text(
-                              "$estimatedMinutes MINS",
-                              style: theme.textTheme.headlineSmall?.copyWith(
-                                color: theme.colorScheme.primary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                    // Tape Widget
+                    TapeProgressBar(
+                      progress: progress,
+                      height: 60,
+                      baseColor: const Color(0xFF222222), // Darker base for contrast
+                      progressColor: theme.colorScheme.primary, // Gold
                     ),
-                    const SizedBox(height: 24),
-                    LinearProgressIndicator(
-                      value: progress,
-                      backgroundColor: Colors.grey[900],
-                      color: theme.colorScheme.primary,
-                      minHeight: 8,
-                      borderRadius: BorderRadius.circular(4),
+                    const SizedBox(height: 16),
+                    // Stats Row
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("PROGRESS", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
+                              Text(
+                                "${(progress * 100).toInt()}%",
+                                style: theme.textTheme.headlineLarge?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w900,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("TOTAL TIME", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
+                              Text(
+                                "$estimatedMinutes MIN",
+                                style: theme.textTheme.headlineSmall?.copyWith(
+                                  color: theme.colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 32),
-              
-              // Timeline List
-              ...sessions.asMap().entries.map((entry) {
-                final index = entry.key;
-                final session = entry.value;
-                final isLast = index == sessions.length - 1;
 
-                return _buildTimelineItem(context, session, index, isLast);
-              }),
+              // Timeline List
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                  children: [
+                    const Divider(color: Colors.white10),
+                    const SizedBox(height: 16),
+                    ...sessions.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      final session = entry.value;
+                      final isLast = index == sessions.length - 1;
+                      return _buildTimelineItem(context, session, index, isLast);
+                    }),
+                    const SizedBox(height: 48),
+                  ],
+                ),
+              ),
             ],
           );
         },
