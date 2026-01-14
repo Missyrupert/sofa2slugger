@@ -10,7 +10,7 @@ class CornerScreen extends ConsumerWidget {
   Future<void> _launchFeedback() async {
     final Uri url = Uri.parse('https://docs.google.com/forms/d/e/1FAIpQLSfjbJAGE9qvyEf3E29TlhAHuF_S9uiB2yHKVpsiZIJemkteQA/viewform');
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      debugPrint('Could not launch \$url');
+      debugPrint('Could not launch $url');
     }
   }
 
@@ -123,7 +123,7 @@ class CornerScreen extends ConsumerWidget {
           Center(
             child: Text(
               "v0.3.0",
-              style: TextStyle(color: Colors.white24, fontSize: 12),
+              style: const TextStyle(color: Colors.white24, fontSize: 12),
             ),
           ),
         ],

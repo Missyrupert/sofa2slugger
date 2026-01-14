@@ -15,14 +15,12 @@ class SessionRepository {
   static const String _progressKey = 'completed_session_index';
   late SharedPreferences _prefs;
 
-  // Hardcoded Session Data
-  // Hardcoded Session Data
   final List<Session> _allSessions = [
     Session(
-      id: 'manifesto', // Changed from orientation
-      title: 'THE MANIFESTO', // Changed from Orientation
+      id: 'manifesto',
+      title: 'THE MANIFESTO',
       description: 'Context & Safety. Required.',
-      audioPath: '/audio/orientation.mp3', 
+      audioPath: '/audio/orientation.mp3',
     ),
     Session(id: 'session01', title: 'Session 01', description: 'Foundations', audioPath: '/audio/session01.mp3'),
     Session(id: 'session02', title: 'Session 02', description: 'Movement', audioPath: '/audio/session02.mp3'),
@@ -36,15 +34,12 @@ class SessionRepository {
     Session(id: 'session10', title: 'Session 10', description: 'The Round', audioPath: '/audio/session10.mp3'),
   ];
 
-  /* init handled lazily */
-
   // Mock Premium Status (Default to true for dev/testing)
   bool _isPremium = true;
   bool get isPremium => _isPremium;
 
   void setPremium(bool value) {
     _isPremium = value;
-    // In a real app, we might notify listeners here if this was a ChangeNotifier
   }
 
   /// Returns the list of sessions with correct locked/unlocked state

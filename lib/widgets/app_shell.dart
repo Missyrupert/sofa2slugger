@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sofa2slugger/services/audio_service.dart';
 import 'package:sofa2slugger/services/session_repository.dart';
-import 'package:sofa2slugger/theme/app_theme.dart';
 import 'audio_player_bar.dart';
 
 // Logic provider to link Audio Completion -> Session Progress
@@ -29,21 +28,19 @@ class AppShell extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = AppTheme.dark;
     final int selectedIndex = _calculateSelectedIndex(context);
 
-    // Cleanest: Watch a "SessionCompletionManager" provider.
     ref.watch(_sessionCompletionManagerProvider);
 
     return Scaffold(
       body: Column(
         children: [
           Expanded(child: child),
-          const AudioPlayerBar(), // Persistent Player
+          const AudioPlayerBar(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _calculateSelectedIndex(context),
+        currentIndex: selectedIndex,
         onTap: (index) => _onItemTapped(index, context),
         items: const [
           BottomNavigationBarItem(

@@ -34,7 +34,6 @@ class AppTheme {
         elevation: 0,
         centerTitle: true,
       ),
-      /* cardTheme removed due to type error */
       iconTheme: const IconThemeData(
         color: _white,
       ),

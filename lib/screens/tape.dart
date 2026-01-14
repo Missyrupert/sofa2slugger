@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../services/session_repository.dart';
 import '../models/session.dart';
+import '../services/session_repository.dart';
 import '../widgets/tape_progress_bar.dart';
 
 class TapeScreen extends ConsumerWidget {
@@ -162,18 +162,17 @@ class TapeScreen extends ConsumerWidget {
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: isCompleted ? Colors.white : Colors.grey,
                       fontWeight: FontWeight.bold,
-                      decoration: isCompleted ? null : null,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Row(
                     children: [
                       if (isCompleted) ...[
-                        const Icon(Icons.check, size: 14, color: Colors.green),
+                        Icon(Icons.check, size: 14, color: Colors.green.withOpacity(0.8)),
                         const SizedBox(width: 4),
                         Text(
                           "COMPLETE",
-                          style: theme.textTheme.labelSmall?.copyWith(color: Colors.green),
+                          style: theme.textTheme.labelSmall?.copyWith(color: Colors.green.withOpacity(0.8)),
                         ),
                       ] else ...[
                          Text(

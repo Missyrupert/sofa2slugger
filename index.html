@@ -45,6 +45,17 @@
       z-index: 10;
       cursor: pointer;
       pointer-events: auto;
+      border: none;
+      font-size: inherit;
+    }
+
+    .cta:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .cta-buy {
+      background: #16a34a;
     }
 
     .sub {
@@ -128,6 +139,9 @@
       <p class="price">£19.99 — one-time payment</p>
       <p>Orientation + Session 1 are free. Pay once to unlock Sessions 2–10.</p>
       <p>No tiers. No upsells. No subscription.</p>
+      <div style="margin-top: 16px;">
+        <button class="cta cta-buy" id="buy-btn" onclick="handleBuy()">Unlock All Sessions — £19.99</button>
+      </div>
     </div>
 
     <div class="card">
@@ -141,6 +155,37 @@
         target="_blank" style="color: #f2f2f2; text-decoration: underline;">Give Beta Feedback</a>
     </div>
   </div>
+
+  <script>
+    // Stripe Checkout Handler
+    async function handleBuy() {
+      const btn = document.getElementById('buy-btn');
+      btn.disabled = true;
+      btn.textContent = 'Redirecting...';
+
+      try {
+        // Call Netlify Function to create checkout session
+        const response = await fetch('https://sofa2slugger.netlify.app/.netlify/functions/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to create checkout session');
+        }
+
+        const { url } = await response.json();
+
+        // Redirect to Stripe Checkout
+        window.location.href = url;
+      } catch (error) {
+        console.error('Checkout error:', error);
+        btn.disabled = false;
+        btn.textContent = 'Unlock All Sessions — £19.99';
+        alert('Unable to start checkout. Please try again.');
+      }
+    }
+  </script>
 </body>
 
 </html>

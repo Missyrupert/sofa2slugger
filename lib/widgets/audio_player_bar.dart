@@ -11,8 +11,6 @@ class AudioPlayerBar extends ConsumerWidget {
     final audioService = ref.watch(audioServiceProvider);
     final theme = Theme.of(context);
 
-    // TODO: Connect to current session title state. For now, we focus on controls.
-    
     return StreamBuilder<PlayerState>(
       stream: audioService.playerStateStream,
       builder: (context, snapshot) {
@@ -30,8 +28,6 @@ class AudioPlayerBar extends ConsumerWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Progress Bar
-              // Progress Bar (Hidden for Orientation/Manifesto)
               if (audioService.currentSessionId != 'manifesto')
                 StreamBuilder<Duration>(
                   stream: audioService.positionStream,
@@ -59,8 +55,7 @@ class AudioPlayerBar extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // TODO: Current Track Info
-                   Text(
+                  Text(
                     "TRAINING IN PROGRESS",
                     style: theme.textTheme.labelSmall?.copyWith(color: theme.colorScheme.secondary),
                   ),

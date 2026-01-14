@@ -33,11 +33,6 @@ class AudioService {
       }
     });
 
-    _player.playerStateStream.listen((state) {
-      if (state.processingState == ProcessingState.completed) {
-         // Session ended
-      }
-    });
   }
 
   Stream<void> get completionStream => _player.playerStateStream

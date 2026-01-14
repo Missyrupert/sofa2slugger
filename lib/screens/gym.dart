@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/session_repository.dart';
 import '../services/audio_service.dart';
-import '../models/session.dart';
 
 class GymScreen extends ConsumerWidget {
   const GymScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sessionRepo = ref.watch(sessionRepositoryProvider);
     final theme = Theme.of(context);
-
     final sessionsValue = ref.watch(sessionsProvider);
 
     return Scaffold(
@@ -42,14 +39,14 @@ class GymScreen extends ConsumerWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFF0A0A0A), // Obsidian Black
                     border: Border.all(
-                      color: isLocked ? Colors.white10 : const Color(0xFFB71C1C), // Iron vs Blood Red
-                      width: isLocked ? 1 : 2,
+                      color: isLocked ? Colors.white10 : const Color(0xFFB71C1C),
+                      width: isLocked ? 1 : 1.5,
                     ),
                     borderRadius: BorderRadius.circular(4), // Sharp/Brutalist
                     boxShadow: isLocked ? [] : [
                       BoxShadow(
-                        color: const Color(0xFFB71C1C).withOpacity(0.2),
-                        blurRadius: 15,
+                        color: const Color(0xFFB71C1C).withOpacity(0.15),
+                        blurRadius: 12,
                         offset: const Offset(0, 4),
                       )
                     ],
@@ -75,7 +72,7 @@ class GymScreen extends ConsumerWidget {
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: isLocked ? Colors.white24 : const Color(0xFFB71C1C),
-                                  width: 2,
+                                  width: 1.5,
                                 ),
                                 color: isCompleted ? const Color(0xFFB71C1C) : Colors.transparent,
                               ),
