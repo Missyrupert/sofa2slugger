@@ -3,7 +3,7 @@
     "type": "speech",
     "speaker": "VANCE",
     "file": "session01_part_000_vance.mp3",
-    "text": "This is Session One. You don’t need experience to be here. You don’t need speed. You don’t need power. You just need to show up. Boxing isn’t chaos. It’s structure. Today, we build the base. Everything that comes later rests on this. Here is Mac."
+    "text": "This is Session One. You are not here to perform. You are here to learn how to begin. Nothing in this session is about speed. Nothing is about power. Today is about position. About understanding where your body is, and how to place it with intent. This session sets the base. Everything that follows rests on this. Here is Mac."
   },
   {
     "type": "silence",
@@ -13,19 +13,23 @@
     "type": "speech",
     "speaker": "MAC",
     "file": "session01_part_001_mac.mp3",
-    "text": "Mac here. Session One. Today is about foundations. Before we move, one thing to know. As the sessions go on, I won’t always name every punch. Sometimes I’ll call the shot instead. That means: When I say one, you jab. When I say two, you cross. You don’t need to memorise anything today. Just know this is where we’re heading. Now we start at the very beginning."
+    "text": "Mac here. Session One. This session is instructional. I’ll explain what we’re doing, why we’re doing it, how to do it, and how long to stay there. There’s no rush. If you pause or repeat, that’s part of the work. We start with stance."
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session01_part_002_mac.mp3",
-    "text": "Everything starts with stance. If your stance is wrong, everything else has to work harder. Picture train tracks. Your feet are on separate rails, not a tightrope. A tightrope looks neat, but it’s easy to knock you off balance. Train tracks give you stability. Front foot points forward. Back foot turns out slightly. Knees soft. Weight balanced. This lets you move, punch, and defend without fighting your own body. Hold it there. Feel stable."
+    "text": "This is your stance. Your stance is the position everything else comes from. If this feels stable, movement becomes easier later. Place your feet like train tracks. Side by side, not one in front of the other. Front foot points forward. Back foot turns out slightly. Soften the knees. Let your weight sit evenly. You should feel balanced. Not tense. Not leaning. Hold this."
+  },
+  {
+    "type": "silence",
+    "duration": 4
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session01_part_003_mac.mp3",
-    "text": "Now the guard. Your hands protect your head, but they also protect your attention. When the guard drops in boxing, things slip through. Life’s a bit like that too. When your guard is down, you miss what’s coming. So this isn’t tension. It’s readiness. When I say hands up, they stay up. You’re not lifting and dropping them. You’re setting them in place. Think of resting your hands on invisible shelves at cheek level. We’ll wake the guard up. After me. Set of four. Hands up. One. Hands up. Two. Hands up. Three. Hands up. Four. Again. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Stay in stance."
+    "text": "Notice your balance. If you feel wobbly, widen the tracks slightly. If your legs feel locked, soften the knees again. Stay there. This is the position we return to."
   },
   {
     "type": "silence",
@@ -35,7 +39,7 @@
     "type": "speech",
     "speaker": "MAC",
     "file": "session01_part_004_mac.mp3",
-    "text": "First punch. The Jab. This punch controls distance. It tells the other person where they can and can’t stand. Think of it like a wet towel. Loose. Fast. Snaps out and back. Front hand. Straight out. Straight back. It’s not about power. It’s about reach and timing. We take it slow. After me. Set of four. Jab. One. Jab. Two. Jab. Three. Jab. Four. Reset. Again. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Hands down briefly."
+    "text": "Now the guard. In boxing, the guard protects your head. More than that, it protects your attention. When the guard drops, things slip through. Punches in boxing. Problems in life. Not because of weakness, but because awareness faded. So this isn’t tension. It’s readiness. Bring your hands up to about cheek level. Imagine resting them on invisible shelves. Elbows in. Shoulders relaxed. Once the guard is set, it stays set. You’re not lifting and dropping the hands. You’re placing them and keeping them there."
   },
   {
     "type": "silence",
@@ -45,23 +49,61 @@
     "type": "speech",
     "speaker": "MAC",
     "file": "session01_part_005_mac.mp3",
-    "text": "Second punch. The Cross. This one travels from the ground up. Power comes from turning the body, not from swinging the arm. Think of pushing a heavy door closed. You don’t slam it. You lean into it and let your body do the work. Rear hand. Hip turns. Shoulder follows. We stay smooth. After me. Set of four. Cross. One. Cross. Two. Cross. Three. Cross. Four. Reset. Again. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Shake the arms out."
+    "text": "From now on, after every punch, the hands return to the guard. When I say \"back to guard,\" it means check your feet, and check your hands. You start there, you finish there."
   },
   {
     "type": "silence",
-    "duration": 2
+    "duration": 3
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session01_part_006_mac.mp3",
-    "text": "Now we connect them. The jab creates space. The cross travels through it. Later, I’ll call this one–two. For now, just follow the rhythm. After me. Set of four. Jab. Cross. One. Jab. Cross. Two. Jab. Cross. Three. Jab. Cross. Four. Reset. Again. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Let the arms hang."
+    "text": "Later in the program, I will use numbers to call punches. One means Jab. Two means Cross. We won’t use them today. Just focus on the names of the leads."
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session01_part_007_mac.mp3",
-    "text": "Take a breath. Nothing rushed. Nothing forced. You built a base today. We’re done."
+    "text": "This is your first punch. The jab. The jab controls space. It lets you reach without committing your body. It’s not about power. It’s about placement and timing. Front hand. Straight out. Straight back. Think loose. Like snapping a towel. The arm moves. The body stays calm."
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session01_part_008_mac.mp3",
+    "text": "After me. Jab. Back to guard. Jab. Back to guard. Jab. Back to guard. Jab. Back to guard. Pause. Again. Jab. Back to guard. Jab. Back to guard. Jab. Back to guard. Jab. Back to guard. Pause. Last set. Jab. Back to guard. Jab. Back to guard. Jab. Back to guard. Jab. Back to guard. And stop. Hands down. Reset the shoulders."
+  },
+  {
+    "type": "silence",
+    "duration": 3
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session01_part_009_mac.mp3",
+    "text": "Now the second punch. The cross. This punch uses the body. Power comes from connection, not from swinging the arm. Back foot presses lightly. The hip turns. The shoulder follows. The arm comes along."
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session01_part_010_mac.mp3",
+    "text": "After me. Cross. Back to guard. Cross. Back to guard. Cross. Back to guard. Cross. Back to guard. Pause. Again. Cross. Back to guard. Cross. Back to guard. Cross. Back to guard. Cross. Back to guard. Pause. Last set. Cross. Back to guard. Cross. Back to guard. Cross. Back to guard. Cross. Back to guard. And stop. Shake the arms out."
+  },
+  {
+    "type": "silence",
+    "duration": 3
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session01_part_011_mac.mp3",
+    "text": "Now we connect them. The jab creates space. The cross travels through it. Nothing forced. Nothing fast. Just clean movement."
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session01_part_012_mac.mp3",
+    "text": "After me. Jab. Cross. Back to guard. Jab. Cross. Back to guard. Jab. Cross. Back to guard. Jab. Cross. Back to guard. Pause. Again. Jab. Cross. Back to guard. Jab. Cross. Back to guard. Jab. Cross. Back to guard. Jab. Cross. Back to guard. Pause. Last set. Jab. Cross. Back to guard. Jab. Cross. Back to guard. Jab. Cross. Back to guard. Jab. Cross. Back to guard. And stop. Let the arms hang."
   },
   {
     "type": "silence",
@@ -69,8 +111,22 @@
   },
   {
     "type": "speech",
+    "speaker": "MAC",
+    "file": "session01_part_013_mac.mp3",
+    "text": "Take a breath. If this felt simple, that’s intentional. If it felt awkward, that’s expected. You’ve placed your body. You’ve learned where things begin. We’re done."
+  },
+  {
+    "type": "silence",
+    "duration": 5
+  },
+  {
+    "type": "speech",
     "speaker": "VANCE",
-    "file": "session01_part_008_vance.mp3",
-    "text": "Session One complete. You’ve just finished the Orientation and your first full training session. Those two are free. Not as a teaser — but so you could feel how this works before deciding to go further. From here on, the sessions build. The movement sharpens. The thinking deepens. If you want access to the rest of the program, you can unlock everything for £19.99. No pressure. No subscription. Just the next steps, waiting when you’re ready. Either way, you showed up today. Session Two is there if you want it."
+    "file": "session01_part_014_vance.mp3",
+    "text": "Session One complete. You’ve set the base. Nothing rushed. Nothing added. Session Two builds gently from here. Same pieces. Cleaner movement. It’s there when you’re ready."
+  },
+  {
+    "type": "silence",
+    "duration": 5
   }
 ]

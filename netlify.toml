@@ -4,3 +4,18 @@
 
 [build.environment]
   FLUTTER_CHANNEL = "stable"
+
+# 1. Redirect Root (/) to External Landing Page
+# This ensures direct visits to the app bypass go to the marketing site.
+[[redirects]]
+  from = "/"
+  to = "https://sofa2sluggerland.netlify.app/"
+  status = 301
+  force = true
+
+# 2. SPA Fallback
+# Any other path (e.g. /gym, /splash) is rewritten to index.html so Flutter can handle it.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

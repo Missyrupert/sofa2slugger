@@ -9,9 +9,9 @@ const VOICE_IDS = {
     MAC: '50d6beb4-80ea-4802-8387-6c948fe84208'
 };
 
-const SCRIPTS_DIR = '../assets/scripts';
-const OUTPUT_DIR = '../web/audio/raw'; // Changed to raw for intermediate files
-const MANIFEST_DIR = '../web/audio/manifests';
+const SCRIPTS_DIR = path.join(__dirname, '../assets/scripts');
+const OUTPUT_DIR = path.join(__dirname, '../web/audio/raw'); // Changed to raw for intermediate files
+const MANIFEST_DIR = path.join(__dirname, '../web/audio/manifests');
 
 // --- INITIALIZATION ---
 const client = new CartesiaClient({ apiKey: API_KEY });
@@ -188,10 +188,10 @@ async function streamToBuffer(stream) {
 
 // --- EXECUTION ---
 (async () => {
-    // TEMPORARY: Prioritize Session 10 for verification
-    const files = fs.readdirSync(SCRIPTS_DIR).filter(f => f === 'session10.txt');
-    // files.sort(); 
-    console.log(`Found ${files.length} scripts (Session 10 only).`);
+    // Process Sessions 2-10
+    const files = fs.readdirSync(SCRIPTS_DIR).filter(f => f.startsWith('session') && f !== 'session01.txt' && f.endsWith('.txt'));
+    files.sort();
+    console.log(`Found ${files.length} scripts to process.`);
 
     for (const file of files) {
         await processSession(file);

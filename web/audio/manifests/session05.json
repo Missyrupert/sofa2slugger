@@ -3,7 +3,7 @@
     "type": "speech",
     "speaker": "VANCE",
     "file": "session05_part_000_vance.mp3",
-    "text": "This is Session Five. So far, you’ve learned how to move and how to generate force. Now we focus on something just as important. Staying safe while you do it. Defence isn’t retreat. It’s intelligence. Here is Mac."
+    "text": "This is Session Five. So far, you’ve learned how to move and how to generate force. Today, we focus on staying organised while you do it. Defence is not retreat. It’s awareness. Here is Mac."
   },
   {
     "type": "silence",
@@ -13,61 +13,71 @@
     "type": "speech",
     "speaker": "MAC",
     "file": "session05_part_001_mac.mp3",
-    "text": "Mac here. Session Five. Today is defence. Not panic. Not covering up. Small movements. Awareness. Staying present. If any of this feels unfamiliar, that’s fine. We keep it simple."
+    "text": "Mac here. Session Five. Today is about defence. Not panic. Not covering up. Small movements. Clear attention. If any of this feels unfamiliar, that’s expected. We keep it simple."
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session05_part_002_mac.mp3",
-    "text": "Start in stance. Hands up. We’re waking up the head and knees. The body stays tall. The head moves just enough. After me. Set of four. Slip left. One. Slip right. Two. Slip left. Three. Slip right. Four. Again. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Stay loose."
+    "text": "Set your stance. Hands up. This warm-up wakes up the legs and head. The body stays tall. The head moves just enough. After me. Four at a time. Slip left. One. Slip right. Two. Slip left. Three. Slip right. Four. Pause. Again. One. Two. Three. Four. Pause. Last set. One. Two. Three. Four. And stop. Stay loose."
   },
   {
     "type": "silence",
-    "duration": 2
+    "duration": 3
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session05_part_003_mac.mp3",
-    "text": "When you slip, you’re not ducking. You’re letting the punch miss. Small bend in the knees. Head moves off the centre line. Eyes forward. You stay balanced. You stay ready."
+    "text": "When you slip, you’re not ducking. You’re letting a punch miss. The knees bend slightly. The head moves off the centre line. Your eyes stay forward. Your balance stays under you. This keeps you ready to move again."
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session05_part_004_mac.mp3",
-    "text": "After me. Set of four. Slip left. One. Slip right. Two. Slip left. Three. Slip right. Four. Reset. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Shake it out."
+    "text": "After me. Four at a time. Slip left. One. Slip right. Two. Slip left. Three. Slip right. Four. Pause. Again. One. Two. Three. Four. Pause. Last set. One. Two. Three. Four. And stop. Shake the arms out."
   },
   {
     "type": "silence",
-    "duration": 2
+    "duration": 3
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session05_part_005_mac.mp3",
-    "text": "Now the roll. This deals with hooks. You’re not folding. You’re changing level. Knees bend. Hips turn. Head passes underneath. Think smooth, not deep."
+    "text": "Now the roll. This deals with hooks. You’re not folding at the waist. You’re changing level. The knees bend. The hips turn. The head passes underneath. The movement stays smooth, not deep."
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session05_part_006_mac.mp3",
-    "text": "After me. Set of four. Roll left. One. Roll right. Two. Roll left. Three. Roll right. Four. Reset. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Hands down briefly."
+    "text": "After me. Four at a time. Roll left. One. Roll right. Two. Roll left. Three. Roll right. Four. Pause. Again. One. Two. Three. Four. Pause. Last set. One. Two. Three. Four. And stop. Hands down briefly if needed."
   },
   {
     "type": "silence",
-    "duration": 2
+    "duration": 3
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session05_part_007_mac.mp3",
-    "text": "Defence matters because it puts you in position. Slip. Cross. Nothing forced. Just available. After me. Set of four. Slip. Cross. One. Slip. Cross. Two. Slip. Cross. Three. Slip. Cross. Four. Reset. One. Two. Three. Four. Last set. One. Two. Three. Four. And stop. Let the arms hang."
+    "text": "Defence matters because it creates position. When you move your head, your body is already set to respond. Slip. Cross. Nothing forced. Just available."
   },
   {
     "type": "speech",
     "speaker": "MAC",
     "file": "session05_part_008_mac.mp3",
-    "text": "Take a breath. If this felt awkward at times, that’s normal. Awareness takes practice. You stayed with it. We’re done."
+    "text": "After me. Four at a time. Slip. Cross. One. Slip. Cross. Two. Slip. Cross. Three. Slip. Cross. Four. Pause. Again. One. Two. Three. Four. Pause. Last set. One. Two. Three. Four. And stop. Let the arms hang."
+  },
+  {
+    "type": "silence",
+    "duration": 4
+  },
+  {
+    "type": "speech",
+    "speaker": "MAC",
+    "file": "session05_part_009_mac.mp3",
+    "text": "Take a breath. Awareness takes practice. It develops over time. This session was about noticing and staying organised. We’re done."
   },
   {
     "type": "silence",
@@ -76,7 +86,7 @@
   {
     "type": "speech",
     "speaker": "VANCE",
-    "file": "session05_part_009_vance.mp3",
-    "text": "Session Five complete. You’re not just throwing punches now. You’re paying attention. That changes everything. Session Six builds from here. Rest up."
+    "file": "session05_part_010_vance.mp3",
+    "text": "Session Five complete. You’re no longer just moving. You’re paying attention. From here on, defence and offence start to blend. Session Six builds on this and adds response. It’s there when you’re ready."
   }
 ]

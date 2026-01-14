@@ -66,54 +66,90 @@ class IQScreen extends StatelessWidget {
   }
 
   Widget _buildGlossaryItem(BuildContext context, GlossaryItem item) {
-    final theme = Theme.of(context);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth >= 768) {
+          return _buildDesktopLayout(context, item);
+        } else {
+          return _buildMobileLayout(context, item);
+        }
+      },
+    );
+  }
+
+  Widget _buildMobileLayout(BuildContext context, GlossaryItem item) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 48.0),
       child: Column(
+        children: [
+          _buildTextContent(context, item),
+          if (item.imagePath != null) ...[
+            const SizedBox(height: 24),
+            _buildImage(item),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDesktopLayout(BuildContext context, GlossaryItem item) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 64.0),
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image Card (Only if path exists)
-          // Image Card
-            if (item.imagePath != null)
-            Center(
-              child: Container(
-                height: 200, // Reduced from 280 to be "not massive"
-                width: 200, 
-                margin: const EdgeInsets.only(bottom: 24),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF050505),
-                  borderRadius: BorderRadius.circular(12),
-                  image: DecorationImage(
-                    image: AssetImage(item.imagePath!),
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                  ),
-                  border: Border.all(color: Colors.white12, width: 1),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.6),
-                      blurRadius: 16,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          
-          Text(
-            item.term,
-            style: theme.textTheme.headlineSmall?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 1.0,
-            ),
+          Expanded(
+            child: _buildTextContent(context, item),
           ),
-          const SizedBox(height: 8),
-           // "WHAT"
-          _buildDetailRow(theme, "WHAT", item.definition),
-           const SizedBox(height: 8),
-           // "WHY & HOW"
-          _buildDetailRow(theme, "WHY & HOW", item.details),
+          if (item.imagePath != null) ...[
+            const SizedBox(width: 48),
+            _buildImage(item),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextContent(BuildContext context, GlossaryItem item) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          item.term,
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 1.0,
+          ),
+        ),
+        const SizedBox(height: 16),
+        _buildDetailRow(theme, "WHAT", item.definition),
+        const SizedBox(height: 12),
+        _buildDetailRow(theme, "WHY & HOW", item.details),
+      ],
+    );
+  }
+
+  Widget _buildImage(GlossaryItem item) {
+    return Container(
+      height: 200,
+      width: 200,
+      decoration: BoxDecoration(
+        color: const Color(0xFF050505),
+        borderRadius: BorderRadius.circular(12),
+        image: DecorationImage(
+          image: AssetImage(item.imagePath!),
+          fit: BoxFit.cover,
+          alignment: Alignment.topCenter,
+        ),
+        border: Border.all(color: Colors.white12, width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.6),
+            blurRadius: 16,
+            offset: const Offset(0, 8),
+          ),
         ],
       ),
     );

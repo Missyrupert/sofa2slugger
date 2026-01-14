@@ -29,12 +29,19 @@ class _SplashScreenState extends State<SplashScreen> {
             .fadeOut(delay: 2000.ms, duration: 1000.ms),
 
             // Stage 2: Text (Starts after image fades)
-            Text(
-              'SOFA2SLUGGER',
-              style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                letterSpacing: 4.0,
-                color: Colors.white,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              width: MediaQuery.of(context).size.width,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  'SOFA2SLUGGER',
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 4.0,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             )
             .animate(onPlay: (controller) => controller.repeat()) // Trick to allow sequential logic, but strictly we just delay

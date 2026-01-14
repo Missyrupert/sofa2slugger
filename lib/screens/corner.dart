@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sofa2slugger/services/session_repository.dart';
 import 'package:sofa2slugger/screens/admin/legal_screens.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CornerScreen extends ConsumerWidget {
   const CornerScreen({super.key});
+
+  Future<void> _launchFeedback() async {
+    final Uri url = Uri.parse('https://docs.google.com/forms/d/e/1FAIpQLSfjbJAGE9qvyEf3E29TlhAHuF_S9uiB2yHKVpsiZIJemkteQA/viewform');
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      debugPrint('Could not launch \$url');
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -63,6 +71,10 @@ class CornerScreen extends ConsumerWidget {
               );
             },
           ),
+
+          const SizedBox(height: 32),
+          _buildSectionHeader(theme, "FEEDBACK"),
+          _buildActionTile(context, "BETA FEEDBACK", Icons.feedback_outlined, _launchFeedback),
 
           const SizedBox(height: 32),
           _buildSectionHeader(theme, "ADMINISTRATION"),
@@ -159,6 +171,34 @@ class CornerScreen extends ConsumerWidget {
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActionTile(BuildContext context, String title, IconData icon, VoidCallback onTap) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0A0A0A),
+        border: Border.all(color: Colors.white10),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          title: Text(
+            title.toUpperCase(), 
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1.0,
+            )
+          ),
+          trailing: Icon(icon, color: Colors.white24, size: 16),
+          onTap: onTap,
         ),
       ),
     );

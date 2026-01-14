@@ -4,11 +4,11 @@ const { exec } = require('child_process');
 const ffmpeg = require('fluent-ffmpeg');
 
 // --- CONSTANTS ---
-const MANIFEST_DIR = '../web/audio/manifests';
-const RAW_DIR = '../web/audio/raw';
-const OUTPUT_DIR = '../web/audio/final'; // Final output
-const MUSIC_DIR = '../web/audio/music';
-const ASSETS_DIR = '../'; // Root? No, assets are in ../assets or ../web/audio
+const MANIFEST_DIR = path.join(__dirname, '../web/audio/manifests');
+const RAW_DIR = path.join(__dirname, '../web/audio/raw');
+const OUTPUT_DIR = path.join(__dirname, '../web/audio/final'); // Final output
+const MUSIC_DIR = path.join(__dirname, '../web/audio/music');
+const ASSETS_DIR = path.join(__dirname, '../'); // Root? No, assets are in ../assets or ../web/audio
 
 // Map sessions to music
 const SESSION_MUSIC = {
@@ -24,8 +24,8 @@ const SESSION_MUSIC = {
     'session10': 'session10_base.mp3'
 };
 
-const BELL_PATH = '../web/audio/boxing_bell.mp3';
-const CROWD_PATH = '../web/audio/crowd_simulated.mp3';
+const BELL_PATH = path.join(__dirname, '../web/audio/boxing_bell.mp3');
+const CROWD_PATH = path.join(__dirname, '../web/audio/crowd_simulated.mp3');
 
 if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
@@ -142,6 +142,7 @@ async function mixSession(sessionName) {
         // Timestamps for Bell
         const bellStart = events.find(e => e.name === 'BELL_START')?.time || 0;
         const bellEnd = events.find(e => e.name === 'BELL_END')?.time || 0;
+        console.log(`[Session 10] Bell Start: ${bellStart}s, Bell End: ${bellEnd}s`);
 
         // Logic:
         // 1. Voice Track -> [voice_raw]
@@ -191,13 +192,11 @@ async function mixSession(sessionName) {
             // Bells
             { filter: 'adelay', options: `${bellStart * 1000}|${bellStart * 1000}`, inputs: '2:a', outputs: 'bell1' },
             { filter: 'adelay', options: `${bellEnd * 1000}|${bellEnd * 1000}`, inputs: '2:a', outputs: 'bell2' },
-            { filter: 'amix', options: { inputs: 2, duration: 'longest' }, inputs: ['bell1', 'bell2'], outputs: 'bells_total' },
+            { filter: 'amix', options: { inputs: 2, duration: 'longest' }, inputs: ['bell1', 'bell2'], outputs: 'bells_raw' },
+            { filter: 'volume', options: '4.0', inputs: 'bells_raw', outputs: 'bells_total' },
 
-            // Backing = BG + Bells (Bells shouldn't be ducked ideally, or maybe they should? Bell is "absolute authority", likely NOT ducked)
-            // But Voice > Bell. If Voice talks over Bell, Bell should duck?
-            // "Bell is absolute authority" => Bell should NOT be ducked by Voice? Or Voice is dominant?
-            // "Voice (Mac and Vance) — always dominant".
-            // Let's safe side: Voice ducks EVERYTHING.
+            // Backing = BG + Bells
+            // Voice ducks everything.
             { filter: 'amix', options: { inputs: 2, duration: 'first' }, inputs: ['bg_mix', 'bells_total'], outputs: 'backing_track' },
 
             // Sidechain
@@ -218,7 +217,9 @@ async function mixSession(sessionName) {
             // Sidechain
             { filter: 'sidechaincompress', options: { threshold: 0.1, ratio: 5, attack: 50, release: 400 }, inputs: ['music_vol', 'sc_src'], outputs: 'music_ducked' },
             // Final Mix
-            { filter: 'amix', options: { inputs: 2, duration: 'longest' }, inputs: ['music_ducked', 'voice_out'], outputs: 'final' }
+            { filter: 'amix', options: { inputs: 2, duration: 'longest' }, inputs: ['music_ducked', 'voice_out'], outputs: 'final_pre' },
+            // Fade Out
+            { filter: 'afade', options: `t=out:st=${totalDuration - 5}:d=5`, inputs: 'final_pre', outputs: 'final' }
         ];
     }
 
@@ -245,9 +246,8 @@ function generateSilence(durationSec, outputFile) {
 
 // --- EXECUTION ---
 (async () => {
-    // Process all manifests found
-    const manifests = fs.readdirSync(MANIFEST_DIR).filter(f => f.endsWith('.json'));
-    // manifests.sort();
+    // Process all manifests found, excluding session01 which is done
+    const manifests = fs.readdirSync(MANIFEST_DIR).filter(f => f.startsWith('session') && f !== 'session01.json' && f.endsWith('.json'));
 
     // Verify raw files are ready?
     // We assume generate_sessions.js has run or is running. 
@@ -256,6 +256,8 @@ function generateSilence(durationSec, outputFile) {
 
     for (const m of manifests) {
         const name = path.basename(m, '.json');
-        await mixSession(name);
+        if (name === 'session10') {
+             await mixSession(name);
+        }
     }
 })();

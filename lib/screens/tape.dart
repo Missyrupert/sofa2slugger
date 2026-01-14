@@ -47,34 +47,46 @@ class TapeScreen extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("PROGRESS", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
-                              Text(
-                                "${(progress * 100).toInt()}%",
-                                style: theme.textTheme.headlineLarge?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w900,
-                                  fontStyle: FontStyle.italic,
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("PROGRESS", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "${(progress * 100).toInt()}%",
+                                    style: theme.textTheme.headlineLarge?.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text("TOTAL TIME", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
-                              Text(
-                                "$estimatedMinutes MIN",
-                                style: theme.textTheme.headlineSmall?.copyWith(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.bold,
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text("TOTAL TIME", style: theme.textTheme.labelSmall?.copyWith(color: Colors.grey, letterSpacing: 1.5)),
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    "$estimatedMinutes MIN",
+                                    style: theme.textTheme.headlineSmall?.copyWith(
+                                      color: theme.colorScheme.primary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
