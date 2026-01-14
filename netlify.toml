@@ -1,19 +1,15 @@
 [build]
   command = "rm -rf _flutter && git clone https://github.com/flutter/flutter.git -b stable _flutter && _flutter/bin/flutter config --enable-web && _flutter/bin/flutter build web --release"
   publish = "build/web"
+  functions = "netlify/functions"
 
 [build.environment]
   FLUTTER_CHANNEL = "stable"
+  # STRIPE_SECRET_KEY should be set in Netlify Dashboard > Site Settings > Environment Variables
+  # Test key: sk_test_... (from Stripe Dashboard)
+  # Live key: sk_live_... (from Stripe Dashboard)
 
-# 1. Redirect Root (/) to External Landing Page
-# This ensures direct visits to the app bypass go to the marketing site.
-[[redirects]]
-  from = "/"
-  to = "https://sofa2sluggerland.netlify.app/"
-  status = 301
-  force = true
-
-# 2. SPA Fallback
+# 1. SPA Fallback
 # Any other path (e.g. /gym, /splash) is rewritten to index.html so Flutter can handle it.
 [[redirects]]
   from = "/*"
