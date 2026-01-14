@@ -2,6 +2,7 @@ import 'dart:html' as html;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sofa2slugger/services/storage.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -14,6 +15,12 @@ class _LandingScreenState extends State<LandingScreen> {
   bool _isLoading = false;
 
   Future<void> _handleBuy() async {
+    // Smart Entry: If user has already paid, go straight to gym
+    if (StorageService.isPremium) {
+      context.go('/gym');
+      return;
+    }
+
     setState(() => _isLoading = true);
 
     try {

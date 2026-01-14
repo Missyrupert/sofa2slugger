@@ -1,19 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'services/storage.dart';
-import 'screens/landing.dart';
-import 'screens/start.dart';
-import 'widgets/app_shell.dart';
-import 'screens/gym.dart';
-import 'screens/tape.dart';
 import 'screens/corner.dart';
+import 'screens/gym.dart';
 import 'screens/iq.dart';
+import 'screens/landing.dart';
 import 'screens/splash.dart';
-import 'screens/landing.dart';
 import 'screens/start.dart';
-import 'screens/start.dart';
-import 'screens/landing.dart';
+import 'screens/tape.dart';
+import 'widgets/app_shell.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
