@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sofa2slugger/services/session_repository.dart';
+import 'package:sofa2slugger/services/storage.dart';
 import 'package:sofa2slugger/screens/admin/legal_screens.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -55,8 +56,7 @@ class CornerScreen extends ConsumerWidget {
                   subtitle: const Text('Unlock all sessions', style: TextStyle(color: Colors.white54, fontSize: 12)),
                   value: true, 
                   onChanged: (val) async {
-                     final repo = ref.read(sessionRepositoryProvider);
-                     repo.setPremium(val);
+                     await StorageService.setPremium(val);
                      ref.refresh(sessionsProvider);
                      
                      if (context.mounted) {
