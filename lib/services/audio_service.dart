@@ -50,10 +50,18 @@ class AudioService {
       // Stop previous playback
       await stop();
       
+      // Cache Busting: Append timestamp to force browser to fetch fresh file
+      // This solves the "sticky audio" issue where the browser serves cached content
+      // even when the URI path changes if the filename was previously cached aggressively.
+      final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+      final uri = Uri.parse(assetPath).replace(queryParameters: {'t': timestamp});
+      
+      print("AudioService: Loading URI with cache wipe: $uri");
+      
       // Load Main Mixed Track
-      await _player.setAudioSource(AudioSource.uri(Uri.parse(assetPath)));
+      await _player.setAudioSource(AudioSource.uri(uri));
       final duration = _player.duration;
-      print("AudioService: Loaded mixed asset ($assetPath). Duration: $duration");
+      print("AudioService: Loaded mixed asset. Duration: $duration");
       
     } catch (e) {
       print("AudioService: Error loading audio asset: $e");
