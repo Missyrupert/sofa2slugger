@@ -2,5 +2,7 @@
   "name": "sofa2slugger-functions",
   "version": "1.0.0",
   "description": "Netlify Functions for Sofa2Slugger",
-  "dependencies": {}
+  "dependencies": {
+    "stripe": "^14.25.0"
+  }
 }
