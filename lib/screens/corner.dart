@@ -93,7 +93,6 @@ class CornerScreen extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-            decoration: BoxDecoration(
               border: Border.all(color: Colors.white10),
               borderRadius: BorderRadius.circular(8),
             ),
