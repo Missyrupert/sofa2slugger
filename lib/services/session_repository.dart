@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/session.dart';
+import 'storage.dart';
 
 final sessionRepositoryProvider = Provider<SessionRepository>((ref) {
   return SessionRepository();
@@ -34,13 +35,7 @@ class SessionRepository {
     Session(id: 'session10', title: 'Session 10', description: 'The Round', audioPath: '/audio/session10.mp3'),
   ];
 
-  // Mock Premium Status (Default to true for dev/testing)
-  bool _isPremium = true;
-  bool get isPremium => _isPremium;
 
-  void setPremium(bool value) {
-    _isPremium = value;
-  }
 
   /// Returns the list of sessions with correct locked/unlocked state
   Future<List<Session>> getSessions() async {
@@ -60,7 +55,7 @@ class SessionRepository {
       // 3. If NOT Premium: Only 0 and 1 are unlocked.
       
       bool isUnlocked;
-      if (_isPremium) {
+      if (StorageService.isPremium) {
         // Premium: All unlocked
         isUnlocked = true; 
       } else {

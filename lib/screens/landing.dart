@@ -100,20 +100,41 @@ class _LandingScreenState extends State<LandingScreen> {
                   // Primary CTA - Buy
                   SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: _isLoading ? null : _handleBuy,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF16A34A),
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ElevatedButton(
+                          onPressed: _isLoading ? null : _handleBuy,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF16A34A),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: Text(
+                            _isLoading ? 'Redirecting...' : 'Unlock All Sessions — £19.99',
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        _isLoading ? 'Redirecting...' : 'Unlock All Sessions — £19.99',
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
+                        const SizedBox(height: 12),
+                        OutlinedButton(
+                          onPressed: () => context.go('/splash'),
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: Colors.grey[700]!),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text(
+                            'Start Free (Sessions 1 & 2)',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 8),
