@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
       mode: 'payment',
       line_items: [
         {
-          price: 'price_1SpWa2Q2IRpXvFJoPsKOyBQ7',
+          price: 'price_1SpxlxLOeUZSyE4RbYV0byrU',
           quantity: 1,
         },
       ],
