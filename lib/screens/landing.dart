@@ -114,7 +114,7 @@ class _LandingScreenState extends State<LandingScreen> {
                             ),
                           ),
                           child: Text(
-                            _isLoading ? 'Redirecting...' : 'Unlock All Sessions — £19.99',
+                            _isLoading ? 'Redirecting...' : 'Unlock All Sessions — £9.99',
                             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                           ),
                         ),
@@ -191,7 +191,7 @@ class _LandingScreenState extends State<LandingScreen> {
                         ),
                         const SizedBox(height: 12),
                         const Text(
-                          '£19.99 — one-time payment',
+                          '£9.99 — one-time payment',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -217,7 +217,7 @@ class _LandingScreenState extends State<LandingScreen> {
                               ),
                             ),
                             child: Text(
-                              _isLoading ? 'Redirecting...' : 'Unlock All Sessions — £19.99',
+                              _isLoading ? 'Redirecting...' : 'Unlock All Sessions — £9.99',
                               style: const TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),

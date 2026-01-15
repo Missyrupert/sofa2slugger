@@ -143,7 +143,7 @@ class GymScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               "Error loading gym: $err",
-              style: theme.textTheme.bodyLarge?.copyWith(color: Colors.red),
+              style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurface),
               textAlign: TextAlign.center,
             ),
           ),

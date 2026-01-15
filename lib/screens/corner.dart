@@ -42,13 +42,13 @@ class CornerScreen extends ConsumerWidget {
                 margin: const EdgeInsets.only(bottom: 24),
                 decoration: BoxDecoration(
                   color: const Color(0xFF0A0A0A),
-                  border: Border.all(color: const Color(0xFFB71C1C).withOpacity(0.5)),
+                  border: Border.all(color: const Color(0xFFD4AF37).withOpacity(0.3)),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: SwitchListTile(
                   title: const Text('PREMIUM MODE', 
                     style: TextStyle(
-                      color: Color(0xFFB71C1C), 
+                      color: Color(0xFFD4AF37), // Elite Gold
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.0
                     )
@@ -65,7 +65,7 @@ class CornerScreen extends ConsumerWidget {
                        );
                      }
                   },
-                  activeColor: const Color(0xFFB71C1C),
+                  activeColor: const Color(0xFFD4AF37), // Elite Gold
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 ),
               );
@@ -93,23 +93,24 @@ class CornerScreen extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.red.withOpacity(0.3)),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white10),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
               children: [
                 const Text(
                   "DANGER ZONE",
-                  style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+                  style: TextStyle(color: Colors.white38, fontWeight: FontWeight.bold, letterSpacing: 1.2),
                 ),
                 const SizedBox(height: 16),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red.withOpacity(0.1),
-                      foregroundColor: Colors.red,
-                      side: const BorderSide(color: Colors.red),
+                      backgroundColor: Colors.white.withOpacity(0.05),
+                      foregroundColor: Colors.white70,
+                      side: const BorderSide(color: Colors.white10),
                     ),
                     onPressed: () => _showResetConfirmDialog(context, ref),
                     child: const Text("RESET ALL PROGRESS"),
@@ -232,7 +233,7 @@ class CornerScreen extends ConsumerWidget {
                 );
               }
             },
-            child: const Text("RESET", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+            child: const Text("RESET", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
