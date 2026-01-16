@@ -1,0 +1,7 @@
+{
+    "name": "sofa2slugger",
+    "private": true,
+    "dependencies": {
+        "stripe": "^14.25.0"
+    }
+}
