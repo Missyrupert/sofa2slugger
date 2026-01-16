@@ -1,7 +1,0 @@
-{
-    "name": "sofa2slugger",
-    "description": "Root package.json for Netlify dependencies",
-    "dependencies": {
-        "stripe": "^14.25.0"
-    }
-}
