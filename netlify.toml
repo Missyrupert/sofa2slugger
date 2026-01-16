@@ -1,0 +1,7 @@
+[build]
+  # No build command needed for static site
+  command = ""
+  # Publish the root of the repository
+  publish = "/"
+  # Functions directory
+  functions = "netlify/functions"
