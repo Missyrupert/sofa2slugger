@@ -36,7 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 fit: BoxFit.scaleDown,
                 child: Text(
                   'SOFA2SLUGGER',
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  maxLines: 1, // Force single line scaling
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 100, // Large base size for scaling
                     fontWeight: FontWeight.bold,
                     letterSpacing: 4.0,
                     color: Colors.white,

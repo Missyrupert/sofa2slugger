@@ -1,6 +1,5 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
 exports.handler = async (event, context) => {
+  console.log("create-checkout invoked");
   // CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -18,8 +17,16 @@ exports.handler = async (event, context) => {
   }
 
   try {
+    // Initialize Stripe inside handler to catch "Cannot find module" errors
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error('STRIPE_SECRET_KEY is missing from environment variables');
+    }
+    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
     // Get the origin for redirect URLs
     const origin = event.headers.origin || event.headers.referer?.replace(/\/$/, '') || 'https://sofa2slugger.netlify.app';
+
+    console.log(`Debug: Creating checkout session for price_1SpxlxLOeUZSyE4RbYV0byrU from origin ${origin}`);
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -33,17 +40,23 @@ exports.handler = async (event, context) => {
       cancel_url: `${origin}/`,
     });
 
+    console.log("Debug: Session created successfully:", session.id);
+
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({ url: session.url }),
     };
   } catch (error) {
-    console.error('Stripe error:', error);
+    console.error('Stripe error details:', error);
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({
+        error: error.message,
+        stack: error.stack,
+        details: "Check Function Logs for more info"
+      }),
     };
   }
 };
