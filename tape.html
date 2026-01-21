@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tale of the Tape - Sofa2Slugger</title>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+  <main>
+    <a href="index.html" class="back">&larr; Back</a>
+    <h1>Tale of the Tape</h1>
+
+    <div class="tape-level" id="current-level">
+      <span class="level-label" id="level-name">Not Started</span>
+      <span class="level-sessions" id="level-progress">0 of 10 sessions</span>
+    </div>
+
+    <div class="tape-phases">
+      <div class="phase" id="phase-1">
+        <div class="phase-header">
+          <span class="phase-name">Laying Groundwork</span>
+          <span class="phase-range">Sessions 1–4</span>
+        </div>
+        <p class="phase-desc">You're learning to stand before you walk. Stance, guard, the basic punches. This is where discipline begins—not in speed or power, but in showing up and doing the work.</p>
+        <div class="phase-sessions">
+          <span class="pip" data-session="1"></span>
+          <span class="pip" data-session="2"></span>
+          <span class="pip" data-session="3"></span>
+          <span class="pip" data-session="4"></span>
+        </div>
+      </div>
+
+      <div class="phase" id="phase-2">
+        <div class="phase-header">
+          <span class="phase-name">Building Rhythm</span>
+          <span class="phase-range">Sessions 5–7</span>
+        </div>
+        <p class="phase-desc">The punches are there. Now you learn to breathe between them. Rhythm isn't about going fast—it's about knowing when to go and when to wait. You're finding your tempo.</p>
+        <div class="phase-sessions">
+          <span class="pip" data-session="5"></span>
+          <span class="pip" data-session="6"></span>
+          <span class="pip" data-session="7"></span>
+        </div>
+      </div>
+
+      <div class="phase" id="phase-3">
+        <div class="phase-header">
+          <span class="phase-name">Holding Your Own</span>
+          <span class="phase-range">Sessions 8–10</span>
+        </div>
+        <p class="phase-desc">You can throw. You can move. Now you learn to stay in the pocket when it gets uncomfortable. This is where the work pays off—not in winning, but in not quitting.</p>
+        <div class="phase-sessions">
+          <span class="pip" data-session="8"></span>
+          <span class="pip" data-session="9"></span>
+          <span class="pip" data-session="10"></span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function loadProgress() {
+      var completed = 0;
+      for (var i = 1; i <= 10; i++) {
+        var status = localStorage.getItem('s2s_session_' + i);
+        var pip = document.querySelector('.pip[data-session="' + i + '"]');
+        if (status === 'complete') {
+          completed++;
+          if (pip) pip.classList.add('complete');
+        }
+      }
+
+      var levelName = document.getElementById('level-name');
+      var levelProgress = document.getElementById('level-progress');
+      var currentLevel = document.getElementById('current-level');
+
+      levelProgress.textContent = completed + ' of 10 sessions';
+
+      if (completed === 0) {
+        levelName.textContent = 'Not Started';
+      } else if (completed <= 4) {
+        levelName.textContent = 'Laying Groundwork';
+        currentLevel.classList.add('phase-active-1');
+        document.getElementById('phase-1').classList.add('active');
+      } else if (completed <= 7) {
+        levelName.textContent = 'Building Rhythm';
+        currentLevel.classList.add('phase-active-2');
+        document.getElementById('phase-1').classList.add('done');
+        document.getElementById('phase-2').classList.add('active');
+      } else {
+        levelName.textContent = 'Holding Your Own';
+        currentLevel.classList.add('phase-active-3');
+        document.getElementById('phase-1').classList.add('done');
+        document.getElementById('phase-2').classList.add('done');
+        document.getElementById('phase-3').classList.add('active');
+      }
+
+      if (completed === 10) {
+        levelName.textContent = 'Complete';
+        document.getElementById('phase-3').classList.remove('active');
+        document.getElementById('phase-3').classList.add('done');
+      }
+    }
+    loadProgress();
+  </script>
+</body>
+</html>

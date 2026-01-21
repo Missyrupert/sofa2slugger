@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corner - Sofa2Slugger</title>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+  <main>
+    <a href="index.html" class="back">&larr; Back</a>
+    <h1>Corner</h1>
+    <p class="subtitle">Support</p>
+
+    <div class="corner-links">
+      <a href="mailto:support@sofa2slugger.com" class="corner-card">
+        <span class="corner-title">Contact</span>
+        <span class="corner-desc">Get in touch</span>
+      </a>
+      <div class="corner-card" id="feedback-btn">
+        <span class="corner-title">Feedback</span>
+        <span class="corner-desc">Tell us what you think</span>
+      </div>
+      <div class="corner-card" id="privacy-btn">
+        <span class="corner-title">Privacy</span>
+        <span class="corner-desc">How we handle your data</span>
+      </div>
+      <div class="corner-card" id="reset-btn">
+        <span class="corner-title">Reset Progress</span>
+        <span class="corner-desc">Start fresh</span>
+      </div>
+    </div>
+
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="modal-title"></h2>
+        <div id="modal-body"></div>
+        <button id="modal-close" class="btn-primary">Close</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var modal = document.getElementById('modal');
+    var modalTitle = document.getElementById('modal-title');
+    var modalBody = document.getElementById('modal-body');
+    var modalClose = document.getElementById('modal-close');
+
+    function showModal(title, body) {
+      modalTitle.textContent = title;
+      modalBody.innerHTML = body;
+      modal.classList.remove('hidden');
+    }
+
+    modalClose.addEventListener('click', function() {
+      modal.classList.add('hidden');
+    });
+
+    document.getElementById('privacy-btn').addEventListener('click', function() {
+      showModal('Privacy', '<p>Your progress is stored locally on your device. We do not collect or transmit any personal data.</p>');
+    });
+
+    document.getElementById('feedback-btn').addEventListener('click', function() {
+      showModal('Feedback', '<p>We appreciate your feedback. Email us at support@sofa2slugger.com</p>');
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', function() {
+      if (confirm('Reset all progress? This cannot be undone.')) {
+        for (var i = 1; i <= 10; i++) {
+          localStorage.removeItem('s2s_session_' + i);
+        }
+        alert('Progress reset.');
+      }
+    });
+  </script>
+</body>
+</html>
