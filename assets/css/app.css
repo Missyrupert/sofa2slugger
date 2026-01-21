@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #111;
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+nav a, .tracks .track {
+  display: block;
+  padding: 1rem;
+  background: #222;
+  color: #eee;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+nav a:hover, .tracks .track:hover {
+  background: #333;
+}
+
+.tracks .track.playing {
+  background: #2a5;
+}
+
+.back {
+  display: inline-block;
+  color: #888;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+.back:hover {
+  color: #eee;
+}
+
+.player {
+  margin-top: 1rem;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #333;
+  color: #eee;
+}
+
+button:hover:not(:disabled) {
+  background: #444;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#btn-play {
+  background: #2a5;
+}
+
+#btn-play:hover:not(:disabled) {
+  background: #3b6;
+}
+
+#status {
+  margin-top: 1.5rem;
+  color: #888;
+}
+
+.tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
