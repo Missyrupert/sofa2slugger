@@ -1,0 +1,530 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0a0a0a;
+  color: #e8e8e8;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Navigation */
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.nav-card, .corner-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #e8e8e8;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.nav-card:hover, .corner-card:hover {
+  background: #1a1a1a;
+}
+
+.nav-title, .corner-title {
+  font-weight: 500;
+}
+
+.nav-desc, .corner-desc {
+  color: #555;
+  font-size: 0.85rem;
+}
+
+/* Back link */
+.back {
+  display: inline-block;
+  color: #555;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  transition: color 0.15s ease;
+}
+
+.back:hover {
+  color: #888;
+}
+
+/* Sessions list */
+.sessions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.session-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.session-card:hover:not(.locked) {
+  background: #1a1a1a;
+  border-color: #333;
+}
+
+.session-card.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.session-card.active {
+  border-color: #444;
+  background: #1a1a1a;
+}
+
+.session-num {
+  font-size: 0.8rem;
+  color: #555;
+  font-weight: 600;
+  min-width: 1.5rem;
+}
+
+.session-name {
+  font-weight: 500;
+}
+
+.session-info {
+  flex: 1;
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+/* Player */
+.player {
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.player.hidden {
+  display: none;
+}
+
+.now-playing {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#session-title {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+#phase {
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.player-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctrl-btn {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #222;
+  color: #e8e8e8;
+  border: 1px solid #333;
+}
+
+.ctrl-btn:hover:not(:disabled) {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.ctrl-play, .ctrl-pause {
+  width: 56px;
+  height: 56px;
+  font-size: 1.2rem;
+  background: #1a3a1a;
+  color: #7cb87c;
+  border-color: #2a4a2a;
+}
+
+.ctrl-play:hover:not(:disabled), .ctrl-pause:hover:not(:disabled) {
+  background: #1f451f;
+}
+
+.ctrl-btn.hidden {
+  display: none;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+/* Buttons */
+button, .btn-primary {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #222;
+  color: #e8e8e8;
+  transition: background 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #2a2a2a;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #1a3a1a;
+  color: #7cb87c;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #1f451f;
+}
+
+/* Preview section */
+.preview {
+  margin: 2rem 0;
+}
+
+.status {
+  margin-top: 1rem;
+  color: #555;
+  font-size: 0.85rem;
+  min-height: 1.2rem;
+}
+
+/* Progress grid */
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.progress-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 8px;
+}
+
+.progress-item.complete {
+  border-color: #1a3a1a;
+}
+
+.progress-num {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.25rem;
+}
+
+.progress-item.complete .progress-num {
+  color: #7cb87c;
+}
+
+.progress-status {
+  font-size: 0.75rem;
+  color: #555;
+}
+
+/* Corner links */
+.corner-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+}
+
+.modal-content h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content p {
+  color: #888;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+/* Hero image */
+.hero {
+  margin-bottom: 1.5rem;
+}
+
+.hero-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  opacity: 0.9;
+  border: 2px solid #222;
+}
+
+/* Glossary */
+.glossary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.term {
+  padding: 1rem 1.25rem;
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 8px;
+}
+
+.term-name {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #e8e8e8;
+}
+
+.term-def {
+  display: block;
+  font-size: 0.85rem;
+  color: #777;
+  line-height: 1.4;
+}
+
+/* Tale of the Tape */
+.tape-level {
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.level-label {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.level-sessions {
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.tape-level.phase-active-1 { border-color: #2a3a2a; }
+.tape-level.phase-active-2 { border-color: #3a3a2a; }
+.tape-level.phase-active-3 { border-color: #3a2a2a; }
+
+.tape-phases {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.phase {
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: left;
+  opacity: 0.5;
+}
+
+.phase.active {
+  opacity: 1;
+  border-color: #333;
+}
+
+.phase.done {
+  opacity: 0.7;
+}
+
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.phase-name {
+  font-weight: 600;
+}
+
+.phase-range {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.phase-desc {
+  font-size: 0.85rem;
+  color: #777;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.phase-sessions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pip {
+  width: 24px;
+  height: 24px;
+  background: #222;
+  border-radius: 4px;
+}
+
+.pip.complete {
+  background: #2a4a2a;
+}
+
+/* Fight IQ term cards */
+.fightiq-page .glossary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.term-card {
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.term-card .term-name {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #e8e8e8;
+}
+
+.term-section {
+  margin-bottom: 0.75rem;
+}
+
+.term-section:last-child {
+  margin-bottom: 0;
+}
+
+.term-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.term-section p {
+  font-size: 0.85rem;
+  color: #999;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Purchase section */
+.purchase {
+  margin: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+}
