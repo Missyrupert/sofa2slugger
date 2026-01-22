@@ -583,6 +583,12 @@ button:disabled {
   color: #444;
 }
 
+.intro-desc {
+  color: #888;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
 .orientation-cue {
   text-align: center;
   color: #777;
