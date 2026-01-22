@@ -620,3 +620,155 @@ button:disabled {
   gap: 0.75rem;
   align-items: baseline;
 }
+/* ================================
+   COSMETIC ENHANCEMENTS
+   ================================ */
+
+/* Subtle grain overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.035;
+  z-index: 1000;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Red "2" in the logo */
+.red-2 {
+  color: #c44;
+}
+
+/* Emotional hook */
+.emotional-hook {
+  text-align: center;
+  color: #aaa;
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+  line-height: 1.5;
+}
+
+/* Why audio section */
+.why-audio {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid #333;
+  padding: 1rem 1.25rem;
+  margin: 0 auto 2rem;
+  max-width: 320px;
+}
+
+.why-audio p {
+  color: #888;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Content sections */
+.content-section {
+  text-align: left;
+  margin: 0 auto 1.75rem;
+  max-width: 320px;
+}
+
+.section-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+
+/* Feature lists */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #999;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.feature-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #444;
+}
+
+.check-list li::before {
+  content: "✓";
+  color: #5a8a5a;
+}
+
+/* Testimonial / social proof */
+.testimonial {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 300px;
+  padding: 1.25rem;
+  background: #111;
+  border-radius: 8px;
+  border: 1px solid #1a1a1a;
+}
+
+.testimonial-quote {
+  color: #888;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.testimonial-quote::before {
+  content: """;
+  color: #444;
+}
+
+.testimonial-quote::after {
+  content: """;
+  color: #444;
+}
+
+/* Value anchoring */
+.value-anchor {
+  text-align: center;
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+/* Reassurance section */
+.reassurance {
+  background: #0f0f0f;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.reassurance-text {
+  color: #888;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* CTA button enhancement */
+.btn-cta {
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+}
