@@ -33,8 +33,8 @@ var btnStop = document.getElementById('btn-stop');
 var sessionCards = document.querySelectorAll('.session-card:not(.locked)');
 
 // Session card click handlers
-sessionCards.forEach(function(card) {
-  card.addEventListener('click', function(e) {
+sessionCards.forEach(function (card) {
+  card.addEventListener('click', function (e) {
     if (this.classList.contains('locked')) return;
     var sessionNum = parseInt(this.getAttribute('data-session'));
     loadSession(sessionNum, true);
@@ -44,28 +44,28 @@ sessionCards.forEach(function(card) {
 function loadSession(num, autoPlay) {
   stopAll();
   currentSession = num;
-  
+
   var padded = num < 10 ? '0' + num : '' + num;
-  
+
   intro = new Audio('assets/audio/vance-s' + padded + '-intro.wav');
   warmup = new Audio('assets/audio/s' + num + '_warmup.wav');
   coaching = new Audio('assets/audio/s' + num + '_coaching.wav');
   outro = new Audio('assets/audio/vance-s' + padded + '-outro.wav');
   music = new Audio('assets/audio/s' + num + '_music_bed.wav');
-  
+
   music.loop = true;
   music.volume = 0.08; // Quiet, like a jukebox across the room
-  
+
   // Wire up the sequence
   intro.addEventListener('ended', onIntroEnd);
   warmup.addEventListener('ended', onWarmupEnd);
   coaching.addEventListener('ended', onCoachingEnd);
   outro.addEventListener('ended', onOutroEnd);
-  
+
   // Get session name from card
   var card = document.querySelector('.session-card[data-session="' + num + '"]');
   var name = card ? card.querySelector('.session-name').textContent : '';
-  sessionTitle.textContent = num + ' — ' + name;
+  sessionTitle.textContent = 'Session ' + num + ' — ' + name;
 
   phaseDisplay.textContent = 'Ready';
   phase = 'ready';
@@ -118,7 +118,7 @@ function fadeOutMusic() {
   var startVolume = music.volume;
   var volumeStep = startVolume / steps;
 
-  var fade = setInterval(function() {
+  var fade = setInterval(function () {
     if (music.volume > volumeStep) {
       music.volume -= volumeStep;
     } else {
@@ -128,7 +128,7 @@ function fadeOutMusic() {
       phase = 'done';
       phaseDisplay.textContent = 'Complete';
       btnPlay.disabled = true;
-      
+
       // Mark session complete
       localStorage.setItem('s2s_session_' + currentSession, 'complete');
     }
@@ -144,11 +144,11 @@ function stopAll() {
   phase = 'ready';
 }
 
-btnPlay.addEventListener('click', function() {
+btnPlay.addEventListener('click', function () {
   startSession();
 });
 
-btnStop.addEventListener('click', function() {
+btnStop.addEventListener('click', function () {
   stopAll();
   phaseDisplay.textContent = 'Stopped';
   btnPlay.disabled = false;

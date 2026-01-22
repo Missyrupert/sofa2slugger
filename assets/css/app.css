@@ -135,6 +135,13 @@ h1 {
   font-weight: 500;
 }
 
+.session-info {
+  flex: 1;
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
 /* Player */
 .player {
   background: #151515;
