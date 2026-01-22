@@ -156,7 +156,7 @@ function onIntroEnd() {
 
 function onWarmupEnd() {
   phase = 'coaching';
-  phaseDisplay.textContent = 'Training';
+  phaseDisplay.textContent = 'Coaching';
   coaching.play();
 }
 
@@ -235,7 +235,7 @@ function skipToPrevPhase() {
   var prevPhase = phases[idx - 1];
   phase = prevPhase;
 
-  var labels = { intro: 'Intro', warmup: 'Warmup', coaching: 'Training', outro: 'Closing' };
+  var labels = { intro: 'Intro', warmup: 'Warmup', coaching: 'Coaching', outro: 'Closing' };
   phaseDisplay.textContent = labels[phase];
 
   var prevAudio = getCurrentAudio();

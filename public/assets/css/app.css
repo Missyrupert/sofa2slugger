@@ -48,7 +48,8 @@ h1 {
   margin-top: 2rem;
 }
 
-.nav-card, .corner-card {
+.nav-card,
+.corner-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,15 +63,18 @@ h1 {
   transition: background 0.15s ease;
 }
 
-.nav-card:hover, .corner-card:hover {
+.nav-card:hover,
+.corner-card:hover {
   background: #1a1a1a;
 }
 
-.nav-title, .corner-title {
+.nav-title,
+.corner-title {
   font-weight: 500;
 }
 
-.nav-desc, .corner-desc {
+.nav-desc,
+.corner-desc {
   color: #555;
   font-size: 0.85rem;
 }
@@ -197,7 +201,8 @@ h1 {
   border-color: #444;
 }
 
-.ctrl-play, .ctrl-pause {
+.ctrl-play,
+.ctrl-pause {
   width: 56px;
   height: 56px;
   font-size: 1.2rem;
@@ -206,7 +211,8 @@ h1 {
   border-color: #2a4a2a;
 }
 
-.ctrl-play:hover:not(:disabled), .ctrl-pause:hover:not(:disabled) {
+.ctrl-play:hover:not(:disabled),
+.ctrl-pause:hover:not(:disabled) {
   background: #1f451f;
 }
 
@@ -221,7 +227,8 @@ h1 {
 }
 
 /* Buttons */
-button, .btn-primary {
+button,
+.btn-primary {
   padding: 0.75rem 1.5rem;
   font-size: 0.95rem;
   font-weight: 500;
@@ -409,9 +416,17 @@ button:disabled {
   font-size: 0.85rem;
 }
 
-.tape-level.phase-active-1 { border-color: #2a3a2a; }
-.tape-level.phase-active-2 { border-color: #3a3a2a; }
-.tape-level.phase-active-3 { border-color: #3a2a2a; }
+.tape-level.phase-active-1 {
+  border-color: #2a3a2a;
+}
+
+.tape-level.phase-active-2 {
+  border-color: #3a3a2a;
+}
+
+.tape-level.phase-active-3 {
+  border-color: #3a2a2a;
+}
 
 .tape-phases {
   display: flex;
@@ -527,4 +542,75 @@ button:disabled {
   margin: 1.5rem 0;
   display: flex;
   justify-content: center;
+}
+
+/* Feature additions */
+.intro-card {
+  text-align: left;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 0 auto 2rem;
+  max-width: 320px;
+}
+
+.intro-lead {
+  margin-bottom: 0.75rem;
+  color: #e8e8e8;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.intro-list {
+  list-style: none;
+  color: #888;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 0;
+}
+
+.intro-list li {
+  margin-bottom: 0.4rem;
+  padding-left: 0.75rem;
+  position: relative;
+}
+
+.intro-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #444;
+}
+
+.orientation-cue {
+  text-align: center;
+  color: #777;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  padding: 0 0.5rem;
+}
+
+.session-tags {
+  display: block;
+  width: 100%;
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 0.35rem;
+  line-height: 1.4;
+}
+
+.session-info-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.session-header-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
 }
