@@ -1,0 +1,5 @@
+# Local Netlify folder
+.netlify
+
+# Large audio files (use external hosting)
+assets/audio/*.wav
