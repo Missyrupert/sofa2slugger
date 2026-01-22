@@ -13,7 +13,11 @@
  * - assets/audio/s{N}_warmup.wav
  * - assets/audio/s{N}_coaching.wav
  * - assets/audio/vance-s{NN}-outro.wav
- * - assets/audio/s{N}_music_bed.wav
+ *
+ * Music bed mapping:
+ * - Sessions 1-4:  s1_music_bed.wav
+ * - Sessions 5-7:  s2_music_bed.wav
+ * - Sessions 8-10: s3_music_bed.wav
  */
 
 var currentSession = null;
@@ -36,6 +40,13 @@ var btnPrev = document.getElementById('btn-prev');
 var btnNext = document.getElementById('btn-next');
 var sessionCards = document.querySelectorAll('.session-card:not(.locked)');
 
+// Music bed mapping: which music file to use for each session
+function getMusicBedNum(sessionNum) {
+  if (sessionNum <= 4) return 1;
+  if (sessionNum <= 7) return 2;
+  return 3;
+}
+
 // Session card click handlers
 sessionCards.forEach(function (card) {
   card.addEventListener('click', function (e) {
@@ -50,12 +61,13 @@ function loadSession(num, autoPlay) {
   currentSession = num;
 
   var padded = num < 10 ? '0' + num : '' + num;
+  var musicBedNum = getMusicBedNum(num);
 
   intro = new Audio('assets/audio/vance-s' + padded + '-intro.wav');
   warmup = new Audio('assets/audio/s' + num + '_warmup.wav');
   coaching = new Audio('assets/audio/s' + num + '_coaching.wav');
   outro = new Audio('assets/audio/vance-s' + padded + '-outro.wav');
-  music = new Audio('assets/audio/s' + num + '_music_bed.wav');
+  music = new Audio('assets/audio/s' + musicBedNum + '_music_bed.wav');
 
   music.loop = true;
   music.volume = 0.08;
