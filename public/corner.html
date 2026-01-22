@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +11,21 @@
       text-align: left;
       margin-bottom: 2rem;
     }
+
     .corner-section h2 {
       font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.75rem;
       color: #e8e8e8;
     }
+
     .corner-section p {
       font-size: 0.85rem;
       color: #888;
       line-height: 1.6;
       margin-bottom: 0.5rem;
     }
+
     .corner-section ul {
       font-size: 0.85rem;
       color: #888;
@@ -29,29 +33,35 @@
       margin: 0.5rem 0;
       padding-left: 1.25rem;
     }
+
     .corner-section li {
       margin-bottom: 0.25rem;
     }
+
     .support-email {
       display: inline-block;
       color: #7cb87c;
       text-decoration: none;
       font-weight: 500;
     }
+
     .support-email:hover {
       text-decoration: underline;
     }
+
     .reset-btn {
       margin-top: 0.75rem;
       background: #2a1a1a;
       color: #c87c7c;
       border: 1px solid #3a2222;
     }
+
     .reset-btn:hover {
       background: #351f1f;
     }
   </style>
 </head>
+
 <body>
   <main>
     <a href="index.html" class="back">&larr; Back</a>
@@ -61,13 +71,15 @@
     <div class="corner-section">
       <h2>About Sofa2Slugger</h2>
       <p>Audio-only boxing training. No screens to watch, no scores to chase.</p>
-      <p>Sessions are structured around boxing fundamentals: stance, movement, punches, combinations. You follow along at your own pace. The app guides with voice cues only.</p>
+      <p>Sessions are structured around boxing fundamentals: stance, movement, punches, combinations. You follow along
+        at your own pace. The app guides with voice cues only.</p>
       <p>No performance tracking. No pressure. Just practice.</p>
     </div>
 
     <div class="corner-section">
       <h2>Support</h2>
-      <p>For help or questions: <a href="mailto:support@sofa2slugger.com" class="support-email">support@sofa2slugger.com</a></p>
+      <p>For help or questions: <a href="mailto:fightback@sofa2slugger.com"
+          class="support-email">fightback@sofa2slugger.com</a></p>
       <p>When reporting an issue, include:</p>
       <ul>
         <li>Which page you were on</li>
@@ -78,7 +90,8 @@
 
     <div class="corner-section">
       <h2>Reset App</h2>
-      <p>Clear your session progress on this device. This removes locally stored data only. It does not affect your account or access status.</p>
+      <p>Clear your session progress on this device. This removes locally stored data only. It does not affect your
+        account or access status.</p>
       <button class="reset-btn" id="reset-btn">Reset session data</button>
     </div>
 
@@ -95,7 +108,7 @@
   </main>
 
   <script>
-    document.getElementById('reset-btn').addEventListener('click', function() {
+    document.getElementById('reset-btn').addEventListener('click', function () {
       if (confirm('Reset all session data on this device?')) {
         var keys = Object.keys(localStorage);
         for (var i = 0; i < keys.length; i++) {
@@ -108,4 +121,5 @@
     });
   </script>
 </body>
+
 </html>
