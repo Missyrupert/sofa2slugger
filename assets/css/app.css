@@ -156,19 +156,62 @@ h1 {
 }
 
 .now-playing {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
   margin-bottom: 1rem;
 }
 
 #session-title {
   font-weight: 500;
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
 #phase {
   color: #555;
   font-size: 0.85rem;
+}
+
+.player-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctrl-btn {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #222;
+  color: #e8e8e8;
+  border: 1px solid #333;
+}
+
+.ctrl-btn:hover:not(:disabled) {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.ctrl-play, .ctrl-pause {
+  width: 56px;
+  height: 56px;
+  font-size: 1.2rem;
+  background: #1a3a1a;
+  color: #7cb87c;
+  border-color: #2a4a2a;
+}
+
+.ctrl-play:hover:not(:disabled), .ctrl-pause:hover:not(:disabled) {
+  background: #1f451f;
+}
+
+.ctrl-btn.hidden {
+  display: none;
 }
 
 .controls {

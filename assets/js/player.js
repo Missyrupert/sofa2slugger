@@ -1,13 +1,13 @@
 /**
  * Sofa2Slugger Session Player
- * 
+ *
  * Audio flow per session:
  * 1. Vance intro (no music)
  * 2. Warmup (music starts quietly underneath)
  * 3. Coaching (music continues)
  * 4. Vance outro (music continues)
  * 5. Music fades out 4 seconds after outro ends
- * 
+ *
  * Audio file naming convention:
  * - assets/audio/vance-s{NN}-intro.wav
  * - assets/audio/s{N}_warmup.wav
@@ -18,6 +18,7 @@
 
 var currentSession = null;
 var phase = 'ready'; // ready | intro | warmup | coaching | outro | fading | done
+var isPaused = false;
 
 var intro = null;
 var warmup = null;
@@ -29,7 +30,10 @@ var player = document.getElementById('player');
 var sessionTitle = document.getElementById('session-title');
 var phaseDisplay = document.getElementById('phase');
 var btnPlay = document.getElementById('btn-play');
+var btnPause = document.getElementById('btn-pause');
 var btnStop = document.getElementById('btn-stop');
+var btnPrev = document.getElementById('btn-prev');
+var btnNext = document.getElementById('btn-next');
 var sessionCards = document.querySelectorAll('.session-card:not(.locked)');
 
 // Session card click handlers
@@ -54,7 +58,7 @@ function loadSession(num, autoPlay) {
   music = new Audio('assets/audio/s' + num + '_music_bed.wav');
 
   music.loop = true;
-  music.volume = 0.08; // Quiet, like a jukebox across the room
+  music.volume = 0.08;
 
   // Wire up the sequence
   intro.addEventListener('ended', onIntroEnd);
@@ -69,12 +73,23 @@ function loadSession(num, autoPlay) {
 
   phaseDisplay.textContent = 'Ready';
   phase = 'ready';
+  isPaused = false;
   player.classList.remove('hidden');
-  btnPlay.disabled = false;
+  showPlayButton();
 
   if (autoPlay) {
     startSession();
   }
+}
+
+function showPlayButton() {
+  btnPlay.classList.remove('hidden');
+  btnPause.classList.add('hidden');
+}
+
+function showPauseButton() {
+  btnPlay.classList.add('hidden');
+  btnPause.classList.remove('hidden');
 }
 
 function startSession() {
@@ -82,8 +97,42 @@ function startSession() {
     phase = 'intro';
     phaseDisplay.textContent = 'Intro';
     intro.play();
-    btnPlay.disabled = true;
+    showPauseButton();
   }
+}
+
+function getCurrentAudio() {
+  switch (phase) {
+    case 'intro': return intro;
+    case 'warmup': return warmup;
+    case 'coaching': return coaching;
+    case 'outro': return outro;
+    default: return null;
+  }
+}
+
+function pausePlayback() {
+  if (isPaused || phase === 'ready' || phase === 'done' || phase === 'fading') return;
+
+  var current = getCurrentAudio();
+  if (current) current.pause();
+  if (music && phase !== 'intro') music.pause();
+
+  isPaused = true;
+  showPlayButton();
+  phaseDisplay.textContent = phaseDisplay.textContent.replace(' (Paused)', '') + ' (Paused)';
+}
+
+function resumePlayback() {
+  if (!isPaused) return;
+
+  var current = getCurrentAudio();
+  if (current) current.play();
+  if (music && phase !== 'intro') music.play();
+
+  isPaused = false;
+  showPauseButton();
+  phaseDisplay.textContent = phaseDisplay.textContent.replace(' (Paused)', '');
 }
 
 function onIntroEnd() {
@@ -108,6 +157,8 @@ function onCoachingEnd() {
 function onOutroEnd() {
   phase = 'fading';
   phaseDisplay.textContent = 'Finishing...';
+  showPlayButton();
+  btnPlay.disabled = true;
   fadeOutMusic();
 }
 
@@ -127,7 +178,7 @@ function fadeOutMusic() {
       music.volume = 0.08;
       phase = 'done';
       phaseDisplay.textContent = 'Complete';
-      btnPlay.disabled = true;
+      btnPlay.disabled = false;
 
       // Mark session complete
       localStorage.setItem('s2s_session_' + currentSession, 'complete');
@@ -142,16 +193,90 @@ function stopAll() {
   if (outro) { outro.pause(); outro.currentTime = 0; }
   if (music) { music.pause(); music.currentTime = 0; music.volume = 0.08; }
   phase = 'ready';
+  isPaused = false;
 }
 
+function skipToPrevPhase() {
+  if (phase === 'ready' || phase === 'done' || phase === 'fading') return;
+
+  var current = getCurrentAudio();
+
+  // If more than 3 seconds in, restart current phase
+  if (current && current.currentTime > 3) {
+    current.currentTime = 0;
+    return;
+  }
+
+  // Otherwise go to previous phase
+  var phases = ['intro', 'warmup', 'coaching', 'outro'];
+  var idx = phases.indexOf(phase);
+  if (idx <= 0) {
+    // At intro, just restart
+    if (current) current.currentTime = 0;
+    return;
+  }
+
+  // Stop current
+  if (current) { current.pause(); current.currentTime = 0; }
+
+  // Go to previous
+  var prevPhase = phases[idx - 1];
+  phase = prevPhase;
+
+  var labels = { intro: 'Intro', warmup: 'Warmup', coaching: 'Training', outro: 'Closing' };
+  phaseDisplay.textContent = labels[phase];
+
+  var prevAudio = getCurrentAudio();
+  if (prevAudio) prevAudio.play();
+
+  // Handle music
+  if (phase === 'intro' && music) {
+    music.pause();
+    music.currentTime = 0;
+  }
+
+  if (!isPaused) showPauseButton();
+}
+
+function skipToNextPhase() {
+  if (phase === 'ready' || phase === 'done' || phase === 'fading') return;
+
+  var current = getCurrentAudio();
+  if (current) {
+    // Trigger the ended event by jumping to end
+    current.currentTime = current.duration;
+  }
+}
+
+// Event listeners
 btnPlay.addEventListener('click', function () {
-  startSession();
+  if (phase === 'ready' || phase === 'done') {
+    if (phase === 'done') {
+      loadSession(currentSession, true);
+    } else {
+      startSession();
+    }
+  } else if (isPaused) {
+    resumePlayback();
+  }
+});
+
+btnPause.addEventListener('click', function () {
+  pausePlayback();
 });
 
 btnStop.addEventListener('click', function () {
   stopAll();
   phaseDisplay.textContent = 'Stopped';
-  btnPlay.disabled = false;
+  showPlayButton();
+});
+
+btnPrev.addEventListener('click', function () {
+  skipToPrevPhase();
+});
+
+btnNext.addEventListener('click', function () {
+  skipToNextPhase();
 });
 
 // Auto-load session 1 on page load
