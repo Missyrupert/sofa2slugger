@@ -89,6 +89,11 @@ function loadSession(num, autoPlay) {
   player.classList.remove('hidden');
   showPlayButton();
 
+  // Scroll player into view smoothly
+  setTimeout(function() {
+    player.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
+
   if (autoPlay) {
     startSession();
   }

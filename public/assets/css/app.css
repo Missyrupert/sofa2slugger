@@ -6,8 +6,8 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #0a0a0a;
-  color: #e8e8e8;
+  background: #f4e4c1;
+  color: #1a1a1a;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -29,13 +29,13 @@ h1 {
 }
 
 .tagline {
-  color: #666;
+  color: #5a4a3a;
   font-size: 0.9rem;
   margin-bottom: 2rem;
 }
 
 .subtitle {
-  color: #666;
+  color: #5a4a3a;
   font-size: 0.85rem;
   margin-bottom: 1.5rem;
 }
@@ -54,18 +54,18 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.25rem;
-  background: #151515;
-  border: 1px solid #222;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
   text-decoration: none;
-  color: #e8e8e8;
+  color: #1a1a1a;
   cursor: pointer;
   transition: background 0.15s ease;
 }
 
 .nav-card:hover,
 .corner-card:hover {
-  background: #1a1a1a;
+  background: #f8f0e0;
 }
 
 .nav-title,
@@ -75,14 +75,14 @@ h1 {
 
 .nav-desc,
 .corner-desc {
-  color: #555;
+  color: #6a5a4a;
   font-size: 0.85rem;
 }
 
 /* Back link */
 .back {
   display: inline-block;
-  color: #555;
+  color: #6a5a4a;
   text-decoration: none;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
@@ -90,7 +90,7 @@ h1 {
 }
 
 .back:hover {
-  color: #888;
+  color: #1a1a1a;
 }
 
 /* Sessions list */
@@ -106,16 +106,16 @@ h1 {
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  background: #151515;
-  border: 1px solid #222;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .session-card:hover:not(.locked) {
-  background: #1a1a1a;
-  border-color: #333;
+  background: #f8f0e0;
+  border-color: #8b1a1a;
 }
 
 .session-card.locked {
@@ -124,13 +124,13 @@ h1 {
 }
 
 .session-card.active {
-  border-color: #444;
-  background: #1a1a1a;
+  border-color: #8b1a1a;
+  background: #f8f0e0;
 }
 
 .session-num {
   font-size: 0.8rem;
-  color: #555;
+  color: #6a5a4a;
   font-weight: 600;
   min-width: 1.5rem;
 }
@@ -148,11 +148,12 @@ h1 {
 
 /* Player */
 .player {
-  background: #151515;
-  border: 1px solid #222;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
   padding: 1.5rem;
   margin-top: 1rem;
+  scroll-margin-top: 1rem;
 }
 
 .player.hidden {
@@ -171,7 +172,7 @@ h1 {
 }
 
 #phase {
-  color: #555;
+  color: #6a5a4a;
   font-size: 0.85rem;
 }
 
@@ -191,14 +192,14 @@ h1 {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #222;
-  color: #e8e8e8;
-  border: 1px solid #333;
+  background: #fffdf8;
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
 }
 
 .ctrl-btn:hover:not(:disabled) {
-  background: #2a2a2a;
-  border-color: #444;
+  background: #f8f0e0;
+  border-color: #8b1a1a;
 }
 
 .ctrl-play,
@@ -206,14 +207,14 @@ h1 {
   width: 56px;
   height: 56px;
   font-size: 1.2rem;
-  background: #1a3a1a;
-  color: #7cb87c;
-  border-color: #2a4a2a;
+  background: #8b1a1a;
+  color: #f4e4c1;
+  border-color: #8b1a1a;
 }
 
 .ctrl-play:hover:not(:disabled),
 .ctrl-pause:hover:not(:disabled) {
-  background: #1f451f;
+  background: #6a1515;
 }
 
 .ctrl-btn.hidden {
@@ -232,16 +233,16 @@ button,
   padding: 0.75rem 1.5rem;
   font-size: 0.95rem;
   font-weight: 500;
-  border: none;
+  border: 2px solid #1a1a1a;
   border-radius: 6px;
   cursor: pointer;
-  background: #222;
-  color: #e8e8e8;
+  background: #fffdf8;
+  color: #1a1a1a;
   transition: background 0.15s ease;
 }
 
 button:hover:not(:disabled) {
-  background: #2a2a2a;
+  background: #f8f0e0;
 }
 
 button:disabled {
@@ -250,12 +251,13 @@ button:disabled {
 }
 
 .btn-primary {
-  background: #1a3a1a;
-  color: #7cb87c;
+  background: #8b1a1a;
+  color: #f4e4c1;
+  border-color: #8b1a1a;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #1f451f;
+  background: #6a1515;
 }
 
 /* Preview section */
@@ -265,7 +267,7 @@ button:disabled {
 
 .status {
   margin-top: 1rem;
-  color: #555;
+  color: #6a5a4a;
   font-size: 0.85rem;
   min-height: 1.2rem;
 }
@@ -282,29 +284,29 @@ button:disabled {
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background: #151515;
-  border: 1px solid #222;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
 }
 
 .progress-item.complete {
-  border-color: #1a3a1a;
+  border-color: #8b1a1a;
 }
 
 .progress-num {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #444;
+  color: #6a5a4a;
   margin-bottom: 0.25rem;
 }
 
 .progress-item.complete .progress-num {
-  color: #7cb87c;
+  color: #8b1a1a;
 }
 
 .progress-status {
   font-size: 0.75rem;
-  color: #555;
+  color: #6a5a4a;
 }
 
 /* Corner links */
@@ -318,7 +320,7 @@ button:disabled {
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(30, 25, 20, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -330,8 +332,8 @@ button:disabled {
 }
 
 .modal-content {
-  background: #151515;
-  border: 1px solid #222;
+  background: #f4e4c1;
+  border: 3px solid #1a1a1a;
   border-radius: 8px;
   padding: 2rem;
   max-width: 320px;
@@ -345,24 +347,19 @@ button:disabled {
 }
 
 .modal-content p {
-  color: #888;
+  color: #5a4a3a;
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
 }
 
-/* Hero image */
+/* Hero image - removed for vintage poster aesthetic */
 .hero {
-  margin-bottom: 1.5rem;
+  display: none;
 }
 
 .hero-img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  opacity: 0.9;
-  border: 2px solid #222;
+  display: none;
 }
 
 /* Glossary */
@@ -375,8 +372,8 @@ button:disabled {
 
 .term {
   padding: 1rem 1.25rem;
-  background: #151515;
-  border: 1px solid #222;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
 }
 
@@ -384,20 +381,20 @@ button:disabled {
   display: block;
   font-weight: 600;
   margin-bottom: 0.35rem;
-  color: #e8e8e8;
+  color: #1a1a1a;
 }
 
 .term-def {
   display: block;
   font-size: 0.85rem;
-  color: #777;
+  color: #5a4a3a;
   line-height: 1.4;
 }
 
 /* Tale of the Tape */
 .tape-level {
-  background: #151515;
-  border: 1px solid #222;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -412,20 +409,20 @@ button:disabled {
 }
 
 .level-sessions {
-  color: #555;
+  color: #6a5a4a;
   font-size: 0.85rem;
 }
 
 .tape-level.phase-active-1 {
-  border-color: #2a3a2a;
+  border-color: #8b1a1a;
 }
 
 .tape-level.phase-active-2 {
-  border-color: #3a3a2a;
+  border-color: #8b1a1a;
 }
 
 .tape-level.phase-active-3 {
-  border-color: #3a2a2a;
+  border-color: #8b1a1a;
 }
 
 .tape-phases {
@@ -435,8 +432,8 @@ button:disabled {
 }
 
 .phase {
-  background: #151515;
-  border: 1px solid #222;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
   padding: 1.25rem;
   text-align: left;
@@ -445,7 +442,7 @@ button:disabled {
 
 .phase.active {
   opacity: 1;
-  border-color: #333;
+  border-color: #8b1a1a;
 }
 
 .phase.done {
@@ -465,12 +462,12 @@ button:disabled {
 
 .phase-range {
   font-size: 0.8rem;
-  color: #555;
+  color: #6a5a4a;
 }
 
 .phase-desc {
   font-size: 0.85rem;
-  color: #777;
+  color: #5a4a3a;
   line-height: 1.5;
   margin-bottom: 1rem;
 }
@@ -483,12 +480,13 @@ button:disabled {
 .pip {
   width: 24px;
   height: 24px;
-  background: #222;
+  background: #d8c8a8;
+  border: 1px solid #1a1a1a;
   border-radius: 4px;
 }
 
 .pip.complete {
-  background: #2a4a2a;
+  background: #8b1a1a;
 }
 
 /* Fight IQ term cards */
@@ -499,8 +497,8 @@ button:disabled {
 }
 
 .term-card {
-  background: #151515;
-  border: 1px solid #222;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
   padding: 1.25rem;
   text-align: left;
@@ -509,7 +507,7 @@ button:disabled {
 .term-card .term-name {
   font-size: 1.1rem;
   margin-bottom: 1rem;
-  color: #e8e8e8;
+  color: #1a1a1a;
 }
 
 .term-section {
@@ -524,7 +522,7 @@ button:disabled {
   display: block;
   font-size: 0.7rem;
   font-weight: 600;
-  color: #555;
+  color: #6a5a4a;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
@@ -532,7 +530,7 @@ button:disabled {
 
 .term-section p {
   font-size: 0.85rem;
-  color: #999;
+  color: #5a4a3a;
   line-height: 1.5;
   margin: 0;
 }
@@ -547,8 +545,8 @@ button:disabled {
 /* Feature additions */
 .intro-card {
   text-align: left;
-  background: #111;
-  border: 1px solid #222;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
   padding: 1.25rem;
   margin: 0 auto 2rem;
@@ -557,14 +555,14 @@ button:disabled {
 
 .intro-lead {
   margin-bottom: 0.75rem;
-  color: #e8e8e8;
+  color: #1a1a1a;
   font-weight: 500;
   font-size: 0.95rem;
 }
 
 .intro-list {
   list-style: none;
-  color: #888;
+  color: #5a4a3a;
   font-size: 0.85rem;
   line-height: 1.5;
   padding: 0;
@@ -580,18 +578,18 @@ button:disabled {
   content: "•";
   position: absolute;
   left: 0;
-  color: #444;
+  color: #8b1a1a;
 }
 
 .intro-desc {
-  color: #888;
+  color: #5a4a3a;
   font-size: 0.85rem;
   line-height: 1.6;
 }
 
 .orientation-cue {
   text-align: center;
-  color: #777;
+  color: #5a4a3a;
   font-size: 0.85rem;
   margin-bottom: 1rem;
   line-height: 1.4;
@@ -602,7 +600,7 @@ button:disabled {
   display: block;
   width: 100%;
   font-size: 0.7rem;
-  color: #666;
+  color: #6a5a4a;
   margin-top: 0.35rem;
   line-height: 1.4;
 }
@@ -624,7 +622,7 @@ button:disabled {
    COSMETIC ENHANCEMENTS
    ================================ */
 
-/* Subtle grain overlay */
+/* Vintage paper texture overlay */
 .grain-overlay {
   position: fixed;
   top: 0;
@@ -632,20 +630,21 @@ button:disabled {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.08;
   z-index: 1000;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
 }
 
 /* Red "2" in the logo */
 .red-2 {
-  color: #c44;
+  color: #8b1a1a;
 }
 
 /* Emotional hook */
 .emotional-hook {
   text-align: center;
-  color: #aaa;
+  color: #5a4a3a;
   font-size: 1rem;
   font-style: italic;
   margin-bottom: 1.5rem;
@@ -656,15 +655,15 @@ button:disabled {
 /* Why audio section */
 .why-audio {
   text-align: center;
-  background: rgba(255, 255, 255, 0.02);
-  border-left: 2px solid #333;
+  background: rgba(139, 26, 26, 0.05);
+  border-left: 3px solid #8b1a1a;
   padding: 1rem 1.25rem;
   margin: 0 auto 2rem;
   max-width: 320px;
 }
 
 .why-audio p {
-  color: #888;
+  color: #5a4a3a;
   font-size: 0.85rem;
   line-height: 1.6;
   margin: 0;
@@ -680,7 +679,7 @@ button:disabled {
 .section-title {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #777;
+  color: #1a1a1a;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 0.75rem;
@@ -697,7 +696,7 @@ button:disabled {
   position: relative;
   padding-left: 1.25rem;
   margin-bottom: 0.5rem;
-  color: #999;
+  color: #5a4a3a;
   font-size: 0.85rem;
   line-height: 1.5;
 }
@@ -706,12 +705,12 @@ button:disabled {
   content: "—";
   position: absolute;
   left: 0;
-  color: #444;
+  color: #8b1a1a;
 }
 
 .check-list li::before {
   content: "✓";
-  color: #5a8a5a;
+  color: #8b1a1a;
 }
 
 /* Testimonial / social proof */
@@ -720,13 +719,13 @@ button:disabled {
   margin: 2rem auto;
   max-width: 300px;
   padding: 1.25rem;
-  background: #111;
+  background: #fffdf8;
   border-radius: 8px;
-  border: 1px solid #1a1a1a;
+  border: 2px solid #1a1a1a;
 }
 
 .testimonial-quote {
-  color: #888;
+  color: #5a4a3a;
   font-size: 0.9rem;
   font-style: italic;
   line-height: 1.6;
@@ -735,18 +734,18 @@ button:disabled {
 
 .testimonial-quote::before {
   content: """;
-  color: #444;
+  color: #8b1a1a;
 }
 
 .testimonial-quote::after {
   content: """;
-  color: #444;
+  color: #8b1a1a;
 }
 
 /* Value anchoring */
 .value-anchor {
   text-align: center;
-  color: #666;
+  color: #6a5a4a;
   font-size: 0.8rem;
   margin-top: 1rem;
   line-height: 1.5;
@@ -754,14 +753,14 @@ button:disabled {
 
 /* Reassurance section */
 .reassurance {
-  background: #0f0f0f;
-  border: 1px solid #1a1a1a;
+  background: #fffdf8;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
   padding: 1.25rem;
 }
 
 .reassurance-text {
-  color: #888;
+  color: #5a4a3a;
   font-size: 0.85rem;
   line-height: 1.6;
   margin: 0;
