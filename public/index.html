@@ -9,12 +9,24 @@
 </head>
 
 <body>
+  <!-- Splash Screen -->
+  <div class="splash" id="splash">
+    <h1 class="splash-title">SOFA<span class="red-2">2</span>SLUGGER</h1>
+    <p class="splash-subtitle">Boxing for the rest of us.</p>
+    <span class="splash-enter">Click to enter</span>
+  </div>
+
   <div class="grain-overlay"></div>
   <main class="landing">
     <header>
       <h1>Sofa<span class="red-2">2</span>Slugger</h1>
       <p class="tagline">Boxing for the rest of us.</p>
     </header>
+
+    <!-- Hero anchor image -->
+    <div class="hero-anchor">
+      <img src="assets/images/splash.npg.jpeg" alt="Boxing training">
+    </div>
 
     <!-- Emotional hook -->
     <p class="emotional-hook">You've always wanted to learn boxing. This is where you start.</p>
@@ -65,7 +77,7 @@
     </section>
 
     <section class="preview">
-      <button id="preview-btn" class="btn-primary btn-cta">Try the First Session Free</button>
+      <button id="preview-btn" class="btn-primary btn-cta">Play Session 1 (Free)</button>
       <p id="preview-status" class="status"></p>
       <p class="value-anchor">A single boxing class costs £15–£25. Sofa2Slugger gives you 10 sessions for £9.99.</p>
     </section>
@@ -102,6 +114,40 @@
   </main>
 
   <script>
+    // ================================
+    // SPLASH SCREEN
+    // ================================
+    (function() {
+      var splash = document.getElementById("splash");
+      var STORAGE_KEY = "s2s_splash_seen";
+
+      // Check if splash was already dismissed
+      if (localStorage.getItem(STORAGE_KEY)) {
+        splash.style.display = "none";
+        return;
+      }
+
+      function dismissSplash() {
+        splash.classList.add("fade-out");
+        localStorage.setItem(STORAGE_KEY, "1");
+        setTimeout(function() {
+          splash.style.display = "none";
+        }, 600);
+      }
+
+      // Auto-dismiss after 3 seconds
+      var autoTimer = setTimeout(dismissSplash, 3000);
+
+      // Click to dismiss immediately
+      splash.addEventListener("click", function() {
+        clearTimeout(autoTimer);
+        dismissSplash();
+      });
+    })();
+
+    // ================================
+    // PREVIEW PLAYER
+    // ================================
     var previewBtn = document.getElementById("preview-btn");
     var previewStatus = document.getElementById("preview-status");
     var intro = new Audio("/audio/vance-s01-intro.wav");
@@ -115,7 +161,7 @@
         intro.currentTime = 0;
         outro.currentTime = 0;
         playing = false;
-        previewBtn.textContent = "Try the First Session Free";
+        previewBtn.textContent = "Play Session 1 (Free)";
         previewStatus.textContent = "";
         return;
       }
@@ -131,7 +177,7 @@
 
     outro.addEventListener("ended", function () {
       playing = false;
-      previewBtn.textContent = "Try the First Session Free";
+      previewBtn.textContent = "Play Session 1 (Free)";
       previewStatus.textContent = "";
     });
   </script>

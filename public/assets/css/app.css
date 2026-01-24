@@ -771,3 +771,125 @@ button:disabled {
   padding: 0.9rem 2rem;
   font-size: 1rem;
 }
+
+/* ================================
+   SPLASH SCREEN
+   ================================ */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.6s ease-out;
+}
+
+.splash.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.splash-title {
+  font-size: clamp(2rem, 10vw, 4.5rem);
+  font-weight: 700;
+  color: #f4e4c1;
+  letter-spacing: 0.15em;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: splash-reveal 1s ease-out 0.3s forwards;
+}
+
+.splash-title .red-2 {
+  color: #8b1a1a;
+}
+
+.splash-subtitle {
+  font-size: clamp(0.85rem, 3vw, 1.1rem);
+  color: #6a5a4a;
+  margin-top: 1rem;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  animation: splash-reveal 0.8s ease-out 0.8s forwards;
+}
+
+.splash-enter {
+  position: absolute;
+  bottom: 15%;
+  font-size: 0.75rem;
+  color: #4a4a4a;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: splash-reveal 0.6s ease-out 1.5s forwards;
+}
+
+@keyframes splash-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   LANDING PAGE ENHANCEMENTS
+   ================================ */
+
+/* Larger, more impactful header */
+.landing header {
+  margin-bottom: 2.5rem;
+}
+
+.landing h1 {
+  font-size: 2.2rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.landing .tagline {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* Hero anchor image */
+.hero-anchor {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 3px solid #1a1a1a;
+}
+
+.hero-anchor img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(20%) contrast(1.05);
+}
+
+/* Tighter emotional hook */
+.landing .emotional-hook {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Primary CTA prominence */
+.landing .preview {
+  margin: 2.5rem 0;
+}
+
+.landing .btn-cta {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
