@@ -838,58 +838,196 @@ button:disabled {
 }
 
 /* ================================
-   LANDING PAGE ENHANCEMENTS
+   LANDING PAGE - HERO FOLD
    ================================ */
 
-/* Larger, more impactful header */
-.landing header {
-  margin-bottom: 2.5rem;
+/* Override body centering for landing page */
+body:has(.landing) {
+  align-items: flex-start;
 }
 
-.landing h1 {
-  font-size: 2.2rem;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.75rem;
+.landing {
+  max-width: 100%;
+  padding: 0;
 }
 
-.landing .tagline {
-  font-size: 1rem;
-  margin-bottom: 0;
+/* Hero section - full viewport */
+.hero-fold {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+  text-align: center;
 }
 
-/* Hero anchor image */
-.hero-anchor {
+.hero-fold header {
+  margin-bottom: 1.5rem;
+}
+
+.hero-fold h1 {
+  font-size: clamp(1.8rem, 8vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.hero-tagline {
+  font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+  color: #5a4a3a;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* Hero visual anchor */
+.hero-visual {
   width: 100%;
-  max-width: 320px;
+  max-width: 280px;
   margin: 0 auto 2rem;
   border-radius: 8px;
   overflow: hidden;
   border: 3px solid #1a1a1a;
+  box-shadow: 0 8px 32px rgba(26, 26, 26, 0.15);
 }
 
-.hero-anchor img {
+.hero-visual img {
   width: 100%;
   height: auto;
   display: block;
-  filter: grayscale(20%) contrast(1.05);
+  filter: grayscale(15%) contrast(1.05);
 }
 
-/* Tighter emotional hook */
-.landing .emotional-hook {
-  font-size: 1.1rem;
+/* Hero CTA - dominant */
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-cta .btn-cta {
+  padding: 1.1rem 2.5rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 16px rgba(139, 26, 26, 0.3);
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero-cta .btn-cta:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 26, 26, 0.4);
+}
+
+.hero-cta .status {
+  margin-top: 0.5rem;
+  min-height: 1.5rem;
+}
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: #8a7a6a;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  animation: hint-bounce 2s ease-in-out infinite;
+}
+
+.scroll-hint svg {
+  opacity: 0.6;
+}
+
+@keyframes hint-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ================================
+   LANDING PAGE - DETAIL FOLD
+   ================================ */
+
+.detail-fold {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+}
+
+/* Emotional hook - prominent opener */
+.detail-fold .emotional-hook {
+  font-size: 1.15rem;
   margin-bottom: 2rem;
-  max-width: 320px;
-  margin-left: auto;
-  margin-right: auto;
+  text-align: center;
 }
 
-/* Primary CTA prominence */
-.landing .preview {
+/* Intro card */
+.detail-fold .intro-card {
+  margin-bottom: 2.5rem;
+}
+
+/* Why audio */
+.detail-fold .why-audio {
+  margin-bottom: 2.5rem;
+}
+
+/* Content sections - improved spacing */
+.detail-fold .content-section {
+  margin-bottom: 2.5rem;
+  max-width: 100%;
+}
+
+.detail-fold .section-title {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.detail-fold .feature-list li {
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+}
+
+/* Pricing anchor - standalone emphasis */
+.pricing-anchor {
+  text-align: center;
+  padding: 1.5rem;
   margin: 2.5rem 0;
+  background: rgba(139, 26, 26, 0.04);
+  border-radius: 8px;
 }
 
-.landing .btn-cta {
-  padding: 1rem 2.5rem;
+.pricing-anchor .value-anchor {
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.pricing-anchor strong {
+  color: #8b1a1a;
   font-size: 1.1rem;
-  letter-spacing: 0.02em;
+}
+
+/* Testimonial - more space */
+.detail-fold .testimonial {
+  margin: 2.5rem auto;
+}
+
+/* Reassurance */
+.detail-fold .reassurance {
+  margin-bottom: 2.5rem;
+}
+
+/* Nav at bottom */
+.detail-fold + .main-nav,
+.landing .main-nav {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
 }
