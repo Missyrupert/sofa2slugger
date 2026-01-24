@@ -185,10 +185,23 @@
 
     // Music bed configuration
     var MUSIC_VOLUME = 0.25; // 25% volume for music bed
-    var musicTracks = {
-      start: "/audio/start_music_bed.mp3",
-      middle: "/audio/middle-music-bed.mp3",
-      final: "/audio/final_music_bed.mp3"
+
+    // Music bed assignments by session:
+    // Sessions 1-4: start_music_bed
+    // Sessions 5-7: middle-music-bed
+    // Sessions 8-9: final_music_bed
+    // Session 10: effects only (bell, crowd) - TBD
+    var sessionMusicBed = {
+      1: "/audio/start_music_bed.mp3",
+      2: "/audio/start_music_bed.mp3",
+      3: "/audio/start_music_bed.mp3",
+      4: "/audio/start_music_bed.mp3",
+      5: "/audio/middle-music-bed.mp3",
+      6: "/audio/middle-music-bed.mp3",
+      7: "/audio/middle-music-bed.mp3",
+      8: "/audio/final_music_bed.mp3",
+      9: "/audio/final_music_bed.mp3",
+      10: null // Effects only - TBD
     };
 
     // Session configurations - ALL UNLOCKED
@@ -304,15 +317,6 @@
       var item = audioQueue[queueIndex];
       statusEl.textContent = "Session " + currentSession + ": " + item.label + "...";
 
-      // Handle music bed transitions
-      if (item.musicBed) {
-        if (!musicBed) {
-          startMusicBed(item.musicBed);
-        } else if (musicBed.src !== item.musicBed) {
-          crossfadeMusic(item.musicBed);
-        }
-      }
-
       currentAudio = new Audio(item.src);
       currentAudio.addEventListener("ended", function() {
         queueIndex++;
@@ -330,20 +334,23 @@
       currentSession = num;
       var s = sessions[num];
 
-      // Build queue with music bed assignments:
-      // - Intro + Warmup: start music
-      // - Main Session: middle music
-      // - Outro: final music
+      // Build queue: intro -> warmup -> session -> outro
       audioQueue = [
-        { src: s.intro, label: "Intro", musicBed: musicTracks.start },
-        { src: s.warmup, label: "Warmup", musicBed: musicTracks.start },
-        { src: s.session, label: "Main Session", musicBed: musicTracks.middle },
-        { src: s.outro, label: "Outro", musicBed: musicTracks.final }
+        { src: s.intro, label: "Intro" },
+        { src: s.warmup, label: "Warmup" },
+        { src: s.session, label: "Main Session" },
+        { src: s.outro, label: "Outro" }
       ];
       queueIndex = 0;
 
       stopBtn.style.display = "inline-block";
       sessionButtons.forEach(function(btn) { btn.disabled = true; });
+
+      // Start music bed for this session (loops throughout entire session)
+      var music = sessionMusicBed[num];
+      if (music) {
+        startMusicBed(music);
+      }
 
       playNext();
     }
