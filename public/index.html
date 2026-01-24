@@ -32,6 +32,7 @@
 
       <div class="hero-cta">
         <button id="preview-btn" class="btn-primary btn-cta">Play Session 1 (Free)</button>
+        <button id="unlock-btn" class="btn-secondary" style="margin-top:10px;padding:8px 16px;font-size:12px;opacity:0.6;">🔓 Test Unlock (Dev)</button>
         <p id="preview-status" class="status"></p>
       </div>
 
@@ -164,39 +165,93 @@
     })();
 
     // ================================
-    // PREVIEW PLAYER
+    // PREVIEW PLAYER (Free Warmup)
     // ================================
     var previewBtn = document.getElementById("preview-btn");
     var previewStatus = document.getElementById("preview-status");
-    var intro = new Audio("/audio/vance-s01-intro.wav");
-    var outro = new Audio("/audio/vance-s01-outro.wav");
+
+    // Audio tracks
+    var intro = new Audio("/audio/vance-s01-intro.mp3");
+    var warmup = new Audio("/audio/session-1-warmup.mp3");
+    var fullSession = new Audio("/audio/session-1.mp3");
+    var outro = new Audio("/audio/vance-s01-outro.mp3");
+
     var playing = false;
+    var isPaidUser = false; // Set to true after purchase
+
+    // Preload audio for smoother transitions
+    intro.preload = "auto";
+    warmup.preload = "auto";
+    outro.preload = "auto";
+
+    function stopAllAudio() {
+      [intro, warmup, fullSession, outro].forEach(function(audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+      playing = false;
+      previewBtn.textContent = "Play Session 1 (Free)";
+      previewStatus.textContent = "";
+    }
 
     previewBtn.addEventListener("click", function () {
       if (playing) {
-        intro.pause();
-        outro.pause();
-        intro.currentTime = 0;
-        outro.currentTime = 0;
-        playing = false;
-        previewBtn.textContent = "Play Session 1 (Free)";
-        previewStatus.textContent = "";
+        stopAllAudio();
         return;
       }
       playing = true;
       previewBtn.textContent = "Stop";
-      previewStatus.textContent = "Playing...";
+      previewStatus.textContent = "Playing intro...";
       intro.play();
     });
 
+    // Sequence: intro -> warmup -> (full session if paid) -> outro
     intro.addEventListener("ended", function () {
-      if (playing) outro.play();
+      if (playing) {
+        previewStatus.textContent = "Playing warmup...";
+        warmup.play();
+      }
+    });
+
+    warmup.addEventListener("ended", function () {
+      if (playing) {
+        if (isPaidUser) {
+          previewStatus.textContent = "Playing full session...";
+          fullSession.play();
+        } else {
+          previewStatus.textContent = "Playing outro...";
+          outro.play();
+        }
+      }
+    });
+
+    fullSession.addEventListener("ended", function () {
+      if (playing) {
+        previewStatus.textContent = "Playing outro...";
+        outro.play();
+      }
     });
 
     outro.addEventListener("ended", function () {
-      playing = false;
-      previewBtn.textContent = "Play Session 1 (Free)";
-      previewStatus.textContent = "";
+      stopAllAudio();
+    });
+
+    // Handle audio errors gracefully
+    [intro, warmup, fullSession, outro].forEach(function(audio, index) {
+      var names = ["intro", "warmup", "full session", "outro"];
+      audio.addEventListener("error", function() {
+        console.error("Error loading " + names[index]);
+        previewStatus.textContent = "Error loading audio";
+      });
+    });
+
+    // Dev unlock button for testing paid flow
+    var unlockBtn = document.getElementById("unlock-btn");
+    unlockBtn.addEventListener("click", function() {
+      isPaidUser = !isPaidUser;
+      unlockBtn.textContent = isPaidUser ? "🔒 Lock (Dev)" : "🔓 Test Unlock (Dev)";
+      unlockBtn.style.opacity = isPaidUser ? "1" : "0.6";
+      previewStatus.textContent = isPaidUser ? "UNLOCKED - full session enabled" : "LOCKED - warmup only";
     });
   </script>
 </body>
