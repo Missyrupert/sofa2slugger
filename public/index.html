@@ -33,11 +33,14 @@
       <div class="hero-cta">
         <!-- FREE SESSION CTA - SCREAMING -->
         <a href="gym.html" class="free-banner"
-          style="display:block;text-decoration:none;background:#8b1a1a;color:#f4e4c1;padding:12px 20px;border-radius:6px;margin-bottom:12px;text-align:center;">
+          style="display:block;text-decoration:none;background:#8b1a1a;color:#f4e4c1;padding:12px 20px;border-radius:6px;margin-bottom:8px;text-align:center;">
           <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.9;">Try it now</span>
           <p style="font-size:1.4rem;font-weight:700;margin:4px 0 0;letter-spacing:0.02em;">SESSION 1 IS FREE</p>
         </a>
-        <p style="font-size:11px;opacity:0.6;margin-top:12px;">No signup required</p>
+        <p style="font-size:13px;opacity:0.85;margin-top:0;margin-bottom:4px;font-style:normal;color:#1a1a1a;">
+          Session 1 &middot; ~12 minutes &middot; Audio-guided
+        </p>
+        <p style="font-size:11px;opacity:0.6;margin-top:4px;">No signup required</p>
 
         <!-- Manifesto Player - secondary -->
         <div class="manifesto-player" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.1);">
@@ -241,7 +244,7 @@
         manifestoAudio.addEventListener("ended", function () {
           isPlaying = false;
           manifestoBtn.innerHTML = '<span id="manifesto-icon">&#9654;</span> Play Manifesto';
-          manifestoStatus.textContent = "Complete";
+          manifestoStatus.textContent = "When you’re ready, Session 1 is available in the Gym.";
         });
 
         manifestoAudio.addEventListener("error", function () {
