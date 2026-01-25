@@ -31,16 +31,20 @@
       </div>
 
       <div class="hero-cta">
-        <div class="session-buttons"
-          style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:15px;">
-          <button class="btn-primary btn-session" data-session="1">Session 1</button>
-          <button class="btn-primary btn-session" data-session="2">Session 2</button>
-          <button class="btn-primary btn-session" data-session="3">Session 3</button>
-          <button class="btn-primary btn-session" data-session="4">Session 4</button>
+        <!-- Manifesto Player -->
+        <div class="manifesto-player" style="margin-bottom:20px;">
+          <p style="font-size:13px;opacity:0.8;margin-bottom:10px;">Hear the philosophy</p>
+          <button id="btn-manifesto" class="btn-secondary" style="padding:12px 24px;">
+            <span id="manifesto-icon">&#9654;</span> Play Manifesto
+          </button>
+          <p id="manifesto-status" style="font-size:11px;opacity:0.6;margin-top:8px;"></p>
         </div>
-        <button id="stop-btn" class="btn-secondary" style="display:none;padding:12px 24px;">Stop</button>
-        <p id="preview-status" class="status"></p>
-        <p style="font-size:11px;opacity:0.6;margin-top:10px;">🔓 All sessions unlocked for testing</p>
+
+        <!-- Main CTA -->
+        <a href="gym.html" class="btn-primary" style="text-decoration:none;padding:14px 32px;font-size:16px;">
+          Enter the Gym
+        </a>
+        <p style="font-size:12px;opacity:0.7;margin-top:12px;">Session 1 free &bull; Sessions 2-10 for £9.99</p>
       </div>
 
       <div class="scroll-hint">
@@ -199,234 +203,47 @@
     })();
 
     // ================================
-    // SESSION PLAYER (Gated)
+    // MANIFESTO PLAYER
     // ================================
-    var sessionButtons = document.querySelectorAll(".btn-session");
-    var stopBtn = document.getElementById("stop-btn");
-    var statusEl = document.getElementById("preview-status");
+    var manifestoBtn = document.getElementById("btn-manifesto");
+    var manifestoIcon = document.getElementById("manifesto-icon");
+    var manifestoStatus = document.getElementById("manifesto-status");
+    var manifestoAudio = null;
+    var isPlaying = false;
 
-    var currentSession = null;
-    var currentAudio = null;
-    var musicBed = null;
-    var audioQueue = [];
-    var queueIndex = 0;
-
-    // Music bed configuration
-    var MUSIC_VOLUME = 0.25; // 25% volume for music bed
-
-    // Music bed assignments by session:
-    // Sessions 1-4: start_music_bed
-    // Sessions 5-7: middle-music-bed
-    // Sessions 8-9: final_music_bed
-    // Session 10: effects only (bell, crowd) - TBD
-    var sessionMusicBed = {
-      1: "/audio/start_music_bed.mp3",
-      2: "/audio/start_music_bed.mp3",
-      3: "/audio/start_music_bed.mp3",
-      4: "/audio/start_music_bed.mp3",
-      5: "/audio/middle-music-bed.mp3",
-      6: "/audio/middle-music-bed.mp3",
-      7: "/audio/middle-music-bed.mp3",
-      8: "/audio/final_music_bed.mp3",
-      9: "/audio/final_music_bed.mp3",
-      10: null // Effects only - TBD
-    };
-
-    // Session configurations
-    var sessions = {
-      1: {
-        intro: "/audio/vance-s01-intro.mp3",
-        warmup: "/audio/session-1-warmup.mp3",
-        session: "/audio/session-1.mp3",
-        outro: "/audio/vance-s01-outro.mp3"
-      },
-      2: {
-        intro: "/audio/vance-s02-intro.mp3",
-        warmup: "/audio/session-2-warmup.mp3",
-        session: "/audio/session-2.mp3",
-        outro: "/audio/vance-s02-outro.mp3"
-      },
-      3: {
-        intro: "/audio/vance-s03-intro.mp3",
-        warmup: "/audio/session-3-warmup.mp3",
-        session: "/audio/session-3.mp3",
-        outro: "/audio/vance-s03-outro.mp3"
-      },
-      4: {
-        intro: "/audio/vance-s04-intro.mp3",
-        warmup: "/audio/session-4-warmup.mp3",
-        session: "/audio/session-4.mp3",
-        outro: "/audio/vance-s04-outro.mp3"
-      }
-    };
-
-    // Initialize UI based on entitlement
-    function updateAccessUI() {
-      var hasAccess = isPremium();
-      sessionButtons.forEach(function (btn) {
-        var num = parseInt(btn.getAttribute("data-session"));
-        if (num > 1 && !hasAccess) {
-          btn.classList.add("locked");
-          // Optional: add lock icon or style
-        } else {
-          btn.classList.remove("locked");
+    manifestoBtn.addEventListener("click", function() {
+      if (isPlaying) {
+        // Stop
+        if (manifestoAudio) {
+          manifestoAudio.pause();
+          manifestoAudio.currentTime = 0;
         }
-      });
+        isPlaying = false;
+        manifestoIcon.innerHTML = "&#9654;";
+        manifestoBtn.innerHTML = '<span id="manifesto-icon">&#9654;</span> Play Manifesto';
+        manifestoStatus.textContent = "";
+      } else {
+        // Play
+        manifestoAudio = new Audio("/audio/manifesto.mp3");
+        manifestoAudio.play();
+        isPlaying = true;
+        manifestoIcon.innerHTML = "&#9632;";
+        manifestoBtn.innerHTML = '<span id="manifesto-icon">&#9632;</span> Stop';
+        manifestoStatus.textContent = "Playing manifesto...";
 
-      // Update access text
-      var accessMsg = document.querySelector('p[style*="🔓 All sessions unlocked"]');
-      if (accessMsg) {
-        if (hasAccess) {
-          accessMsg.textContent = "🔓 Premium Access Active";
-          accessMsg.style.color = "#7cb87c";
-        } else {
-          accessMsg.textContent = "🔒 Free Version (Session 1 Only)";
-          accessMsg.style.color = "#888";
-        }
+        manifestoAudio.addEventListener("ended", function() {
+          isPlaying = false;
+          manifestoBtn.innerHTML = '<span id="manifesto-icon">&#9654;</span> Play Manifesto';
+          manifestoStatus.textContent = "Complete";
+        });
+
+        manifestoAudio.addEventListener("error", function() {
+          isPlaying = false;
+          manifestoBtn.innerHTML = '<span id="manifesto-icon">&#9654;</span> Play Manifesto';
+          manifestoStatus.textContent = "Error loading audio";
+        });
       }
-    }
-    updateAccessUI();
-
-    // Music bed functions
-    function startMusicBed(track) {
-      if (musicBed) {
-        musicBed.pause();
-      }
-      musicBed = new Audio(track);
-      musicBed.volume = MUSIC_VOLUME;
-      musicBed.loop = true;
-      musicBed.play();
-    }
-
-    function crossfadeMusic(newTrack) {
-      var oldMusic = musicBed;
-      var newMusic = new Audio(newTrack);
-      newMusic.volume = 0;
-      newMusic.loop = true;
-      newMusic.play();
-
-      // Crossfade over 1 second
-      var fadeSteps = 20;
-      var fadeInterval = 50;
-      var step = 0;
-
-      var fade = setInterval(function () {
-        step++;
-        var progress = step / fadeSteps;
-        if (oldMusic) oldMusic.volume = MUSIC_VOLUME * (1 - progress);
-        newMusic.volume = MUSIC_VOLUME * progress;
-
-        if (step >= fadeSteps) {
-          clearInterval(fade);
-          if (oldMusic) {
-            oldMusic.pause();
-          }
-          musicBed = newMusic;
-        }
-      }, fadeInterval);
-    }
-
-    function fadeOutMusic() {
-      if (!musicBed) return;
-      var fadeSteps = 30;
-      var fadeInterval = 50;
-      var step = 0;
-      var startVol = musicBed.volume;
-
-      var fade = setInterval(function () {
-        step++;
-        musicBed.volume = startVol * (1 - step / fadeSteps);
-        if (step >= fadeSteps) {
-          clearInterval(fade);
-          musicBed.pause();
-          musicBed = null;
-        }
-      }, fadeInterval);
-    }
-
-    function stopPlayback() {
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        currentAudio = null;
-      }
-      fadeOutMusic();
-      audioQueue = [];
-      queueIndex = 0;
-      currentSession = null;
-      stopBtn.style.display = "none";
-      sessionButtons.forEach(function (btn) { btn.disabled = false; });
-      statusEl.textContent = "";
-    }
-
-    function playNext() {
-      if (queueIndex >= audioQueue.length) {
-        fadeOutMusic();
-        currentSession = null;
-        stopBtn.style.display = "none";
-        sessionButtons.forEach(function (btn) { btn.disabled = false; });
-        statusEl.textContent = "Session complete!";
-        return;
-      }
-
-      var item = audioQueue[queueIndex];
-      statusEl.textContent = "Session " + currentSession + ": " + item.label + "...";
-
-      currentAudio = new Audio(item.src);
-      currentAudio.addEventListener("ended", function () {
-        queueIndex++;
-        playNext();
-      });
-      currentAudio.addEventListener("error", function () {
-        statusEl.textContent = "Error loading: " + item.label;
-        console.error("Failed to load:", item.src);
-      });
-      currentAudio.play();
-    }
-
-    function playSession(num) {
-      // Gate Check
-      if (num > 1 && !isPremium()) {
-        if (confirm("Sessions 2-10 are available for £9.99.\nLifetime access. No subscription.\n\nGo to checkout?")) {
-          document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
-        }
-        return;
-      }
-
-      stopPlayback();
-      currentSession = num;
-      var s = sessions[num];
-
-      // Build queue: intro -> warmup -> session -> outro
-      audioQueue = [
-        { src: s.intro, label: "Intro" },
-        { src: s.warmup, label: "Warmup" },
-        { src: s.session, label: "Main Session" },
-        { src: s.outro, label: "Outro" }
-      ];
-      queueIndex = 0;
-
-      stopBtn.style.display = "inline-block";
-      sessionButtons.forEach(function (btn) { btn.disabled = true; });
-
-      // Start music bed for this session (loops throughout entire session)
-      var music = sessionMusicBed[num];
-      if (music) {
-        startMusicBed(music);
-      }
-
-      playNext();
-    }
-
-    // Attach click handlers to session buttons
-    sessionButtons.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var num = parseInt(this.getAttribute("data-session"));
-        playSession(num);
-      });
     });
-
-    stopBtn.addEventListener("click", stopPlayback);
 
   </script>
 </body>
