@@ -79,6 +79,7 @@ function initLocks() {
 initLocks();
 
 // Re-select cards after potential unlock
+var sessionCards = document.querySelectorAll('.session-card');
 sessionCards.forEach(function (card) {
   // Card click (fallback/general)
   card.addEventListener('click', function (e) {
