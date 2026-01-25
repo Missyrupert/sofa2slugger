@@ -25,7 +25,9 @@ var phase = 'ready'; // ready | intro | session | done
 var isPaused = false;
 
 var intro = null;
+var intro = null;
 var sessionAudio = null;
+var outro = null;
 
 var player = document.getElementById('player');
 var sessionTitle = document.getElementById('session-title');
@@ -116,22 +118,27 @@ function loadSession(num, autoPlay) {
 
   var padded = num < 10 ? '0' + num : '' + num;
 
-  // Load intro and complete session audio (includes warmup+coaching+outro with music)
+  // Load intro, session, and outro
+  // Intro: Vance (Narrator)
+  // Session: Coach + Music (Complete)
+  // Outro: Vance (Narrator)
   intro = new Audio('/audio/vance-s' + padded + '-intro.mp3');
   sessionAudio = new Audio('/audio/session-' + num + '-complete.mp3');
+  outro = new Audio('/audio/vance-s' + padded + '-outro.mp3');
 
   // Wire up the sequence
   intro.addEventListener('ended', onIntroEnd);
   sessionAudio.addEventListener('ended', onSessionEnd);
+  outro.addEventListener('ended', onOutroEnd);
 
   // Add error handling
-  intro.addEventListener('error', function (e) {
-    console.error("Error playing intro for session " + num, e);
-    alert("Error loading intro audio. Please checks connection.");
-  });
-  sessionAudio.addEventListener('error', function (e) {
-    console.error("Error playing session for session " + num, e);
-    alert("Error loading session audio. Please check connection.");
+  [intro, sessionAudio, outro].forEach(function (audio, index) {
+    if (!audio) return;
+    var labels = ['Intro', 'Training', 'Outro'];
+    audio.addEventListener('error', function (e) {
+      console.error("Error playing " + labels[index] + " for session " + num, e);
+      alert("Error loading " + labels[index] + " audio. Please check connection.");
+    });
   });
 
   // Get session name from card
@@ -178,6 +185,7 @@ function getCurrentAudio() {
   switch (phase) {
     case 'intro': return intro;
     case 'session': return sessionAudio;
+    case 'outro': return outro;
     default: return null;
   }
 }
@@ -211,6 +219,12 @@ function onIntroEnd() {
 }
 
 function onSessionEnd() {
+  phase = 'outro';
+  phaseDisplay.textContent = 'Outro';
+  outro.play();
+}
+
+function onOutroEnd() {
   phase = 'done';
   phaseDisplay.textContent = 'Complete';
   showPlayButton();
@@ -222,6 +236,7 @@ function onSessionEnd() {
 function stopAll() {
   if (intro) { intro.pause(); intro.currentTime = 0; }
   if (sessionAudio) { sessionAudio.pause(); sessionAudio.currentTime = 0; }
+  if (outro) { outro.pause(); outro.currentTime = 0; }
   phase = 'ready';
   isPaused = false;
 }
@@ -239,11 +254,26 @@ function skipToPrevPhase() {
 
   // If in session phase, go back to intro
   if (phase === 'session') {
-    if (current) { current.pause(); current.currentTime = 0; }
+    stopAll(); // Simpler reset
+    // But we want to preserve session
+    // Re-load would be nuclear.
+    // Let's manually back up.
+    if (sessionAudio) { sessionAudio.pause(); sessionAudio.currentTime = 0; }
     phase = 'intro';
     phaseDisplay.textContent = 'Intro';
     intro.currentTime = 0;
     intro.play();
+    if (!isPaused) showPauseButton();
+    return;
+  }
+
+  // If in outro phase, go back to session
+  if (phase === 'outro') {
+    if (outro) { outro.pause(); outro.currentTime = 0; }
+    phase = 'session';
+    phaseDisplay.textContent = 'Training';
+    sessionAudio.currentTime = 0;
+    sessionAudio.play();
     if (!isPaused) showPauseButton();
     return;
   }
