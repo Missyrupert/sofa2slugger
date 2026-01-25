@@ -45,7 +45,7 @@ function isPremium() {
 
 // Redirect to pricing
 function showPaywall() {
-  if (confirm("Sessions 2-10 are locked.\n\nUnlock full access for £9.99?")) {
+  if (confirm("Sessions 2-10 are locked.\n\nUnlock full access for \u00A39.99?")) {
     window.location.href = "index.html#pricing";
   }
 }
@@ -77,19 +77,35 @@ function initLocks() {
 initLocks();
 
 // Re-select cards after potential unlock
-var sessionCards = document.querySelectorAll('.session-card');
-
 sessionCards.forEach(function (card) {
+  // Card click (fallback/general)
   card.addEventListener('click', function (e) {
-    var num = parseInt(this.getAttribute('data-session'));
+    // If we clicked a button, ignore this listener (let the button listener handle it)
+    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
 
-    // Check lock state
+    var num = parseInt(this.getAttribute('data-session'));
     if (this.classList.contains('locked')) {
       showPaywall();
       return;
     }
+    loadSession(num, true);
+  });
+});
 
-    // Play allowed session
+// Explicit play button handlers
+document.querySelectorAll('.session-play').forEach(function (btn) {
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation(); // Stop bubbling to card
+    var num = parseInt(this.getAttribute('data-session'));
+
+    // Check if parent card is locked (double check)
+    var card = this.closest('.session-card');
+    if (card && card.classList.contains('locked')) {
+      // Should be disabled, but just in case
+      showPaywall();
+      return;
+    }
+
     loadSession(num, true);
   });
 });
@@ -108,10 +124,20 @@ function loadSession(num, autoPlay) {
   intro.addEventListener('ended', onIntroEnd);
   sessionAudio.addEventListener('ended', onSessionEnd);
 
+  // Add error handling
+  intro.addEventListener('error', function (e) {
+    console.error("Error playing intro for session " + num, e);
+    alert("Error loading intro audio. Please checks connection.");
+  });
+  sessionAudio.addEventListener('error', function (e) {
+    console.error("Error playing session for session " + num, e);
+    alert("Error loading session audio. Please check connection.");
+  });
+
   // Get session name from card
   var card = document.querySelector('.session-card[data-session="' + num + '"]');
   var name = card ? card.querySelector('.session-name').textContent : '';
-  sessionTitle.textContent = 'Session ' + num + ' — ' + name;
+  sessionTitle.textContent = 'Session ' + num + ' \u2014 ' + name;
 
   phaseDisplay.textContent = 'Ready';
   phase = 'ready';
