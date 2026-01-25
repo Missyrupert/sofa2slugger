@@ -5,11 +5,10 @@ Sofa2Slugger — Canonical Product Brief (v1)
 What it is  
 Sofa2Slugger is an audio-first product designed to help men interrupt inertia and return to physical agency. It is not therapy, motivation, or productivity coaching. It is structured, embodied action through guided audio sessions.
 
-Who it’s for  
-Men who feel stuck, stalled, or dulled by comfort — especially those who know what they should be doing but aren’t doing it.
+Who it’s for  Who it’s for  
+People who feel stuck, stalled, or dulled by comfort — especially those who know what they should be doing but aren’t doing it.
 
-Core promise  
-Move the body first. Thinking follows.
+ first. Thinking follows.
 
 Format  
 Mobile-first audio experience  
