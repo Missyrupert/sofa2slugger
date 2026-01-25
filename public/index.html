@@ -32,14 +32,10 @@
 
       <div class="hero-cta">
         <!-- FREE SESSION CTA - SCREAMING -->
-        <div class="free-banner" style="background:#8b1a1a;color:#f4e4c1;padding:12px 20px;border-radius:6px;margin-bottom:20px;text-align:center;">
+        <a href="gym.html" class="free-banner"
+          style="display:block;text-decoration:none;background:#8b1a1a;color:#f4e4c1;padding:12px 20px;border-radius:6px;margin-bottom:12px;text-align:center;">
           <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.9;">Try it now</span>
           <p style="font-size:1.4rem;font-weight:700;margin:4px 0 0;letter-spacing:0.02em;">SESSION 1 IS FREE</p>
-        </div>
-
-        <!-- Main CTA -->
-        <a href="gym.html" class="btn-primary btn-cta" style="text-decoration:none;padding:16px 40px;font-size:1.1rem;">
-          Start Training Free
         </a>
         <p style="font-size:11px;opacity:0.6;margin-top:12px;">No signup required</p>
 
@@ -222,7 +218,7 @@
     var manifestoAudio = null;
     var isPlaying = false;
 
-    manifestoBtn.addEventListener("click", function() {
+    manifestoBtn.addEventListener("click", function () {
       if (isPlaying) {
         // Stop
         if (manifestoAudio) {
@@ -242,13 +238,13 @@
         manifestoBtn.innerHTML = '<span id="manifesto-icon">&#9632;</span> Stop';
         manifestoStatus.textContent = "Playing manifesto...";
 
-        manifestoAudio.addEventListener("ended", function() {
+        manifestoAudio.addEventListener("ended", function () {
           isPlaying = false;
           manifestoBtn.innerHTML = '<span id="manifesto-icon">&#9654;</span> Play Manifesto';
           manifestoStatus.textContent = "Complete";
         });
 
-        manifestoAudio.addEventListener("error", function() {
+        manifestoAudio.addEventListener("error", function () {
           isPlaying = false;
           manifestoBtn.innerHTML = '<span id="manifesto-icon">&#9654;</span> Play Manifesto';
           manifestoStatus.textContent = "Error loading audio";
