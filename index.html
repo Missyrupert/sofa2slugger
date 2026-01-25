@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Emerald Spark | Hibernian FC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hibs-green: #008751;
+            --hibs-dark: #005a36;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #f4f4f4; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .bg-hibs { background-color: var(--hibs-green); }
+        .text-hibs { color: var(--hibs-green); }
+        .border-hibs { border-color: var(--hibs-green); }
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="text-gray-900 overflow-x-hidden">
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-60">
+            <!-- Placeholder for a high-res image of Easter Road or Leith Docks -->
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=2000" alt="Stadium Atmosphere" class="w-full h-full object-cover">
+        </div>
+        <div class="relative z-10 text-center px-4">
+            <span class="uppercase tracking-widest text-sm font-bold bg-hibs px-4 py-1 mb-4 inline-block">Established 1875</span>
+            <h1 class="text-6xl md:text-8xl font-bold mb-4 italic">The Emerald Spark</h1>
+            <p class="text-xl md:text-2xl max-w-2xl mx-auto font-light italic">"How a club of outsiders, immigrants, and innovators changed the world of football forever."</p>
+        </div>
+        <div class="absolute bottom-10 animate-bounce">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <!-- The Narrative -->
+    <main class="max-w-4xl mx-auto px-6 py-20">
+        
+        <!-- Chapter 1 -->
+        <section class="mb-24">
+            <h2 class="text-4xl mb-8 border-l-8 border-hibs pl-6">The Blueprint: No Hibs, No Celtic</h2>
+            <div class="prose prose-lg text-gray-700 leading-relaxed">
+                <p class="mb-6 font-bold text-xl">Leith is not Edinburgh. It is a sovereign state of mind.</p>
+                <p class="mb-4">Founded in 1875 in the shadows of the Cowgate, Hibernian was more than a club—it was a radical act of social inclusion for the Irish immigrant community. When Hibs won the Scottish Cup in 1887, they didn't just win a trophy; they provided the blueprint for <strong>Celtic FC</strong>, who were formed a year later based directly on the Hibernian model of charity and community identity.</p>
+            </div>
+        </section>
+
+        <!-- The Firsts Grid -->
+        <section class="mb-24 bg-hibs text-white p-12 rounded-sm shadow-2xl relative">
+            <h2 class="text-3xl mb-10 italic">The Pioneers of the Global Game</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-bold mb-2 uppercase tracking-tighter text-green-200">1955: The European Frontier</h3>
+                    <p class="text-sm opacity-90">While others hesitated, Hibs stepped into the unknown as the <strong>first British club</strong> to enter the European Cup, reaching the semi-finals and teaching the island that football had no borders.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 uppercase tracking-tighter text-green-200">1954: Under the Lights</h3>
+                    <p class="text-sm opacity-90">Easter Road was a laboratory of the modern spectacle, becoming one of the first in Scotland to install floodlights, turning football into a Tuesday night drama.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 uppercase tracking-tighter text-green-200">1977: The Bukta Revolution</h3>
+                    <p class="text-sm opacity-90">The first club in the UK to brave a shirt sponsor on television. A controversial move that paved the way for the multi-billion pound commercial era of today.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 uppercase tracking-tighter text-green-200">The Famous Five</h3>
+                    <p class="text-sm opacity-90">Smith, Johnstone, Reilly, Turnbull, and Ormond. Not just a strike force, but an aesthetic movement that defined "The Hibs Way"—poetry in motion.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter 2 -->
+        <section class="mb-24">
+            <h2 class="text-4xl mb-8 border-l-8 border-hibs pl-6">Sunshine on Leith</h2>
+            <div class="prose prose-lg text-gray-700 leading-relaxed">
+                <p class="mb-4 text-2xl italic font-serif">"While I'm worth all my chances, but my chances are few..."</p>
+                <p>The 2016 Scottish Cup win wasn't just a sporting victory; it was a communal exorcism. 150,000 people singing in the streets of Leith proved that Hibs remains the quintessential club of the 'other'—the innovators, the dreamers, and the defiant.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer / Legacy -->
+    <footer class="bg-gray-900 text-white py-20 text-center">
+        <h2 class="text-5xl font-bold mb-6">Persevered.</h2>
+        <p class="opacity-50 tracking-widest uppercase">Hibernian Football Club | Leith, Scotland</p>
+    </footer>
+
+    <!-- INTERACTIVE CHATBOT SECTION -->
+    <div x-data="hibsChat()" class="fixed bottom-6 right-6 z-50">
+        <!-- Toggle Button -->
+        <button @click="open = !open" class="bg-hibs hover:bg-hibs-dark text-white p-4 rounded-full shadow-xl transition-all flex items-center justify-center">
+            <svg x-show="!open" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+            <svg x-show="open" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <!-- Chat Window -->
+        <div x-show="open" x-transition.opacity class="absolute bottom-20 right-0 w-96 max-w-[90vw] h-[500px] glass rounded-2xl shadow-2xl border border-hibs flex flex-col overflow-hidden">
+            <div class="bg-hibs p-4 text-white font-bold flex justify-between items-center">
+                <span>The Hibs Historian</span>
+                <span class="text-xs bg-black/20 px-2 py-1 rounded">AI-Powered</span>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-4 space-y-4 text-sm" id="chat-box">
+                <template x-for="msg in messages">
+                    <div :class="msg.role === 'user' ? 'text-right' : 'text-left'">
+                        <div :class="msg.role === 'user' ? 'bg-hibs text-white ml-auto' : 'bg-gray-200 text-gray-800'" class="inline-block p-3 rounded-lg max-w-[80%] shadow-sm">
+                            <p x-text="msg.content"></p>
+                        </div>
+                    </div>
+                </template>
+                <div x-show="loading" class="text-left"><div class="inline-block p-3 bg-gray-200 rounded-lg animate-pulse">Consulting the archives...</div></div>
+            </div>
+
+            <!-- API Key Input (Only shown if key is missing) -->
+            <div x-show="!apiKey" class="p-4 bg-yellow-50 border-t border-yellow-200">
+                <input type="password" x-model="tempKey" placeholder="Enter OpenAI API Key to chat..." class="w-full p-2 text-xs border rounded mb-2">
+                <button @click="saveKey" class="w-full bg-black text-white text-xs py-2 rounded">Activate Historian</button>
+            </div>
+
+            <!-- Input Area -->
+            <div x-show="apiKey" class="p-4 border-t border-gray-100">
+                <div class="flex gap-2">
+                    <input type="text" x-model="userInput" @keyup.enter="sendMessage" placeholder="Ask about the Famous Five..." class="flex-1 border-gray-300 rounded-md text-sm p-2 outline-hibs">
+                    <button @click="sendMessage" class="bg-hibs text-white px-4 py-2 rounded-md font-bold">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function hibsChat() {
+            return {

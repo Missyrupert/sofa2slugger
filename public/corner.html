@@ -112,7 +112,8 @@
       if (confirm('Reset all session data on this device?')) {
         var keys = Object.keys(localStorage);
         for (var i = 0; i < keys.length; i++) {
-          if (keys[i].indexOf('s2s_') === 0) {
+          // Removes all s2s_ keys EXCEPT the premium access token
+          if (keys[i].indexOf('s2s_') === 0 && keys[i] !== 's2s_premium_access') {
             localStorage.removeItem(keys[i]);
           }
         }

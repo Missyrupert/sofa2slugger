@@ -31,7 +31,8 @@
       </div>
 
       <div class="hero-cta">
-        <div class="session-buttons" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:15px;">
+        <div class="session-buttons"
+          style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:15px;">
           <button class="btn-primary btn-session" data-session="1">Session 1</button>
           <button class="btn-primary btn-session" data-session="2">Session 2</button>
           <button class="btn-primary btn-session" data-session="3">Session 3</button>
@@ -45,7 +46,7 @@
       <div class="scroll-hint">
         <span>Learn more</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-          <path d="M8 12L2 6h12L8 12z"/>
+          <path d="M8 12L2 6h12L8 12z" />
         </svg>
       </div>
     </section>
@@ -58,12 +59,14 @@
 
       <div class="intro-card">
         <p class="intro-lead">Sofa2Slugger is an audio-only boxing training app for complete beginners.</p>
-        <p class="intro-desc">Sessions are guided entirely by voice—no video, no mirrors, and no experience needed. You'll build confidence from the sofa to the gym, one round at a time.</p>
+        <p class="intro-desc">Sessions are guided entirely by voice—no video, no mirrors, and no experience needed.
+          You'll build confidence from the sofa to the gym, one round at a time.</p>
       </div>
 
       <!-- Why audio works -->
       <div class="why-audio">
-        <p>Audio training lets you focus on how your body feels, not how it looks. Close your eyes, follow the cues, and move.</p>
+        <p>Audio training lets you focus on how your body feels, not how it looks. Close your eyes, follow the cues, and
+          move.</p>
       </div>
 
       <!-- What You'll Learn -->
@@ -101,8 +104,15 @@
       </section>
 
       <!-- Pricing -->
-      <div class="pricing-anchor">
-        <p class="value-anchor">A single boxing class costs £15–£25.<br>Sofa2Slugger gives you 10 sessions for <strong>£9.99</strong>.</p>
+      <div class="pricing-anchor" id="pricing">
+        <p class="value-anchor">A single boxing class costs £15–£25.<br>Sofa2Slugger gives you 10 sessions for
+          <strong>£9.99</strong>.
+        </p>
+        <div style="margin-top: 20px;">
+          <!-- Stripe Payment Link -->
+          <a href="https://buy.stripe.com/7sY7sM8823E8auX3WR8k800" class="btn-primary"
+            style="text-decoration: none; padding: 12px 24px;">Unlock Sessions 2-10</a>
+        </div>
       </div>
 
       <!-- Social proof -->
@@ -113,7 +123,8 @@
       <!-- What Happens After You Buy -->
       <section class="content-section reassurance">
         <h2 class="section-title">What Happens After You Buy</h2>
-        <p class="reassurance-text">You'll get instant access to all 10 sessions via Google Drive. Download them to your phone, save them offline, and train whenever you're ready. No accounts, no apps to install, no waiting.</p>
+        <p class="reassurance-text">You'll get instant access to all 10 sessions via Google Drive. Download them to your
+          phone, save them offline, and train whenever you're ready. No accounts, no apps to install, no waiting.</p>
       </section>
 
     </section>
@@ -140,9 +151,26 @@
 
   <script>
     // ================================
+    // PAYMENT & ACCESS LOGIC
+    // ================================
+    var STORAGE_KEY_PAID = "s2s_premium_access";
+
+    // check for payment success return
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('payment') === 'success') {
+      localStorage.setItem(STORAGE_KEY_PAID, 'true');
+      // Clean URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    function isPremium() {
+      return localStorage.getItem(STORAGE_KEY_PAID) === 'true';
+    }
+
+    // ================================
     // SPLASH SCREEN
     // ================================
-    (function() {
+    (function () {
       var splash = document.getElementById("splash");
       var STORAGE_KEY = "s2s_splash_seen";
 
@@ -155,7 +183,7 @@
       function dismissSplash() {
         splash.classList.add("fade-out");
         localStorage.setItem(STORAGE_KEY, "1");
-        setTimeout(function() {
+        setTimeout(function () {
           splash.style.display = "none";
         }, 600);
       }
@@ -164,14 +192,14 @@
       var autoTimer = setTimeout(dismissSplash, 3000);
 
       // Click to dismiss immediately
-      splash.addEventListener("click", function() {
+      splash.addEventListener("click", function () {
         clearTimeout(autoTimer);
         dismissSplash();
       });
     })();
 
     // ================================
-    // SESSION PLAYER (All Sessions Unlocked + Music Bed)
+    // SESSION PLAYER (Gated)
     // ================================
     var sessionButtons = document.querySelectorAll(".btn-session");
     var stopBtn = document.getElementById("stop-btn");
@@ -204,7 +232,7 @@
       10: null // Effects only - TBD
     };
 
-    // Session configurations - ALL UNLOCKED
+    // Session configurations
     var sessions = {
       1: {
         intro: "/audio/vance-s01-intro.mp3",
@@ -232,6 +260,33 @@
       }
     };
 
+    // Initialize UI based on entitlement
+    function updateAccessUI() {
+      var hasAccess = isPremium();
+      sessionButtons.forEach(function (btn) {
+        var num = parseInt(btn.getAttribute("data-session"));
+        if (num > 1 && !hasAccess) {
+          btn.classList.add("locked");
+          // Optional: add lock icon or style
+        } else {
+          btn.classList.remove("locked");
+        }
+      });
+
+      // Update access text
+      var accessMsg = document.querySelector('p[style*="🔓 All sessions unlocked"]');
+      if (accessMsg) {
+        if (hasAccess) {
+          accessMsg.textContent = "🔓 Premium Access Active";
+          accessMsg.style.color = "#7cb87c";
+        } else {
+          accessMsg.textContent = "🔒 Free Version (Session 1 Only)";
+          accessMsg.style.color = "#888";
+        }
+      }
+    }
+    updateAccessUI();
+
     // Music bed functions
     function startMusicBed(track) {
       if (musicBed) {
@@ -255,7 +310,7 @@
       var fadeInterval = 50;
       var step = 0;
 
-      var fade = setInterval(function() {
+      var fade = setInterval(function () {
         step++;
         var progress = step / fadeSteps;
         if (oldMusic) oldMusic.volume = MUSIC_VOLUME * (1 - progress);
@@ -278,7 +333,7 @@
       var step = 0;
       var startVol = musicBed.volume;
 
-      var fade = setInterval(function() {
+      var fade = setInterval(function () {
         step++;
         musicBed.volume = startVol * (1 - step / fadeSteps);
         if (step >= fadeSteps) {
@@ -300,7 +355,7 @@
       queueIndex = 0;
       currentSession = null;
       stopBtn.style.display = "none";
-      sessionButtons.forEach(function(btn) { btn.disabled = false; });
+      sessionButtons.forEach(function (btn) { btn.disabled = false; });
       statusEl.textContent = "";
     }
 
@@ -309,7 +364,7 @@
         fadeOutMusic();
         currentSession = null;
         stopBtn.style.display = "none";
-        sessionButtons.forEach(function(btn) { btn.disabled = false; });
+        sessionButtons.forEach(function (btn) { btn.disabled = false; });
         statusEl.textContent = "Session complete!";
         return;
       }
@@ -318,11 +373,11 @@
       statusEl.textContent = "Session " + currentSession + ": " + item.label + "...";
 
       currentAudio = new Audio(item.src);
-      currentAudio.addEventListener("ended", function() {
+      currentAudio.addEventListener("ended", function () {
         queueIndex++;
         playNext();
       });
-      currentAudio.addEventListener("error", function() {
+      currentAudio.addEventListener("error", function () {
         statusEl.textContent = "Error loading: " + item.label;
         console.error("Failed to load:", item.src);
       });
@@ -330,6 +385,14 @@
     }
 
     function playSession(num) {
+      // Gate Check
+      if (num > 1 && !isPremium()) {
+        if (confirm("Sessions 2-10 are available for £9.99.\nLifetime access. No subscription.\n\nGo to checkout?")) {
+          document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+      }
+
       stopPlayback();
       currentSession = num;
       var s = sessions[num];
@@ -344,7 +407,7 @@
       queueIndex = 0;
 
       stopBtn.style.display = "inline-block";
-      sessionButtons.forEach(function(btn) { btn.disabled = true; });
+      sessionButtons.forEach(function (btn) { btn.disabled = true; });
 
       // Start music bed for this session (loops throughout entire session)
       var music = sessionMusicBed[num];
@@ -356,14 +419,15 @@
     }
 
     // Attach click handlers to session buttons
-    sessionButtons.forEach(function(btn) {
-      btn.addEventListener("click", function() {
+    sessionButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
         var num = parseInt(this.getAttribute("data-session"));
         playSession(num);
       });
     });
 
     stopBtn.addEventListener("click", stopPlayback);
+
   </script>
 </body>
 

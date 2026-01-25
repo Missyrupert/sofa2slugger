@@ -38,7 +38,6 @@ var btnPause = document.getElementById('btn-pause');
 var btnStop = document.getElementById('btn-stop');
 var btnPrev = document.getElementById('btn-prev');
 var btnNext = document.getElementById('btn-next');
-var sessionCards = document.querySelectorAll('.session-card:not(.locked)');
 
 // Music bed mapping: which music file to use for each session
 function getMusicBedNum(sessionNum) {
@@ -47,12 +46,60 @@ function getMusicBedNum(sessionNum) {
   return 3;
 }
 
-// Session card click handlers
+// Paywall check
+var STORAGE_KEY_PAID = "s2s_premium_access";
+function isPremium() {
+  return localStorage.getItem(STORAGE_KEY_PAID) === 'true';
+}
+
+// Redirect to pricing
+function showPaywall() {
+  if (confirm("Sessions 2-10 are locked.\n\nUnlock full access for £9.99?")) {
+    window.location.href = "index.html#pricing";
+  }
+}
+
+// Initialize Locks
+function initLocks() {
+  var hasAccess = isPremium();
+  var allCards = document.querySelectorAll('.session-card');
+
+  allCards.forEach(function (card) {
+    var num = parseInt(card.getAttribute('data-session'));
+    var btn = card.querySelector('button');
+
+    if (num > 1) {
+      if (hasAccess) {
+        // Unlock
+        card.classList.remove('locked');
+        if (btn) btn.disabled = false;
+      } else {
+        // Lock (ensure state)
+        card.classList.add('locked');
+        if (btn) btn.disabled = true;
+      }
+    }
+  });
+}
+
+// Run lock check immediately
+initLocks();
+
+// Re-select cards after potential unlock
+var sessionCards = document.querySelectorAll('.session-card');
+
 sessionCards.forEach(function (card) {
   card.addEventListener('click', function (e) {
-    if (this.classList.contains('locked')) return;
-    var sessionNum = parseInt(this.getAttribute('data-session'));
-    loadSession(sessionNum, true);
+    var num = parseInt(this.getAttribute('data-session'));
+
+    // Check lock state
+    if (this.classList.contains('locked')) {
+      showPaywall();
+      return;
+    }
+
+    // Play allowed session
+    loadSession(num, true);
   });
 });
 
@@ -90,7 +137,7 @@ function loadSession(num, autoPlay) {
   showPlayButton();
 
   // Scroll player into view smoothly
-  setTimeout(function() {
+  setTimeout(function () {
     player.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 50);
 

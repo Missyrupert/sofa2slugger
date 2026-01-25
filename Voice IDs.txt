@@ -1,0 +1,11 @@
+Vance Voice ID - 6jf4oamXaEYNyRSGC3NP
+Coach Voice ID - tvkXg3nML2G8tnJTTC1f
+
+EL_API - sk_ac702b529ab31cc32a56e70d5b19b66a1543ef7633b0ca60
+
+SA_API - sk-DDfIM5wYidJLerS0TJEq1omdFbLLVoqTMyRLlWBKyiVrIOLp
+
+$env:STABLE_AUDIO_API_KEY="sk-DDfIM5wYidJLerS0TJEq1omdFbLLVoqTMyRLlWBKyiVrIOLp"
+
+
+	
