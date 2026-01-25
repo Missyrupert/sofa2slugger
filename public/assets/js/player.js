@@ -124,7 +124,9 @@ function loadSession(num, autoPlay) {
   // Session: Coach + Music (Complete)
   // Outro: Vance (Narrator)
   intro = new Audio('/audio/vance-s' + padded + '-intro.mp3');
-  sessionAudio = new Audio('/audio/session-' + num + '-complete.mp3');
+  // Special case for Session 1 to fix loading issues
+  var sessionFile = (num === 1) ? 's1_full.mp3' : 'session-' + num + '-complete.mp3';
+  sessionAudio = new Audio('/audio/' + sessionFile);
   outro = new Audio('/audio/vance-s' + padded + '-outro.mp3');
 
   // Wire up the sequence
