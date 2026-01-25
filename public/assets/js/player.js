@@ -14,6 +14,12 @@
  * - /audio/manifesto.mp3 (manifesto, no music)
  */
 
+// Private unlock hook
+const params = new URLSearchParams(window.location.search);
+if (params.get("unlock") === "friend") {
+  localStorage.setItem("s2s_full_access", "true");
+}
+
 var currentSession = null;
 var phase = 'ready'; // ready | intro | session | done
 var isPaused = false;
@@ -33,7 +39,8 @@ var btnNext = document.getElementById('btn-next');
 // Paywall check
 var STORAGE_KEY_PAID = "s2s_premium_access";
 function isPremium() {
-  return localStorage.getItem(STORAGE_KEY_PAID) === 'true';
+  return localStorage.getItem(STORAGE_KEY_PAID) === 'true' ||
+    localStorage.getItem("s2s_full_access") === "true";
 }
 
 // Redirect to pricing
