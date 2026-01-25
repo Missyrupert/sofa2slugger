@@ -31,20 +31,26 @@
       </div>
 
       <div class="hero-cta">
-        <!-- Manifesto Player -->
-        <div class="manifesto-player" style="margin-bottom:20px;">
-          <p style="font-size:13px;opacity:0.8;margin-bottom:10px;">Hear the philosophy</p>
-          <button id="btn-manifesto" class="btn-secondary" style="padding:12px 24px;">
-            <span id="manifesto-icon">&#9654;</span> Play Manifesto
-          </button>
-          <p id="manifesto-status" style="font-size:11px;opacity:0.6;margin-top:8px;"></p>
+        <!-- FREE SESSION CTA - SCREAMING -->
+        <div class="free-banner" style="background:#8b1a1a;color:#f4e4c1;padding:12px 20px;border-radius:6px;margin-bottom:20px;text-align:center;">
+          <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.9;">Try it now</span>
+          <p style="font-size:1.4rem;font-weight:700;margin:4px 0 0;letter-spacing:0.02em;">SESSION 1 IS FREE</p>
         </div>
 
         <!-- Main CTA -->
-        <a href="gym.html" class="btn-primary" style="text-decoration:none;padding:14px 32px;font-size:16px;">
-          Enter the Gym
+        <a href="gym.html" class="btn-primary btn-cta" style="text-decoration:none;padding:16px 40px;font-size:1.1rem;">
+          Start Training Free
         </a>
-        <p style="font-size:12px;opacity:0.7;margin-top:12px;">Session 1 free &bull; Sessions 2-10 for £9.99</p>
+        <p style="font-size:11px;opacity:0.6;margin-top:12px;">No signup required</p>
+
+        <!-- Manifesto Player - secondary -->
+        <div class="manifesto-player" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.1);">
+          <p style="font-size:12px;opacity:0.7;margin-bottom:8px;">Or hear the philosophy first</p>
+          <button id="btn-manifesto" class="btn-secondary" style="padding:10px 20px;font-size:0.85rem;">
+            <span id="manifesto-icon">&#9654;</span> Play Manifesto
+          </button>
+          <p id="manifesto-status" style="font-size:10px;opacity:0.5;margin-top:6px;"></p>
+        </div>
       </div>
 
       <div class="scroll-hint">
@@ -177,9 +183,13 @@
     (function () {
       var splash = document.getElementById("splash");
       var STORAGE_KEY = "s2s_splash_seen";
+      var STORAGE_TIME_KEY = "s2s_splash_time";
+      var SPLASH_COOLDOWN = 1000 * 60 * 60; // Show splash again after 1 hour
 
-      // Check if splash was already dismissed
-      if (localStorage.getItem(STORAGE_KEY)) {
+      // Check if splash was recently seen (within cooldown period)
+      var lastSeen = parseInt(localStorage.getItem(STORAGE_TIME_KEY) || "0");
+      var now = Date.now();
+      if (now - lastSeen < SPLASH_COOLDOWN) {
         splash.style.display = "none";
         return;
       }
@@ -187,13 +197,14 @@
       function dismissSplash() {
         splash.classList.add("fade-out");
         localStorage.setItem(STORAGE_KEY, "1");
+        localStorage.setItem(STORAGE_TIME_KEY, Date.now().toString());
         setTimeout(function () {
           splash.style.display = "none";
         }, 600);
       }
 
-      // Auto-dismiss after 3 seconds
-      var autoTimer = setTimeout(dismissSplash, 3000);
+      // Auto-dismiss after 3.5 seconds
+      var autoTimer = setTimeout(dismissSplash, 3500);
 
       // Click to dismiss immediately
       splash.addEventListener("click", function () {
