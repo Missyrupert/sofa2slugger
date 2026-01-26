@@ -326,5 +326,17 @@ btnNext.addEventListener('click', function () {
   skipToNextPhase();
 });
 
+// Rewind 15s Logic
+document.getElementById('btn-rewind').addEventListener('click', function () {
+  // Prevent interaction if nothing is loaded or playing
+  if (phase === 'ready' || phase === 'done') return;
+
+  var current = getCurrentAudio();
+  if (current) {
+    // Clamp to 0 to avoid errors
+    current.currentTime = Math.max(0, current.currentTime - 15);
+  }
+});
+
 // Auto-load session 1 on page load
 loadSession(1);

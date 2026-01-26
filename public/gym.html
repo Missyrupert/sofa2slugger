@@ -92,7 +92,7 @@
 
     <!-- Minimalist Player Overlay -->
     <div id="player" class="player hidden">
-      
+
       <!-- Context -->
       <header class="player-header">
         <h2 id="session-title">Session</h2>
@@ -115,12 +115,26 @@
         <button id="btn-stop" class="ctrl-btn" title="Stop">&#9632;</button>
         <button id="btn-next" class="ctrl-btn" title="Next">&#9654;</button>
 
+        <!-- Rewind 15s Control -->
+        <button id="btn-rewind" class="ctrl-btn" title="Rewind 15s">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+            <text x="13" y="17" font-family="sans-serif" font-size="7" font-weight="bold" text-anchor="middle"
+              fill="currentColor">15</text>
+          </svg>
+        </button>
+
         <!-- Primary Play/Pause (SVG Icons) -->
         <button id="btn-play" class="ctrl-btn" title="Play">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z" />
+          </svg>
         </button>
         <button id="btn-pause" class="ctrl-btn hidden" title="Pause">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
         </button>
       </footer>
     </div>
