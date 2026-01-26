@@ -90,21 +90,56 @@
       </div>
     </div>
 
+    <!-- Minimalist Instrument Panel Player -->
     <div id="player" class="player hidden">
-      <div class="now-playing">
-        <span id="session-title">Session 1</span>
-        <div id="phase">Ready</div>
-      </div>
+      <!-- Primary Visual: Timer -->
+      <div id="timer-display">00:00</div>
+
+      <!-- Secondary Controls -->
       <div class="player-controls">
-        <button id="btn-prev" class="ctrl-btn" title="Previous phase">&#9664;&#9664;</button>
-        <button id="btn-play" class="ctrl-btn ctrl-play" title="Play">&#9654;</button>
-        <button id="btn-pause" class="ctrl-btn ctrl-pause hidden" title="Pause">&#10074;&#10074;</button>
-        <button id="btn-stop" class="ctrl-btn" title="Stop">&#9632;</button>
-        <button id="btn-next" class="ctrl-btn" title="Next phase">&#9654;&#9654;</button>
+        <button id="btn-prev" class="ctrl-btn minimal" title="Back">&#9664;</button>
+        <button id="btn-play" class="ctrl-btn minimal" title="Play">&#9654;</button>
+        <button id="btn-pause" class="ctrl-btn minimal hidden" title="Pause">&#10074;&#10074;</button>
+        <button id="btn-stop" class="ctrl-btn minimal" title="Stop">&#9632;</button>
+        <button id="btn-next" class="ctrl-btn minimal" title="Next">&#9654;</button>
+      </div>
+
+      <!-- Hidden/Background Metadata (Required by player.js) -->
+      <div class="meta-hidden" style="opacity: 0; pointer-events: none; position: absolute;">
+        <span id="session-title">Session</span>
+        <div id="phase">Ready</div>
       </div>
     </div>
   </main>
   <script src="assets/js/player.js"></script>
+  <script>
+    // UI-Only Timer Logic (Does not affect playback logic)
+    (function () {
+      const timerEl = document.getElementById('timer-display');
+
+      function updateTimer() {
+        if (typeof window.getCurrentAudio !== 'function') {
+          requestAnimationFrame(updateTimer);
+          return;
+        }
+
+        const audio = window.getCurrentAudio();
+        if (audio) {
+          const time = audio.currentTime || 0;
+          const mins = Math.floor(time / 60).toString().padStart(2, '0');
+          const secs = Math.floor(time % 60).toString().padStart(2, '0');
+          timerEl.textContent = `${mins}:${secs}`;
+        } else {
+          // Reset if stopped
+          timerEl.textContent = "00:00";
+        }
+        requestAnimationFrame(updateTimer);
+      }
+
+      // Start polling
+      requestAnimationFrame(updateTimer);
+    })();
+  </script>
 </body>
 
 </html>

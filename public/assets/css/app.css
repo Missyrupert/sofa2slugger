@@ -212,85 +212,104 @@ h1 {
   align-items: baseline;
 }
 
-/* Player */
+/* Dark Instrument Panel Player */
 .player {
-  background: #fffdf8;
-  border: 2px solid #1a1a1a;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-top: 1rem;
-  scroll-margin-top: 1rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: #111111;
+  /* Deep matte charcoal */
+  color: #eeeeee;
+  padding: 1.5rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  border-top: 1px solid #333;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
 }
 
 .player.hidden {
-  display: none;
+  transform: translateY(100%);
+  display: flex;
+  /* Keep flex layout but move offscreen */
 }
 
-.now-playing {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-#session-title {
-  font-weight: 500;
-  display: block;
-  margin-bottom: 0.25rem;
-}
-
-#phase {
-  color: #6a5a4a;
-  font-size: 0.85rem;
+/* Timer Display - Primary Visual */
+#timer-display {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-size: 5rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #f4e4c1;
+  /* Off-white/cream for contrast */
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .player-controls {
   display: flex;
-  gap: 0.5rem;
-  justify-content: center;
+  gap: 2.5rem;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
 }
 
 .ctrl-btn {
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  font-size: 1rem;
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s ease, transform 0.1s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: #fffdf8;
-  color: #1a1a1a;
-  border: 2px solid #1a1a1a;
+  width: auto;
+  height: auto;
+  border-radius: 0;
 }
 
-.ctrl-btn:hover:not(:disabled) {
-  background: #f8f0e0;
-  border-color: #8b1a1a;
+.ctrl-btn:hover {
+  color: #fff;
+  background: transparent;
+  border-color: transparent;
 }
 
+.ctrl-btn:active {
+  transform: scale(0.95);
+}
+
+/* Play/Pause specific styling (still minimal) */
 .ctrl-play,
 .ctrl-pause {
-  width: 56px;
-  height: 56px;
-  font-size: 1.2rem;
-  background: #8b1a1a;
-  color: #f4e4c1;
-  border-color: #8b1a1a;
+  font-size: 2rem;
+  color: #888;
 }
 
-.ctrl-play:hover:not(:disabled),
-.ctrl-pause:hover:not(:disabled) {
-  background: #6a1515;
+.ctrl-play:hover,
+.ctrl-pause:hover {
+  color: #fff;
+  background: transparent;
 }
 
-.ctrl-btn.hidden {
-  display: none;
+/* Utilities */
+.hidden {
+  display: none !important;
 }
 
-.controls {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
+/* Ensure main content isn't covered by fixed player */
+body {
+  padding-bottom: 300px;
+  /* Extra space for the big player */
 }
 
 /* Buttons */
