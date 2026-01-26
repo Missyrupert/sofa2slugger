@@ -219,15 +219,18 @@ h1 {
   align-items: baseline;
 }
 
-/* Dark Instrument Panel Player */
+/* Boxing Ring Canvas Player */
 .player {
   position: fixed;
+  /* Note: position:fixed acts as containing block for pseudo-elements */
   bottom: 0;
   left: 0;
   width: 100%;
   height: auto;
-  background: #111111;
-  /* Deep matte charcoal */
+  background:
+    /* Canvas texture overlay */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='canvas'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23canvas)' opacity='0.03'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #1a1816 0%, #0f0e0d 100%);
   color: #eeeeee;
   padding: 1.5rem 1rem 2rem;
   display: flex;
@@ -235,8 +238,11 @@ h1 {
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  border-top: 1px solid #333;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  /* Red rope trim - boxing ring style */
+  border-top: 4px solid #8b1a1a;
+  box-shadow:
+    0 -4px 20px rgba(0, 0, 0, 0.5),
+    inset 0 2px 0 rgba(139, 26, 26, 0.3);
   transition: transform 0.3s ease;
 }
 
@@ -246,18 +252,44 @@ h1 {
   /* Keep flex layout but move offscreen */
 }
 
-/* Timer Display - Primary Visual */
+/* Boxing corner accents */
+.player::before,
+.player::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-top: 4px solid #8b1a1a;
+  opacity: 0.6;
+}
+
+.player::before {
+  left: 0;
+  border-left: 4px solid #8b1a1a;
+}
+
+.player::after {
+  right: 0;
+  border-right: 4px solid #8b1a1a;
+}
+
+/* Timer Display - Boxing Scoreboard Style */
 #timer-display {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Impact", "Arial Black", -apple-system, BlinkMacSystemFont, sans-serif;
   font-variant-numeric: tabular-nums;
   font-size: 5rem;
-  font-weight: 300;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em;
   color: #f4e4c1;
-  /* Off-white/cream for contrast */
   margin-bottom: 1.5rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  text-shadow:
+    0 0 20px rgba(139, 26, 26, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+  /* Subtle aged glow effect */
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid rgba(139, 26, 26, 0.3);
 }
 
 .player-controls {
@@ -270,42 +302,47 @@ h1 {
 }
 
 .ctrl-btn {
-  background: transparent;
-  border: none;
-  color: #666;
+  background: rgba(139, 26, 26, 0.15);
+  border: 2px solid rgba(139, 26, 26, 0.4);
+  color: #a89888;
   font-size: 1.5rem;
   cursor: pointer;
-  padding: 0.5rem;
-  transition: color 0.2s ease, transform 0.1s ease;
+  padding: 0.6rem 0.8rem;
+  transition: all 0.15s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   width: auto;
   height: auto;
-  border-radius: 0;
+  border-radius: 4px;
 }
 
 .ctrl-btn:hover {
-  color: #fff;
-  background: transparent;
-  border-color: transparent;
+  color: #f4e4c1;
+  background: rgba(139, 26, 26, 0.3);
+  border-color: #8b1a1a;
 }
 
 .ctrl-btn:active {
   transform: scale(0.95);
+  background: rgba(139, 26, 26, 0.4);
 }
 
-/* Play/Pause specific styling (still minimal) */
+/* Play/Pause specific styling - prominent */
 .ctrl-play,
 .ctrl-pause {
   font-size: 2rem;
-  color: #888;
+  color: #c8b8a8;
+  background: rgba(139, 26, 26, 0.2);
+  border-color: rgba(139, 26, 26, 0.5);
+  padding: 0.7rem 1rem;
 }
 
 .ctrl-play:hover,
 .ctrl-pause:hover {
-  color: #fff;
-  background: transparent;
+  color: #f4e4c1;
+  background: rgba(139, 26, 26, 0.4);
+  border-color: #8b1a1a;
 }
 
 /* Utilities */
