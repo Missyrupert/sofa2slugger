@@ -21,6 +21,13 @@ main {
   text-align: center;
   /* Ensure content isn't hidden behind fixed nav */
   padding-bottom: 90px;
+  /* Space for instrument panel */
+  transition: padding-bottom 0.3s ease;
+}
+
+/* When player is visible (default in this design), push content up */
+body:not(.player-hidden) main {
+  padding-bottom: 300px;
 }
 
 h1 {
