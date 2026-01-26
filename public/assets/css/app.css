@@ -787,8 +787,122 @@ button.btn-primary,
     padding: var(--space-lg);
   }
 
+  .hero-fold {
+    padding: var(--space-lg);
+  }
+
   .detail-fold {
     padding: var(--space-xl) var(--space-md);
+  }
+}
+
+/* ==========================================================================
+   FIGHT IQ (VISUAL OVERHAUL)
+   Target: Archival, elite training manual, calm structure
+   ========================================================================== */
+
+/* Page layout */
+.fightiq-page h1 {
+  margin-bottom: var(--space-xs);
+}
+
+.subtitle {
+  color: var(--text-tertiary);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-2xl);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Glossary Container */
+.glossary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+  /* Generous spacing between groups */
+  position: relative;
+  padding-left: var(--space-lg);
+}
+
+/* Vertical structural line */
+.glossary::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: var(--space-xs);
+  bottom: var(--space-xs);
+  width: 1px;
+  background: var(--text-disabled);
+  opacity: 0.3;
+}
+
+/* Term groupings provided by structural layout in HTML */
+.term-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Category Anchor */
+.iq-category {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+/* Term Item */
+.term-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.term-name {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-light);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-xs);
+}
+
+/* Definiton Sections (What/Why/How) */
+.term-section {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: var(--space-md);
+  align-items: baseline;
+}
+
+.term-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: right;
+  line-height: 1.7;
+  /* Match p line-height */
+}
+
+.term-section p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* Mobile Adjustment for definition layout */
+@media (max-width: 400px) {
+  .term-section {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .term-label {
+    text-align: left;
+    margin-top: var(--space-sm);
   }
 }
 
