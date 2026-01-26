@@ -791,3 +791,159 @@ button.btn-primary,
     padding: var(--space-xl) var(--space-md);
   }
 }
+
+/* ==========================================================================
+   TALE OF THE TAPE (VISUAL OVERHAUL)
+   Target: Instrument panel, calmness, structural progress
+   ========================================================================== */
+
+/* 1. Instrument Panel Readout */
+.tape-level {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-md) 0;
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--text-disabled);
+}
+
+.level-label {
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: -0.01em;
+}
+
+.level-sessions {
+  font-family: monospace;
+  /* Technical feel */
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* 2. Phases Container - The Timeline */
+.tape-phases {
+  position: relative;
+  padding-left: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+/* Vertical structural line */
+.tape-phases::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: var(--space-xs);
+  bottom: var(--space-xs);
+  width: 1px;
+  background: var(--text-disabled);
+  opacity: 0.3;
+}
+
+/* 3. Phase States */
+.phase {
+  position: relative;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+/* State: Future (Default) */
+.phase {
+  opacity: 0.4;
+  /* Recessed */
+}
+
+.phase-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.phase-name {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: var(--font-weight-light);
+}
+
+.phase-range {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+.phase-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 420px;
+  margin-bottom: var(--space-md);
+}
+
+/* State: Active (Current Focus) */
+.phase.active {
+  opacity: 1;
+  /* Full presence */
+}
+
+.phase.active .phase-name {
+  font-weight: var(--font-weight-medium);
+  /* Subtly heavier */
+}
+
+/* Active Marker on the vertical line */
+.phase.active::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--space-lg) * -1 - 1px);
+  /* Align with line */
+  top: 0.4em;
+  width: 3px;
+  height: 1.2em;
+  background: var(--text-secondary);
+  /* Neutral marker */
+  border-radius: 1px;
+}
+
+/* State: Done (Settled) */
+.phase.done {
+  opacity: 0.6;
+  /* Quiet, settled */
+}
+
+.phase.done .phase-name {
+  text-decoration: none;
+  /* No strikethrough, just quiet */
+}
+
+/* 4. Progress Ticks (Pips) - Minimalist */
+.phase-sessions {
+  display: flex;
+  gap: 4px;
+  /* Tight grouping */
+  margin-top: var(--space-sm);
+}
+
+.pip {
+  display: block;
+  width: 2px;
+  height: 6px;
+  background: var(--text-disabled);
+  opacity: 0.3;
+  transition: background 0.2s;
+}
+
+/* Completed sessions - slightly darker/filled, but neutral */
+.pip.complete {
+  opacity: 1;
+  background: var(--text-secondary);
+}
+
+.phase.active .pip {
+  height: 8px;
+  /* Slightly taller in active phase */
+}
