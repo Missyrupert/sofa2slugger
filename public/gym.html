@@ -90,25 +90,39 @@
       </div>
     </div>
 
-    <!-- Minimalist Instrument Panel Player -->
+    <!-- Minimalist Player Overlay -->
     <div id="player" class="player hidden">
-      <!-- Primary Visual: Timer -->
-      <div id="timer-display">00:00</div>
+      
+      <!-- Context -->
+      <header class="player-header">
+        <h2 id="session-title">Session</h2>
+      </header>
 
-      <!-- Secondary Controls -->
-      <div class="player-controls">
-        <button id="btn-prev" class="ctrl-btn minimal" title="Back">&#9664;</button>
-        <button id="btn-play" class="ctrl-btn minimal" title="Play">&#9654;</button>
-        <button id="btn-pause" class="ctrl-btn minimal hidden" title="Pause">&#10074;&#10074;</button>
-        <button id="btn-stop" class="ctrl-btn minimal" title="Stop">&#9632;</button>
-        <button id="btn-next" class="ctrl-btn minimal" title="Next">&#9654;</button>
-      </div>
+      <!-- Timer -->
+      <section class="timer-container">
+        <div id="timer-display" class="timer-digits">00:00</div>
+      </section>
 
-      <!-- Hidden/Background Metadata (Required by player.js) -->
-      <div class="meta-hidden" style="opacity: 0; pointer-events: none; position: absolute;">
-        <span id="session-title">Session</span>
+      <!-- Instruction -->
+      <section class="instruction-container">
         <div id="phase">Ready</div>
-      </div>
+      </section>
+
+      <!-- Controls -->
+      <footer class="player-controls">
+        <!-- Hidden Aux Controls (Preserved for JS compatibility) -->
+        <button id="btn-prev" class="ctrl-btn" title="Back">&#9664;</button>
+        <button id="btn-stop" class="ctrl-btn" title="Stop">&#9632;</button>
+        <button id="btn-next" class="ctrl-btn" title="Next">&#9654;</button>
+
+        <!-- Primary Play/Pause (SVG Icons) -->
+        <button id="btn-play" class="ctrl-btn" title="Play">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button id="btn-pause" class="ctrl-btn hidden" title="Pause">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+      </footer>
     </div>
   </main>
   <script src="assets/js/player.js"></script>
