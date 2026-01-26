@@ -727,9 +727,16 @@ button.btn-primary,
   line-height: 1.7;
 }
 
-/* Red accent removal - monochrome */
+/* Red accent - "The inserted 2" */
 .red-2 {
-  color: var(--text-primary);
+  display: inline-block;
+  color: #9e2a2b;
+  /* Deep, muted, physical red */
+  position: relative;
+  top: 0.12em;
+  /* Deliberately lower - feels heavy/placed */
+  margin: 0 0.04em;
+  /* Slight isolation */
 }
 
 /* Manifesto status */
