@@ -257,7 +257,8 @@ button.btn-primary,
 
 .session-num {
   font-family: monospace;
-  color: var(--text-disabled);
+  color: var(--text-secondary);
+  /* Increased visibility from disabled */
   font-size: 0.85rem;
 }
 
@@ -1194,4 +1195,25 @@ button.btn-primary,
 .phase.active .pip {
   height: 8px;
   /* Slightly taller in active phase */
+}
+
+/* ==========================================================================
+   VISIBILITY TWEAKS (User Feedback: "Numbers and padlocks too faint")
+   ========================================================================== */
+
+.session-num {
+  color: rgba(255, 255, 255, 0.75) !important;
+  /* Clearly visible but not quite primary */
+}
+
+.session-card.locked {
+  opacity: 0.8 !important;
+  /* Much less faded to ensure readability */
+}
+
+.session-card.locked::after {
+  opacity: 1 !important;
+  /* Full opacity padlock */
+  color: var(--text-secondary) !important;
+  /* Brighter icon */
 }
