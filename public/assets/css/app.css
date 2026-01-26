@@ -1,39 +1,40 @@
 /* ==========================================================================
-   SOFA2SLUGGER — VISUAL OVERHAUL (v2.0)
-   Agent: BRUSH
+   SOFA2SLUGGER — VISUAL OVERHAUL (v2.1)
    Target: Invisible, Audio-First, Dark Mode
+   Philosophy: The page should feel like a paused state of the product
    ========================================================================== */
 
 :root {
-  /* Core Palette - Dark Mode Only */
-  --bg-core: #121212;
-  /* Matte Charcoal */
-  --bg-surface: #1E1E1E;
-  /* Slight elevation */
+  /* Core Palette - Dark Mode */
+  --bg-core: #0d0d0d;
+  --bg-warm: #111110;
+  --bg-surface: #1a1a19;
 
-  /* Typography Colors */
-  --text-primary: #FFFFFF;
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --text-disabled: rgba(255, 255, 255, 0.2);
+  /* Typography Colors - Softer contrast */
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.5);
+  --text-tertiary: rgba(255, 255, 255, 0.3);
+  --text-disabled: rgba(255, 255, 255, 0.15);
 
-  /* Accent - Used sparingly */
-  --accent: #FFFFFF;
-  /* Monochrome restraint */
-  --accent-subtle: rgba(255, 255, 255, 0.1);
-  --danger: #cf6679;
-  /* Muted error */
+  /* Single Accent - Muted Steel Blue (used sparingly) */
+  --accent: #6b8aad;
+  --accent-subtle: rgba(107, 138, 173, 0.15);
+  --accent-glow: rgba(107, 138, 173, 0.08);
 
   /* Typography */
   --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-weight-light: 300;
   --font-weight-regular: 400;
-  --font-weight-medium: 500;
+  --font-weight-medium: 450;
 
-  /* Spacing */
+  /* Spacing - Generous rhythm */
+  --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 32px;
   --space-xl: 64px;
+  --space-2xl: 96px;
+  --space-3xl: 128px;
 
   /* Borders */
   --radius-sm: 4px;
@@ -51,11 +52,17 @@
 }
 
 body {
-  background-color: var(--bg-core);
+  background:
+    /* Subtle grain texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E"),
+    /* Vertical gradient - near-black to warmer charcoal */
+    linear-gradient(180deg, var(--bg-core) 0%, var(--bg-warm) 50%, var(--bg-core) 100%);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-stack);
-  line-height: 1.5;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -76,19 +83,26 @@ button {
 
 main {
   width: 100%;
-  max-width: 600px;
+  max-width: 540px;
   margin: 0 auto;
   padding: var(--space-lg);
+  padding-bottom: var(--space-3xl);
   display: flex;
   flex-direction: column;
 }
 
+/* Landing page layout */
+.landing {
+  max-width: 100%;
+  padding: 0;
+}
+
 /* ==========================================================================
-   TYPOGRAPHY
+   TYPOGRAPHY - Restrained, calm
    ========================================================================== */
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: var(--font-weight-light);
   letter-spacing: -0.02em;
   margin-bottom: var(--space-md);
@@ -97,25 +111,28 @@ h1 {
 
 p {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
   margin-bottom: var(--space-md);
 }
 
 /* Hero Tagline */
 .hero-tagline {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: var(--font-weight-regular);
   color: var(--text-secondary);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  letter-spacing: 0.01em;
 }
-
 
 /* ==========================================================================
    COMPONENTS
    ========================================================================== */
 
-/* Buttons - Minimalist */
+/* Primary Button - Minimal, confident */
 .btn-primary,
-button.btn-primary {
+button.btn-primary,
+.btn-overhaul-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -125,22 +142,26 @@ button.btn-primary {
   border: none;
   border-radius: var(--radius-sm);
   font-weight: var(--font-weight-medium);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  transition: transform 0.1s ease, opacity 0.2s ease;
+  transition: opacity 0.15s ease;
+  text-decoration: none;
 }
 
-.btn-primary:hover {
-  opacity: 0.9;
+.btn-primary:hover,
+.btn-overhaul-primary:hover {
+  opacity: 0.85;
 }
 
-.btn-primary:active {
-  transform: scale(0.98);
+.btn-primary:active,
+.btn-overhaul-primary:active {
+  opacity: 0.75;
 }
 
 .btn-primary:disabled {
-  background-color: var(--accent-subtle);
-  color: var(--text-disabled);
+  background-color: var(--text-disabled);
+  color: var(--text-tertiary);
   cursor: not-allowed;
 }
 
@@ -151,32 +172,32 @@ button.btn-primary {
   justify-content: center;
   padding: var(--space-md);
   background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--accent-subtle);
+  color: var(--text-tertiary);
+  border: 1px solid var(--text-disabled);
   border-radius: var(--radius-sm);
+  font-size: 0.85rem;
   cursor: pointer;
-  margin-top: var(--space-sm);
+  margin-top: var(--space-md);
   width: 100%;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .btn-overhaul-secondary:hover {
-  border-color: var(--text-secondary);
-  color: var(--text-primary);
+  border-color: var(--text-tertiary);
+  color: var(--text-secondary);
 }
-
 
 /* Back Link */
 .back {
   display: inline-block;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin-bottom: var(--space-lg);
-  opacity: 0.7;
-  transition: opacity 0.2s;
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+  margin-bottom: var(--space-xl);
+  transition: color 0.15s;
 }
 
 .back:hover {
-  opacity: 1;
+  color: var(--text-secondary);
 }
 
 /* ==========================================================================
@@ -187,9 +208,7 @@ button.btn-primary {
   display: flex;
   flex-direction: column;
   gap: 1px;
-  /* Divider line effect */
-  background: var(--accent-subtle);
-  /* Border color */
+  background: var(--text-disabled);
   border-radius: var(--radius-sm);
   overflow: hidden;
 }
@@ -199,9 +218,9 @@ button.btn-primary {
   justify-content: space-between;
   align-items: center;
   background: var(--bg-core);
-  padding: var(--space-md);
+  padding: var(--space-md) var(--space-md);
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.15s ease;
 }
 
 .session-card:hover:not(.locked) {
@@ -209,14 +228,24 @@ button.btn-primary {
 }
 
 .session-card.locked {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: default;
+}
+
+.session-card.active {
+  background: var(--accent-glow);
 }
 
 .session-info {
   display: flex;
   gap: var(--space-md);
   align-items: baseline;
+}
+
+.session-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
 .session-header-row {
@@ -227,27 +256,31 @@ button.btn-primary {
 
 .session-num {
   font-family: monospace;
-  /* Subtle distinctness for data */
   color: var(--text-disabled);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .session-name {
   color: var(--text-primary);
   font-weight: var(--font-weight-regular);
+  font-size: 0.95rem;
+}
+
+.session-tags {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
 }
 
 .session-card button {
   background: transparent;
-  border: 1px solid var(--accent-subtle);
-  color: var(--text-primary);
+  border: 1px solid var(--text-disabled);
+  color: var(--text-secondary);
   padding: var(--space-sm) var(--space-md);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   border-radius: var(--radius-sm);
   opacity: 0;
-  /* Hidden until hover or active */
-  transform: translateX(10px);
-  transition: all 0.2s ease;
+  transform: translateX(8px);
+  transition: all 0.15s ease;
 }
 
 .session-card:hover button {
@@ -260,49 +293,51 @@ button.btn-primary {
 }
 
 /* ==========================================================================
-   THE PLAYER (Spec v2.0)
+   THE PLAYER - Fullscreen, immersive
    ========================================================================== */
 
-/* Fullscreen Overlay Mode */
 .player {
   position: fixed;
   inset: 0;
-  background-color: var(--bg-core);
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E"),
+    var(--bg-core);
   z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: var(--space-lg);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 }
 
 .player.hidden {
   transform: translateY(100vh);
+  opacity: 0;
   pointer-events: none;
 }
 
 /* Header Context */
 .player-header {
+  position: absolute;
+  top: var(--space-lg);
   width: 100%;
   text-align: center;
-  margin-bottom: auto;
-  padding-top: var(--space-md);
 }
 
-/* Mapping existing ID to new style */
 #session-title {
   display: block;
-  font-size: 13px;
+  font-size: 0.75rem;
   font-weight: var(--font-weight-regular);
-  color: var(--text-disabled);
-  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 /* Main Timer Display */
-.timer-digits {
-  font-size: clamp(80px, 25vw, 180px);
+.timer-digits,
+#timer-display {
+  font-size: clamp(72px, 22vw, 160px);
   font-weight: var(--font-weight-light);
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
@@ -310,59 +345,52 @@ button.btn-primary {
   line-height: 1;
 }
 
-#timer-display {
-  /* Inherit container styles */
-}
-
 /* Instruction / Phase */
 .instruction-container {
-  margin-bottom: var(--space-xl);
+  margin-top: var(--space-lg);
   text-align: center;
-  max-width: 600px;
-  min-height: 3rem;
-  /* Prevent layout shift */
+  max-width: 500px;
+  min-height: 2rem;
 }
 
 #phase {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: var(--font-weight-regular);
   color: var(--text-secondary);
 }
 
 /* Controls */
 .player-controls {
-  margin-top: auto;
-  margin-bottom: var(--space-xl);
+  position: absolute;
+  bottom: var(--space-xl);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-lg);
 }
 
-/* Hide auxiliary buttons (Stop, Prev, Next) visually but keep functional */
+/* Hide auxiliary buttons */
 #btn-prev,
 #btn-next,
 #btn-stop {
+  position: absolute;
   opacity: 0;
-  width: 0;
-  height: 0;
-  padding: 0;
-  margin: 0;
+  width: 1px;
+  height: 1px;
   overflow: hidden;
   pointer-events: none;
 }
 
-/* Play/Pause Button Styling */
+/* Play/Pause Button */
 .ctrl-btn {
   background: none;
   border: none;
   color: var(--text-primary);
   cursor: pointer;
   padding: var(--space-md);
-  font-size: 2rem;
-  /* Icon size */
-  opacity: 0.8;
-  transition: opacity 0.2s ease, transform 0.1s;
+  font-size: 1.75rem;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
 }
 
 .ctrl-btn:hover {
@@ -370,7 +398,7 @@ button.btn-primary {
 }
 
 .ctrl-btn:active {
-  transform: scale(0.95);
+  opacity: 0.6;
 }
 
 .ctrl-btn.hidden {
@@ -378,57 +406,70 @@ button.btn-primary {
 }
 
 /* ==========================================================================
-   NAVIGATION
+   NAVIGATION - Demoted, quiet
    ========================================================================== */
 
 .main-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
-  gap: var(--space-lg);
-  margin-top: var(--space-xl);
-  border-top: 1px solid var(--accent-subtle);
-  padding-top: var(--space-lg);
+  gap: var(--space-xl);
+  padding: var(--space-md) var(--space-lg);
+  background: linear-gradient(0deg, rgba(13, 13, 13, 0.95) 0%, rgba(13, 13, 13, 0) 100%);
+  z-index: 100;
 }
 
 .nav-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   color: var(--text-disabled);
-  font-size: 0.8rem;
-  transition: color 0.2s;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  transition: color 0.15s;
+  padding: var(--space-sm);
 }
 
 .nav-card:hover {
-  color: var(--text-primary);
+  color: var(--text-tertiary);
+}
+
+/* Active nav state - uses accent */
+.nav-card.active,
+.nav-card[aria-current="page"] {
+  color: var(--accent);
 }
 
 .nav-title {
   font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .nav-desc {
   display: none;
-  /* Simplify */
 }
 
 /* ==========================================================================
-   LANDING PAGE (INDEX)
+   LANDING PAGE - Sequence of visual beats
    ========================================================================== */
 
-/* Splash Screen */
+/* Splash Screen - Static, no animation */
 .splash {
   position: fixed;
   inset: 0;
-  background-color: var(--bg-core);
+  background: var(--bg-core);
   z-index: 10000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.5s ease;
 }
 
 .splash.fade-out {
@@ -437,52 +478,99 @@ button.btn-primary {
 }
 
 .splash-title {
-  font-size: 3rem;
-  font-weight: var(--font-weight-medium);
-  letter-spacing: -0.05em;
-  margin-bottom: var(--space-sm);
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  font-weight: var(--font-weight-light);
+  letter-spacing: -0.03em;
   color: var(--text-primary);
 }
 
 .splash-subtitle {
-  color: var(--text-secondary);
-  font-size: 1rem;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  margin-top: var(--space-sm);
 }
 
-/* Hero Section */
+.splash-enter {
+  position: absolute;
+  bottom: var(--space-xl);
+  font-size: 0.7rem;
+  color: var(--text-disabled);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Hero Section - First visual beat */
 .hero-fold {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: var(--space-xl) 0;
-  border-bottom: 1px solid var(--accent-subtle);
+  padding: var(--space-xl) var(--space-lg);
+  /* No border - spacing creates structure */
+}
+
+.hero-fold header {
+  margin-bottom: var(--space-lg);
+}
+
+.hero-fold h1 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: var(--font-weight-light);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.hero-visual {
   margin-bottom: var(--space-xl);
+  max-width: 320px;
 }
 
 .hero-visual img {
   width: 100%;
-  max-width: 400px;
   height: auto;
   border-radius: var(--radius-sm);
-  filter: grayscale(100%) contrast(1.1);
-  /* Black & white treatment */
-  opacity: 0.8;
-  margin-bottom: var(--space-lg);
+  filter: grayscale(100%) contrast(1.05);
+  opacity: 0.6;
 }
 
-/* Content Sections */
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 280px;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: var(--space-lg);
+  color: var(--text-disabled);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+/* Detail Fold - Second visual beat */
 .detail-fold {
-  max-width: 600px;
+  max-width: 480px;
   margin: 0 auto;
+  padding: var(--space-2xl) var(--space-lg);
 }
 
+/* Content Sections - Breathing room */
 .content-section {
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-2xl);
 }
 
 .section-title {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-regular);
   color: var(--text-primary);
   margin-bottom: var(--space-md);
-  font-weight: var(--font-weight-regular);
+  letter-spacing: -0.01em;
 }
 
 .feature-list,
@@ -495,74 +583,191 @@ button.btn-primary {
 .feature-list li {
   margin-bottom: var(--space-sm);
   padding-left: var(--space-md);
-  border-left: 2px solid var(--accent-subtle);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  position: relative;
 }
 
-/* Intro Card (now just text) */
+.feature-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 4px;
+  height: 1px;
+  background: var(--text-disabled);
+}
+
+/* Intro Card - Subtle surface */
 .intro-card {
-  margin-bottom: var(--space-lg);
-  padding: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
   background: var(--bg-surface);
   border-radius: var(--radius-sm);
 }
 
 .intro-lead {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: var(--font-weight-regular);
   color: var(--text-primary);
   margin-bottom: var(--space-md);
+  line-height: 1.6;
+}
+
+.intro-list {
+  list-style: none;
+  padding: 0;
+}
+
+.intro-list li {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-sm);
+  padding-left: var(--space-md);
+  position: relative;
+}
+
+.intro-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.6;
 }
 
 .intro-desc {
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 0.9rem;
+}
+
+/* Emotional hook */
+.emotional-hook {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: var(--space-xl);
+  line-height: 1.7;
+  padding: 0 var(--space-md);
+}
+
+/* Why audio */
+.why-audio {
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.why-audio p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
 }
 
 /* Pricing */
 .pricing-anchor {
-  background: var(--bg-surface);
-  padding: var(--space-lg);
+  padding: var(--space-xl) var(--space-lg);
   text-align: center;
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
 }
 
 .value-anchor {
   color: var(--text-secondary);
-  margin-bottom: var(--space-md);
+  font-size: 0.9rem;
+  line-height: 1.7;
 }
 
 .value-anchor strong {
   color: var(--text-primary);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 /* Testimonial */
 .testimonial {
   text-align: center;
+  color: var(--text-tertiary);
   font-style: italic;
-  color: var(--text-secondary);
-  margin: var(--space-lg) 0;
-  border-left: none;
+  margin: var(--space-xl) 0;
   padding: 0 var(--space-lg);
+  font-size: 0.9rem;
+  line-height: 1.7;
 }
 
-/* Adjusting red accents to monochrome or muted danger */
+.testimonial-quote::before,
+.testimonial-quote::after {
+  color: var(--text-disabled);
+}
+
+/* Reassurance */
+.reassurance {
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.reassurance-text {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* Red accent removal - monochrome */
 .red-2 {
   color: var(--text-primary);
-  /* Remove branding red, keep monochrome */
 }
 
-/* Manifesto Player status */
+/* Manifesto status */
 #manifesto-status {
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
 }
 
-/* Utilities */
+/* Grain overlay (global) */
+.grain-overlay {
+  display: none; /* Using body background instead */
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+.hidden {
+  display: none !important;
+}
+
 .invisible-ui {
   opacity: 0;
   pointer-events: none;
 }
 
-.hidden {
-  display: none !important;
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  :root {
+    --space-xl: 48px;
+    --space-2xl: 72px;
+  }
+
+  .main-nav {
+    gap: var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .nav-card {
+    font-size: 0.65rem;
+  }
+
+  .hero-fold {
+    padding: var(--space-lg);
+  }
+
+  .detail-fold {
+    padding: var(--space-xl) var(--space-md);
+  }
 }
