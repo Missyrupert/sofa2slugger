@@ -17,9 +17,10 @@
   --text-disabled: rgba(255, 255, 255, 0.15);
 
   /* Single Accent - Warm Grey (Monochrome conformance) */
-  --accent: #8c8880;
-  --accent-subtle: rgba(140, 136, 128, 0.15);
-  --accent-glow: rgba(140, 136, 128, 0.08);
+  --accent: #a09d96;
+  /* Slightly brighter for Nav readability */
+  --accent-subtle: rgba(160, 157, 150, 0.15);
+  --accent-glow: rgba(160, 157, 150, 0.08);
 
   /* Typography */
   --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -791,8 +792,130 @@ button.btn-primary,
     padding: var(--space-lg);
   }
 
+  .hero-fold {
+    padding: var(--space-lg);
+  }
+
   .detail-fold {
     padding: var(--space-xl) var(--space-md);
+  }
+}
+
+/* ==========================================================================
+   VISUAL REFINEMENT - NAVIGATION & PLAYER & GYM
+   ========================================================================== */
+
+/* 1. Main Navigation - Brighter, clearer */
+.main-nav {
+  background: var(--bg-core);
+  /* Solid background for clarity */
+  border-top: 1px solid var(--text-disabled);
+  padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
+}
+
+.nav-card {
+  opacity: 0.7;
+  /* Default visible state */
+  color: var(--text-secondary);
+}
+
+.nav-card.active,
+.nav-card[aria-current="page"] {
+  opacity: 1;
+  color: var(--text-primary);
+  /* Use primary white, not accent color */
+}
+
+/* 2. Player - In-place "Bottom Sheet" style */
+.player {
+  /* Reset previous fullscreen styles */
+  position: fixed;
+  inset: auto 0 0 0;
+  /* Bottom anchored */
+  top: auto;
+  height: auto;
+  min-height: 50vh;
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+  border-top: 1px solid var(--text-disabled);
+  background: var(--bg-surface);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(110%);
+  /* Hidden state */
+  z-index: 200;
+  /* Above nav if desired, or below? usually above */
+  padding-bottom: max(var(--space-xl), env(safe-area-inset-bottom));
+}
+
+.player.hidden {
+  transform: translateY(110%);
+  opacity: 1;
+  /* Opacity handled by transform hide */
+  pointer-events: none;
+}
+
+/* Adjust player visuals for compact space */
+.player-header {
+  position: relative;
+  top: 0;
+  margin-bottom: var(--space-lg);
+}
+
+.timer-digits {
+  font-size: clamp(64px, 15vw, 120px);
+}
+
+.player-controls {
+  position: relative;
+  bottom: 0;
+  margin-top: var(--space-lg);
+}
+
+/* 3. Gym - Visual Locking */
+.session-card.locked {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+.session-card.locked .session-info-col {
+  position: relative;
+}
+
+/* Padlock Icon using CSS shapes/emoji or simple ASCII for now */
+.session-card.locked::after {
+  content: '🔒';
+  /* Simple lock icon */
+  font-size: 1.2rem;
+  color: var(--text-tertiary);
+  margin-left: var(--space-md);
+  opacity: 0.5;
+}
+
+/* Splash Pulse Animation for image interactivity hint */
+.visual-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
+  animation: pulse-white 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-white {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
   }
 }
 

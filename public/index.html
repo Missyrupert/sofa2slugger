@@ -26,29 +26,19 @@
         <p class="hero-tagline">Beginner boxing. Audio-guided. No gym.</p>
       </header>
 
-      <div class="hero-visual">
-        <img src="assets/images/splash-v2.jpg" alt="Boxing at home">
-      </div>
-
-      <div class="hero-cta">
-        <!-- PRIMARY CTA -->
-        <a href="gym.html" class="btn-overhaul-primary">
-          Start Session 1 &mdash; Free
-        </a>
-
-        <!-- SECONDARY CTA -->
-        <button id="btn-manifesto" class="btn-overhaul-secondary">
-          Hear the Manifesto (2 Min)
-        </button>
-
-        <!-- Manifest Player Container (Functionality Only) -->
-        <div class="manifesto-player" style="margin-top:0;">
-          <p id="manifesto-status" style="font-size:10px;opacity:0.5;margin-top:6px;"></p>
+      <!-- Clickable Hero Concept: The phone is the CTA -->
+      <a href="gym.html" class="hero-visual-link">
+        <div class="hero-visual">
+          <img src="assets/images/splash-v3.jpg" alt="Start Session 1">
+          <!-- Pulse hint overlay -->
+          <div class="visual-pulse"></div>
         </div>
+      </a>
 
-        <p style="font-size:13px;font-weight:600;opacity:0.9;margin-top:16px;color:#5a4a3a;">
-          No signup required
-        </p>
+      <!-- Removed standalone buttons per instruction -->
+      <!-- The image itself is the primary call to action -->
+      <div class="hero-cta">
+        <p class="scroll-hint">Scroll for Manifesto</p>
       </div>
     </section>
 
