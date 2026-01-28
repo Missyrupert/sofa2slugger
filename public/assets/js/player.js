@@ -24,10 +24,9 @@ var currentSession = null;
 var phase = 'ready'; // ready | intro | session | done
 var isPaused = false;
 
-var intro = null;
-var intro = null;
+// var intro = null; (Removed)
 var sessionAudio = null;
-var outro = null;
+// var outro = null; (Removed)
 
 var player = document.getElementById('player');
 var sessionTitle = document.getElementById('session-title');
@@ -119,29 +118,17 @@ function loadSession(num, autoPlay) {
 
   var padded = num < 10 ? '0' + num : '' + num;
 
-  // Load intro, session, and outro
-  // Intro: Vance (Narrator)
-  // Session: Coach + Music (Complete)
-  // Outro: Vance (Narrator)
-  intro = new Audio('/audio/vance-s' + padded + '-intro.mp3');
-  // Special case for Session 1 to fix loading issues
-  var sessionFile = (num === 1) ? 's1_full.mp3' : 'session-' + num + '-complete.mp3';
-  sessionAudio = new Audio('/audio/' + sessionFile);
-  outro = new Audio('/audio/vance-s' + padded + '-outro.mp3');
+  // Load single final session file
+  // Pattern: session-{NN}-final.mp3
+  sessionAudio = new Audio('/audio/session-' + padded + '-final.mp3');
 
-  // Wire up the sequence
-  intro.addEventListener('ended', onIntroEnd);
+  // Wire up sequence (Simple 1-step)
   sessionAudio.addEventListener('ended', onSessionEnd);
-  outro.addEventListener('ended', onOutroEnd);
 
-  // Add error handling
-  [intro, sessionAudio, outro].forEach(function (audio, index) {
-    if (!audio) return;
-    var labels = ['Intro', 'Training', 'Outro'];
-    audio.addEventListener('error', function (e) {
-      console.error("Error playing " + labels[index] + " for session " + num, e);
-      alert("Error loading " + labels[index] + " audio. Please check connection.");
-    });
+  // Error handling
+  sessionAudio.addEventListener('error', function (e) {
+    console.error("Error playing session " + num, e);
+    alert("Error loading audio. Please check connection.");
   });
 
   // Get session name from card
@@ -177,20 +164,17 @@ function showPauseButton() {
 
 function startSession() {
   if (phase === 'ready') {
-    phase = 'intro';
-    phaseDisplay.textContent = 'Intro';
-    intro.play();
+    // Single phase: Session
+    phase = 'session';
+    phaseDisplay.textContent = 'Training';
+    sessionAudio.play();
     showPauseButton();
   }
 }
 
 function getCurrentAudio() {
-  switch (phase) {
-    case 'intro': return intro;
-    case 'session': return sessionAudio;
-    case 'outro': return outro;
-    default: return null;
-  }
+  // We now only have one audio object
+  return sessionAudio;
 }
 
 function pausePlayback() {
@@ -215,31 +199,55 @@ function resumePlayback() {
   phaseDisplay.textContent = phaseDisplay.textContent.replace(' (Paused)', '');
 }
 
-function onIntroEnd() {
-  phase = 'session';
-  phaseDisplay.textContent = 'Training';
-  sessionAudio.play();
-}
+// function onIntroEnd() { ... } // Removed
+// function onOutroEnd() { ... } // Removed
 
 function onSessionEnd() {
-  phase = 'outro';
-  phaseDisplay.textContent = 'Outro';
-  outro.play();
-}
-
-function onOutroEnd() {
   phase = 'done';
   phaseDisplay.textContent = 'Complete';
   showPlayButton();
 
   // Mark session complete
   localStorage.setItem('s2s_session_' + currentSession, 'complete');
+
+  // Analytics
+  var payload = {
+    event: 'session_completed',
+    session_id: currentSession,
+    timestamp: new Date().toISOString(),
+    completed_timestamp: Date.now(),
+    phase: phase
+  };
+
+  if (window.dataLayer) window.dataLayer.push(payload);
+  else console.log('Analytics Event:', payload);
 }
 
 function stopAll() {
-  if (intro) { intro.pause(); intro.currentTime = 0; }
+  // Analytics: session_abandoned
+  // Fire only if we are actually in a playing phase and not just resetting
+  if ((phase === 'intro' || phase === 'session' || phase === 'outro') && !isPaused) {
+    var current = getCurrentAudio();
+    var lastTime = current ? current.currentTime : 0;
+
+    var payload = {
+      event: 'session_abandoned',
+      session_id: currentSession,
+      timestamp: new Date().toISOString(),
+      abandoned_timestamp: Date.now(),
+      last_playback_position: lastTime,
+      phase: phase
+    };
+
+    if (window.dataLayer) {
+      window.dataLayer.push(payload);
+    } else {
+      console.log('Analytics Event:', payload);
+    }
+  }
+
   if (sessionAudio) { sessionAudio.pause(); sessionAudio.currentTime = 0; }
-  if (outro) { outro.pause(); outro.currentTime = 0; }
+  // intro/outro objects valid no longer exist
   phase = 'ready';
   isPaused = false;
 }
@@ -248,40 +256,6 @@ function skipToPrevPhase() {
   if (phase === 'ready' || phase === 'done') return;
 
   var current = getCurrentAudio();
-
-  // If more than 5 seconds in, restart current phase
-  if (current && current.currentTime > 5) {
-    current.currentTime = 0;
-    return;
-  }
-
-  // If in session phase, go back to intro
-  if (phase === 'session') {
-    stopAll(); // Simpler reset
-    // But we want to preserve session
-    // Re-load would be nuclear.
-    // Let's manually back up.
-    if (sessionAudio) { sessionAudio.pause(); sessionAudio.currentTime = 0; }
-    phase = 'intro';
-    phaseDisplay.textContent = 'Intro';
-    intro.currentTime = 0;
-    intro.play();
-    if (!isPaused) showPauseButton();
-    return;
-  }
-
-  // If in outro phase, go back to session
-  if (phase === 'outro') {
-    if (outro) { outro.pause(); outro.currentTime = 0; }
-    phase = 'session';
-    phaseDisplay.textContent = 'Training';
-    sessionAudio.currentTime = 0;
-    sessionAudio.play();
-    if (!isPaused) showPauseButton();
-    return;
-  }
-
-  // At intro, just restart
   if (current) current.currentTime = 0;
 }
 
@@ -333,8 +307,29 @@ document.getElementById('btn-rewind').addEventListener('click', function () {
 
   var current = getCurrentAudio();
   if (current) {
+    // Capture state before rewind
+    var timeBefore = current.currentTime;
+
     // Clamp to 0 to avoid errors
     current.currentTime = Math.max(0, current.currentTime - 15);
+
+    // Analytics: audio_rewind_15s
+    // Using simple console log as placeholder since no specific analytics provider was found in context
+    // Ideally this would be: window.dataLayer.push({ ... })
+    var payload = {
+      event: 'audio_rewind_15s',
+      session_id: currentSession,
+      timestamp: new Date().toISOString(),
+      current_time_before_rewind: timeBefore,
+      phase: phase
+    };
+
+    // Safety check for dataLayer (GTM/GA4)
+    if (window.dataLayer) {
+      window.dataLayer.push(payload);
+    } else {
+      console.log('Analytics Event:', payload);
+    }
   }
 });
 
