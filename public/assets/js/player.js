@@ -129,7 +129,7 @@ function loadSession(num, autoPlay) {
   // Pattern: session-{NN}-final.mp3
   // For Session 1 explicitly use the finalized mix filename
   if (num === 1) {
-    sessionAudio = new Audio('/audio/session-01-final.mp3');
+    sessionAudio = new Audio('audio/session-01-final.mp3');
   } else {
     sessionAudio = new Audio('/audio/session-' + padded + '-final.mp3');
   }
