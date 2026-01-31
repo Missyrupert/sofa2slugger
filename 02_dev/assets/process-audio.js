@@ -147,7 +147,8 @@ function processSession(session) {
     `volume=${musicVol}[music]`,
 
     // Mix voice and music
-    `[voice][music]amix=inputs=2:duration=first:weights=1 0.8[mixed]`,
+    `[music]volume=0.25[music_bg]`,
+    `[voice][music_bg]amix=inputs=2:duration=first:weights=1 0.25[mixed]`,
 
     // Apply loudness normalization
     `[mixed]loudnorm=I=${CONFIG.targetLoudness}:TP=-1.5:LRA=11[out]`
@@ -223,11 +224,13 @@ async function main() {
     failed: []
   };
 
-  // Process Manifesto first
-  if (processManifesto()) {
-    results.success.push('Manifesto');
-  } else {
-    results.failed.push('Manifesto');
+  // Process Manifesto first (disabled)
+  if (false) {
+    if (processManifesto()) {
+      results.success.push('Manifesto');
+    } else {
+      results.failed.push('Manifesto');
+    }
   }
 
   // Process all sessions

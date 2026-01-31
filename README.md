@@ -11,3 +11,6 @@ This branch (`ui-playground`) is for UI and visual experimentation only.
 
 ## Purpose
 Use this branch to iterate on CSS, layout, typography, and visual components without risking the stability of the core playback experience.
+
+## Session 1 Locked Mode
+This workspace is currently locked to Session 1 as the canonical playback experience. See `SESSION1_LOCK.md` for details and constraints (do not run or rely on audio generation scripts; do not modify `public/audio/`).
