@@ -97,13 +97,30 @@
     }
 
     a.addEventListener('play', function(){ scheduleBgStart(); });
-    a.addEventListener('pause', function(){ if (_bgStartTimer) { clearTimeout(_bgStartTimer); _bgStartTimer = null; } try{ bg.pause(); }catch(e){} });
+    a.addEventListener('pause', function(){ if (_bgStartTimer) { clearTimeout(_bgStartTimer); _bgStartTimer = null; } });
     // When seeking/timeupdate, re-evaluate whether to start music now
     a.addEventListener('timeupdate', function(){
       if (a.currentTime >= MUSIC_START_AT && bg.paused && !_bgStartTimer) {
         bg.play().catch(()=>{});
       }
     });
+
+    // Fade helpers: fade bg volume to `target` over `dur` ms using rAF
+    function fadeBgTo(target, dur){
+      if (!bg || !isFinite(bg.volume)) return;
+      if (bg._fadeAnim) { cancelAnimationFrame(bg._fadeAnim); bg._fadeAnim = null; }
+      var start = performance.now();
+      var from = bg.volume;
+      var delta = target - from;
+      if (Math.abs(delta) < 0.001) return;
+      function step(ts){
+        var t = Math.min(1, (ts - start) / dur);
+        bg.volume = Math.max(0, Math.min(1, from + delta * t));
+        if (t < 1) bg._fadeAnim = requestAnimationFrame(step);
+        else bg._fadeAnim = null;
+      }
+      bg._fadeAnim = requestAnimationFrame(step);
+    }
 
     ['play','playing','pause','ended','error','loadedmetadata'].forEach(ev=>{
       a.addEventListener(ev, e=>{
@@ -185,22 +202,11 @@
     // Fade the background music about 4s after the narrator finishes.
     // On 'ended' we wait 4s then fade over 4s to 0 and pause.
     a.addEventListener('ended', function(){
+      // keep music playing for ~4s after outro, then fade out over 1s
       setTimeout(function(){
-        var fadeDur = 4.0; // seconds
-        var steps = 20;
-        var stepTime = (fadeDur / steps) * 1000;
-        var startVol = MUSIC_VOL;
-        var step = 0;
-        var iv = setInterval(function(){
-          step++;
-          var v = Math.max(0, startVol * (1 - step/steps));
-          bg.volume = v;
-          if (step >= steps) {
-            clearInterval(iv);
-            try { bg.pause(); bg.currentTime = 0; } catch(e){}
-            bg.volume = startVol; // reset for next play
-          }
-        }, stepTime);
+        fadeBgTo(0.0, 1000);
+        // after fade completes, pause and reset
+        setTimeout(function(){ try{ bg.pause(); bg.currentTime = 0; bg.volume = MUSIC_VOL; }catch(e){} }, 1100);
       }, 4000);
     });
   </script>
