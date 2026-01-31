@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Session 01 — Local Player</title>
+  <style>body{font-family:system-ui,Arial,sans-serif;padding:18px}label{display:block;margin-top:12px}input[type=range]{width:100%}</style>
+</head>
+<body>
+  <h1>Session 01 — Local Player</h1>
+  <p>File: <strong>session-01-v2-final.mp3</strong></p>
+
+  <audio id="player" controls preload="metadata">
+    <source src="session-01-v2-final.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <label>Seek: <input id="seek" type="range" min="0" max="100" step="0.1" value="0"></label>
+  <div style="margin-top:8px">
+    <button id="btnPlay">Play</button>
+    <button id="btnPause">Pause</button>
+    <button id="btnSkip">Jump to Outro</button>
+    <span id="time">0:00 / 0:00</span>
+  </div>
+
+  <script>
+    const a = document.getElementById('player');
+    const seek = document.getElementById('seek');
+    const t = document.getElementById('time');
+    document.getElementById('btnPlay').addEventListener('click', ()=>a.play());
+    document.getElementById('btnPause').addEventListener('click', ()=>a.pause());
+    document.getElementById('btnSkip').addEventListener('click', ()=>{
+      if (a.duration) a.currentTime = Math.max(0, a.duration - 0.5);
+    });
+
+    function fmt(s){
+      if (!isFinite(s)) return '0:00';
+      const m=Math.floor(s/60), sec=Math.floor(s%60);
+      return m+':'+(sec<10?'0':'')+sec;
+    }
+
+    a.addEventListener('loadedmetadata', ()=>{
+      seek.max = Math.max(1, a.duration);
+      t.textContent = fmt(0)+' / '+fmt(a.duration);
+    });
+
+    a.addEventListener('timeupdate', ()=>{
+      seek.value = a.currentTime;
+      t.textContent = fmt(a.currentTime)+' / '+fmt(a.duration);
+    });
+
+    let isSeeking = false;
+    seek.addEventListener('input', ()=>{
+      isSeeking = true;
+      t.textContent = fmt(seek.value)+' / '+fmt(a.duration);
+    });
+    seek.addEventListener('change', ()=>{
+      a.currentTime = seek.value;
+      isSeeking = false;
+    });
+  </script>
+</body>
+</html>

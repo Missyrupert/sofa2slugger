@@ -112,6 +112,30 @@ btnRewind.addEventListener('click', function() {
   }
 });
 
+// Skip to the absolute end of the current session (jump to end of current track).
+function skipToEnd() {
+  if (!audio) {
+    // nothing loaded — mark complete
+    phase = 'done';
+    phaseDisplay.textContent = 'Complete';
+    showPlayButton();
+    return;
+  }
+
+  try {
+    // Jump to the track end which will trigger the 'ended' handler and advance/complete session
+    audio.currentTime = audio.duration;
+  } catch (e) {
+    console.error('skipToEnd failed', e);
+    phase = 'done';
+    phaseDisplay.textContent = 'Complete';
+    showPlayButton();
+  }
+}
+
+// Expose for console/testing
+window.skipToEnd = skipToEnd;
+
 // Session card click handlers
 document.querySelectorAll('.session-card').forEach(function(card) {
   card.addEventListener('click', function() {
