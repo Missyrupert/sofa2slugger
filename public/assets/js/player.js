@@ -113,6 +113,13 @@ document.querySelectorAll('.session-play').forEach(function (btn) {
 });
 
 function loadSession(num, autoPlay) {
+  // Enforce Session 1 only (locked execution mode).
+  // All other sessions show the paywall and are not playable in this mode.
+  if (num !== 1) {
+    showPaywall();
+    return;
+  }
+
   stopAll();
   currentSession = num;
 
@@ -120,7 +127,12 @@ function loadSession(num, autoPlay) {
 
   // Load single final session file
   // Pattern: session-{NN}-final.mp3
-  sessionAudio = new Audio('/audio/session-' + padded + '-final.mp3');
+  // For Session 1 explicitly use the finalized mix filename
+  if (num === 1) {
+    sessionAudio = new Audio('/audio/session-01-final.mp3');
+  } else {
+    sessionAudio = new Audio('/audio/session-' + padded + '-final.mp3');
+  }
 
   // Wire up sequence (Simple 1-step)
   sessionAudio.addEventListener('ended', onSessionEnd);
