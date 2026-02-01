@@ -1231,3 +1231,337 @@ button.btn-primary,
   color: var(--text-secondary) !important;
   /* Brighter icon */
 }
+
+/* ==========================================================================
+   MANIFESTO BLOCK
+   ========================================================================== */
+
+.manifesto-block {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+  border: 1px solid var(--text-disabled);
+}
+
+.manifesto-intro {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-md);
+}
+
+.btn-manifesto {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: transparent;
+  border: 1px solid var(--text-secondary);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-manifesto:hover {
+  background: var(--accent-subtle);
+  border-color: var(--text-primary);
+}
+
+.manifesto-icon {
+  font-size: 0.85rem;
+}
+
+.manifesto-status {
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  margin-top: var(--space-md);
+  min-height: 1.2em;
+}
+
+/* ==========================================================================
+   GYM CTAs
+   ========================================================================== */
+
+.gym-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.cta-session1 {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  font-size: 1rem;
+}
+
+.btn-secondary,
+.cta-unlock {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  background: transparent;
+  border: 1px solid var(--text-tertiary);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-secondary:hover,
+.cta-unlock:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+.orientation-cue {
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   NEW PLAYER - Bottom Sheet with Ring Card Design
+   ========================================================================== */
+
+.player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-surface);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  border-top: 1px solid var(--text-disabled);
+  box-shadow: 0 -10px 60px rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  padding: var(--space-lg);
+  padding-bottom: max(var(--space-xl), env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.player.hidden {
+  transform: translateY(110%);
+  pointer-events: none;
+}
+
+/* Round Card Holder - Ring Girl Style */
+.round-card-holder {
+  position: relative;
+  margin-bottom: var(--space-md);
+  perspective: 800px;
+}
+
+.round-card {
+  background: linear-gradient(145deg, #f5f5f5 0%, #e0e0e0 100%);
+  border: 3px solid #333;
+  border-radius: var(--radius-sm);
+  padding: var(--space-md) var(--space-xl);
+  text-align: center;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: rotateX(5deg);
+  position: relative;
+}
+
+/* Subtle "hands" holding the card */
+.round-card::before,
+.round-card::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  width: 20px;
+  height: 24px;
+  background: linear-gradient(to bottom, #d4a574 0%, #c4956a 100%);
+  border-radius: 4px 4px 8px 8px;
+  z-index: -1;
+}
+
+.round-card::before {
+  left: 15%;
+  transform: rotate(-5deg);
+}
+
+.round-card::after {
+  right: 15%;
+  transform: rotate(5deg);
+}
+
+.round-label {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.round-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+  font-family: 'Georgia', serif;
+}
+
+/* Player Title */
+.player-title {
+  font-size: 1rem;
+  font-weight: var(--font-weight-regular);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+/* Progress Container */
+.progress-container {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: var(--space-lg);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--text-disabled);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-sm);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-family: monospace;
+}
+
+/* Player Controls */
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: var(--space-md);
+  border-radius: 50%;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctrl-btn:hover {
+  background: var(--accent-subtle);
+}
+
+.ctrl-btn:active {
+  transform: scale(0.95);
+}
+
+.ctrl-icon {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.ctrl-btn-main {
+  width: 64px;
+  height: 64px;
+  background: var(--text-primary);
+  color: var(--bg-core);
+}
+
+.ctrl-btn-main:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.ctrl-btn-main .ctrl-icon {
+  font-size: 1.5rem;
+}
+
+/* Close Button */
+.btn-close-player {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--space-sm);
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+
+.btn-close-player:hover {
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+
+@media (max-width: 400px) {
+  .round-card {
+    padding: var(--space-sm) var(--space-lg);
+  }
+
+  .round-number {
+    font-size: 2rem;
+  }
+
+  .player-controls {
+    gap: var(--space-lg);
+  }
+
+  .ctrl-btn-main {
+    width: 56px;
+    height: 56px;
+  }
+}

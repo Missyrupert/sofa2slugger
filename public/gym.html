@@ -13,6 +13,24 @@
     <a href="index.html" class="back">&larr; Back</a>
     <h1>Gym</h1>
 
+    <!-- Manifesto Block - New Users Only -->
+    <div id="manifesto-block" class="manifesto-block">
+      <div class="manifesto-content">
+        <p class="manifesto-intro">New here? Listen to what this is about.</p>
+        <button id="btn-manifesto" class="btn-manifesto">
+          <span class="manifesto-icon">&#9654;</span>
+          <span class="manifesto-label">Play Manifesto</span>
+        </button>
+        <p id="manifesto-status" class="manifesto-status"></p>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="gym-ctas">
+      <button id="btn-play-session1" class="btn-primary cta-session1">Play Session 1 Free</button>
+      <a href="https://buy.stripe.com/7sY7sM8823E8auX3WR8k800" class="btn-secondary cta-unlock">Unlock All Sessions</a>
+    </div>
+
     <p class="orientation-cue">Your coach will guide you step by step—just listen and move.</p>
 
     <div class="sessions">
@@ -90,23 +108,49 @@
       </div>
     </div>
 
-    <!-- Session 1 Player Overlay -->
+    <!-- Session Player - Slides up from bottom -->
     <div id="player" class="player hidden">
-      <!-- Context -->
-      <header class="player-header">
-        <h2 id="session-title">Session 1 — Where It Begins</h2>
-      </header>
+      <!-- Session Card - Ring girl style -->
+      <div class="round-card-holder">
+        <div class="round-card">
+          <span class="round-label">SESSION</span>
+          <span id="session-number" class="round-number">1</span>
+        </div>
+      </div>
 
-      <!-- Native Audio Player -->
-      <section class="audio-player-container">
-        <audio id="session1-audio" controls preload="none">
-          <!-- Source will be set dynamically by JavaScript -->
-          Your browser does not support the audio element.
-        </audio>
-      </section>
+      <!-- Session Title -->
+      <h2 id="session-title" class="player-title">Where It Begins</h2>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <input type="range" id="progress-bar" class="progress-bar" min="0" max="100" value="0" step="0.1">
+        <div class="time-display">
+          <span id="current-time">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
+      </div>
+
+      <!-- Player Controls -->
+      <div class="player-controls">
+        <button id="btn-back15" class="ctrl-btn" title="Back 15 seconds">
+          <span class="ctrl-icon">-15</span>
+        </button>
+        <button id="btn-playpause" class="ctrl-btn ctrl-btn-main" title="Play/Pause">
+          <span id="playpause-icon" class="ctrl-icon">&#9654;</span>
+        </button>
+        <button id="btn-stop" class="ctrl-btn" title="Stop">
+          <span class="ctrl-icon">&#9632;</span>
+        </button>
+      </div>
+
+      <!-- Hidden audio element -->
+      <audio id="session-audio" preload="metadata"></audio>
+
+      <!-- Close button -->
+      <button id="btn-close-player" class="btn-close-player">&times;</button>
     </div>
   </main>
   <script src="assets/js/player.js"></script>
 </body>
 
-</html><!-- force update -->
+</html>
