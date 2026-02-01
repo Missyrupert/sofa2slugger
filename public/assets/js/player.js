@@ -12,27 +12,17 @@ var audioElement = document.getElementById('session1-audio');
 function showSession1Player() {
   player.classList.remove('hidden');
   sessionTitle.textContent = 'Session 1 — Where It Begins';
-  
-  // Force reload the audio source to ensure latest file is loaded
+
+  // Load and play the audio
   if (audioElement) {
-    // Stop any current playback
-    audioElement.pause();
-    audioElement.currentTime = 0;
-    
-    // Set source to final mix file (with cache-busting)
-    audioElement.src = '/audio/session01.final.mp3?v=' + Date.now();
-    
-    // Remove all existing source elements and add fresh one
-    while (audioElement.firstChild) {
-      audioElement.removeChild(audioElement.firstChild);
-    }
-    var source = document.createElement('source');
-    source.src = '/audio/session01.final.mp3?v=' + Date.now();
-    source.type = 'audio/mpeg';
-    audioElement.appendChild(source);
-    
-    // Force reload
+    // Set source to final mix file
+    audioElement.src = '/audio/session01.final.mp3';
+
+    // Load and attempt to play
     audioElement.load();
+    audioElement.play().catch(function(err) {
+      console.log('Auto-play blocked, user must click play:', err);
+    });
   }
 }
 
