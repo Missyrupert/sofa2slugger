@@ -1,6 +1,7 @@
 /**
  * Sofa2Slugger Session Player
  * Audio player with play/pause, skip back 15s, stop controls
+ * Handles premium access for sessions 2-10
  */
 
 // ============================================
@@ -33,6 +34,9 @@ var isManifestoPlaying = false;
 // CONSTANTS
 // ============================================
 var STORAGE_KEY_MANIFESTO_HEARD = 's2s_manifesto_heard';
+var STORAGE_KEY_PAID = 's2s_premium_access';
+var STORAGE_KEY_SESSION_PREFIX = 's2s_session_';
+
 var SESSION_NAMES = {
   1: 'Where It Begins',
   2: 'Finding Your Base',
@@ -46,6 +50,12 @@ var SESSION_NAMES = {
   10: 'The Full Round'
 };
 
+// Sessions with audio available (session 10 coming soon)
+var AVAILABLE_SESSIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+// Current session being played
+var currentSession = null;
+
 // ============================================
 // UTILITY FUNCTIONS
 // ============================================
@@ -56,15 +66,93 @@ function formatTime(seconds) {
   return mins + ':' + (secs < 10 ? '0' : '') + secs;
 }
 
+function isPremium() {
+  return localStorage.getItem(STORAGE_KEY_PAID) === 'true';
+}
+
+function padSessionNum(num) {
+  return num < 10 ? '0' + num : '' + num;
+}
+
+function getSessionAudioPath(sessionNum) {
+  return '/audio/session' + padSessionNum(sessionNum) + '.final.mp3';
+}
+
+function isSessionAvailable(sessionNum) {
+  return AVAILABLE_SESSIONS.indexOf(sessionNum) !== -1;
+}
+
+function canPlaySession(sessionNum) {
+  // Session 1 is always free
+  if (sessionNum === 1) return true;
+  // Sessions 2-10 require premium
+  if (sessionNum >= 2 && sessionNum <= 10) {
+    return isPremium() && isSessionAvailable(sessionNum);
+  }
+  return false;
+}
+
+function markSessionComplete(sessionNum) {
+  localStorage.setItem(STORAGE_KEY_SESSION_PREFIX + sessionNum, 'complete');
+}
+
+// ============================================
+// UI UPDATE FUNCTIONS
+// ============================================
+function updateSessionCards() {
+  var premium = isPremium();
+
+  document.querySelectorAll('.session-card').forEach(function(card) {
+    var num = parseInt(card.getAttribute('data-session'));
+    var btn = card.querySelector('.session-play');
+
+    if (num === 1) {
+      // Session 1 always unlocked
+      card.classList.remove('locked');
+      if (btn) {
+        btn.disabled = false;
+        btn.setAttribute('data-session', num);
+      }
+    } else if (premium && isSessionAvailable(num)) {
+      // Premium user with available session
+      card.classList.remove('locked');
+      if (btn) {
+        btn.disabled = false;
+        btn.setAttribute('data-session', num);
+      }
+    } else if (premium && !isSessionAvailable(num)) {
+      // Premium user but session not ready (session 10)
+      card.classList.add('locked');
+      card.classList.add('coming-soon');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Soon';
+      }
+    } else {
+      // Not premium - keep locked
+      card.classList.add('locked');
+      if (btn) btn.disabled = true;
+    }
+  });
+
+  // Update unlock CTA visibility
+  var ctaUnlock = document.querySelector('.cta-unlock');
+  if (ctaUnlock) {
+    ctaUnlock.style.display = premium ? 'none' : 'inline-block';
+  }
+}
+
 // ============================================
 // MANIFESTO LOGIC
 // ============================================
 function initManifesto() {
   // Hide manifesto block for returning users
   if (localStorage.getItem(STORAGE_KEY_MANIFESTO_HEARD) === 'true') {
-    manifestoBlock.style.display = 'none';
+    if (manifestoBlock) manifestoBlock.style.display = 'none';
     return;
   }
+
+  if (!btnManifesto) return;
 
   btnManifesto.addEventListener('click', function() {
     if (isManifestoPlaying) {
@@ -105,21 +193,33 @@ function initManifesto() {
 // PLAYER FUNCTIONS
 // ============================================
 function showPlayer(sessionNum) {
+  if (!canPlaySession(sessionNum)) {
+    if (!isPremium() && sessionNum > 1) {
+      // Redirect to unlock
+      window.location.href = 'https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801';
+    }
+    return;
+  }
+
   // Stop manifesto if playing
   if (isManifestoPlaying && manifestoAudio) {
     manifestoAudio.pause();
     manifestoAudio.currentTime = 0;
     isManifestoPlaying = false;
-    btnManifesto.innerHTML = '<span class="manifesto-icon">&#9654;</span><span class="manifesto-label">Play Manifesto</span>';
-    manifestoStatus.textContent = '';
+    if (btnManifesto) {
+      btnManifesto.innerHTML = '<span class="manifesto-icon">&#9654;</span><span class="manifesto-label">Play Manifesto</span>';
+    }
+    if (manifestoStatus) manifestoStatus.textContent = '';
   }
+
+  currentSession = sessionNum;
 
   // Update UI
   sessionNumber.textContent = sessionNum;
   sessionTitle.textContent = SESSION_NAMES[sessionNum] || 'Session ' + sessionNum;
 
-  // Load audio - for now only Session 1 has audio
-  var audioSrc = '/audio/session01.final.mp3';
+  // Load audio for the selected session
+  var audioSrc = getSessionAudioPath(sessionNum);
   audioElement.src = audioSrc;
   audioElement.load();
 
@@ -142,6 +242,7 @@ function hidePlayer() {
   audioElement.pause();
   audioElement.currentTime = 0;
   player.classList.add('hidden');
+  currentSession = null;
 }
 
 function togglePlayPause() {
@@ -187,6 +288,11 @@ audioElement.addEventListener('ended', function() {
   playpauseIcon.innerHTML = '&#9654;';
   progressBar.value = 0;
   currentTimeEl.textContent = '0:00';
+
+  // Mark session as complete
+  if (currentSession) {
+    markSessionComplete(currentSession);
+  }
 });
 
 // Progress bar scrubbing
@@ -203,16 +309,18 @@ btnStop.addEventListener('click', stopAudio);
 btnClosePlayer.addEventListener('click', hidePlayer);
 
 // Play Session 1 CTA
-btnPlaySession1.addEventListener('click', function() {
-  showPlayer(1);
-});
+if (btnPlaySession1) {
+  btnPlaySession1.addEventListener('click', function() {
+    showPlayer(1);
+  });
+}
 
 // Session card click handlers
 document.querySelectorAll('.session-card').forEach(function(card) {
   card.addEventListener('click', function() {
     var num = parseInt(this.getAttribute('data-session'));
-    if (num === 1) {
-      showPlayer(1);
+    if (canPlaySession(num)) {
+      showPlayer(num);
     }
   });
 });
@@ -221,13 +329,31 @@ document.querySelectorAll('.session-play').forEach(function(btn) {
   btn.addEventListener('click', function(e) {
     e.stopPropagation();
     var num = parseInt(this.getAttribute('data-session'));
-    if (num === 1) {
-      showPlayer(1);
+    if (canPlaySession(num)) {
+      showPlayer(num);
     }
   });
 });
 
 // ============================================
+// PAYMENT SUCCESS HANDLING
+// ============================================
+function checkPaymentSuccess() {
+  var urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('payment') === 'success') {
+    localStorage.setItem(STORAGE_KEY_PAID, 'true');
+    // Clean URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+    // Update UI
+    updateSessionCards();
+    // Show success message (optional)
+    console.log('Payment successful! All sessions unlocked.');
+  }
+}
+
+// ============================================
 // INITIALIZE
 // ============================================
+checkPaymentSuccess();
 initManifesto();
+updateSessionCards();
