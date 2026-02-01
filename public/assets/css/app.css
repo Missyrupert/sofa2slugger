@@ -361,6 +361,20 @@ button.btn-primary,
   color: var(--text-secondary);
 }
 
+/* Audio Player Container */
+.audio-player-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  padding: var(--space-lg);
+}
+
+#session1-audio {
+  width: 100%;
+}
+
 /* Controls */
 .player-controls {
   position: absolute;
