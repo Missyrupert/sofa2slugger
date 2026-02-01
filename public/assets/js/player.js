@@ -15,10 +15,24 @@ function showSession1Player() {
   
   // Force reload the audio source to ensure latest file is loaded
   if (audioElement) {
-    // Remove existing source and add fresh one to bypass cache
-    var currentSrc = audioElement.currentSrc || audioElement.src;
-    audioElement.src = '/audio/session01.final.mp3?' + Date.now();
-    audioElement.load(); // Force reload
+    // Stop any current playback
+    audioElement.pause();
+    audioElement.currentTime = 0;
+    
+    // Set source to final mix file (with cache-busting)
+    audioElement.src = '/audio/session01.final.mp3?v=' + Date.now();
+    
+    // Remove all existing source elements and add fresh one
+    while (audioElement.firstChild) {
+      audioElement.removeChild(audioElement.firstChild);
+    }
+    var source = document.createElement('source');
+    source.src = '/audio/session01.final.mp3?v=' + Date.now();
+    source.type = 'audio/mpeg';
+    audioElement.appendChild(source);
+    
+    // Force reload
+    audioElement.load();
   }
 }
 
