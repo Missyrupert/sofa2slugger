@@ -96,6 +96,22 @@ function markSessionComplete(sessionNum) {
   localStorage.setItem(STORAGE_KEY_SESSION_PREFIX + sessionNum, 'complete');
 }
 
+function showSession1CompleteBlock() {
+  var completeBlock = document.getElementById('session1-complete');
+  if (completeBlock) {
+    completeBlock.classList.remove('hidden');
+    // Scroll to make it visible
+    completeBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function hideSession1CompleteBlock() {
+  var completeBlock = document.getElementById('session1-complete');
+  if (completeBlock) {
+    completeBlock.classList.add('hidden');
+  }
+}
+
 // ============================================
 // UI UPDATE FUNCTIONS
 // ============================================
@@ -105,40 +121,70 @@ function updateSessionCards() {
   document.querySelectorAll('.session-card').forEach(function(card) {
     var num = parseInt(card.getAttribute('data-session'));
     var btn = card.querySelector('.session-play');
+    var statusEl = card.querySelector('.session-status');
 
     if (num === 1) {
       // Session 1 always unlocked
       card.classList.remove('locked');
+      card.classList.remove('coming-soon');
       if (btn) {
         btn.disabled = false;
         btn.setAttribute('data-session', num);
+        btn.textContent = 'Play';
       }
-    } else if (premium && isSessionAvailable(num)) {
-      // Premium user with available session
-      card.classList.remove('locked');
-      if (btn) {
-        btn.disabled = false;
-        btn.setAttribute('data-session', num);
-      }
-    } else if (premium && !isSessionAvailable(num)) {
-      // Premium user but session not ready (session 10)
+      // Status stays "Free"
+    } else if (num === 10) {
+      // Session 10 - Coming Soon (no audio yet)
       card.classList.add('locked');
       card.classList.add('coming-soon');
       if (btn) {
         btn.disabled = true;
         btn.textContent = 'Soon';
       }
+      if (statusEl) {
+        statusEl.textContent = 'Coming Soon';
+        statusEl.classList.remove('session-locked');
+        statusEl.classList.add('session-unlocked');
+      }
+    } else if (premium && isSessionAvailable(num)) {
+      // Sessions 2-9 for premium users
+      card.classList.remove('locked');
+      card.classList.remove('coming-soon');
+      if (btn) {
+        btn.disabled = false;
+        btn.setAttribute('data-session', num);
+        btn.textContent = 'Play';
+      }
+      if (statusEl) {
+        statusEl.textContent = 'Unlocked';
+        statusEl.classList.remove('session-locked');
+        statusEl.classList.add('session-unlocked');
+      }
     } else {
-      // Not premium - keep locked
+      // Sessions 2-9 for non-premium users - LOCKED
       card.classList.add('locked');
-      if (btn) btn.disabled = true;
+      card.classList.remove('coming-soon');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Unlock';
+      }
+      if (statusEl) {
+        statusEl.textContent = 'Locked';
+        statusEl.classList.add('session-locked');
+        statusEl.classList.remove('session-unlocked');
+      }
     }
   });
 
   // Update unlock CTA visibility
   var ctaUnlock = document.querySelector('.cta-unlock');
   if (ctaUnlock) {
-    ctaUnlock.style.display = premium ? 'none' : 'inline-block';
+    ctaUnlock.style.display = premium ? 'none' : 'flex';
+  }
+
+  // Hide Session 1 complete block for premium users
+  if (premium) {
+    hideSession1CompleteBlock();
   }
 }
 
@@ -292,6 +338,11 @@ audioElement.addEventListener('ended', function() {
   // Mark session as complete
   if (currentSession) {
     markSessionComplete(currentSession);
+
+    // Show conversion block after Session 1 for non-premium users
+    if (currentSession === 1 && !isPremium()) {
+      showSession1CompleteBlock();
+    }
   }
 });
 

@@ -1,19 +1,17 @@
 /**
- * Sofa2Slugger Audio Processing Script
+ * Sofa2Slugger Audio Processing Script (10-Track Progressive System)
  *
- * Creates complete session audio blocks:
+ * Creates complete session audio blocks with unique music for each session:
  * - Session content (warmup+coaching merged for 1-4, single file for 5-10)
  * - Vance outro appended seamlessly
- * - Music fades in after session starts, continues through outro, fades out at end
+ * - Session-specific music fades in, continues through outro, fades out at end
  * - Applies loudness normalization
  *
- * Music Bed Assignments:
- * - Sessions 1-4: start_music_bed.mp3 (Music Bed A)
- * - Sessions 5-7: middle-music-bed.mp3 (Music Bed B)
- * - Sessions 8-10: final_music_bed.mp3 (Music Bed C)
+ * NEW: Each session gets its own unique music track that mirrors user progression
+ * Sessions 1-10: Progressive ska/reggae tracks building from sparse to triumphant
  */
 
-const { execSync, exec } = require('child_process');
+const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
@@ -22,13 +20,7 @@ const CONFIG = {
   processedDir: './processed',
   outputDir: './final',
   audioDir: './public/audio',
-
-  // Music bed files
-  musicBeds: {
-    A: 'start_music_bed.mp3',      // Sessions 1-4
-    B: 'middle-music-bed.mp3',     // Sessions 5-7
-    C: 'final_music_bed.mp3'       // Sessions 8-10
-  },
+  musicDir: './public/audio/music', // New: directory for individual session music
 
   // Timing (in seconds)
   musicFadeInStart: 5,    // When music starts fading in (after session content starts)
@@ -38,23 +30,83 @@ const CONFIG = {
 
   // Volume levels (music relative to voice)
   musicVolume: 0.18,        // Standard sessions (18% volume)
-  musicVolumeSession10: 0.12, // Session 10 lower music
+  musicVolumeSession10: 0.25, // Session 10: louder music for celebration
 
   // Target loudness (LUFS)
   targetLoudness: -16,
 
-  // Sessions config - includes outro file for each session
+  // Sessions config - NEW: Each session has its own unique music track
   sessions: [
-    { num: 1, source: 'session-1-merged.mp3', musicBed: 'A', outro: 'vance-s01-outro.mp3' },
-    { num: 2, source: 'session-2-merged.mp3', musicBed: 'A', outro: 'vance-s02-outro.mp3' },
-    { num: 3, source: 'session-3-merged.mp3', musicBed: 'A', outro: 'vance-s03-outro.mp3' },
-    { num: 4, source: 'session-4-merged.mp3', musicBed: 'A', outro: 'vance-s04-outro.mp3' },
-    { num: 5, source: 'session-5.mp3', musicBed: 'B', outro: 'vance-s05-outro.mp3' },
-    { num: 6, source: 'session-6.mp3', musicBed: 'B', outro: 'vance-s06-outro.mp3' },
-    { num: 7, source: 'session-7.mp3', musicBed: 'B', outro: 'vance-s07-outro.mp3' },
-    { num: 8, source: 'session-8.mp3', musicBed: 'C', outro: 'vance-s08-outro.mp3' },
-    { num: 9, source: 'session-9.mp3', musicBed: 'C', outro: 'vance-s09-outro.mp3' },
-    { num: 10, source: 'session-10.mp3', musicBed: 'C', outro: 'vance-s10-outro.mp3' }
+    { 
+      num: 1, 
+      source: 'session-1-merged.mp3', 
+      musicTrack: 'session-01-music.mp3', 
+      outro: 'vance-s01-outro.mp3',
+      description: 'The First Step - Sparse, tentative'
+    },
+    { 
+      num: 2, 
+      source: 'session-2-merged.mp3', 
+      musicTrack: 'session-02-music.mp3', 
+      outro: 'vance-s02-outro.mp3',
+      description: 'Finding Rhythm - Offbeat emerges'
+    },
+    { 
+      num: 3, 
+      source: 'session-3-merged.mp3', 
+      musicTrack: 'session-03-music.mp3', 
+      outro: 'vance-s03-outro.mp3',
+      description: 'Foundation Settles - Groove locks in'
+    },
+    { 
+      num: 4, 
+      source: 'session-4-merged.mp3', 
+      musicTrack: 'session-04-music.mp3', 
+      outro: 'vance-s04-outro.mp3',
+      description: 'Adding Tools - Horns enter'
+    },
+    { 
+      num: 5, 
+      source: 'session-5.mp3', 
+      musicTrack: 'session-05-music.mp3', 
+      outro: 'vance-s05-outro.mp3',
+      description: 'The Pocket - Rocksteady depth'
+    },
+    { 
+      num: 6, 
+      source: 'session-6.mp3', 
+      musicTrack: 'session-06-music.mp3', 
+      outro: 'vance-s06-outro.mp3',
+      description: 'Building Combinations - Call-response'
+    },
+    { 
+      num: 7, 
+      source: 'session-7.mp3', 
+      musicTrack: 'session-07-music.mp3', 
+      outro: 'vance-s07-outro.mp3',
+      description: 'Finding Flow - Effortless rhythm'
+    },
+    { 
+      num: 8, 
+      source: 'session-8.mp3', 
+      musicTrack: 'session-08-music.mp3', 
+      outro: 'vance-s08-outro.mp3',
+      description: 'Speed & Power - Uptempo intensity'
+    },
+    { 
+      num: 9, 
+      source: 'session-9.mp3', 
+      musicTrack: 'session-09-music.mp3', 
+      outro: 'vance-s09-outro.mp3',
+      description: 'The Full Arsenal - Complete sound'
+    },
+    { 
+      num: 10, 
+      source: 'session-10.mp3', 
+      musicTrack: 'session-10-music.mp3', 
+      outro: 'vance-s10-outro.mp3',
+      description: 'Victorious - Triumphant finale'
+    }
   ]
 };
 
@@ -73,25 +125,42 @@ function getDuration(filePath) {
 }
 
 /**
- * Process a single session with music bed
+ * Process a single session with unique music track
  * Creates a complete session block: session content + outro with continuous music
  */
 function processSession(session) {
   const sessionNum = session.num;
   const sourceFile = path.join(CONFIG.processedDir, session.source);
   const outroFile = path.join(CONFIG.audioDir, session.outro);
-  const musicBedFile = path.join(CONFIG.audioDir, CONFIG.musicBeds[session.musicBed]);
+  const musicFile = path.join(CONFIG.musicDir, session.musicTrack);
   const outputFile = path.join(CONFIG.outputDir, `session-${sessionNum}.mp3`);
 
-  console.log(`\n=== Processing Session ${sessionNum} ===`);
+  console.log(`\n${'='.repeat(60)}`);
+  console.log(`SESSION ${sessionNum}: ${session.description}`);
+  console.log(`${'='.repeat(60)}`);
   console.log(`Source: ${sourceFile}`);
   console.log(`Outro: ${outroFile}`);
-  console.log(`Music: ${musicBedFile}`);
+  console.log(`Music: ${musicFile}`);
+
+  // Verify all files exist
+  if (!fs.existsSync(sourceFile)) {
+    console.error(`✗ Source file not found: ${sourceFile}`);
+    return false;
+  }
+  if (!fs.existsSync(outroFile)) {
+    console.error(`✗ Outro file not found: ${outroFile}`);
+    return false;
+  }
+  if (!fs.existsSync(musicFile)) {
+    console.error(`✗ Music file not found: ${musicFile}`);
+    console.log(`  → Generate music using: node generate_s2s_music_suite.js`);
+    return false;
+  }
 
   // Get durations
   const sessionDuration = getDuration(sourceFile);
   const outroDuration = getDuration(outroFile);
-  const musicBedDuration = getDuration(musicBedFile);
+  const musicDuration = getDuration(musicFile);
 
   // Total voice duration: session content + outro
   const voiceDuration = sessionDuration + outroDuration;
@@ -99,13 +168,14 @@ function processSession(session) {
   // Total output duration: voice + music tail after final word
   const totalDuration = voiceDuration + CONFIG.musicTailDuration;
 
-  // Calculate how many loops needed for music bed
-  const loopsNeeded = Math.ceil(totalDuration / musicBedDuration);
+  // Calculate how many loops needed for music (should be 1 if music is ~180s)
+  const loopsNeeded = Math.ceil(totalDuration / musicDuration);
 
   console.log(`Session content: ${sessionDuration.toFixed(2)}s`);
   console.log(`Outro: ${outroDuration.toFixed(2)}s`);
   console.log(`Total voice: ${voiceDuration.toFixed(2)}s`);
   console.log(`Total with tail: ${totalDuration.toFixed(2)}s`);
+  console.log(`Music duration: ${musicDuration.toFixed(2)}s`);
   console.log(`Music loops needed: ${loopsNeeded}`);
 
   // Music volume for this session
@@ -124,11 +194,10 @@ function processSession(session) {
   // Build FFmpeg filter complex
   // 1. Concatenate session content + outro
   // 2. Pad concatenated voice to total duration (for music tail)
-  // 3. Loop music bed, add delay, apply fades and volume
+  // 3. Loop music, add delay, apply fades and volume
   // 4. Mix voice and music
   // 5. Apply loudness normalization
 
-  // Music needs extra length to account for fade-out at the end
   const musicTrimDuration = totalDuration - fadeInStart;
 
   const filterComplex = [
@@ -138,7 +207,7 @@ function processSession(session) {
     // Pad concatenated voice to total duration (for music tail)
     `[concat]apad=whole_dur=${totalDuration}[voice]`,
 
-    // Music bed [2] - loop, trim, delay start, apply fades and volume
+    // Music [2] - loop if needed, trim, delay start, apply fades and volume
     `[2:a]aloop=loop=${loopsNeeded}:size=2e+09,` +
     `atrim=0:${musicTrimDuration},` +
     `adelay=${fadeInStart * 1000}|${fadeInStart * 1000},` +
@@ -146,15 +215,14 @@ function processSession(session) {
     `afade=t=out:st=${fadeOutStart}:d=${CONFIG.musicFadeOutDuration},` +
     `volume=${musicVol}[music]`,
 
-    // Mix voice and music
-    `[music]volume=0.25[music_bg]`,
-    `[voice][music_bg]amix=inputs=2:duration=first:weights=1 0.25[mixed]`,
+    // Mix voice and music (voice at 100%, music at specified volume)
+    `[voice][music]amix=inputs=2:duration=first:weights=1 ${musicVol}[mixed]`,
 
     // Apply loudness normalization
     `[mixed]loudnorm=I=${CONFIG.targetLoudness}:TP=-1.5:LRA=11[out]`
   ].join(';');
 
-  const cmd = `ffmpeg -y -i "${sourceFile}" -i "${outroFile}" -i "${musicBedFile}" ` +
+  const cmd = `ffmpeg -y -i "${sourceFile}" -i "${outroFile}" -i "${musicFile}" ` +
     `-filter_complex "${filterComplex}" -map "[out]" ` +
     `-c:a libmp3lame -b:a 192k "${outputFile}"`;
 
@@ -166,13 +234,13 @@ function processSession(session) {
     // Verify output
     const outputDuration = getDuration(outputFile);
     const outputSize = fs.statSync(outputFile).size;
-    console.log(`Output: ${outputFile}`);
-    console.log(`Duration: ${outputDuration.toFixed(2)}s`);
-    console.log(`Size: ${(outputSize / 1024 / 1024).toFixed(2)} MB`);
-    console.log(`Session ${sessionNum} complete!`);
+    console.log(`✓ Output: ${outputFile}`);
+    console.log(`✓ Duration: ${outputDuration.toFixed(2)}s`);
+    console.log(`✓ Size: ${(outputSize / 1024 / 1024).toFixed(2)} MB`);
+    console.log(`✓ Session ${sessionNum} complete!`);
     return true;
   } catch (error) {
-    console.error(`Error processing session ${sessionNum}:`, error.message);
+    console.error(`✗ Error processing session ${sessionNum}:`, error.message);
     return false;
   }
 }
@@ -181,10 +249,18 @@ function processSession(session) {
  * Process manifesto (clean, no music)
  */
 function processManifesto() {
-  console.log('\n=== Processing Manifesto ===');
+  console.log('\n' + '='.repeat(60));
+  console.log('PROCESSING MANIFESTO');
+  console.log('='.repeat(60));
 
-  const sourceFile = path.join(CONFIG.audioDir, 'Manifesto');
+  const sourceFile = path.join(CONFIG.audioDir, 'manifesto.mp3');
   const outputFile = path.join(CONFIG.outputDir, 'manifesto.mp3');
+
+  if (!fs.existsSync(sourceFile)) {
+    console.log(`Manifesto source not found: ${sourceFile}`);
+    console.log('Skipping manifesto processing.');
+    return false;
+  }
 
   const duration = getDuration(sourceFile);
   console.log(`Source: ${sourceFile}`);
@@ -200,13 +276,13 @@ function processManifesto() {
 
     const outputDuration = getDuration(outputFile);
     const outputSize = fs.statSync(outputFile).size;
-    console.log(`Output: ${outputFile}`);
-    console.log(`Duration: ${outputDuration.toFixed(2)}s`);
-    console.log(`Size: ${(outputSize / 1024 / 1024).toFixed(2)} MB`);
-    console.log('Manifesto complete!');
+    console.log(`✓ Output: ${outputFile}`);
+    console.log(`✓ Duration: ${outputDuration.toFixed(2)}s`);
+    console.log(`✓ Size: ${(outputSize / 1024 / 1024).toFixed(2)} MB`);
+    console.log('✓ Manifesto complete!');
     return true;
   } catch (error) {
-    console.error('Error processing manifesto:', error.message);
+    console.error('✗ Error processing manifesto:', error.message);
     return false;
   }
 }
@@ -215,17 +291,19 @@ function processManifesto() {
  * Main execution
  */
 async function main() {
-  console.log('='.repeat(50));
+  console.log('\n' + '='.repeat(60));
   console.log('SOFA2SLUGGER AUDIO PROCESSING');
-  console.log('='.repeat(50));
+  console.log('10-Track Progressive Music System');
+  console.log('='.repeat(60));
 
   const results = {
     success: [],
     failed: []
   };
 
-  // Process Manifesto first (disabled)
-  if (false) {
+  // Process Manifesto (optional)
+  const processManifestoFlag = false; // Set to true if you want to process manifesto
+  if (processManifestoFlag) {
     if (processManifesto()) {
       results.success.push('Manifesto');
     } else {
@@ -235,6 +313,7 @@ async function main() {
 
   // Process all sessions
   for (const session of CONFIG.sessions) {
+    console.log(''); // Add spacing between sessions
     if (processSession(session)) {
       results.success.push(`Session ${session.num}`);
     } else {
@@ -243,9 +322,9 @@ async function main() {
   }
 
   // Summary
-  console.log('\n' + '='.repeat(50));
+  console.log('\n' + '='.repeat(60));
   console.log('PROCESSING COMPLETE');
-  console.log('='.repeat(50));
+  console.log('='.repeat(60));
   console.log(`Successful: ${results.success.length}`);
   console.log(`Failed: ${results.failed.length}`);
 
@@ -254,12 +333,16 @@ async function main() {
   }
 
   // List final outputs
-  console.log('\nFinal outputs in ./final/:');
+  console.log(`\nFinal outputs in ${CONFIG.outputDir}/:`);
   const files = fs.readdirSync(CONFIG.outputDir).sort();
+  let totalSize = 0;
   files.forEach(f => {
     const size = fs.statSync(path.join(CONFIG.outputDir, f)).size;
-    console.log(`  ${f} (${(size / 1024 / 1024).toFixed(2)} MB)`);
+    totalSize += size;
+    console.log(`  ${f.padEnd(25)} ${(size / 1024 / 1024).toFixed(2)} MB`);
   });
+  console.log(`\nTotal size: ${(totalSize / 1024 / 1024).toFixed(2)} MB`);
+  console.log('='.repeat(60));
 }
 
 main().catch(console.error);

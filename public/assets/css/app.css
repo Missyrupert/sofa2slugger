@@ -1565,3 +1565,153 @@ button.btn-primary,
     height: 56px;
   }
 }
+
+/* ==========================================================================
+   PRE-LAUNCH CLARITY PASS - Format & Conversion Elements
+   ========================================================================== */
+
+/* Format Clarity Statement - Near CTA */
+.format-clarity {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: var(--space-md) 0;
+  padding: var(--space-md);
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--text-tertiary);
+}
+
+/* Outcome Statement */
+.outcome-statement {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: var(--space-lg) 0;
+  font-style: italic;
+}
+
+/* Pricing Clarification */
+.pricing-clarify {
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+/* Trust Anchor */
+.trust-anchor {
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+  margin-top: var(--space-lg);
+  font-style: italic;
+}
+
+/* Session Status Labels */
+.session-status {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-left: var(--space-sm);
+}
+
+.session-free {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.session-locked {
+  color: var(--text-tertiary);
+  background: transparent;
+  border: 1px solid var(--text-disabled);
+}
+
+.session-unlocked {
+  color: var(--text-secondary);
+  background: transparent;
+}
+
+/* Post-Session 1 Conversion Block */
+.session1-complete-block {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  margin: var(--space-xl) 0;
+  text-align: center;
+  border: 1px solid var(--text-disabled);
+}
+
+.session1-complete-block.hidden {
+  display: none;
+}
+
+.complete-heading {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-regular);
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.complete-reassure {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.complete-forward {
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.complete-cta {
+  display: inline-block;
+  text-decoration: none;
+  padding: var(--space-md) var(--space-xl);
+  font-size: 1rem;
+}
+
+/* ========================================
+   SESSION CARD LOCKED STATE
+======================================== */
+
+.session-card.locked {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.session-card.locked::before {
+  content: "🔒";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  opacity: 0.3;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.session-card.coming-soon::before {
+  content: "⏳";
+}
+
+.session-card.locked .session-play {
+  background: #666;
+  cursor: not-allowed;
+}
+
+.session-status.session-locked {
+  color: #999;
+  font-weight: normal;
+}
+
+.session-status.session-unlocked {
+  color: var(--red-2);
+  font-weight: bold;
+}
