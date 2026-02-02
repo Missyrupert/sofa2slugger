@@ -1,7 +1,16 @@
 /**
  * Sofa2Slugger Session Player
- * Audio player with play/pause, skip back 15s, stop controls
+ * Audio player with voice, music, and bell synchronization
  * Handles premium access for sessions 2-10
+ *
+ * Audio Sources (from /audio/Golden_Box/):
+ * - Voice: s1draft.mp3 through s10draft.mp3
+ * - Music: session-01-music.mp3 through session-10-music.mp3
+ * - Bell: bell
+ *
+ * Bell Rules:
+ * - Session 9: 3 rounds x 1 min = bell at 0s, 60s, 120s, 180s, 240s, 300s (if audio allows)
+ * - Session 10: 1 round x 3 min = bell at 0s, 180s
  */
 
 // ============================================
@@ -31,6 +40,14 @@ var manifestoAudio = null;
 var isManifestoPlaying = false;
 
 // ============================================
+// AUDIO SYSTEM - Voice, Music, Bell
+// ============================================
+var musicElement = null;
+var bellSound = null;
+var bellTimers = [];
+var musicVolume = 0.15; // Music at 15% volume behind voice
+
+// ============================================
 // CONSTANTS
 // ============================================
 var STORAGE_KEY_MANIFESTO_HEARD = 's2s_manifesto_heard';
@@ -50,8 +67,18 @@ var SESSION_NAMES = {
   10: 'The Full Round'
 };
 
-// Sessions with audio available (session 10 coming soon)
-var AVAILABLE_SESSIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// Sessions with audio available
+var AVAILABLE_SESSIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// Bell timing configuration (in seconds from start)
+// Session 9: 3 rounds x 1 minute each = 6 bells total
+//   - Start R1 (0s), End R1 (60s), Start R2 (60.5s), End R2 (120s), Start R3 (120.5s), End R3 (180s)
+// Session 10: 1 round x 3 minutes = 2 bells total
+//   - Start (0s), End (180s)
+var BELL_TIMES = {
+  9: [0, 60, 60.5, 120, 120.5, 180],  // 6 bells: double-tap at round transitions
+  10: [0, 180]  // 2 bells: start and end of 3-minute round
+};
 
 // Current session being played
 var currentSession = null;
@@ -74,8 +101,17 @@ function padSessionNum(num) {
   return num < 10 ? '0' + num : '' + num;
 }
 
-function getSessionAudioPath(sessionNum) {
-  return '/audio/session' + padSessionNum(sessionNum) + '.final.mp3';
+// Audio paths - now using Golden_Box
+function getVoicePath(sessionNum) {
+  return '/audio/Golden_Box/s' + sessionNum + 'draft.mp3';
+}
+
+function getMusicPath(sessionNum) {
+  return '/audio/Golden_Box/session-' + padSessionNum(sessionNum) + '-music.mp3';
+}
+
+function getBellPath() {
+  return '/audio/Golden_Box/bell';
 }
 
 function isSessionAvailable(sessionNum) {
@@ -100,7 +136,6 @@ function showSession1CompleteBlock() {
   var completeBlock = document.getElementById('session1-complete');
   if (completeBlock) {
     completeBlock.classList.remove('hidden');
-    // Scroll to make it visible
     completeBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
@@ -109,6 +144,104 @@ function hideSession1CompleteBlock() {
   var completeBlock = document.getElementById('session1-complete');
   if (completeBlock) {
     completeBlock.classList.add('hidden');
+  }
+}
+
+// ============================================
+// BELL SYSTEM
+// ============================================
+function preloadBell() {
+  if (!bellSound) {
+    bellSound = new Audio(getBellPath());
+    bellSound.preload = 'auto';
+    bellSound.volume = 0.8;
+  }
+}
+
+function playBell() {
+  if (bellSound) {
+    // Clone the audio to allow overlapping plays if needed
+    var bell = bellSound.cloneNode();
+    bell.volume = 0.8;
+    bell.play().catch(function(err) {
+      console.log('Bell play error:', err);
+    });
+  }
+}
+
+function clearBellTimers() {
+  bellTimers.forEach(function(timer) {
+    clearTimeout(timer);
+  });
+  bellTimers = [];
+}
+
+function scheduleBells(sessionNum) {
+  clearBellTimers();
+
+  var times = BELL_TIMES[sessionNum];
+  if (!times || times.length === 0) return;
+
+  console.log('[Bell] Scheduling bells for session ' + sessionNum + ':', times);
+
+  times.forEach(function(time, index) {
+    var timer = setTimeout(function() {
+      console.log('[Bell] Ring! (scheduled at ' + time + 's, bell #' + (index + 1) + ')');
+      playBell();
+    }, time * 1000);
+    bellTimers.push(timer);
+  });
+}
+
+// ============================================
+// MUSIC SYSTEM
+// ============================================
+function createMusicElement(sessionNum) {
+  // Clean up existing music
+  if (musicElement) {
+    musicElement.pause();
+    musicElement.src = '';
+    musicElement = null;
+  }
+
+  musicElement = new Audio(getMusicPath(sessionNum));
+  musicElement.volume = musicVolume;
+  musicElement.loop = true; // Loop music throughout session
+  musicElement.preload = 'auto';
+
+  return musicElement;
+}
+
+function startMusic() {
+  if (musicElement) {
+    musicElement.currentTime = 0;
+    musicElement.play().catch(function(err) {
+      console.log('Music autoplay blocked:', err);
+    });
+  }
+}
+
+function pauseMusic() {
+  if (musicElement) {
+    musicElement.pause();
+  }
+}
+
+function stopMusic() {
+  if (musicElement) {
+    musicElement.pause();
+    musicElement.currentTime = 0;
+  }
+}
+
+function syncMusicToVoice() {
+  // Keep music in sync with voice playback state
+  if (musicElement && audioElement) {
+    if (audioElement.paused) {
+      musicElement.pause();
+    } else {
+      musicElement.play().catch(function() {});
+    }
   }
 }
 
@@ -132,22 +265,8 @@ function updateSessionCards() {
         btn.setAttribute('data-session', num);
         btn.textContent = 'Play';
       }
-      // Status stays "Free"
-    } else if (num === 10) {
-      // Session 10 - Coming Soon (no audio yet)
-      card.classList.add('locked');
-      card.classList.add('coming-soon');
-      if (btn) {
-        btn.disabled = true;
-        btn.textContent = 'Soon';
-      }
-      if (statusEl) {
-        statusEl.textContent = 'Coming Soon';
-        statusEl.classList.remove('session-locked');
-        statusEl.classList.add('session-unlocked');
-      }
     } else if (premium && isSessionAvailable(num)) {
-      // Sessions 2-9 for premium users
+      // Premium users - all available sessions unlocked
       card.classList.remove('locked');
       card.classList.remove('coming-soon');
       if (btn) {
@@ -161,7 +280,7 @@ function updateSessionCards() {
         statusEl.classList.add('session-unlocked');
       }
     } else {
-      // Sessions 2-9 for non-premium users - LOCKED
+      // Non-premium users - LOCKED
       card.classList.add('locked');
       card.classList.remove('coming-soon');
       if (btn) {
@@ -222,7 +341,6 @@ function initManifesto() {
         isManifestoPlaying = false;
         btnManifesto.innerHTML = '<span class="manifesto-icon">&#9654;</span><span class="manifesto-label">Play Manifesto</span>';
         manifestoStatus.textContent = 'Ready to train? Hit Play Session 1.';
-        // Mark as heard
         localStorage.setItem(STORAGE_KEY_MANIFESTO_HEARD, 'true');
       });
 
@@ -258,16 +376,30 @@ function showPlayer(sessionNum) {
     if (manifestoStatus) manifestoStatus.textContent = '';
   }
 
+  // Clear any existing bell timers
+  clearBellTimers();
+
+  // Stop any existing music
+  stopMusic();
+
   currentSession = sessionNum;
 
   // Update UI
   sessionNumber.textContent = sessionNum;
   sessionTitle.textContent = SESSION_NAMES[sessionNum] || 'Session ' + sessionNum;
 
-  // Load audio for the selected session
-  var audioSrc = getSessionAudioPath(sessionNum);
-  audioElement.src = audioSrc;
+  // Load voice audio from Golden_Box
+  var voiceSrc = getVoicePath(sessionNum);
+  console.log('[Player] Loading voice:', voiceSrc);
+  audioElement.src = voiceSrc;
   audioElement.load();
+
+  // Create music element for this session
+  createMusicElement(sessionNum);
+  console.log('[Player] Loading music:', getMusicPath(sessionNum));
+
+  // Preload bell sound
+  preloadBell();
 
   // Reset UI
   progressBar.value = 0;
@@ -279,7 +411,14 @@ function showPlayer(sessionNum) {
   player.classList.remove('hidden');
 
   // Auto-play
-  audioElement.play().catch(function(err) {
+  audioElement.play().then(function() {
+    // Start music when voice starts
+    startMusic();
+    // Schedule bells for sessions 9 and 10
+    if (sessionNum === 9 || sessionNum === 10) {
+      scheduleBells(sessionNum);
+    }
+  }).catch(function(err) {
     console.log('Auto-play blocked:', err);
   });
 }
@@ -287,25 +426,61 @@ function showPlayer(sessionNum) {
 function hidePlayer() {
   audioElement.pause();
   audioElement.currentTime = 0;
+  stopMusic();
+  clearBellTimers();
   player.classList.add('hidden');
   currentSession = null;
 }
 
 function togglePlayPause() {
   if (audioElement.paused) {
-    audioElement.play();
+    audioElement.play().then(function() {
+      startMusic();
+      // Reschedule bells from current position if session 9 or 10
+      if (currentSession === 9 || currentSession === 10) {
+        rescheduleRemainingBells();
+      }
+    });
   } else {
     audioElement.pause();
+    pauseMusic();
+    clearBellTimers(); // Clear timers when paused
   }
+}
+
+function rescheduleRemainingBells() {
+  clearBellTimers();
+
+  var times = BELL_TIMES[currentSession];
+  if (!times) return;
+
+  var currentTime = audioElement.currentTime;
+
+  times.forEach(function(time, index) {
+    if (time > currentTime) {
+      var delay = (time - currentTime) * 1000;
+      var timer = setTimeout(function() {
+        console.log('[Bell] Ring! (rescheduled, bell #' + (index + 1) + ')');
+        playBell();
+      }, delay);
+      bellTimers.push(timer);
+    }
+  });
 }
 
 function skipBack15() {
   audioElement.currentTime = Math.max(0, audioElement.currentTime - 15);
+  // Reschedule bells after seeking
+  if ((currentSession === 9 || currentSession === 10) && !audioElement.paused) {
+    rescheduleRemainingBells();
+  }
 }
 
 function stopAudio() {
   audioElement.pause();
   audioElement.currentTime = 0;
+  stopMusic();
+  clearBellTimers();
   playpauseIcon.innerHTML = '&#9654;';
 }
 
@@ -324,16 +499,26 @@ audioElement.addEventListener('timeupdate', function() {
 
 audioElement.addEventListener('play', function() {
   playpauseIcon.innerHTML = '&#10074;&#10074;';
+  // Ensure music is playing when voice plays
+  if (musicElement && musicElement.paused) {
+    musicElement.play().catch(function() {});
+  }
 });
 
 audioElement.addEventListener('pause', function() {
   playpauseIcon.innerHTML = '&#9654;';
+  // Pause music when voice pauses
+  pauseMusic();
 });
 
 audioElement.addEventListener('ended', function() {
   playpauseIcon.innerHTML = '&#9654;';
   progressBar.value = 0;
   currentTimeEl.textContent = '0:00';
+
+  // Stop music and clear bells
+  stopMusic();
+  clearBellTimers();
 
   // Mark session as complete
   if (currentSession) {
@@ -349,6 +534,10 @@ audioElement.addEventListener('ended', function() {
 // Progress bar scrubbing
 progressBar.addEventListener('input', function() {
   audioElement.currentTime = progressBar.value;
+  // Reschedule bells after seeking
+  if ((currentSession === 9 || currentSession === 10) && !audioElement.paused) {
+    rescheduleRemainingBells();
+  }
 });
 
 // ============================================
@@ -397,7 +586,6 @@ function checkPaymentSuccess() {
     window.history.replaceState({}, document.title, window.location.pathname);
     // Update UI
     updateSessionCards();
-    // Show success message (optional)
     console.log('Payment successful! All sessions unlocked.');
   }
 }
@@ -408,3 +596,6 @@ function checkPaymentSuccess() {
 checkPaymentSuccess();
 initManifesto();
 updateSessionCards();
+preloadBell(); // Preload bell sound on page load
+
+console.log('[S2S Player] Initialized - Golden Box audio system active');
