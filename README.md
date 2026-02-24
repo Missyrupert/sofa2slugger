@@ -1,16 +1,5 @@
-# UI Playground Branch
+# Sofa2Slugger - Static Site Archive
 
-**WARNING: EXPERIMENTAL BRANCH**
+This branch contains the original static HTML version.
 
-This branch (`ui-playground`) is for UI and visual experimentation only.
-
-## Rules
-1. **Audio Integrity**: Do NOT modify, delete, or rename any files in `/public/audio`.
-2. **Logic Protection**: Do NOT modify audio processing scripts, session ordering, or playback logic (e.g., `player.js` core logic).
-3. **Source of Truth**: The `master` branch remains the canonical source of truth for the product.
-
-## Purpose
-Use this branch to iterate on CSS, layout, typography, and visual components without risking the stability of the core playback experience.
-
-## Session 1 Locked Mode
-This workspace is currently locked to Session 1 as the canonical playback experience. See `SESSION1_LOCK.md` for details and constraints (do not run or rely on audio generation scripts; do not modify `public/audio/`).
+The live site deploys from the 'clean' branch (Next.js app).
