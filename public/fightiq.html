@@ -6,159 +6,132 @@
   <meta name=viewport content=width=device-width, initial-scale=1.0>
   <title>Fight IQ - Sofa2Slugger</title>
   <link rel=stylesheet href=assets/css/app.css>
+  <style>
+    .fightiq-movements {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+    }
+
+    .fightiq-block video {
+      width: 100%;
+      display: block;
+      margin-bottom: var(--space-md);
+    }
+
+    .fightiq-mac {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: var(--space-sm);
+    }
+
+    .fightiq-insight {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-bottom: 0;
+      max-width: 100%;
+    }
+  </style>
 </head>
 
 <body>
   <main class=fightiq-page>
     <a href=index.html class=back>&larr; Back</a>
     <h1>Fight IQ</h1>
-    <p class=subtitle>The language of boxing</p>
-    <div class=glossary>
-      <!-- OFFENCE -->
-      <div class="term-group">
-        <span class="iq-category">Offensive Tools</span>
+    <div class=fightiq-movements>
 
-        <div class="term-card">
-          <h3 class="term-name">Jab</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>A quick, straight punch thrown with your lead hand. The first punch you learn and the last one you
-              master.</p>
-          </div>
-          <div class="term-section"><span class="term-label">Why</span>
-            <p>The jab sets everything up. It measures distance, disrupts rhythm, and creates openings for power shots.
-            </p>
-          </div>
-          <div class="term-section"><span class="term-label">How</span>
-            <p>Think of flicking a wet towel. The power comes from the snap, not the wind-up. Extend fast, retract
-              faster.</p>
-          </div>
-        </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-stance-orthodox.mp4></video>
+        <p class=fightiq-mac>Feet staggered, left forward. Weight even. Hold—no fidgeting.</p>
+        <p class=fightiq-insight>Bad stance and you're hittable before you throw.<br>You're buying range with position, not speed.</p>
+      </section>
 
-        <div class="term-card">
-          <h3 class="term-name">Cross</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>A straight power punch with your rear hand, rotating hips and shoulders through the target.</p>
-          </div>
-          <div class="term-section"><span class=term-label>Why</span>
-            <p>This is your hammer. While the jab probes, the cross punishes. The punch that ends exchanges.</p>
-          </div>
-          <div class="term-section"><span class="term-label">How</span>
-            <p>Imagine pushing a heavy door with your whole body. Back foot pivots, hip turns, shoulder follows. Power
-              from the ground up.</p>
-          </div>
-        </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-stance-southpaw.mp4></video>
+        <p class=fightiq-mac>Right foot leads. Same length, same guard—don't square the chest.</p>
+        <p class=fightiq-insight>They have to remap angles and leads mid-fight.<br>Outside foot isn't style—it's who owns the line.</p>
+      </section>
 
-        <div class="term-card">
-          <h3 class="term-name">Hook</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>A curved punch in a horizontal arc, targeting the side of head or body.</p>
-          </div>
-          <div class="term-section"><span class="term-label">Why</span>
-            <p>Hooks attack angles straight punches cannot reach. They come from the blind spot.</p>
-          </div>
-          <div class="term-section"><span class="term-label">How</span>
-            <p>Imagine slamming a door shut with your whole body behind it. Your arm stays bent, elbow locked at 90
-              degrees. The power comes from your hips snapping round, not your arm swinging.</p>
-          </div>
-        </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-guard-orthodox.mp4></video>
+        <p class=fightiq-mac>Hands at the jaw. Elbows covering ribs. Chin down. Stay still.</p>
+        <p class=fightiq-insight>Flared elbows leave the jaw on a rail.<br>This is what makes their first shot cost something.</p>
+      </section>
 
-        <div class="term-card">
-          <h3 class="term-name">Uppercut</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>A vertical punch driven upward, targeting chin or body at close range.</p>
-          </div>
-          <div class="term-section"><span class="term-label">Why</span>
-            <p>When the straight line is blocked, you go under. Exploits the gap between elbows.</p>
-          </div>
-          <div class="term-section"><span class="term-label">How</span>
-            <p>Drop hand, bend knees, drive up. Legs do the work. Standing up fast with fist in the way.</p>
-          </div>
-        </div>
-      </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-guard-southpaw.mp4></video>
+        <p class=fightiq-mac>Lead arm frames the face. Rear hand high. Nothing drifting forward.</p>
+        <p class=fightiq-insight>A lazy lead side is a free lane for their rear hand.<br>Structure beats hoping their straight misses.</p>
+      </section>
 
-      <!-- DEFENCE -->
-      <div class="term-group">
-        <span class="iq-category">Defensive Structure</span>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-punch-jab.mp4></video>
+        <p class=fightiq-mac>Extend the lead straight, full return. No telegraph, no lean.</p>
+        <p class=fightiq-insight>If something keeps snapping their face, they can't set their feet.<br>You buy the half-beat for everything else.</p>
+      </section>
 
-        <div class="term-card">
-          <h3 class="term-name">Stance</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>Your foundational position. Feet placement, weight distribution, where hands live.</p>
-          </div>
-          <div class="term-section"><span class="term-label">Why</span>
-            <p>Everything starts here. Weak stance means weak punches and easy knockdowns.</p>
-          </div>
-          <div class="term-section"><span class="term-label">How</span>
-            <p>Feet shoulder-width, staggered. Knees soft. Like standing on a surfboard - stable but ready.</p>
-          </div>
-        </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-punch-cross.mp4></video>
+        <p class=fightiq-mac>Rear fist in one line: back heel, hip, shoulder through.</p>
+        <p class=fightiq-insight>Arm-only crosses land; body crosses move people.<br>That's how you punish someone still squared in front of you.</p>
+      </section>
 
-        <div class="term-card">
-          <h3 class="term-name">Guard</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>Defensive hand position protecting head and body when not throwing.</p>
-          </div>
-          <div class="term-section"><span class="term-label">Why</span>
-            <p>Offence gets glory but defence keeps you fighting. Your guard is your seatbelt.</p>
-          </div>
-          <div class="term-section"><span class="term-label">How</span>
-            <p>Hands by cheekbones, elbows tucked. Chin down, eyes up. Like holding phones to your ears.</p>
-          </div>
-        </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-punch-hook-lead.mp4></video>
+        <p class=fightiq-mac>Elbow at height, short arc. Turn the core—don't loop wide.</p>
+        <p class=fightiq-insight>Straights own the middle; hooks eat the blind side.<br>They shell forward and forget what's beside them.</p>
+      </section>
 
-        <div class="term-card">
-          <h3 class="term-name">Slip</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>Head movement off centre line, letting punches pass by instead of through.</p>
-          </div>
-          <div class="term-section"><span class="term-label>Why</span><p>Blocking absorbs damage. Slipping avoids it and sets up your counter.</p></div>
-          <div class=" term-section"><span class="term-label">How</span>
-              <p>Bend at waist, not knees. Two inches is a mile. Small movements, eyes on target.</p>
-          </div>
-        </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-punch-hook-rear.mp4></video>
+        <p class=fightiq-mac>Shift weight in, hook tight. Same level in, same level out.</p>
+        <p class=fightiq-insight>When they're leaning or turning away, the rear hook is there.<br>Wide swings feed counters—short ones don't.</p>
+      </section>
 
-        <div class="term-card">
-          <h3 class="term-name">Roll</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>Bend and rotate to let hooks pass over your head or shoulder.</p>
-          </div>
-          <div class="term-section"><span class="term-label>Why</span><p>Hooks come from the side. Rolling takes you under and back up ready to fire.</p></div>
-          <div class=" term-section"><span class="term-label">How</span>
-              <p>Duck under a clothesline while walking forward. A U-shape, not straight down-and-up.</p>
-          </div>
-        </div>
-      </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-punch-uppercut-lead.mp4></video>
+        <p class=fightiq-mac>Drop the level slightly, drive up the channel between the arms.</p>
+        <p class=fightiq-insight>Chin floats when they're tired or stuck high.<br>Elbows wide opens the middle—meet it from below.</p>
+      </section>
 
-      <!-- GENERALSHIP -->
-      <div class="term-group">
-        <span class="iq-category">Ring Generalship</span>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-punch-uppercut-rear.mp4></video>
+        <p class=fightiq-mac>Load the back leg, punch vertical through the pocket.</p>
+        <p class=fightiq-insight>Same gap as the lead—more mass behind it.<br>That's the shot when they're dipping square onto you.</p>
+      </section>
 
-        <div class="term-card">
-          <h3 class="term-name">Footwork</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>How you move. Stepping, pivoting, cutting angles while staying balanced.</p>
-          </div>
-          <div class="term-section"><span class="term-label">Why</span>
-            <p>Feet set up everything. Good footwork puts you in range to land, out of range to get hit.</p>
-          </div>
-          <div class="term-section"><span class="term-label">How</span>
-            <p>Push, do not step. Never cross feet. Think sliding on ice - smooth, balanced, controlled.</p>
-          </div>
-        </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-defense-slip-left.mp4></video>
+        <p class=fightiq-mac>Waist left, chin off centre. Small shift—keep your eyes on them.</p>
+        <p class=fightiq-insight>You didn't block—you left the address they punched.<br>Their line is empty; your feet are still under you.</p>
+      </section>
 
-        <div class="term-card">
-          <h3 class="term-name">Range</h3>
-          <div class="term-section"><span class="term-label">What</span>
-            <p>Distance between you and target. Long, mid, and close range have different tools.</p>
-          </div>
-          <div class="term-section"><span class="term-label">Why</span>
-            <p>Punches only work at specific distances. Knowing range means knowing which weapon to use.</p>
-          </div>
-          <div class="term-section"><span class="term-label">How</span>
-            <p>Jab is your measuring stick. Fully extended is long range. Bent arm is closer.</p>
-          </div>
-        </div>
-      </div>
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-defense-slip-right.mp4></video>
+        <p class=fightiq-mac>Clear right off the jab lane. Minimal—don't dive.</p>
+        <p class=fightiq-insight>What they aimed down the middle clips nothing.<br>You stay balanced—counter's already loaded.</p>
+      </section>
+
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-defense-roll.mp4></video>
+        <p class=fightiq-mac>Roll under the arc, then reset—U-shape, not a collapse.</p>
+        <p class=fightiq-insight>High guard doesn't delete hooks; changing level does.<br>You come up where their next punch isn't set.</p>
+      </section>
+
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-defense-slip-roll.mp4></video>
+        <p class=fightiq-mac>Slip into the roll—one motion, back to stance.</p>
+        <p class=fightiq-insight>One move beats one punch; the chain beats bursts.<br>You're gone before the second shot of the combo tracks.</p>
+      </section>
+
+      <section class=fightiq-block>
+        <video controls playsinline preload=metadata src=videos/movements/s2s-defense-parry.mp4></video>
+        <p class=fightiq-mac>Deflect the wrist offline—tap and angle, don't paw or chase.</p>
+        <p class=fightiq-insight>You bent their line; they're extended, you aren't.<br>That inch is the difference between eating and answering.</p>
+      </section>
+
     </div>
   </main>
 </body>
