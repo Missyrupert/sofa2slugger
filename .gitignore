@@ -1,0 +1,12 @@
+node_modules/
+apps/web/node_modules/
+.next/
+apps/web/.next/
+.netlify/
+apps/web/.netlify/
+.env
+.env.local
+.env.*.local
+*.log
+*.tsbuildinfo
+deploy-*.zip
