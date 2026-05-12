@@ -216,7 +216,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
             cy={RING_SIZE / 2}
             r={RING_R}
             fill="none"
-            stroke="#c7563f"
+            stroke="var(--slugger-brass)"
             strokeWidth={RING_STROKE}
             strokeLinecap="round"
             strokeDasharray={RING_CIRCUMFERENCE}
@@ -228,7 +228,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
           type="button"
           onClick={togglePlay}
           aria-label={playing ? "Pause" : "Play"}
-          className="slugger-phone-pulse absolute flex h-24 w-24 items-center justify-center bg-[#c7563f] text-[#fbf3e7] shadow-2xl shadow-[#c7563f]/25 transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#fbf3e7] focus:ring-offset-2 focus:ring-offset-[#11100e]"
+          className="slugger-phone-pulse absolute flex h-24 w-24 items-center justify-center bg-[var(--slugger-brass)] text-[var(--slugger-bone)] shadow-2xl shadow-[var(--slugger-brass)]/25 transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--slugger-bone)] focus:ring-offset-2 focus:ring-offset-[var(--slugger-ink)]"
         >
           {playing ? (
             <Pause className="h-10 w-10" strokeWidth={2.5} />
@@ -247,7 +247,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
           type="button"
           onClick={seekBack}
           aria-label="Rewind 15 seconds"
-          className="flex h-12 w-12 items-center justify-center border border-white/15 bg-white/8 text-white/70 transition hover:bg-[#fbf3e7] hover:text-[#11100e]"
+          className="flex h-12 w-12 items-center justify-center border border-white/15 bg-white/8 text-white/70 transition hover:bg-[var(--slugger-bone)] hover:text-[var(--slugger-ink)]"
         >
           <RotateCcw className="h-5 w-5" strokeWidth={2} />
         </button>
@@ -255,7 +255,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
           type="button"
           onClick={seekForward}
           aria-label="Forward 15 seconds"
-          className="flex h-12 w-12 items-center justify-center border border-white/15 bg-white/8 text-white/70 transition hover:bg-[#fbf3e7] hover:text-[#11100e]"
+          className="flex h-12 w-12 items-center justify-center border border-white/15 bg-white/8 text-white/70 transition hover:bg-[var(--slugger-bone)] hover:text-[var(--slugger-ink)]"
         >
           <RotateCw className="h-5 w-5" strokeWidth={2} />
         </button>
@@ -274,7 +274,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
             aria-pressed={playbackRate === rate}
             className={`h-9 min-w-14 px-3 text-sm font-bold transition ${
               playbackRate === rate
-                ? "bg-[#fbf3e7] text-[#11100e]"
+                ? "bg-[var(--slugger-bone)] text-[var(--slugger-ink)]"
                 : "text-white/65 hover:bg-white/10 hover:text-white"
             }`}
           >
@@ -292,9 +292,9 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
           value={currentTime}
           onChange={handleScrub}
           aria-label="Scrub position"
-          className="h-2 w-full cursor-pointer appearance-none bg-white/10 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-[#fbf3e7]"
+          className="h-2 w-full cursor-pointer appearance-none bg-white/10 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-[var(--slugger-bone)]"
           style={{
-            background: `linear-gradient(to right, #c7563f 0%, #c7563f ${progress}%, rgba(255,255,255,0.12) ${progress}%, rgba(255,255,255,0.12) 100%)`,
+            background: `linear-gradient(to right, var(--slugger-brass) 0%, var(--slugger-brass) ${progress}%, rgba(255,255,255,0.12) ${progress}%, rgba(255,255,255,0.12) 100%)`,
           }}
         />
       </div>

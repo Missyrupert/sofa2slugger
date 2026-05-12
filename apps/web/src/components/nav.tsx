@@ -24,7 +24,7 @@ export function Nav({ variant = "sidebar" }: { variant?: NavVariant }) {
   if (variant === "bottom") {
     return (
       <nav
-        className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#11100e]/15 bg-[#eee5d8]/95 shadow-[0_-12px_36px_rgba(0,0,0,0.12)] backdrop-blur md:hidden"
+        className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--slugger-ink)]/15 bg-[var(--slugger-paper)]/95 shadow-[0_-12px_36px_rgba(0,0,0,0.12)] backdrop-blur md:hidden"
         aria-label="Main navigation"
       >
         <ul className="grid grid-cols-4 px-1 py-2">
@@ -36,8 +36,8 @@ export function Nav({ variant = "sidebar" }: { variant?: NavVariant }) {
                   href={href}
                   className={`flex min-h-14 flex-col items-center justify-center gap-0.5 rounded-md px-2 py-2 text-[11px] font-black uppercase transition ${
                     active
-                      ? "bg-[#11100e] text-[#fbf3e7]"
-                      : "text-[#675f55] hover:bg-black/5 hover:text-[#11100e]"
+                      ? "bg-[var(--slugger-ink)] text-[var(--slugger-bone)]"
+                      : "text-[var(--slugger-muted)] hover:bg-black/5 hover:text-[var(--slugger-ink)]"
                   }`}
                   aria-current={active ? "page" : undefined}
                 >
@@ -65,8 +65,8 @@ export function Nav({ variant = "sidebar" }: { variant?: NavVariant }) {
             href={href}
             className={`flex items-center gap-3 rounded-md px-4 py-3 text-sm font-black uppercase tracking-wide transition ${
               active
-                ? "bg-[#c7563f] text-[#fbf3e7] shadow-lg shadow-[#c7563f]/20"
-                : "text-[#fbf3e7]/60 hover:bg-white/8 hover:text-[#fbf3e7]"
+                ? "bg-[var(--slugger-brass)] text-[var(--slugger-ink)] shadow-lg shadow-black/20"
+                : "text-[var(--slugger-bone)]/60 hover:bg-white/8 hover:text-[var(--slugger-bone)]"
             }`}
             aria-current={active ? "page" : undefined}
           >

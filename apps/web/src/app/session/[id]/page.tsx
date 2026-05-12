@@ -35,10 +35,10 @@ export default function SessionPage() {
   if (!session) {
     return (
       <div className="flex min-h-[70vh] flex-col items-center justify-center gap-4 p-10 text-center">
-        <p className="text-lg font-black uppercase text-[#11100e]">
+        <p className="text-lg font-black uppercase text-[var(--slugger-ink)]">
           Round not found.
         </p>
-        <Link href="/gym" className="font-black uppercase text-[#c7563f]">
+        <Link href="/gym" className="font-black uppercase text-[var(--slugger-brass)]">
           Back to Gym
         </Link>
       </div>
@@ -50,14 +50,14 @@ export default function SessionPage() {
       <section className="slugger-ring flex flex-col px-5 py-6 text-white sm:px-8 lg:px-10">
         <Link
           href="/gym"
-          className="inline-flex w-fit items-center gap-2 border border-white/12 bg-white/8 px-3 py-2 text-sm font-black uppercase tracking-wide text-white/72 transition hover:bg-[#fbf3e7] hover:text-[#11100e]"
+          className="inline-flex w-fit items-center gap-2 border border-white/12 bg-white/8 px-3 py-2 text-sm font-black uppercase tracking-wide text-white/72 transition hover:bg-[var(--slugger-bone)] hover:text-[var(--slugger-ink)]"
         >
           <ArrowLeft className="h-4 w-4" />
           Gym
         </Link>
 
         <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center justify-center py-10 text-center">
-          <p className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-[#f0a086]">
+          <p className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-[var(--slugger-action-hot)]">
             Round {sessionId.toString().padStart(2, "0")} / {SESSIONS.length}
           </p>
           <h1 className="text-balance mt-3 text-4xl font-black uppercase leading-none tracking-tight sm:text-6xl">
@@ -80,14 +80,14 @@ export default function SessionPage() {
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Link
                     href="/gym"
-                    className="bg-[#fbf3e7] px-5 py-3 text-sm font-black uppercase tracking-wide text-[#11100e]"
+                    className="bg-[var(--slugger-bone)] px-5 py-3 text-sm font-black uppercase tracking-wide text-[var(--slugger-ink)]"
                   >
                     Back to Gym
                   </Link>
                   {nextSession && (
                     <Link
                       href={`/session/${nextSession.id}`}
-                      className="bg-[#c7563f] px-5 py-3 text-sm font-black uppercase tracking-wide text-[#fbf3e7]"
+                      className="bg-[var(--slugger-brass)] px-5 py-3 text-sm font-black uppercase tracking-wide text-[var(--slugger-bone)]"
                     >
                       Next round
                     </Link>
@@ -114,7 +114,7 @@ export default function SessionPage() {
                 />
               ) : (
                 <div className="flex flex-col items-center gap-5 py-10 text-center">
-                  <span className="flex h-16 w-16 items-center justify-center bg-[#fbf3e7] text-[#11100e]">
+                  <span className="flex h-16 w-16 items-center justify-center bg-[var(--slugger-bone)] text-[var(--slugger-ink)]">
                     <Headphones className="h-8 w-8" />
                   </span>
                   <div>
@@ -127,7 +127,7 @@ export default function SessionPage() {
                   </div>
                   <Link
                     href="/gym"
-                    className="bg-[#fbf3e7] px-5 py-3 text-sm font-black uppercase tracking-wide text-[#11100e]"
+                    className="bg-[var(--slugger-bone)] px-5 py-3 text-sm font-black uppercase tracking-wide text-[var(--slugger-ink)]"
                   >
                     Back to Gym
                   </Link>
@@ -138,42 +138,42 @@ export default function SessionPage() {
         </div>
       </section>
 
-      <aside className="border-t border-black/10 bg-[#eee5d8] p-5 sm:p-6 lg:border-l lg:border-t-0">
-        <div className="border border-black/10 bg-[#fbf3e7]/78 p-5">
-          <p className="text-xs font-black uppercase text-[#9c4b39]">
+      <aside className="border-t border-black/10 bg-[var(--slugger-paper)] p-5 sm:p-6 lg:border-l lg:border-t-0">
+        <div className="border border-black/10 bg-[var(--slugger-bone)]/78 p-5">
+          <p className="text-xs font-black uppercase text-[var(--slugger-brass)]">
             Round notes
           </p>
           <dl className="mt-4 grid grid-cols-1 gap-3 text-sm">
-            <div className="flex items-center justify-between bg-[#eee5d8] px-3 py-2">
-              <dt className="inline-flex items-center gap-2 font-bold text-[#5f574f]">
+            <div className="flex items-center justify-between bg-[var(--slugger-paper)] px-3 py-2">
+              <dt className="inline-flex items-center gap-2 font-bold text-[var(--slugger-muted)]">
                 <Clock3 className="h-4 w-4" />
                 Duration
               </dt>
-              <dd className="font-black text-[#11100e]">
+              <dd className="font-black text-[var(--slugger-ink)]">
                 {formatDuration(session.durationSec)}
               </dd>
             </div>
-            <div className="flex items-center justify-between bg-[#eee5d8] px-3 py-2">
-              <dt className="inline-flex items-center gap-2 font-bold text-[#5f574f]">
+            <div className="flex items-center justify-between bg-[var(--slugger-paper)] px-3 py-2">
+              <dt className="inline-flex items-center gap-2 font-bold text-[var(--slugger-muted)]">
                 <ListChecks className="h-4 w-4" />
                 Focus
               </dt>
-              <dd className="font-black text-[#11100e]">{session.focus}</dd>
+              <dd className="font-black text-[var(--slugger-ink)]">{session.focus}</dd>
             </div>
           </dl>
-          <div className="mt-4 bg-[#eee5d8] px-3 py-3">
-            <p className="text-xs font-black uppercase text-[#7c7469]">
+          <div className="mt-4 bg-[var(--slugger-paper)] px-3 py-3">
+            <p className="text-xs font-black uppercase text-[var(--slugger-muted)]">
               Cue
             </p>
-            <p className="mt-1 text-sm font-bold text-[#11100e]">
+            <p className="mt-1 text-sm font-bold text-[var(--slugger-ink)]">
               {session.audioCue}
             </p>
           </div>
-          <div className="mt-4 bg-[#eee5d8] px-3 py-3">
-            <p className="text-xs font-black uppercase text-[#7c7469]">
+          <div className="mt-4 bg-[var(--slugger-paper)] px-3 py-3">
+            <p className="text-xs font-black uppercase text-[var(--slugger-muted)]">
               Skills
             </p>
-            <ul className="mt-2 space-y-1 text-sm text-[#5f574f]">
+            <ul className="mt-2 space-y-1 text-sm text-[var(--slugger-muted)]">
               {session.skills.map((skill) => (
                 <li key={skill}>{skill}</li>
               ))}
@@ -181,19 +181,19 @@ export default function SessionPage() {
           </div>
         </div>
 
-        <div className="mt-4 border border-black/10 bg-[#fbf3e7]/78 p-5">
-          <p className="text-xs font-black uppercase text-[#9c4b39]">
+        <div className="mt-4 border border-black/10 bg-[var(--slugger-bone)]/78 p-5">
+          <p className="text-xs font-black uppercase text-[var(--slugger-brass)]">
             Before you press play
           </p>
-          <p className="mt-3 text-sm leading-6 text-[#5f574f]">
+          <p className="mt-3 text-sm leading-6 text-[var(--slugger-muted)]">
             Clear a little space, keep the volume comfortable, and move at the
             pace that lets you stay in control. If you lose the rhythm, pause,
             reset your stance, and start again.
           </p>
         </div>
 
-        <div className="mt-4 border border-black/10 bg-[#fbf3e7]/78 p-5">
-          <p className="text-xs font-black uppercase text-[#9c4b39]">
+        <div className="mt-4 border border-black/10 bg-[var(--slugger-bone)]/78 p-5">
+          <p className="text-xs font-black uppercase text-[var(--slugger-brass)]">
             Program
           </p>
           <div className="mt-4 flex flex-col gap-2">
@@ -203,14 +203,14 @@ export default function SessionPage() {
                 href={`/session/${item.id}`}
                 className={`border px-3 py-3 transition ${
                   item.id === sessionId
-                    ? "border-[#c7563f]/45 bg-[#c7563f]/10"
-                    : "border-black/8 bg-[#eee5d8]/70 hover:bg-white"
+                    ? "border-[var(--slugger-brass)]/45 bg-[var(--slugger-brass)]/10"
+                    : "border-black/8 bg-[var(--slugger-paper)]/70 hover:bg-white"
                 }`}
               >
-                <p className="text-xs font-black uppercase text-[#7c7469]">
+                <p className="text-xs font-black uppercase text-[var(--slugger-muted)]">
                   {item.id.toString().padStart(2, "0")} / {item.intensity}
                 </p>
-                <p className="mt-1 font-black uppercase leading-tight text-[#11100e]">
+                <p className="mt-1 font-black uppercase leading-tight text-[var(--slugger-ink)]">
                   {item.shortTitle}
                 </p>
               </Link>

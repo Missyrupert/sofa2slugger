@@ -1,12 +1,76 @@
-node_modules/
-apps/web/node_modules/
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Build
 .next/
-apps/web/.next/
-.netlify/
+out/
+build/
+
+# Local Netlify folder
+/.netlify
+/.netlify.bak/
 apps/web/.netlify/
+
+# Environment Variables
+# IMPORTANT: Never commit .env.local or .env*.local files.
+# These contain sensitive credentials (API keys, database URLs, etc.)
+# Copy .env.example and fill in your local values instead.
 .env
 .env.local
 .env.*.local
-*.log
-*.tsbuildinfo
+apps/web/.env.local
+
+# Audio files
+# For production: either commit audio files to git (good for <500MB total)
+# or upload to Netlify Blobs via `npm run upload:audio` and use blob URLs
+# Currently: audio files ARE tracked in git (uncommenting below would require Blobs setup)
+# /audio/
+# apps/web/public/audio/
+
+
+# Vercel
+.vercel
+
+# Netlify MCP deploy artifacts
 deploy-*.zip
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+*.job.log
+tree.json
+
+# Local workshop and generated review clutter
+audio-production/
+apps/web/tmp-brand-screens/
+apps/web/public/audio/*.html
+apps/web/public/audio/*review*
+apps/web/public/audio/*prototype*
+apps/web/public/audio/*music-python*
+apps/web/public/audio/*music-bed*
+apps/web/public/audio/*eleven*
+apps/web/public/audio/*openai-narrator*
+
+# Local source workshop files kept on the laptop, not in the deploy repo
+scripts/
+docs/*
+!docs/brand-kit.md
+apps/web/tests/
+apps/web/public/file.svg
+apps/web/public/globe.svg
+apps/web/public/next.svg
+apps/web/public/vercel.svg
+apps/web/public/window.svg
+.env.*.example
+.env.example
+README.md
+SECURITY.md
+STRIPE_KEY_ROTATION.md
+check-stripe-keys.js
+run-preview.cjs
+apps/web/.gitignore
+apps/web/README.md

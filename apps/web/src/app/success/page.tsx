@@ -18,19 +18,19 @@ export default function SuccessPage() {
   }, []);
 
   return (
-    <div className="slugger-ring flex min-h-[70vh] flex-col items-center justify-center gap-6 p-6 text-center text-[#fbf3e7] md:p-10">
+    <div className="slugger-ring flex min-h-[70vh] flex-col items-center justify-center gap-6 p-6 text-center text-[var(--slugger-bone)] md:p-10">
       <CheckCircle className="h-16 w-16 text-[#8dc7a3]" strokeWidth={1.5} />
       <h1 className="text-4xl font-black uppercase tracking-tight">
         All rounds unlocked
       </h1>
-      <p className="max-w-md text-[#d8cbbb]">
+      <p className="max-w-md text-[var(--slugger-panel)]">
         {unlocked
           ? "You now have lifetime access to all 12 rounds. Train whenever you want."
           : "Setting up your access..."}
       </p>
       <Link
         href="/gym"
-        className="mt-4 bg-[#c7563f] px-8 py-4 font-black uppercase tracking-wide text-[#fbf3e7] transition hover:bg-[#f07a55]"
+        className="mt-4 bg-[var(--slugger-brass)] px-8 py-4 font-black uppercase tracking-wide text-[var(--slugger-bone)] transition hover:bg-[var(--slugger-action-hot)]"
       >
         Go to the card
       </Link>

@@ -45,40 +45,40 @@ export function UnlockModal({ onClose }: UnlockModalProps) {
       aria-labelledby="unlock-modal-title"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="relative w-full max-w-md border border-white/10 bg-[#11100e] p-6 text-[#fbf3e7] shadow-2xl">
+      <div className="relative w-full max-w-md border border-white/10 bg-[var(--slugger-ink)] p-6 text-[var(--slugger-bone)] shadow-2xl">
         <button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 text-[#d8cbbb]/60 transition hover:text-[#fbf3e7]"
+          className="absolute right-4 top-4 text-[var(--slugger-panel)]/60 transition hover:text-[var(--slugger-bone)]"
         >
           <X className="h-5 w-5" strokeWidth={2} />
         </button>
         <h2
           id="unlock-modal-title"
-          className="pr-8 text-2xl font-black uppercase tracking-tight text-[#fbf3e7]"
+          className="pr-8 text-2xl font-black uppercase tracking-tight text-[var(--slugger-bone)]"
         >
           Unlock the full course
         </h2>
-        <p className="mt-3 leading-7 text-[#d8cbbb]">
+        <p className="mt-3 leading-7 text-[var(--slugger-panel)]">
           Get lifetime access to all 12 audio shadowboxing rounds. Pay once,
           train forever.
         </p>
-        <ul className="mt-4 space-y-2 text-sm font-semibold text-[#d8cbbb]">
+        <ul className="mt-4 space-y-2 text-sm font-semibold text-[var(--slugger-panel)]">
           <li>12 progressive rounds</li>
           <li>Proper form and technique coaching</li>
           <li>No subscription, no recurring fees</li>
         </ul>
         {error && (
-          <p className="mt-3 text-sm font-bold text-[#f0a086]">{error}</p>
+          <p className="mt-3 text-sm font-bold text-[var(--slugger-action-hot)]">{error}</p>
         )}
         <button
           type="button"
           onClick={handleCheckout}
           disabled={loading}
-          className="mt-6 w-full bg-[#c7563f] py-4 font-black uppercase tracking-wide text-[#fbf3e7] transition hover:bg-[#f07a55] disabled:opacity-50"
+          className="mt-6 w-full bg-[var(--slugger-brass)] py-4 font-black uppercase tracking-wide text-[var(--slugger-bone)] transition hover:bg-[var(--slugger-action-hot)] disabled:opacity-50"
         >
-          {loading ? "Redirecting..." : "Preview unlock"}
+          {loading ? "Redirecting..." : "Unlock for £9.99"}
         </button>
       </div>
     </div>

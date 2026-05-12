@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --slugger-action: #c7563f;
-  --slugger-action-hot: #f07a55;
-  --slugger-ink: #11100e;
-  --slugger-black: #090908;
-  --slugger-charcoal: #1b1a17;
-  --slugger-panel: #d8cbbb;
-  --slugger-paper: #eee5d8;
-  --slugger-bone: #fbf3e7;
-  --slugger-muted: #7c7469;
-  --slugger-signal: #5f7467;
-  --slugger-brass: #c69a5d;
+  --slugger-action: #b8955d;
+  --slugger-action-hot: #d8b06d;
+  --slugger-ink: #101416;
+  --slugger-black: #07090a;
+  --slugger-charcoal: #171c1f;
+  --slugger-panel: #d8cbb6;
+  --slugger-paper: #eee5d5;
+  --slugger-bone: #fbf4e8;
+  --slugger-muted: #70695d;
+  --slugger-signal: #6f837b;
+  --slugger-brass: #b8955d;
+  --slugger-steel: #26383d;
+  --slugger-shadow: #211a14;
 }
 
 @theme inline {
@@ -35,9 +37,9 @@ body {
   color: var(--slugger-ink);
   font-family: Inter, Arial, ui-sans-serif, system-ui, sans-serif;
   background:
-    radial-gradient(circle at 18% 8%, rgba(199, 86, 63, 0.18), transparent 30%),
-    radial-gradient(circle at 84% 16%, rgba(198, 154, 93, 0.10), transparent 28%),
-    linear-gradient(135deg, #090908 0%, #171512 52%, #0b0b0a 100%);
+    radial-gradient(circle at 18% 8%, rgba(184, 149, 93, 0.16), transparent 30%),
+    radial-gradient(circle at 84% 16%, rgba(111, 131, 123, 0.12), transparent 28%),
+    linear-gradient(135deg, #07090a 0%, #171c1f 48%, #211a14 100%);
 }
 
 body::before {
@@ -51,9 +53,9 @@ body::before {
 
 .slugger-ring {
   background:
-    radial-gradient(circle at 18% 18%, rgba(240, 122, 85, 0.24), transparent 26%),
-    radial-gradient(circle at 78% 72%, rgba(95, 116, 103, 0.18), transparent 34%),
-    linear-gradient(135deg, #27231d, #11100e 58%, #2b1712);
+    radial-gradient(circle at 16% 18%, rgba(184, 149, 93, 0.2), transparent 26%),
+    radial-gradient(circle at 78% 72%, rgba(111, 131, 123, 0.18), transparent 34%),
+    linear-gradient(135deg, #26383d, #101416 56%, #211a14);
 }
 
 .slugger-ring-lines {
@@ -80,7 +82,7 @@ body::before {
 .slugger-glow {
   box-shadow:
     0 0 0 1px rgba(251, 243, 231, 0.08),
-    0 0 28px rgba(199, 86, 63, 0.34),
+    0 0 28px rgba(184, 149, 93, 0.28),
     0 18px 70px rgba(9, 9, 8, 0.42);
 }
 
@@ -91,12 +93,106 @@ body::before {
 @keyframes slugger-phone-pulse {
   0%,
   100% {
-    box-shadow: 0 0 18px rgba(199, 86, 63, 0.35);
+    box-shadow: 0 0 18px rgba(184, 149, 93, 0.32);
     transform: translateY(0);
   }
   50% {
-    box-shadow: 0 0 34px rgba(240, 122, 85, 0.56);
+    box-shadow: 0 0 34px rgba(216, 176, 109, 0.5);
     transform: translateY(-1px);
+  }
+}
+
+.slugger-two-card {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0.78em;
+  padding: 0.04em 0.11em 0.08em;
+  color: var(--slugger-ink);
+  background:
+    linear-gradient(135deg, rgba(251, 244, 232, 0.94), rgba(216, 203, 182, 0.92)),
+    var(--slugger-bone);
+  border: 2px solid rgba(184, 149, 93, 0.72);
+  box-shadow:
+    0.08em 0.08em 0 rgba(184, 149, 93, 0.88),
+    0 0 32px rgba(184, 149, 93, 0.24);
+  transform: rotate(-2deg);
+}
+
+.slugger-two-card::before {
+  content: "";
+  position: absolute;
+  top: 0.08em;
+  left: 50%;
+  width: 0.4em;
+  height: 0.05em;
+  border-radius: 999px;
+  background: rgba(16, 20, 22, 0.82);
+  transform: translateX(-50%);
+}
+
+.slugger-two-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--slugger-ink);
+  background:
+    linear-gradient(135deg, rgba(251, 244, 232, 0.96), rgba(216, 203, 182, 0.92)),
+    var(--slugger-bone);
+  border: 1px solid rgba(184, 149, 93, 0.74);
+  box-shadow: 3px 3px 0 rgba(184, 149, 93, 0.86);
+}
+
+.slugger-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 54%, rgba(184, 149, 93, 0.16), transparent 24%),
+    linear-gradient(135deg, #07090a, #101416 52%, #211a14);
+  pointer-events: none;
+  animation: slugger-splash-out 4s ease forwards;
+}
+
+.slugger-splash-card {
+  width: min(86vw, 560px);
+  border: 1px solid rgba(251, 244, 232, 0.16);
+  padding: 48px 36px;
+  text-align: center;
+  background: rgba(7, 9, 10, 0.56);
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.42);
+  animation: slugger-splash-card 4s ease forwards;
+}
+
+@keyframes slugger-splash-out {
+  0%,
+  72% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes slugger-splash-card {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  18%,
+  70% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.99);
   }
 }
 
@@ -105,5 +201,5 @@ body::before {
 }
 
 ::selection {
-  background: rgba(184, 91, 66, 0.35);
+  background: rgba(184, 149, 93, 0.35);
 }
