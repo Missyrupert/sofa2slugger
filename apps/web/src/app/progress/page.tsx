@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Circle, Play, Trophy } from "lucide-react";
+import { RoundFeedbackForm } from "@/components/round-feedback-form";
 import { SESSIONS } from "@/lib/sessions";
 import { getCompletedSessions, getSessionProgress } from "@/lib/storage";
 
@@ -19,7 +20,9 @@ export default function ProgressPage() {
   }, []);
 
   const nextSession = SESSIONS.find((s) => !completed.includes(s.id));
-  const percent = mounted ? Math.round((completed.length / SESSIONS.length) * 100) : 0;
+  const percent = mounted
+    ? Math.round((completed.length / SESSIONS.length) * 100)
+    : 0;
 
   return (
     <div className="bg-[var(--slugger-paper)] px-5 py-8 text-[var(--slugger-ink)] sm:px-8 lg:px-10">
@@ -115,6 +118,12 @@ export default function ProgressPage() {
           </div>
         </section>
       </div>
+
+      {mounted && completed.length > 0 && (
+        <div className="mt-6">
+          <RoundFeedbackForm defaultRound={completed[completed.length - 1]} />
+        </div>
+      )}
     </div>
   );
 }

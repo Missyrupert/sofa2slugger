@@ -34,14 +34,14 @@ export function Nav({ variant = "sidebar" }: { variant?: NavVariant }) {
               <li key={href}>
                 <Link
                   href={href}
-                  className={`flex min-h-14 flex-col items-center justify-center gap-0.5 rounded-md px-2 py-2 text-[11px] font-black uppercase transition ${
+                  className={`flex min-h-14 flex-col items-center justify-center gap-0.5 rounded-md px-1 py-2 text-[10px] font-black uppercase transition ${
                     active
                       ? "bg-[var(--slugger-ink)] text-[var(--slugger-bone)]"
                       : "text-[var(--slugger-muted)] hover:bg-black/5 hover:text-[var(--slugger-ink)]"
                   }`}
                   aria-current={active ? "page" : undefined}
                 >
-                  <Icon className="h-6 w-6" strokeWidth={2} />
+                  <Icon className="h-5 w-5" strokeWidth={2} />
                   <span>{label}</span>
                 </Link>
               </li>

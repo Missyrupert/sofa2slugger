@@ -47,6 +47,7 @@ tree.json
 # Local workshop and generated review clutter
 audio-production/
 apps/web/tmp-brand-screens/
+apps/web/tmp-mobile-check/
 apps/web/public/audio/*.html
 apps/web/public/audio/*review*
 apps/web/public/audio/*prototype*
