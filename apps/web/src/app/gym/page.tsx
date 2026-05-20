@@ -71,7 +71,21 @@ export default function GymPage() {
               <p className="mt-4 text-sm leading-6 text-[var(--slugger-muted)]">
                 The screen is only the doorway. The work happens in your ears and your feet.
               </p>
-                <div className="mt-6 grid grid-cols-3 border-y border-[var(--slugger-ink)]/12 py-4 text-center">
+              <div className="mt-5 border border-[var(--slugger-ink)]/12 bg-[var(--slugger-bone)] p-3">
+                <p className="text-xs font-black uppercase tracking-wide text-[var(--slugger-brass)]">
+                  Start here
+                </p>
+                <p className="mt-1 text-sm font-bold leading-5 text-[var(--slugger-muted)]">
+                  Listen to the course intro before Round 1 if this is your first visit.
+                </p>
+                <audio
+                  controls
+                  preload="metadata"
+                  src="/audio/course-intro.chill-ska-warm-6x.mp3"
+                  className="mt-3 w-full"
+                />
+              </div>
+              <div className="mt-6 grid grid-cols-3 border-y border-[var(--slugger-ink)]/12 py-4 text-center">
                 <Metric value="1" label="Free" />
                 <Metric value="12" label="Rounds" />
                 <Metric value="0" label="Kit" />

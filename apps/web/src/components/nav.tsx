@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Dumbbell, BarChart3, HelpCircle, Home, ClipboardCheck } from "lucide-react";
+import { Dumbbell, BarChart3, HelpCircle, Home } from "lucide-react";
 
 const MAIN_NAV_ITEMS = [
   { href: "/", label: "Home", icon: Home },
   { href: "/gym", label: "Gym", icon: Dumbbell },
   { href: "/progress", label: "Progress", icon: BarChart3 },
-  { href: "/round-review", label: "Review", icon: ClipboardCheck },
   { href: "/corner", label: "Corner", icon: HelpCircle },
 ] as const;
 
@@ -28,7 +27,7 @@ export function Nav({ variant = "sidebar" }: { variant?: NavVariant }) {
         className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--slugger-ink)]/15 bg-[var(--slugger-paper)]/95 shadow-[0_-12px_36px_rgba(0,0,0,0.12)] backdrop-blur md:hidden"
         aria-label="Main navigation"
       >
-        <ul className="grid grid-cols-5 px-1 py-2">
+        <ul className="grid grid-cols-4 px-1 py-2">
           {MAIN_NAV_ITEMS.map(({ href, label, icon: Icon }) => {
             const active = isActive(href, pathname);
             return (

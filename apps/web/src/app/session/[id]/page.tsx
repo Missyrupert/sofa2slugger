@@ -172,6 +172,23 @@ export default function SessionPage() {
           </div>
 
           <aside className="grid gap-4">
+            {sessionId === 1 && (
+              <div className="border-t border-[var(--slugger-ink)]/16 pt-5">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--slugger-brass)]">
+                  Course intro
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[var(--slugger-muted)]">
+                  New here? Let the narrator set the frame before the coach starts the base.
+                </p>
+                <audio
+                  controls
+                  preload="metadata"
+                  src="/audio/course-intro.chill-ska-warm-6x.mp3"
+                  className="mt-3 w-full"
+                />
+              </div>
+            )}
+
             <div className="border-t border-[var(--slugger-ink)]/16 pt-5">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--slugger-brass)]">
                 Before play
