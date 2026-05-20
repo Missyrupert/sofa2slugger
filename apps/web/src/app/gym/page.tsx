@@ -29,7 +29,7 @@ export default function GymPage() {
   }, []);
 
   return (
-    <div className="bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
+    <div className="max-w-full overflow-x-hidden bg-[var(--slugger-paper)] pb-8 text-[var(--slugger-ink)] md:pb-0">
       <section className="border-b border-[var(--slugger-ink)]/12 bg-[var(--slugger-bone)] px-5 py-10 sm:px-8 lg:px-12">
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_380px] lg:items-end">
           <div>
@@ -37,7 +37,7 @@ export default function GymPage() {
               <ShieldCheck className="h-4 w-4" />
               Your course
             </p>
-            <h1 className="mt-4 max-w-4xl text-5xl font-black uppercase leading-[0.88] sm:text-7xl">
+            <h1 className="mt-4 max-w-full break-words text-4xl font-black uppercase leading-[0.92] sm:max-w-4xl sm:text-5xl lg:text-6xl">
               Start with the base. Build the round.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--slugger-muted)]">

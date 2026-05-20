@@ -42,8 +42,8 @@ const principles = [
 
 export default function HomePage() {
   return (
-    <div className="bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
-      <section className="relative min-h-[calc(100vh-96px)] overflow-hidden bg-[var(--slugger-black)] text-[var(--slugger-bone)]">
+    <div className="max-w-full overflow-x-hidden bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
+      <section className="relative min-h-[min(100vh,900px)] overflow-hidden bg-[var(--slugger-black)] text-[var(--slugger-bone)]">
         <Image
           src="/images/hero-sofa-to-slugger-v1.png"
           alt="A person sitting on a sofa with boxing wraps nearby and a phone on the floor."
@@ -55,13 +55,13 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/76 via-black/56 to-black/18" />
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[var(--slugger-black)] to-transparent" />
 
-        <div className="relative flex min-h-[calc(100vh-96px)] items-end px-5 py-8 sm:px-8 lg:px-12">
-          <div className="w-full max-w-5xl pb-4 lg:pb-10">
+        <div className="relative flex min-h-[min(100vh,900px)] items-end px-5 py-8 sm:px-8 lg:px-12">
+          <div className="w-full max-w-full pb-4 sm:max-w-5xl lg:pb-10">
             <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[var(--slugger-action-hot)]">
               <ShieldCheck className="h-4 w-4" />
               No gym. No bag. No audience.
             </p>
-            <h1 className="mt-5 max-w-4xl text-5xl font-black uppercase leading-[0.86] tracking-normal sm:text-7xl lg:text-8xl">
+            <h1 className="slugger-hero-title mt-5 max-w-full font-black uppercase tracking-normal">
               Sofa2Slugger
             </h1>
             <p className="mt-6 max-w-2xl text-xl font-black leading-8 text-[var(--slugger-bone)] sm:text-3xl sm:leading-10">

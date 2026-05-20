@@ -149,6 +149,14 @@ body::before {
   text-wrap: balance;
 }
 
+.slugger-hero-title {
+  font-size: clamp(2.25rem, 7vw + 0.25rem, 5.5rem);
+  line-height: 0.95;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 ::selection {
   background: rgba(184, 149, 93, 0.35);
 }
