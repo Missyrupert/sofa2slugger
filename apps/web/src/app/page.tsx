@@ -31,37 +31,24 @@ const journey = [
 
 export default function HomePage() {
   return (
-    <div className="bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
-      <div className="slugger-splash" aria-hidden>
-        <div className="slugger-splash-card">
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-[var(--slugger-action-hot)]">
-            Sofa2Slugger
-          </p>
-          <p className="mt-4 text-5xl font-black uppercase leading-none text-[var(--slugger-bone)] sm:text-7xl">
-            Stand up
-          </p>
-          <p className="mt-3 text-sm font-bold uppercase tracking-[0.16em] text-[var(--slugger-panel)]">
-            Round one is waiting.
-          </p>
-        </div>
-      </div>
+    <div className="max-w-full overflow-x-hidden bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
       <section className="relative overflow-hidden bg-[var(--slugger-black)] text-[var(--slugger-bone)]">
         <div className="absolute inset-0 slugger-hero-grid opacity-70" />
         <div className="absolute bottom-[-28%] left-[8%] h-72 w-72 rounded-full bg-[var(--slugger-brass)]/20 blur-3xl" />
-        <div className="relative grid min-h-[calc(100vh-96px)] lg:grid-cols-[1.02fr_0.98fr]">
-          <div className="flex flex-col justify-between px-5 py-7 sm:px-8 lg:px-10">
-            <div className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.22em] text-[var(--slugger-action-hot)]">
+        <div className="relative grid max-w-full lg:min-h-[calc(100vh-96px)] lg:grid-cols-[1.02fr_0.98fr]">
+          <div className="flex min-w-0 flex-col justify-between px-5 py-7 sm:px-8 lg:px-10">
+            <div className="flex max-w-full flex-wrap items-center gap-3 text-xs font-black uppercase tracking-[0.16em] text-[var(--slugger-action-hot)] sm:tracking-[0.22em]">
               <span className="slugger-phone-pulse flex h-9 w-9 items-center justify-center bg-[var(--slugger-steel)] text-[var(--slugger-bone)]">
                 <Dumbbell className="h-4 w-4" />
               </span>
               Private audio boxing for beginners
             </div>
 
-            <div className="my-12 max-w-3xl lg:my-16">
-              <h1 className="text-6xl font-black uppercase leading-[0.82] tracking-normal sm:text-7xl xl:text-8xl">
+            <div className="my-12 max-w-full lg:my-16 lg:max-w-3xl">
+              <h1 className="slugger-hero-title max-w-full font-black uppercase tracking-normal">
                 Sofa2Slugger
               </h1>
-              <p className="mt-6 max-w-2xl text-3xl font-black leading-9 text-[var(--slugger-bone)] sm:text-4xl">
+              <p className="slugger-hero-lead mt-6 max-w-2xl font-black text-[var(--slugger-bone)]">
                 Less watching. More moving. Round one starts where you are.
               </p>
               <p className="mt-5 max-w-xl text-base leading-7 text-[var(--slugger-panel)]">
@@ -73,14 +60,14 @@ export default function HomePage() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/session/1"
-                  className="inline-flex min-h-14 items-center justify-center gap-3 bg-[var(--slugger-bone)] px-6 py-4 text-sm font-black uppercase text-[var(--slugger-ink)] transition hover:bg-white"
+                  className="inline-flex min-h-14 w-full items-center justify-center gap-3 bg-[var(--slugger-bone)] px-6 py-4 text-sm font-black uppercase text-[var(--slugger-ink)] transition hover:bg-white sm:w-auto"
                 >
                   <Play className="h-5 w-5" fill="currentColor" />
                   Start Round 1
                 </Link>
                 <Link
                   href="#intro-audio"
-                  className="inline-flex min-h-14 items-center justify-center gap-3 border border-white/18 px-6 py-4 text-sm font-black uppercase text-[var(--slugger-bone)] transition hover:bg-white/10"
+                  className="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-white/18 px-6 py-4 text-sm font-black uppercase text-[var(--slugger-bone)] transition hover:bg-white/10 sm:w-auto"
                 >
                   Hear the idea
                   <ArrowRight className="h-5 w-5" />
@@ -88,19 +75,19 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="grid max-w-xl grid-cols-3 border border-white/14 bg-white/[0.06] backdrop-blur">
+            <div className="grid w-full max-w-xl grid-cols-3 border border-white/14 bg-white/[0.06] backdrop-blur">
               <Metric value="Free" label="Round 1" />
               <Metric value="12" label="Guided rounds" />
               <Metric value="No" label="Kit needed" />
             </div>
           </div>
 
-          <div className="flex items-center px-5 pb-8 sm:px-8 lg:px-8 lg:py-10">
-            <div className="slugger-glow relative w-full bg-[var(--slugger-black)] p-2">
+          <div className="flex min-w-0 items-center px-5 pb-8 sm:px-8 lg:px-8 lg:py-10">
+            <div className="slugger-glow relative w-full max-w-full bg-[var(--slugger-black)] p-2">
               <img
                 src="/images/hero-sofa-to-slugger-v1.png"
                 alt="A hooded person sitting on a sofa, looking down at a glowing phone on the floor."
-                className="h-auto w-full object-contain"
+                className="h-auto max-w-full object-contain"
               />
             </div>
           </div>
@@ -178,7 +165,7 @@ export default function HomePage() {
               <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--slugger-brass)]">
                 The fight card
               </p>
-              <h2 className="mt-3 text-5xl font-black uppercase leading-none">
+              <h2 className="mt-3 max-w-full break-words text-3xl font-black uppercase leading-tight sm:text-4xl lg:text-5xl">
                 Twelve short rounds. One earned path.
               </h2>
               <p className="mt-4 text-base leading-7 text-[var(--slugger-muted)]">
