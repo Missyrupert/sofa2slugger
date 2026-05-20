@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getResolvedBaseUrl } from "@/lib/env";
+import { COURSE_PRICE_PENCE } from "@/lib/product";
 
-const COURSE_PRICE_PENCE = 999;
 
 export async function POST() {
   const secretKey = process.env.STRIPE_SECRET_KEY;

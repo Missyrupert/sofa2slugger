@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Play, Pause, RotateCcw, RotateCw } from "lucide-react";
 import { markSessionComplete } from "@/lib/storage";
+import { trackEvent } from "@/lib/analytics";
 
 const STORAGE_KEY_PREFIX = "s2s_playback_";
 const PLAYBACK_RATE_STORAGE_KEY = "s2s_playback_rate";
@@ -26,6 +27,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
   const [duration, setDuration] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1);
   const playbackRateRef = useRef(1);
+  const hasTrackedPlayRef = useRef(false);
 
   const localStorageKey = `${STORAGE_KEY_PREFIX}${sessionId}`;
 
@@ -57,6 +59,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
     const handleEnded = () => {
       setPlaying(false);
       markSessionComplete(sessionId);
+      trackEvent("round_completed", { sessionId });
       onComplete?.();
     };
     const handleLoadedData = () => {
@@ -132,6 +135,10 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
       audio.pause();
       savePosition(audio.currentTime);
     } else {
+      if (!hasTrackedPlayRef.current) {
+        trackEvent("round_play_started", { sessionId, playbackRate });
+        hasTrackedPlayRef.current = true;
+      }
       audio.play();
     }
     setPlaying(!playing);
@@ -193,9 +200,18 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
 
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
   const ringOffset = RING_CIRCUMFERENCE * (1 - progress / 100);
+  const remaining = Math.max(0, (duration || 0) - currentTime);
 
   return (
     <div className="flex flex-col items-center gap-7">
+      <div className="text-center">
+        <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--slugger-action-hot)]">
+          Audio round
+        </p>
+        <p className="mt-2 max-w-md text-sm font-bold leading-6 text-white/62">
+          Press play, put the phone down, and let the coach carry the order.
+        </p>
+      </div>
       <div className="relative flex items-center justify-center">
         <svg
           width={RING_SIZE}
@@ -238,9 +254,20 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
         </button>
       </div>
 
-      <span className="border border-white/10 bg-white/8 px-4 py-2 font-mono text-lg text-white/72">
-        {formatTime(currentTime)} / {formatTime(duration || 0)}
-      </span>
+<div className="grid w-full max-w-md grid-cols-3 border border-white/10 bg-white/8 text-center font-mono text-sm text-white/72">
+        <div className="border-r border-white/10 px-3 py-3">
+          <p className="font-sans text-[10px] font-black uppercase tracking-wide text-white/38">Elapsed</p>
+          <p className="mt-1 text-lg">{formatTime(currentTime)}</p>
+        </div>
+        <div className="border-r border-white/10 px-3 py-3">
+          <p className="font-sans text-[10px] font-black uppercase tracking-wide text-white/38">Left</p>
+          <p className="mt-1 text-lg">{formatTime(remaining)}</p>
+        </div>
+        <div className="px-3 py-3">
+          <p className="font-sans text-[10px] font-black uppercase tracking-wide text-white/38">Total</p>
+          <p className="mt-1 text-lg">{formatTime(duration || 0)}</p>
+        </div>
+      </div>
 
       <div className="flex items-center gap-6">
         <button
@@ -265,6 +292,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
         className="flex items-center gap-1 border border-white/10 bg-white/8 p-1"
         aria-label="Playback pace"
       >
+        <span className="px-3 text-xs font-black uppercase tracking-wide text-white/42">Pace</span>
         {PLAYBACK_RATES.map((rate) => (
           <button
             key={rate}

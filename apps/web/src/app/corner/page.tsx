@@ -9,6 +9,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { COURSE_PRICE_LABEL } from "@/lib/product";
 
 const FAQS = [
   {
@@ -44,7 +45,7 @@ const FAQS = [
     a: "Yes. No sign-up, no email, and no card details. Start Round 1 whenever you are ready.",
   },
   {
-    q: "What do I get for £9.99?",
+    q: `What do I get for ${COURSE_PRICE_LABEL}?`,
     a: "Lifetime access to rounds 2 through 12 in this browser. No subscription and no recurring charge.",
   },
   {
@@ -174,3 +175,4 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     </div>
   );
 }
+

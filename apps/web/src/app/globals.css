@@ -29,17 +29,18 @@
 
 html {
   background: var(--slugger-black);
+  max-width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
   color: var(--slugger-ink);
   font-family: Inter, Arial, ui-sans-serif, system-ui, sans-serif;
-  background:
-    radial-gradient(circle at 18% 8%, rgba(184, 149, 93, 0.16), transparent 30%),
-    radial-gradient(circle at 84% 16%, rgba(111, 131, 123, 0.12), transparent 28%),
-    linear-gradient(135deg, #07090a 0%, #171c1f 48%, #211a14 100%);
+  background: linear-gradient(135deg, #07090a 0%, #171c1f 48%, #211a14 100%);
 }
 
 body::before {
@@ -142,58 +143,6 @@ body::before {
     var(--slugger-bone);
   border: 1px solid rgba(184, 149, 93, 0.74);
   box-shadow: 3px 3px 0 rgba(184, 149, 93, 0.86);
-}
-
-.slugger-splash {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(circle at 50% 54%, rgba(184, 149, 93, 0.16), transparent 24%),
-    linear-gradient(135deg, #07090a, #101416 52%, #211a14);
-  pointer-events: none;
-  animation: slugger-splash-out 4s ease forwards;
-}
-
-.slugger-splash-card {
-  width: min(86vw, 560px);
-  border: 1px solid rgba(251, 244, 232, 0.16);
-  padding: 48px 36px;
-  text-align: center;
-  background: rgba(7, 9, 10, 0.56);
-  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.42);
-  animation: slugger-splash-card 4s ease forwards;
-}
-
-@keyframes slugger-splash-out {
-  0%,
-  72% {
-    opacity: 1;
-    visibility: visible;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes slugger-splash-card {
-  0% {
-    opacity: 0;
-    transform: translateY(12px) scale(0.98);
-  }
-  18%,
-  70% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.99);
-  }
 }
 
 .text-balance {

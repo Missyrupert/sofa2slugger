@@ -21,7 +21,7 @@ export default function RootLayout({
         className="min-h-screen antialiased"
         style={{ fontFamily: "Inter, Arial, system-ui, sans-serif" }}
       >
-        <div className="mx-auto flex min-h-screen w-full max-w-[1500px] flex-col px-2 py-2 md:flex-row md:gap-4 md:px-4 md:py-4">
+        <div className="mx-auto flex min-h-screen w-full max-w-[1500px] flex-col overflow-x-hidden px-2 py-2 md:flex-row md:gap-4 md:px-4 md:py-4">
           <aside className="hidden w-68 flex-shrink-0 flex-col overflow-hidden border border-white/10 bg-[var(--slugger-black)]/95 text-[var(--slugger-bone)] shadow-2xl shadow-black/35 md:flex">
             <div className="slugger-ring-lines flex min-h-48 flex-col justify-between border-b border-white/10 p-5">
               <Link href="/" className="group flex items-center gap-3">
@@ -43,7 +43,7 @@ export default function RootLayout({
                   Beginner ready
                 </div>
                 <p className="mt-2 text-sm leading-5 text-white/68">
-                  Short guided rounds that teach stance, punches, defense, and flow.
+                  Short guided sessions that teach stance, punches, defence, movement, and flow.
                 </p>
               </div>
             </div>
@@ -59,7 +59,7 @@ export default function RootLayout({
             </div>
           </aside>
 
-          <div className="flex min-h-0 flex-1 flex-col overflow-hidden border border-white/10 bg-[var(--slugger-paper)] shadow-2xl shadow-black/35">
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden border border-white/10 bg-[var(--slugger-paper)] shadow-2xl shadow-black/35">
             <header className="flex flex-shrink-0 items-center justify-between border-b border-[var(--slugger-ink)]/14 bg-[var(--slugger-paper)] px-4 py-3 md:hidden">
               <Link href="/" className="flex items-center gap-2 text-base font-black uppercase tracking-tight text-[var(--slugger-ink)]">
                 <span className="slugger-two-mark h-8 w-10 text-[11px]">

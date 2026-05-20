@@ -15,6 +15,7 @@ deploy-*.zip
 *.log
 *.tsbuildinfo
 apps/web/tmp-brand-screens/
+apps/web/tmp-mobile-check/
 apps/web/public/audio/*.html
 apps/web/public/audio/*review*
 apps/web/public/audio/*prototype*
