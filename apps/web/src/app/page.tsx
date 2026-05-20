@@ -59,16 +59,16 @@ export default function HomePage() {
           <div className="w-full max-w-5xl pb-4 lg:pb-10">
             <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[var(--slugger-action-hot)]">
               <ShieldCheck className="h-4 w-4" />
-              Beginner audio boxing
+              No gym. No bag. No audience.
             </p>
             <h1 className="mt-5 max-w-4xl text-5xl font-black uppercase leading-[0.86] tracking-normal sm:text-7xl lg:text-8xl">
-              No gym. No bag. No audience.
+              Sofa2Slugger
             </h1>
             <p className="mt-6 max-w-2xl text-xl font-black leading-8 text-[var(--slugger-bone)] sm:text-3xl sm:leading-10">
-              Twelve private audio sessions that teach you to stand, move, guard, and finish a round.
+              Beginner audio boxing from your own room.
             </p>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/72">
-              Sofa2Slugger is shadowboxing for people who like the idea of boxing but do not want the gym theatre. Start where you are. Put your headphones in. Let the coach do the rest.
+              Twelve private sessions that teach you to stand, move, guard, and finish a round. Start where you are. Put your headphones in. Let the coach do the rest.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
