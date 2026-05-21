@@ -42,7 +42,7 @@ export default function HomePage() {
     <div className="max-w-full overflow-x-hidden bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
       <section className="relative overflow-hidden bg-[var(--slugger-black)] text-[var(--slugger-bone)]">
         <div className="absolute inset-0 slugger-hero-grid opacity-70" />
-        <div className="relative grid max-w-full xl:min-h-[calc(100vh-96px)] xl:grid-cols-[0.92fr_1.08fr]">
+        <div className="relative grid max-w-full 2xl:min-h-[calc(100vh-96px)] 2xl:grid-cols-[0.88fr_1.12fr]">
           <div className="flex min-w-0 flex-col justify-between px-5 py-7 sm:px-8 lg:px-10">
             <div className="flex max-w-full flex-wrap items-center gap-3 text-xs font-black uppercase tracking-[0.14em] text-[var(--slugger-action-hot)] sm:tracking-[0.2em]">
               <span className="slugger-phone-pulse flex h-9 w-9 items-center justify-center bg-[var(--slugger-steel)] text-[var(--slugger-bone)]">
@@ -74,8 +74,7 @@ export default function HomePage() {
                 <Link
                   href="/gym"
                   className="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-white/18 px-6 py-4 text-sm font-black uppercase text-[var(--slugger-bone)] transition hover:bg-white/10 sm:w-auto"
-                >
-                  Full course Ã‚Â£9.99
+                >Full course {"\u00a39.99"}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
@@ -83,12 +82,12 @@ export default function HomePage() {
 
             <div className="grid w-full max-w-xl grid-cols-3 border border-white/14 bg-white/[0.06] backdrop-blur">
               <Metric value="Free" label="Round 1" />
-              <Metric value="Ã‚Â£9.99" label="Full card" />
+              <Metric value={"\u00a39.99"} label="Full card" />
               <Metric value="No" label="Kit needed" />
             </div>
           </div>
 
-          <div className="flex min-w-0 flex-col justify-center gap-5 px-5 pb-8 sm:px-8 xl:px-8 xl:py-10">
+          <div className="flex min-w-0 flex-col justify-center gap-5 px-5 pb-8 sm:px-8 2xl:px-8 2xl:py-10">
             <div className="slugger-glow relative w-full max-w-full bg-[var(--slugger-black)] p-2">
               <Image
                 src="/images/hero-sofa-to-slugger-v1.png"
@@ -96,7 +95,8 @@ export default function HomePage() {
                 width={1200}
                 height={900}
                 priority
-                className="h-auto max-h-[48vh] w-full object-contain xl:max-h-[58vh]"
+                unoptimized
+                className="h-auto max-h-[48vh] w-full object-contain 2xl:max-h-[58vh]"
               />
             </div>
             <div className="grid gap-3 border border-white/14 bg-white/[0.07] p-4 backdrop-blur sm:grid-cols-[auto_1fr] sm:items-center">
@@ -104,9 +104,7 @@ export default function HomePage() {
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--slugger-action-hot)]">
                   Launch price
                 </p>
-                <p className="mt-1 text-4xl font-black leading-none text-[var(--slugger-bone)]">
-                  Ã‚Â£9.99
-                </p>
+                <p className="mt-1 text-4xl font-black leading-none text-[var(--slugger-bone)]">{"\u00a39.99"}</p>
               </div>
               <div>
                 <p className="text-sm font-bold leading-6 text-[var(--slugger-panel)]">
