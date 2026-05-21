@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -37,28 +37,30 @@ const included = [
   "No subscription",
 ] as const;
 
+const price = "\u00a39.99";
+
 export default function HomePage() {
   return (
     <div className="max-w-full overflow-x-hidden bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
       <section className="relative overflow-hidden bg-[var(--slugger-black)] text-[var(--slugger-bone)]">
         <div className="absolute inset-0 slugger-hero-grid opacity-70" />
-        <div className="relative grid max-w-full 2xl:min-h-[calc(100vh-96px)] 2xl:grid-cols-[0.88fr_1.12fr]">
-          <div className="flex min-w-0 flex-col justify-between px-5 py-7 sm:px-8 lg:px-10">
-            <div className="flex max-w-full flex-wrap items-center gap-3 text-xs font-black uppercase tracking-[0.14em] text-[var(--slugger-action-hot)] sm:tracking-[0.2em]">
-              <span className="slugger-phone-pulse flex h-9 w-9 items-center justify-center bg-[var(--slugger-steel)] text-[var(--slugger-bone)]">
-                <Dumbbell className="h-4 w-4" />
-              </span>
-              Beginner audio boxing
-            </div>
+        <div className="relative mx-auto flex max-w-6xl flex-col gap-8 px-5 py-8 sm:px-8 lg:px-10 lg:py-12">
+          <div className="flex max-w-full flex-wrap items-center gap-3 text-xs font-black uppercase tracking-[0.14em] text-[var(--slugger-action-hot)] sm:tracking-[0.2em]">
+            <span className="slugger-phone-pulse flex h-9 w-9 items-center justify-center bg-[var(--slugger-steel)] text-[var(--slugger-bone)]">
+              <Dumbbell className="h-4 w-4" />
+            </span>
+            Beginner audio boxing
+          </div>
 
-            <div className="my-10 max-w-full lg:my-14 lg:max-w-3xl">
-              <h1 className="slugger-hero-title max-w-full font-black uppercase tracking-normal">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end xl:grid-cols-[minmax(0,1fr)_410px]">
+            <div className="min-w-0">
+              <h1 className="slugger-hero-title font-black uppercase tracking-normal">
                 Sofa2Slugger
               </h1>
-              <p className="slugger-hero-lead mt-5 max-w-2xl font-black text-[var(--slugger-bone)]">
+              <p className="slugger-hero-lead mt-5 max-w-3xl font-black text-[var(--slugger-bone)]">
                 No gym. No bag. No audience.
               </p>
-              <p className="mt-4 max-w-xl text-base leading-7 text-[var(--slugger-panel)]">
+              <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--slugger-panel)] sm:text-lg sm:leading-8">
                 Twelve private audio sessions that teach you to stand, move,
                 guard, and finish a round from the room you are already in.
               </p>
@@ -74,21 +76,40 @@ export default function HomePage() {
                 <Link
                   href="/gym"
                   className="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-white/18 px-6 py-4 text-sm font-black uppercase text-[var(--slugger-bone)] transition hover:bg-white/10 sm:w-auto"
-                >Full course {"\u00a39.99"}
+                >
+                  Full course {price}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
             </div>
 
-            <div className="grid w-full max-w-xl grid-cols-3 border border-white/14 bg-white/[0.06] backdrop-blur">
-              <Metric value="Free" label="Round 1" />
-              <Metric value={"\u00a39.99"} label="Full card" />
-              <Metric value="No" label="Kit needed" />
-            </div>
+            <aside className="border border-white/14 bg-white/[0.07] p-4 backdrop-blur lg:p-5">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--slugger-action-hot)]">
+                Launch price
+              </p>
+              <p className="mt-2 text-4xl font-black leading-none text-[var(--slugger-bone)]">
+                {price}
+              </p>
+              <p className="mt-3 text-sm font-bold leading-6 text-[var(--slugger-panel)]">
+                Pay once for rounds 2-12. Round 1 stays free, so nobody has to buy blind.
+              </p>
+              <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-black uppercase text-[var(--slugger-panel)]/82">
+                {included.map((item) => (
+                  <span key={item} className="border border-white/10 px-2 py-2 text-center">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </aside>
           </div>
 
-          <div className="flex min-w-0 flex-col justify-center gap-5 px-5 pb-8 sm:px-8 2xl:px-8 2xl:py-10">
-            <div className="slugger-glow relative w-full max-w-full bg-[var(--slugger-black)] p-2">
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[minmax(0,1fr)_410px]">
+            <div className="grid w-full grid-cols-3 border border-white/14 bg-white/[0.06] backdrop-blur lg:max-w-2xl">
+              <Metric value="Free" label="Round 1" />
+              <Metric value={price} label="Full card" />
+              <Metric value="No" label="Kit needed" />
+            </div>
+            <div className="slugger-glow relative w-full bg-[var(--slugger-black)] p-2">
               <Image
                 src="/images/hero-sofa-to-slugger-v1.png"
                 alt="A hooded person sitting on a sofa, looking down at a glowing phone on the floor."
@@ -96,28 +117,8 @@ export default function HomePage() {
                 height={900}
                 priority
                 unoptimized
-                className="h-auto max-h-[48vh] w-full object-contain 2xl:max-h-[58vh]"
+                className="h-auto max-h-72 w-full object-contain lg:max-h-64"
               />
-            </div>
-            <div className="grid gap-3 border border-white/14 bg-white/[0.07] p-4 backdrop-blur sm:grid-cols-[auto_1fr] sm:items-center">
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--slugger-action-hot)]">
-                  Launch price
-                </p>
-                <p className="mt-1 text-4xl font-black leading-none text-[var(--slugger-bone)]">{"\u00a39.99"}</p>
-              </div>
-              <div>
-                <p className="text-sm font-bold leading-6 text-[var(--slugger-panel)]">
-                  Pay once for rounds 2-12. Round 1 stays free, so nobody has to buy blind.
-                </p>
-                <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-black uppercase text-[var(--slugger-panel)]/82 sm:grid-cols-4">
-                  {included.map((item) => (
-                    <span key={item} className="border border-white/10 px-2 py-2 text-center">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>

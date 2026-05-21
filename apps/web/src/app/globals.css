@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
   --slugger-action: #b8955d;
@@ -149,7 +149,7 @@ body::before {
 }
 
 .slugger-hero-title {
-  font-size: clamp(2.45rem, 9.6vw, 5.25rem);
+  font-size: clamp(2.45rem, 8.8vw, 5.2rem);
   line-height: 0.92;
   max-width: 100%;
   overflow-wrap: normal;
@@ -157,23 +157,22 @@ body::before {
 }
 
 .slugger-hero-lead {
-  font-size: clamp(1.35rem, 4.3vw + 0.2rem, 2.35rem);
+  font-size: clamp(1.35rem, 4.2vw + 0.2rem, 2.35rem);
   line-height: 1.08;
   max-width: 100%;
 }
 
 @media (min-width: 768px) {
   .slugger-hero-title {
-    font-size: clamp(4rem, 7vw, 6rem);
+    font-size: clamp(4rem, 6.2vw, 6.1rem);
   }
 }
 
-@media (min-width: 1536px) {
+@media (min-width: 1280px) {
   .slugger-hero-title {
-    font-size: clamp(4.25rem, 4.8vw, 6.5rem);
+    font-size: clamp(4.6rem, 5.4vw, 6.4rem);
   }
 }
-
 ::selection {
   background: rgba(184, 149, 93, 0.35);
 }
