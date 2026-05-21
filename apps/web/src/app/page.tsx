@@ -52,7 +52,7 @@ export default function HomePage() {
             Beginner audio boxing
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end xl:grid-cols-[minmax(0,1fr)_410px]">
+          <div className="grid gap-8">
             <div className="min-w-0">
               <h1 className="slugger-hero-title font-black uppercase tracking-normal">
                 Sofa2Slugger
@@ -83,7 +83,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <aside className="border border-white/14 bg-white/[0.07] p-4 backdrop-blur lg:p-5">
+            <aside className="border border-white/14 bg-white/[0.07] p-4 backdrop-blur lg:hidden">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--slugger-action-hot)]">
                 Launch price
               </p>
@@ -103,7 +103,7 @@ export default function HomePage() {
             </aside>
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[minmax(0,1fr)_410px]">
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,0.72fr)_minmax(260px,0.28fr)] lg:items-start">
             <div className="grid w-full grid-cols-3 border border-white/14 bg-white/[0.06] backdrop-blur lg:max-w-2xl">
               <Metric value="Free" label="Round 1" />
               <Metric value={price} label="Full card" />
