@@ -149,17 +149,29 @@ body::before {
 }
 
 .slugger-hero-title {
-  font-size: clamp(2.25rem, 7vw + 0.25rem, 5.5rem);
-  line-height: 0.95;
+  font-size: clamp(2.55rem, 10.5vw, 5.75rem);
+  line-height: 0.92;
   max-width: 100%;
   overflow-wrap: anywhere;
-  word-break: break-word;
+  word-break: normal;
 }
 
 .slugger-hero-lead {
-  font-size: clamp(1.25rem, 4vw + 0.5rem, 2.25rem);
-  line-height: 1.15;
+  font-size: clamp(1.35rem, 4.5vw + 0.25rem, 2.5rem);
+  line-height: 1.05;
   max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .slugger-hero-title {
+    font-size: clamp(3.5rem, 7.5vw, 6.25rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .slugger-hero-title {
+    font-size: clamp(4.25rem, 5.2vw, 6.75rem);
+  }
 }
 
 ::selection {

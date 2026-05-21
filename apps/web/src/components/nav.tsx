@@ -6,7 +6,7 @@ import { Dumbbell, BarChart3, HelpCircle, Home } from "lucide-react";
 
 const MAIN_NAV_ITEMS = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/gym", label: "Gym", icon: Dumbbell },
+  { href: "/gym", label: "Rounds", icon: Dumbbell },
   { href: "/progress", label: "Progress", icon: BarChart3 },
   { href: "/corner", label: "Corner", icon: HelpCircle },
 ] as const;

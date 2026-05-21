@@ -30,7 +30,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Hands home. Chin tucked. Feet under you.",
     milestone: "Base",
     intensity: "Base",
-    durationSec: 304,
+    durationSec: 558,
     isFree: true,
   },
   {
@@ -44,7 +44,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Touch and home.",
     milestone: "Straight Punches",
     intensity: "Base",
-    durationSec: 236,
+    durationSec: 664,
     isFree: false,
   },
   {
@@ -58,7 +58,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Turn, touch, return.",
     milestone: "Straight Punches",
     intensity: "Base",
-    durationSec: 220,
+    durationSec: 556,
     isFree: false,
   },
   {
@@ -72,7 +72,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Punch, protect, leave.",
     milestone: "Straight Punches",
     intensity: "Build",
-    durationSec: 214,
+    durationSec: 599,
     isFree: false,
   },
   {
@@ -86,7 +86,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Turn the body. Bring the hand home.",
     milestone: "Inside Work",
     intensity: "Build",
-    durationSec: 202,
+    durationSec: 618,
     isFree: false,
   },
   {
@@ -100,7 +100,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Stay compact. Up the middle. Home.",
     milestone: "Inside Work",
     intensity: "Build",
-    durationSec: 229,
+    durationSec: 728,
     isFree: false,
   },
   {
@@ -114,7 +114,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Small move, clean shape.",
     milestone: "Defense",
     intensity: "Build",
-    durationSec: 274,
+    durationSec: 667,
     isFree: false,
   },
   {
@@ -128,7 +128,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Feet under you.",
     milestone: "Movement",
     intensity: "Build",
-    durationSec: 206,
+    durationSec: 633,
     isFree: false,
   },
   {
@@ -142,7 +142,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Every attack has a receipt.",
     milestone: "Defense",
     intensity: "Burn",
-    durationSec: 210,
+    durationSec: 595,
     isFree: false,
   },
   {
@@ -156,7 +156,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Find the gear. Breathe on the shot.",
     milestone: "Movement",
     intensity: "Burn",
-    durationSec: 218,
+    durationSec: 614,
     isFree: false,
   },
   {
@@ -170,7 +170,7 @@ export const SESSIONS: Session[] = [
     audioCue: "Win the moment. Reset. Win the next.",
     milestone: "Full Round",
     intensity: "Burn",
-    durationSec: 229,
+    durationSec: 520,
     isFree: false,
   },
   {
@@ -184,7 +184,7 @@ export const SESSIONS: Session[] = [
     audioCue: "You finished the round. Now make it cleaner.",
     milestone: "Full Round",
     intensity: "Burn",
-    durationSec: 275,
+    durationSec: 616,
     isFree: false,
   },
 ];

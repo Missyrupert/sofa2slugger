@@ -5,9 +5,9 @@ import { Nav } from "@/components/nav";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sofa to Slugger",
+  title: "Sofa2Slugger",
   description:
-    "Audio-guided shadowboxing training for beginners. Twelve compact rounds, no equipment needed.",
+    "Beginner audio boxing at home. Twelve private rounds, no gym, no bag, no audience.",
 };
 
 export default function RootLayout({
