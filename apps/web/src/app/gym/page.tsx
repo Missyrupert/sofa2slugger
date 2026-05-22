@@ -51,15 +51,21 @@ export default function GymPage() {
             </p>
             <div className="mt-4 grid gap-3 text-sm font-bold text-[var(--slugger-panel)]">
               <p>
-                <span className="mr-2 text-[var(--slugger-action-hot)]">01</span>
+                <span className="mr-2 text-[var(--slugger-action-hot)]">
+                  01
+                </span>
                 Round 1 is free.
               </p>
               <p>
-                <span className="mr-2 text-[var(--slugger-action-hot)]">02</span>
+                <span className="mr-2 text-[var(--slugger-action-hot)]">
+                  02
+                </span>
                 The full 12-round card unlocks once.
               </p>
               <p>
-                <span className="mr-2 text-[var(--slugger-action-hot)]">03</span>
+                <span className="mr-2 text-[var(--slugger-action-hot)]">
+                  03
+                </span>
                 Your completed rounds appear on Progress.
               </p>
             </div>
@@ -76,8 +82,9 @@ export default function GymPage() {
             Begin at the base.
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--slugger-muted)]">
-            Round 1 is the starting point. The locked rounds show the path ahead:
-            fundamentals, defense, movement, rhythm, and a first full round.
+            Round 1 is the starting point. The locked rounds show the path
+            ahead: fundamentals, defense, movement, rhythm, and a first full
+            round.
           </p>
         </div>
 
@@ -172,11 +179,27 @@ function SessionCard({
   );
 
   if (accessible) {
-    return <Link href={`/session/${session.id}`}>{card}</Link>;
+    return (
+      <Link
+        href={`/session/${session.id}`}
+        data-analytics-event={
+          session.id === 1 ? "Start Round 1 clicked" : undefined
+        }
+        data-analytics-label={session.id === 1 ? "gym_round_card" : undefined}
+      >
+        {card}
+      </Link>
+    );
   }
 
   return (
-    <button type="button" onClick={onLockedClick} className="w-full">
+    <button
+      type="button"
+      onClick={onLockedClick}
+      data-analytics-event="Unlock full course clicked"
+      data-analytics-label={`locked_round_${session.id}`}
+      className="w-full"
+    >
       {card}
     </button>
   );

@@ -9,6 +9,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 const FAQS = [
   {
@@ -148,11 +149,18 @@ function CornerBadge({
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
 
+  function toggleOpen() {
+    if (!open) {
+      trackEvent("FAQ opened", { question });
+    }
+    setOpen(!open);
+  }
+
   return (
     <div className="border border-black/10 bg-[var(--slugger-bone)]/78">
       <button
         type="button"
-        onClick={() => setOpen(!open)}
+        onClick={toggleOpen}
         className="flex min-h-16 w-full items-center justify-between gap-4 px-4 py-4 text-left"
       >
         <span className="text-sm font-black uppercase leading-5 text-[var(--slugger-ink)]">

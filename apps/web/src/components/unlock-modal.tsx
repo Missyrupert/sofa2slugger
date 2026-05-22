@@ -70,12 +70,16 @@ export function UnlockModal({ onClose }: UnlockModalProps) {
           <li>No subscription, no recurring fees</li>
         </ul>
         {error && (
-          <p className="mt-3 text-sm font-bold text-[var(--slugger-action-hot)]">{error}</p>
+          <p className="mt-3 text-sm font-bold text-[var(--slugger-action-hot)]">
+            {error}
+          </p>
         )}
         <button
           type="button"
           onClick={handleCheckout}
           disabled={loading}
+          data-analytics-event="Unlock full course clicked"
+          data-analytics-label="unlock_modal_checkout"
           className="mt-6 w-full bg-[var(--slugger-brass)] py-4 font-black uppercase tracking-wide text-[var(--slugger-bone)] transition hover:bg-[var(--slugger-action-hot)] disabled:opacity-50"
         >
           {loading ? "Redirecting..." : "Unlock for £9.99"}

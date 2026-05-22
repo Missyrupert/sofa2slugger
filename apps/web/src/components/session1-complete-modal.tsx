@@ -75,44 +75,77 @@ export function Session1CompleteModal({ onClose }: Session1CompleteModalProps) {
         </h2>
 
         <p className="mt-4 leading-7 text-[var(--slugger-panel)]">
-          That was just the warm-up. Rounds 2-12 take you from jabs and
-          crosses through to full round work: proper technique, real
-          combinations, and rounds that actually make you sweat.
+          That was just the warm-up. Rounds 2-12 take you from jabs and crosses
+          through to full round work: proper technique, real combinations, and
+          rounds that actually make you sweat.
         </p>
 
         <div className="mt-6 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
           <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)]">02</span> The Jab
+            <span className="font-black text-[var(--slugger-action-hot)]">
+              02
+            </span>{" "}
+            The Jab
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)]">03</span> The Cross
+            <span className="font-black text-[var(--slugger-action-hot)]">
+              03
+            </span>{" "}
+            The Cross
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)]">04</span> One-Two &amp; Exit
+            <span className="font-black text-[var(--slugger-action-hot)]">
+              04
+            </span>{" "}
+            One-Two &amp; Exit
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)]">05</span> Hooks
+            <span className="font-black text-[var(--slugger-action-hot)]">
+              05
+            </span>{" "}
+            Hooks
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)]">06</span> Uppercuts
+            <span className="font-black text-[var(--slugger-action-hot)]">
+              06
+            </span>{" "}
+            Uppercuts
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)]">07</span> Basic Defense
+            <span className="font-black text-[var(--slugger-action-hot)]">
+              07
+            </span>{" "}
+            Basic Defense
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)]">08</span> Footwork &amp; Angles
+            <span className="font-black text-[var(--slugger-action-hot)]">
+              08
+            </span>{" "}
+            Footwork &amp; Angles
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)]">09</span> Attack &amp; Defense
+            <span className="font-black text-[var(--slugger-action-hot)]">
+              09
+            </span>{" "}
+            Attack &amp; Defense
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-panel)]">
-            <span className="font-black text-[var(--slugger-action-hot)]/70">10</span> Rhythm &amp; Tempo
+            <span className="font-black text-[var(--slugger-action-hot)]/70">
+              10
+            </span>{" "}
+            Rhythm &amp; Tempo
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-panel)]">
-            <span className="font-black text-[var(--slugger-action-hot)]/70">11</span> Round Builder
+            <span className="font-black text-[var(--slugger-action-hot)]/70">
+              11
+            </span>{" "}
+            Round Builder
           </div>
           <div className="flex items-center gap-2 text-[var(--slugger-panel)]">
-            <span className="font-black text-[var(--slugger-action-hot)]/70">12</span> First Full Round
+            <span className="font-black text-[var(--slugger-action-hot)]/70">
+              12
+            </span>{" "}
+            First Full Round
           </div>
         </div>
 
@@ -120,13 +153,19 @@ export function Session1CompleteModal({ onClose }: Session1CompleteModalProps) {
           One payment. No subscription. Train whenever you want.
         </p>
 
-        {error && <p className="mt-3 text-sm font-bold text-[var(--slugger-action-hot)]">{error}</p>}
+        {error && (
+          <p className="mt-3 text-sm font-bold text-[var(--slugger-action-hot)]">
+            {error}
+          </p>
+        )}
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
             onClick={handleCheckout}
             disabled={loading}
+            data-analytics-event="Unlock full course clicked"
+            data-analytics-label="round_1_complete_modal_checkout"
             className="flex-1 bg-[var(--slugger-brass)] py-4 font-black uppercase tracking-wide text-[var(--slugger-bone)] transition hover:bg-[var(--slugger-action-hot)] disabled:opacity-50"
           >
             {loading ? "Redirecting..." : "Unlock full course - £9.99"}

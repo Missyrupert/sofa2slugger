@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Play, Pause, RotateCcw, RotateCw } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import { markSessionComplete } from "@/lib/storage";
 
 const STORAGE_KEY_PREFIX = "s2s_playback_";
@@ -26,6 +27,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
   const [duration, setDuration] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1);
   const playbackRateRef = useRef(1);
+  const playStartedTrackedRef = useRef(false);
 
   const localStorageKey = `${STORAGE_KEY_PREFIX}${sessionId}`;
 
@@ -54,6 +56,15 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
       setDuration(audio.duration);
     };
     const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
+    const handlePlayStarted = () => {
+      if (playStartedTrackedRef.current) return;
+      playStartedTrackedRef.current = true;
+      trackEvent("Audio play started", {
+        session_id: sessionId,
+        source: src,
+        audio_type: "session_audio",
+      });
+    };
     const handleEnded = () => {
       setPlaying(false);
       markSessionComplete(sessionId);
@@ -76,12 +87,14 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
 
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
     audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("play", handlePlayStarted);
     audio.addEventListener("ended", handleEnded);
     audio.addEventListener("loadeddata", handleLoadedData);
 
     return () => {
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
       audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("play", handlePlayStarted);
       audio.removeEventListener("ended", handleEnded);
       audio.removeEventListener("loadeddata", handleLoadedData);
       if (audio.currentTime > 0) savePosition(audio.currentTime);
@@ -94,7 +107,9 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
     if (typeof window === "undefined") return;
     let frame = 0;
     try {
-      const stored = Number(window.localStorage.getItem(PLAYBACK_RATE_STORAGE_KEY));
+      const stored = Number(
+        window.localStorage.getItem(PLAYBACK_RATE_STORAGE_KEY)
+      );
       if (PLAYBACK_RATES.includes(stored)) {
         frame = window.requestAnimationFrame(() => setPlaybackRate(stored));
       }
@@ -148,7 +163,10 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
   function seekForward() {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.currentTime = Math.min(audio.duration, audio.currentTime + SEEK_AMOUNT);
+    audio.currentTime = Math.min(
+      audio.duration,
+      audio.currentTime + SEEK_AMOUNT
+    );
     setCurrentTime(audio.currentTime);
     savePosition(audio.currentTime);
   }
@@ -233,7 +251,11 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
           {playing ? (
             <Pause className="h-10 w-10" strokeWidth={2.5} />
           ) : (
-            <Play className="ml-1 h-10 w-10" strokeWidth={2.5} fill="currentColor" />
+            <Play
+              className="ml-1 h-10 w-10"
+              strokeWidth={2.5}
+              fill="currentColor"
+            />
           )}
         </button>
       </div>
@@ -311,7 +333,9 @@ function formatTime(sec: number): string {
 function applyPlaybackRate(audio: HTMLAudioElement, rate: number) {
   audio.playbackRate = rate;
   audio.defaultPlaybackRate = rate;
-  const pitchSafeAudio = audio as HTMLAudioElement & { preservesPitch?: boolean };
+  const pitchSafeAudio = audio as HTMLAudioElement & {
+    preservesPitch?: boolean;
+  };
   if ("preservesPitch" in pitchSafeAudio) {
     pitchSafeAudio.preservesPitch = true;
   }
