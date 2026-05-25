@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -24,10 +24,10 @@ const journey = [
     action: "Start free",
   },
   {
-    title: "Unlock the card",
-    body: "Rounds 2-12 build punches, defense, rhythm, movement, and one complete round.",
+    title: "Unlock the rounds",
+    body: "Rounds 2-12 build punches, defense, rhythm, movement, and steady momentum.",
     href: "/gym",
-    action: "See rounds",
+    action: "See the course",
   },
 ] as const;
 
@@ -41,18 +41,18 @@ const included = [
 const price = "\u00a39.99";
 
 const forYou = [
-  "You want to learn boxing basics privately",
-  "You feel awkward starting in a gym",
-  "You want short structured movement at home",
-  "You prefer clear instruction over hype",
-  "You want to build rhythm, balance, guard, and confidence slowly",
+  "You want a gentle, structured way to get moving again",
+  "You feel overwhelmed or embarrassed to begin again in a gym",
+  "You want low-friction, zero-equipment movement at home",
+  "You prefer quiet encouragement over high-energy fitness hype",
+  "You want to escape inertia and build momentum step-by-step",
 ] as const;
 
 const notForYou = [
-  "You already box seriously",
-  "You want hardcore fight training",
-  "You want video-led workouts",
-  "You want calorie tracking, leaderboards, or influencer-style fitness content",
+  "You already have a high-intensity workout routine",
+  "You want intense, competitive boxing training",
+  "You want video workouts to watch and copy",
+  "You want calorie tracking, leaderboards, or influencer-style content",
   "You are looking for medical or professional coaching advice",
 ] as const;
 
@@ -66,7 +66,7 @@ export default function HomePage() {
             <span className="slugger-phone-pulse flex h-9 w-9 items-center justify-center bg-[var(--slugger-steel)] text-[var(--slugger-bone)]">
               <Dumbbell className="h-4 w-4" />
             </span>
-            Beginner audio boxing
+            A quiet way to get moving again
           </div>
 
           <div className="grid gap-8">
@@ -75,11 +75,10 @@ export default function HomePage() {
                 Sofa2Slugger
               </h1>
               <p className="slugger-hero-lead mt-5 max-w-3xl font-black text-[var(--slugger-bone)]">
-                No gym. No bag. No audience.
+                No pressure. No gym. No audience.
               </p>
               <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--slugger-panel)] sm:text-lg sm:leading-8">
-                A private audio-guided boxing course for beginners who want to
-                move again without turning fitness into a performance.
+                A private audio-guided course for anyone who wants to shake off the inertia and start moving again—comfortably at home, with no screens and no expectations.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -90,7 +89,7 @@ export default function HomePage() {
                   className="inline-flex min-h-14 w-full items-center justify-center gap-3 bg-[var(--slugger-bone)] px-6 py-4 text-sm font-black uppercase text-[var(--slugger-ink)] transition hover:bg-white sm:w-auto"
                 >
                   <Play className="h-5 w-5" fill="currentColor" />
-                  Start Round 1 free
+                  Try Round 1 free
                 </Link>
                 <Link
                   href="/gym"
@@ -98,7 +97,7 @@ export default function HomePage() {
                   data-analytics-label="homepage_hero"
                   className="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-white/18 px-6 py-4 text-sm font-black uppercase text-[var(--slugger-bone)] transition hover:bg-white/10 sm:w-auto"
                 >
-                  Full course {price}
+                  All 12 Rounds {price}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
@@ -131,8 +130,8 @@ export default function HomePage() {
           <div className="grid gap-5 lg:grid-cols-[minmax(0,0.72fr)_minmax(260px,0.28fr)] lg:items-start">
             <div className="grid w-full grid-cols-3 border border-white/14 bg-white/[0.06] backdrop-blur lg:max-w-2xl">
               <Metric value="Free" label="Round 1" />
-              <Metric value={price} label="Full card" />
-              <Metric value="No" label="Kit needed" />
+              <Metric value={price} label="Lifetime access" />
+              <Metric value="No" label="Equipment needed" />
             </div>
             <div className="slugger-glow relative w-full bg-[var(--slugger-black)] p-2">
               <Image
@@ -161,20 +160,21 @@ export default function HomePage() {
           </div>
           <div className="max-w-3xl space-y-4 text-base leading-7 text-[var(--slugger-muted)] sm:text-lg sm:leading-8">
             <p>
-              Most fitness products are built for people who already feel like
-              fitness people.
+              Most fitness products are built for people who already look and feel
+              like athletes. They require gear, mirrors, and performance.
             </p>
             <p className="font-black text-[var(--slugger-ink)]">
               Sofa2Slugger is for the rest of us.
             </p>
             <p>
-              It was built for normal people who want a way back into movement
-              without joining a gym, buying equipment, filming themselves, or
-              pretending they already know what they are doing.
+              It was built for adults who are stuck in inertia, recovering from a break,
+              or simply embarrassed to start again in public. You don’t need boxing gloves,
+              a heavy bag, or perfect coordination.
             </p>
             <p>
-              Boxing gives the structure. Audio gives the privacy. The first win
-              is simply standing up and starting.
+              The rhythm of shadow boxing gives you a simple, structured focus. The privacy
+              of audio lets you move without watching yourself or being watched. The only goal
+              is standing up and starting.
             </p>
           </div>
         </div>
@@ -275,7 +275,7 @@ export default function HomePage() {
                 The fight card
               </p>
               <h2 className="mt-3 max-w-full break-words text-3xl font-black uppercase leading-tight sm:text-4xl lg:text-5xl">
-                Twelve short rounds. One earned path.
+                Twelve short rounds. A gentle path back.
               </h2>
               <p className="mt-4 text-base leading-7 text-[var(--slugger-muted)]">
                 The course turns a normal room into a simple training sequence:
@@ -293,7 +293,7 @@ export default function HomePage() {
                 </li>
                 <li className="flex gap-2">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 text-[var(--slugger-signal)]" />
-                  Beginner-safe without pretending boxing is soft.
+                  Beginner-safe, using the rhythm and focus of shadow boxing.
                 </li>
               </ul>
             </div>
