@@ -39,19 +39,6 @@ const included = [
 export default function HomePage() {
   return (
     <div className="bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
-      <div className="slugger-splash" aria-hidden>
-        <div className="slugger-splash-card">
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-[var(--slugger-action-hot)]">
-            Sofa2Slugger
-          </p>
-          <p className="mt-4 text-5xl font-black uppercase leading-none text-[var(--slugger-bone)] sm:text-7xl">
-            Stand up
-          </p>
-          <p className="mt-3 text-sm font-bold uppercase tracking-[0.16em] text-[var(--slugger-panel)]">
-            Round one is waiting.
-          </p>
-        </div>
-      </div>
       <section className="relative overflow-hidden bg-[var(--slugger-black)] text-[var(--slugger-bone)]">
         <div className="absolute inset-0 slugger-hero-grid opacity-70" />
         <div className="absolute bottom-[-28%] left-[8%] h-72 w-72 rounded-full bg-[var(--slugger-brass)]/20 blur-3xl" />
@@ -210,24 +197,28 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <div className="grid gap-2 sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-2">
               {SESSIONS.map((session) => (
                 <Link
                   key={session.id}
                   href={session.isFree ? `/session/${session.id}` : "/gym"}
-                  className="grid grid-cols-[auto_1fr] items-center gap-4 border border-[var(--slugger-ink)]/12 bg-[var(--slugger-bone)] px-4 py-4 transition hover:border-[var(--slugger-brass)] hover:bg-white"
+                  className="group/session flex min-h-44 flex-col items-start justify-between border border-[var(--slugger-ink)]/12 bg-[var(--slugger-bone)] p-5 transition hover:border-[var(--slugger-brass)] hover:bg-white"
                 >
-                  <span className="flex h-11 w-11 items-center justify-center bg-[var(--slugger-ink)] text-sm font-black text-[var(--slugger-bone)]">
-                    {session.id.toString().padStart(2, "0")}
-                  </span>
                   <div>
-                    <h3 className="font-black uppercase leading-5">
+                    <span className="flex h-11 w-11 items-center justify-center bg-[var(--slugger-ink)] text-sm font-black text-[var(--slugger-bone)]">
+                      {session.id.toString().padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-4 font-black uppercase leading-5">
                       {session.shortTitle}
                     </h3>
-                    <p className="mt-1 text-sm text-[var(--slugger-muted)]">
+                    <p className="mt-3 text-sm leading-6 text-[var(--slugger-muted)]">
                       {session.summary}
                     </p>
                   </div>
+                  <span className="mt-5 inline-flex items-center gap-2 text-xs font-black uppercase text-[var(--slugger-steel)] opacity-0 transition group-hover/session:opacity-100">
+                    {session.isFree ? "Start free" : "View round"}
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
                 </Link>
               ))}
             </div>
