@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -6,177 +5,113 @@ import {
   Headphones,
   Play,
   Dumbbell,
-  XCircle,
 } from "lucide-react";
 import { SESSIONS } from "@/lib/sessions";
 
 const journey = [
   {
-    title: "Hear the frame",
-    body: "The intro tells you what this is, what it is not, and how to train safely.",
+    title: "Listen first",
+    body: "A short intro sets the course, the promise, and the limits before you train.",
     href: "#intro-audio",
     action: "Play intro",
   },
   {
-    title: "Try Round 1",
-    body: "Start with stance, guard, breathing, and enough movement to feel the idea click.",
+    title: "Stand up",
+    body: "Round one teaches the base: stance, guard, breathing, and calm movement.",
     href: "/session/1",
     action: "Start free",
   },
   {
-    title: "Unlock the rounds",
-    body: "Rounds 2-12 build punches, defense, rhythm, movement, and steady momentum.",
+    title: "Earn the card",
+    body: "If Round 1 clicks, the rest of the course builds toward a complete shadowboxing round.",
     href: "/gym",
-    action: "See the course",
+    action: "View course",
   },
 ] as const;
 
 const included = [
   "Round 1 free",
-  "12 audio-led rounds",
-  "Lifetime access",
+  "Rounds 2-12 optional",
+  "One payment",
   "No subscription",
-] as const;
-
-const price = "\u00a39.99";
-
-const forYou = [
-  "You want a gentle, structured way to get moving again",
-  "You feel overwhelmed or embarrassed to begin again in a gym",
-  "You want low-friction, zero-equipment movement at home",
-  "You prefer quiet encouragement over high-energy fitness hype",
-  "You want to escape inertia and build momentum step-by-step",
-] as const;
-
-const notForYou = [
-  "You already have a high-intensity workout routine",
-  "You want intense, competitive boxing training",
-  "You want video workouts to watch and copy",
-  "You want calorie tracking, leaderboards, or influencer-style content",
-  "You are looking for medical or professional coaching advice",
 ] as const;
 
 export default function HomePage() {
   return (
-    <div className="max-w-full overflow-x-hidden bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
+    <div className="bg-[var(--slugger-paper)] text-[var(--slugger-ink)]">
+      <div className="slugger-splash" aria-hidden>
+        <div className="slugger-splash-card">
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-[var(--slugger-action-hot)]">
+            Sofa2Slugger
+          </p>
+          <p className="mt-4 text-5xl font-black uppercase leading-none text-[var(--slugger-bone)] sm:text-7xl">
+            Stand up
+          </p>
+          <p className="mt-3 text-sm font-bold uppercase tracking-[0.16em] text-[var(--slugger-panel)]">
+            Round one is waiting.
+          </p>
+        </div>
+      </div>
       <section className="relative overflow-hidden bg-[var(--slugger-black)] text-[var(--slugger-bone)]">
         <div className="absolute inset-0 slugger-hero-grid opacity-70" />
-        <div className="relative mx-auto flex max-w-6xl flex-col gap-8 px-5 py-8 sm:px-8 lg:px-10 lg:py-12">
-          <div className="flex max-w-full flex-wrap items-center gap-3 text-xs font-black uppercase tracking-[0.14em] text-[var(--slugger-action-hot)] sm:tracking-[0.2em]">
-            <span className="slugger-phone-pulse flex h-9 w-9 items-center justify-center bg-[var(--slugger-steel)] text-[var(--slugger-bone)]">
-              <Dumbbell className="h-4 w-4" />
-            </span>
-            A quiet way to get moving again
-          </div>
+        <div className="absolute bottom-[-28%] left-[8%] h-72 w-72 rounded-full bg-[var(--slugger-brass)]/20 blur-3xl" />
+        <div className="relative grid min-h-[calc(100vh-96px)] lg:grid-cols-[1.02fr_0.98fr]">
+          <div className="flex flex-col justify-between px-5 py-7 sm:px-8 lg:px-10">
+            <div className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.22em] text-[var(--slugger-action-hot)]">
+              <span className="slugger-phone-pulse flex h-9 w-9 items-center justify-center bg-[var(--slugger-steel)] text-[var(--slugger-bone)]">
+                <Dumbbell className="h-4 w-4" />
+              </span>
+              Start Round 1 free
+            </div>
 
-          <div className="grid gap-8">
-            <div className="min-w-0">
-              <h1 className="slugger-hero-title font-black uppercase tracking-normal">
+            <div className="my-12 max-w-3xl lg:my-16">
+              <h1 className="text-6xl font-black uppercase leading-[0.82] tracking-normal sm:text-7xl xl:text-8xl">
                 Sofa2Slugger
               </h1>
-              <p className="slugger-hero-lead mt-5 max-w-3xl font-black text-[var(--slugger-bone)]">
-                No pressure. No gym. No audience.
+              <p className="mt-6 max-w-2xl text-3xl font-black leading-9 text-[var(--slugger-bone)] sm:text-4xl">
+                No gym. No mirror. No camera.
               </p>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--slugger-panel)] sm:text-lg sm:leading-8">
-                A private audio-guided course for anyone who wants to shake off the inertia and start moving again—comfortably at home, with no screens and no expectations.
+              <p className="mt-5 max-w-xl text-base leading-7 text-[var(--slugger-panel)]">
+                Just headphones on, stand up, and follow the first home
+                training round. Try it first. Upgrade only if you want Round 2.
               </p>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/session/1"
-                  data-analytics-event="Start Round 1 clicked"
-                  data-analytics-label="homepage_hero"
-                  className="inline-flex min-h-14 w-full items-center justify-center gap-3 bg-[var(--slugger-bone)] px-6 py-4 text-sm font-black uppercase text-[var(--slugger-ink)] transition hover:bg-white sm:w-auto"
+                  className="inline-flex min-h-14 items-center justify-center gap-3 bg-[var(--slugger-bone)] px-6 py-4 text-sm font-black uppercase text-[var(--slugger-ink)] transition hover:bg-white"
                 >
                   <Play className="h-5 w-5" fill="currentColor" />
-                  Try Round 1 free
+                  Start Round 1 free
                 </Link>
                 <Link
-                  href="/gym"
-                  data-analytics-event="Unlock full course clicked"
-                  data-analytics-label="homepage_hero"
-                  className="inline-flex min-h-14 w-full items-center justify-center gap-3 border border-white/18 px-6 py-4 text-sm font-black uppercase text-[var(--slugger-bone)] transition hover:bg-white/10 sm:w-auto"
+                  href="#intro-audio"
+                  className="inline-flex min-h-14 items-center justify-center gap-3 border border-white/18 px-6 py-4 text-sm font-black uppercase text-[var(--slugger-bone)] transition hover:bg-white/10"
                 >
-                  All 12 Rounds {price}
+                  Hear the idea
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
             </div>
 
-            <aside className="border border-white/14 bg-white/[0.07] p-4 backdrop-blur lg:hidden">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--slugger-action-hot)]">
-                Launch price
-              </p>
-              <p className="mt-2 text-4xl font-black leading-none text-[var(--slugger-bone)]">
-                {price}
-              </p>
-              <p className="mt-3 text-sm font-bold leading-6 text-[var(--slugger-panel)]">
-                Pay once for rounds 2-12. Round 1 stays free, so nobody has to
-                buy blind.
-              </p>
-              <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-black uppercase text-[var(--slugger-panel)]/82">
-                {included.map((item) => (
-                  <span
-                    key={item}
-                    className="border border-white/10 px-2 py-2 text-center"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </aside>
+            <div className="grid max-w-xl grid-cols-3 border border-white/14 bg-white/[0.06] backdrop-blur">
+              <Metric value="Free" label="Round 1" />
+              <Metric value="12" label="Guided rounds" />
+              <Metric value="No" label="Kit or camera" />
+            </div>
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-[minmax(0,0.72fr)_minmax(260px,0.28fr)] lg:items-start">
-            <div className="grid w-full grid-cols-3 border border-white/14 bg-white/[0.06] backdrop-blur lg:max-w-2xl">
-              <Metric value="Free" label="Round 1" />
-              <Metric value={price} label="Lifetime access" />
-              <Metric value="No" label="Equipment needed" />
-            </div>
+          <div className="flex items-center px-5 pb-8 sm:px-8 lg:px-8 lg:py-10">
             <div className="slugger-glow relative w-full bg-[var(--slugger-black)] p-2">
-              <Image
+              <img
                 src="/images/hero-sofa-to-slugger-v1.png"
                 alt="A hooded person sitting on a sofa, looking down at a glowing phone on the floor."
-                width={1200}
-                height={900}
-                priority
-                unoptimized
-                className="h-auto max-h-72 w-full object-contain lg:max-h-64"
+                className="h-auto w-full object-contain"
               />
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="border-b border-[var(--slugger-ink)]/12 bg-[var(--slugger-paper)] px-5 py-10 sm:px-8 lg:px-10">
-        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--slugger-brass)]">
-              Why this exists
-            </p>
-            <h2 className="mt-3 max-w-2xl text-3xl font-black uppercase leading-tight sm:text-4xl">
-              For people who do not feel like fitness people.
-            </h2>
-          </div>
-          <div className="max-w-3xl space-y-4 text-base leading-7 text-[var(--slugger-muted)] sm:text-lg sm:leading-8">
-            <p>
-              Most fitness products are built for people who already look and feel
-              like athletes. They require gear, mirrors, and performance.
-            </p>
-            <p className="font-black text-[var(--slugger-ink)]">
-              Sofa2Slugger is for the rest of us.
-            </p>
-            <p>
-              It was built for adults who are stuck in inertia, recovering from a break,
-              or simply embarrassed to start again in public. You don’t need boxing gloves,
-              a heavy bag, or perfect coordination.
-            </p>
-            <p>
-              The rhythm of shadow boxing gives you a simple, structured focus. The privacy
-              of audio lets you move without watching yourself or being watched. The only goal
-              is standing up and starting.
-            </p>
-          </div>
+
         </div>
       </section>
 
@@ -213,48 +148,25 @@ export default function HomePage() {
               controls
               className="w-full"
               src="/audio/course-intro.chill-ska-warm-6x.mp3"
-              data-analytics-audio-type="course_intro"
             />
           </div>
         </div>
       </section>
 
-      <section className="border-b border-[var(--slugger-ink)]/12 bg-[var(--slugger-paper)] px-5 py-10 sm:px-8 lg:px-10">
-        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--slugger-brass)]">
-              Why audio?
-            </p>
-            <h2 className="mt-3 max-w-xl text-3xl font-black uppercase leading-tight sm:text-4xl">
-              Video makes you watch. Audio makes you move.
-            </h2>
-          </div>
-          <div className="max-w-3xl text-base leading-7 text-[var(--slugger-muted)] sm:text-lg sm:leading-8">
-            <p>
-              There are no mirrors, no perfect bodies to copy, and no audience.
-              Just clear instruction in your ear, one step at a time.
-            </p>
-            <p className="mt-4 font-black uppercase text-[var(--slugger-ink)]">
-              Listen first. Then move.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-8 sm:px-8 lg:px-10">
+      <section className="px-5 py-10 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-3 md:grid-cols-3">
             {journey.map((step, index) => (
               <Link
                 key={step.title}
                 href={step.href}
-                className="group flex min-h-44 flex-col justify-between border border-[var(--slugger-ink)]/14 bg-[var(--slugger-bone)] p-5 transition hover:-translate-y-1 hover:border-[var(--slugger-brass)] hover:shadow-xl hover:shadow-black/10"
+                className="group flex min-h-56 flex-col justify-between border border-[var(--slugger-ink)]/14 bg-[var(--slugger-bone)] p-5 transition hover:-translate-y-1 hover:border-[var(--slugger-brass)] hover:shadow-xl hover:shadow-black/10"
               >
                 <div>
                   <span className="inline-flex h-9 w-9 items-center justify-center bg-[var(--slugger-ink)] text-sm font-black text-[var(--slugger-bone)]">
                     {index + 1}
                   </span>
-                  <h2 className="mt-4 text-2xl font-black uppercase leading-6">
+                  <h2 className="mt-5 text-2xl font-black uppercase leading-6">
                     {step.title}
                   </h2>
                   <p className="mt-3 text-sm leading-6 text-[var(--slugger-muted)]">
@@ -269,13 +181,13 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="mt-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--slugger-brass)]">
                 The fight card
               </p>
-              <h2 className="mt-3 max-w-full break-words text-3xl font-black uppercase leading-tight sm:text-4xl lg:text-5xl">
-                Twelve short rounds. A gentle path back.
+              <h2 className="mt-3 text-5xl font-black uppercase leading-none">
+                Twelve short rounds. One earned path.
               </h2>
               <p className="mt-4 text-base leading-7 text-[var(--slugger-muted)]">
                 The course turns a normal room into a simple training sequence:
@@ -293,7 +205,7 @@ export default function HomePage() {
                 </li>
                 <li className="flex gap-2">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 text-[var(--slugger-signal)]" />
-                  Beginner-safe, using the rhythm and focus of shadow boxing.
+                  Beginner-safe without pretending boxing is soft.
                 </li>
               </ul>
             </div>
@@ -321,66 +233,55 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-2">
-            <AudienceColumn
-              title="This is for you if..."
-              items={forYou}
-              icon="check"
-            />
-            <AudienceColumn
-              title="This is not for you if..."
-              items={notForYou}
-              icon="x"
-            />
-          </div>
 
-          <div className="mt-10 border border-[var(--slugger-ink)]/14 bg-[var(--slugger-bone)] p-5">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-[var(--slugger-brass)]">
-              Safety note
-            </p>
-            <p className="mt-3 max-w-4xl text-sm font-bold leading-6 text-[var(--slugger-muted)]">
-              Sofa2Slugger teaches beginner movement and shadowboxing
-              fundamentals. It is not professional boxing coaching, medical
-              advice, or fight preparation. Move within your limits and stop if
-              something feels wrong.
-            </p>
-          </div>
+          <section className="mt-12 border border-[var(--slugger-ink)]/14 bg-[var(--slugger-ink)] p-5 text-[var(--slugger-bone)] sm:p-6">
+            <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--slugger-action-hot)]">
+                  After Round 1
+                </p>
+                <h2 className="mt-3 text-3xl font-black uppercase leading-tight sm:text-4xl">
+                  Round 1 is free. Round 2 is optional.
+                </h2>
+                <p className="mt-3 max-w-2xl text-sm font-bold leading-6 text-[var(--slugger-panel)]">
+                  If the first round gives you something useful, unlock rounds
+                  2-12 for {"\u00a39.99"}. One payment. No subscription.
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-[auto_1fr] sm:items-center">
+                <p className="text-4xl font-black leading-none text-[var(--slugger-bone)]">
+                  {"\u00a39.99"}
+                </p>
+                <div className="grid grid-cols-2 gap-2 text-xs font-black uppercase text-[var(--slugger-panel)]/82">
+                  {included.map((item) => (
+                    <span
+                      key={item}
+                      className="border border-white/10 px-2 py-2 text-center"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  href="/gym"
+                  className="inline-flex min-h-12 items-center justify-center gap-3 bg-[var(--slugger-bone)] px-5 py-3 text-sm font-black uppercase text-[var(--slugger-ink)] transition hover:bg-white sm:col-span-2"
+                >
+                  See rounds 2-12
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </div>
   );
 }
 
-function AudienceColumn({
-  title,
-  items,
-  icon,
-}: {
-  title: string;
-  items: readonly string[];
-  icon: "check" | "x";
-}) {
-  const Icon = icon === "check" ? CheckCircle2 : XCircle;
-
-  return (
-    <section className="border border-[var(--slugger-ink)]/14 bg-[var(--slugger-bone)] p-5">
-      <h2 className="text-2xl font-black uppercase leading-tight">{title}</h2>
-      <ul className="mt-5 grid gap-3 text-sm font-bold leading-6 text-[var(--slugger-charcoal)]">
-        {items.map((item) => (
-          <li key={item} className="flex gap-2">
-            <Icon className="mt-1 h-4 w-4 shrink-0 text-[var(--slugger-signal)]" />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
 function Metric({ value, label }: { value: string; label: string }) {
   return (
     <div className="border-r border-white/12 p-4 last:border-r-0">
-      <p className="text-2xl font-black sm:text-3xl">{value}</p>
+      <p className="text-3xl font-black">{value}</p>
       <p className="mt-1 text-xs font-black uppercase text-[var(--slugger-panel)]/60">
         {label}
       </p>
