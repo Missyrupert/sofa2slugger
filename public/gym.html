@@ -28,10 +28,13 @@
     <!-- CTAs -->
     <div class="gym-ctas">
       <button id="btn-play-session1" class="btn-primary cta-session1">Play Session 1 Free</button>
-      <a href="https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801" class="btn-secondary cta-unlock">Unlock All Sessions</a>
+      <!-- Stripe Payment Link: replace href with the confirmed new £4.99 GBP Stripe payment link once tested. Current link is preserved so checkout does not break. -->
+      <a href="https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801" class="btn-secondary cta-unlock"
+        data-stripe-current-link="https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801"
+        data-stripe-new-price-id="TODO_INSERT_STRIPE_PRICE_ID_499_GBP">Start Today — Unlock All Sessions for &pound;4.99</a>
     </div>
 
-    <p class="orientation-cue">Your coach will guide you step by step—just listen and move.</p>
+    <p class="orientation-cue">Your coach will guide you step by step&mdash;just listen and move.</p>
 
     <div class="sessions">
       <div class="session-card" data-session="1">
