@@ -1,10 +1,14 @@
-const STRIPE_PRICE_ID_499_GBP = 'price_1Tc9DWLOeUZSyE4Rr2I2a5WH';
+const DEFAULT_STRIPE_PRICE_ID_499_GBP = 'price_1Tc9DWLOeUZSyE4Rr2I2a5WH';
 const STRIPE_PAYMENT_LINK_LEGACY = 'https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801';
 
 function getSiteUrl(event) {
   const proto = event.headers['x-forwarded-proto'] || 'https';
   const host = event.headers.host;
   return `${proto}://${host}`;
+}
+
+function getStripePriceId() {
+  return process.env.STRIPE_PRICE_ID_GBP_499 || DEFAULT_STRIPE_PRICE_ID_499_GBP;
 }
 
 function redirect(location) {
@@ -20,6 +24,7 @@ function redirect(location) {
 
 exports.handler = async function handler(event) {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+  const stripePriceId = getStripePriceId();
 
   // Keep checkout working while Stripe server-side configuration is being completed.
   if (!stripeSecretKey) {
@@ -35,12 +40,12 @@ exports.handler = async function handler(event) {
     mode: 'payment',
     success_url: successUrl,
     cancel_url: cancelUrl,
-    'line_items[0][price]': STRIPE_PRICE_ID_499_GBP,
+    'line_items[0][price]': stripePriceId,
     'line_items[0][quantity]': '1',
     'metadata[product]': 'Sofa2Slugger',
-    'metadata[price_id]': STRIPE_PRICE_ID_499_GBP,
+    'metadata[price_id]': stripePriceId,
     'payment_intent_data[metadata][product]': 'Sofa2Slugger',
-    'payment_intent_data[metadata][price_id]': STRIPE_PRICE_ID_499_GBP
+    'payment_intent_data[metadata][price_id]': stripePriceId
   });
 
   try {
