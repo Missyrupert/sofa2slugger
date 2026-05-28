@@ -2,7 +2,13 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getResolvedBaseUrl } from "@/lib/env";
 
-const COURSE_PRICE_PENCE = 999;
+const DEFAULT_STRIPE_PRICE_ID_GBP_499 = "price_1Tc9DWLOeUZSyE4Rr2I2a5WH";
+
+function getCoursePriceId() {
+  return (
+    process.env.STRIPE_PRICE_ID_GBP_499 || DEFAULT_STRIPE_PRICE_ID_GBP_499
+  );
+}
 
 export async function POST() {
   const secretKey = process.env.STRIPE_SECRET_KEY;
@@ -14,6 +20,7 @@ export async function POST() {
   }
 
   const stripe = new Stripe(secretKey);
+  const coursePriceId = getCoursePriceId();
 
   const baseUrl = getResolvedBaseUrl();
 
@@ -23,18 +30,20 @@ export async function POST() {
       payment_method_types: ["card"],
       line_items: [
         {
-          price_data: {
-            currency: "gbp",
-            product_data: {
-              name: "Sofa2Slugger Full Course",
-              description:
-                "Lifetime access to all 12 guided audio boxing rounds.",
-            },
-            unit_amount: COURSE_PRICE_PENCE,
-          },
+          price: coursePriceId,
           quantity: 1,
         },
       ],
+      metadata: {
+        product: "Sofa2Slugger Full Course",
+        price_id: coursePriceId,
+      },
+      payment_intent_data: {
+        metadata: {
+          product: "Sofa2Slugger Full Course",
+          price_id: coursePriceId,
+        },
+      },
       success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/gym`,
     });
