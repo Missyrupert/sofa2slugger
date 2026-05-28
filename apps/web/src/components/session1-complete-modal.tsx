@@ -168,7 +168,7 @@ export function Session1CompleteModal({ onClose }: Session1CompleteModalProps) {
             data-analytics-label="round_1_complete_modal_checkout"
             className="flex-1 bg-[var(--slugger-brass)] py-4 font-black uppercase tracking-wide text-[var(--slugger-bone)] transition hover:bg-[var(--slugger-action-hot)] disabled:opacity-50"
           >
-            {loading ? "Redirecting..." : "Unlock full course - £9.99"}
+            {loading ? "Redirecting..." : "Unlock full course - £4.99"}
           </button>
           <button
             type="button"
