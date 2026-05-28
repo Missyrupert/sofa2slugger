@@ -97,8 +97,6 @@ export default function HomePage() {
               />
             </div>
           </div>
-
-
         </div>
       </section>
 
@@ -224,7 +222,6 @@ export default function HomePage() {
             </div>
           </div>
 
-
           <section className="mt-12 border border-[var(--slugger-ink)]/14 bg-[var(--slugger-ink)] p-5 text-[var(--slugger-bone)] sm:p-6">
             <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div>
@@ -232,16 +229,16 @@ export default function HomePage() {
                   After Round 1
                 </p>
                 <h2 className="mt-3 text-3xl font-black uppercase leading-tight sm:text-4xl">
-                  Round 1 is free. Round 2 is optional.
+                  Round 1 is free. Start today for the rest.
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm font-bold leading-6 text-[var(--slugger-panel)]">
                   If the first round gives you something useful, unlock rounds
-                  2-12 for {"\u00a39.99"}. One payment. No subscription.
+                  2-12 for {"\u00a34.99"}. One payment. No subscription.
                 </p>
               </div>
               <div className="grid gap-3 sm:grid-cols-[auto_1fr] sm:items-center">
                 <p className="text-4xl font-black leading-none text-[var(--slugger-bone)]">
-                  {"\u00a39.99"}
+                  {"\u00a34.99"}
                 </p>
                 <div className="grid grid-cols-2 gap-2 text-xs font-black uppercase text-[var(--slugger-panel)]/82">
                   {included.map((item) => (
