@@ -54,6 +54,20 @@ var STORAGE_KEY_MANIFESTO_HEARD = 's2s_manifesto_heard';
 var STORAGE_KEY_PAID = 's2s_premium_access';
 var STORAGE_KEY_SESSION_PREFIX = 's2s_session_';
 
+// Stripe checkout configuration.
+// Product ID is not currently stored in this codebase because checkout uses Stripe Payment Links.
+// Insert the confirmed new £4.99 GBP Stripe price ID here if this moves to generated Checkout Sessions.
+var STRIPE_PRODUCT_ID = '';
+var STRIPE_PRICE_ID_499_GBP = 'TODO_INSERT_STRIPE_PRICE_ID_499_GBP';
+// Insert the confirmed new £4.99 GBP Stripe payment link here after testing it end-to-end.
+var STRIPE_PAYMENT_LINK_499_GBP = '';
+// Preserved legacy payment link so the existing checkout path remains available until replacement is confirmed.
+var STRIPE_PAYMENT_LINK_LEGACY = 'https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801';
+
+function getCheckoutUrl() {
+  return STRIPE_PAYMENT_LINK_499_GBP || STRIPE_PAYMENT_LINK_LEGACY;
+}
+
 var SESSION_NAMES = {
   1: 'Where It Begins',
   2: 'Finding Your Base',
@@ -295,10 +309,11 @@ function updateSessionCards() {
     }
   });
 
-  // Update unlock CTA visibility
+  // Update unlock CTA visibility and destination
   var ctaUnlock = document.querySelector('.cta-unlock');
   if (ctaUnlock) {
     ctaUnlock.style.display = premium ? 'none' : 'flex';
+    ctaUnlock.href = getCheckoutUrl();
   }
 
   // Hide Session 1 complete block for premium users
@@ -360,7 +375,7 @@ function showPlayer(sessionNum) {
   if (!canPlaySession(sessionNum)) {
     if (!isPremium() && sessionNum > 1) {
       // Redirect to unlock
-      window.location.href = 'https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801';
+      window.location.href = getCheckoutUrl();
     }
     return;
   }
