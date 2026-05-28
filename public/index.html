@@ -5,6 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sofa2Slugger</title>
+  <meta name="description" content="Start Sofa2Slugger today for £4.99 GBP. A one-time payment unlocks 10 audio-guided beginner boxing sessions you can train at home, without a gym or subscription.">
+  <meta property="og:title" content="Sofa2Slugger">
+  <meta property="og:description" content="A low-friction way to start moving today: 10 audio-guided beginner boxing sessions for a £4.99 GBP one-time payment.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sofa2Slugger">
+  <meta name="twitter:description" content="Unlock 10 audio-guided beginner boxing sessions for £4.99 GBP. Pay once, start today, train anywhere.">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Sofa2Slugger",
+      "description": "Audio-guided beginner boxing sessions for at-home training.",
+      "offers": {
+        "@type": "Offer",
+        "price": "4.99",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock",
+        "category": "One-time payment"
+      }
+    }
+  </script>
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
 
@@ -96,14 +118,16 @@
 
       <!-- Pricing -->
       <div class="pricing-anchor" id="pricing">
-        <p class="value-anchor">A single boxing class costs &pound;15&ndash;&pound;25.<br>Sofa2Slugger gives you 10
-          sessions for
-          <strong>&pound;9.99</strong>.
+        <p class="value-anchor">Start today with the full 10-session programme for
+          <strong>&pound;4.99 GBP</strong>&mdash;a one-time payment, no subscription.
         </p>
+        <p class="pricing-clarify">A focused, low-risk entry point into boxing-style movement you can begin the moment you're ready.</p>
         <div style="margin-top: 20px;">
-          <!-- Stripe Payment Link -->
+          <!-- Stripe Payment Link: replace href with the confirmed new £4.99 GBP Stripe payment link once tested. Current link is preserved so checkout does not break. -->
           <a href="https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801" class="btn-primary"
-            style="text-decoration: none; padding: 12px 24px;">Unlock Sessions 2-10</a>
+            data-stripe-current-link="https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801"
+            data-stripe-new-price-id="TODO_INSERT_STRIPE_PRICE_ID_499_GBP"
+            style="text-decoration: none; padding: 12px 24px;">Start Today — Unlock Sessions 2-10</a>
         </div>
       </div>
 
@@ -115,7 +139,7 @@
       <!-- What Happens After You Buy -->
       <section class="content-section reassurance">
         <h2 class="section-title">What Happens After You Buy</h2>
-        <p class="reassurance-text">You'll get instant access to all 10 sessions right here on the site. No accounts, no apps to install, no waiting. Just hit play and train.</p>
+        <p class="reassurance-text">You'll get instant access to all 10 sessions right here on the site. No accounts, no apps to install, no waiting. Pay once, hit play, and train.</p>
       </section>
 
     </section>
