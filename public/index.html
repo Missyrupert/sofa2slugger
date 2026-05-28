@@ -123,10 +123,10 @@
         </p>
         <p class="pricing-clarify">A focused, low-risk entry point into boxing-style movement you can begin the moment you're ready.</p>
         <div style="margin-top: 20px;">
-          <!-- Stripe Payment Link: replace href with the confirmed new £4.99 GBP Stripe payment link once tested. Current link is preserved so checkout does not break. -->
-          <a href="https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801" class="btn-primary"
+          <!-- Stripe Checkout uses price_1Tc9DWLOeUZSyE4Rr2I2a5WH via /.netlify/functions/create-checkout. The function falls back to the legacy Payment Link if Stripe server config is missing. -->
+          <a href="/.netlify/functions/create-checkout" class="btn-primary"
             data-stripe-current-link="https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801"
-            data-stripe-new-price-id="TODO_INSERT_STRIPE_PRICE_ID_499_GBP"
+            data-stripe-new-price-id="price_1Tc9DWLOeUZSyE4Rr2I2a5WH"
             style="text-decoration: none; padding: 12px 24px;">Start Today — Unlock Sessions 2-10</a>
         </div>
       </div>
