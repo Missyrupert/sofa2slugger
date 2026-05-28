@@ -45,8 +45,8 @@ const FAQS = [
     a: "Yes. No sign-up, no email, and no card details. Start Round 1 whenever you are ready.",
   },
   {
-    q: "What do I get for £9.99?",
-    a: "Lifetime access to rounds 2 through 12 in this browser. No subscription and no recurring charge.",
+    q: "What do I get for £4.99?",
+    a: "Lifetime access to rounds 2 through 12 in this browser. One low-friction payment, no subscription and no recurring charge.",
   },
   {
     q: "Can I replay rounds?",
