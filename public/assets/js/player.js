@@ -55,17 +55,16 @@ var STORAGE_KEY_PAID = 's2s_premium_access';
 var STORAGE_KEY_SESSION_PREFIX = 's2s_session_';
 
 // Stripe checkout configuration.
-// Product ID is not currently stored in this codebase because checkout uses Stripe Payment Links.
-// Insert the confirmed new £4.99 GBP Stripe price ID here if this moves to generated Checkout Sessions.
+// Product ID is not currently stored in this codebase because checkout is price-driven.
 var STRIPE_PRODUCT_ID = '';
-var STRIPE_PRICE_ID_499_GBP = 'TODO_INSERT_STRIPE_PRICE_ID_499_GBP';
-// Insert the confirmed new £4.99 GBP Stripe payment link here after testing it end-to-end.
-var STRIPE_PAYMENT_LINK_499_GBP = '';
-// Preserved legacy payment link so the existing checkout path remains available until replacement is confirmed.
+var STRIPE_PRICE_ID_499_GBP = 'price_1Tc9DWLOeUZSyE4Rr2I2a5WH';
+// Server-side checkout creates a Stripe Checkout Session using STRIPE_PRICE_ID_499_GBP.
+var STRIPE_CHECKOUT_URL_499_GBP = '/.netlify/functions/create-checkout';
+// Preserved legacy payment link so checkout still works if server-side Stripe configuration is missing.
 var STRIPE_PAYMENT_LINK_LEGACY = 'https://buy.stripe.com/dRm7sM73Y3E80Unctn8k801';
 
 function getCheckoutUrl() {
-  return STRIPE_PAYMENT_LINK_499_GBP || STRIPE_PAYMENT_LINK_LEGACY;
+  return STRIPE_CHECKOUT_URL_499_GBP || STRIPE_PAYMENT_LINK_LEGACY;
 }
 
 var SESSION_NAMES = {
