@@ -1,0 +1,153 @@
+"use client";
+
+import { FormEvent, useEffect, useState } from "react";
+import { Mail } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
+import { getStoredAttribution } from "@/lib/attribution";
+
+type EmailCaptureProps = {
+  source: "homepage" | "round_1_complete";
+  variant?: "light" | "dark";
+};
+
+export function EmailCapture({
+  source,
+  variant = "light",
+}: EmailCaptureProps) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    trackEvent("email_capture_viewed", { source });
+  }, [source]);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          source,
+          page: window.location.pathname,
+          attribution: getStoredAttribution(),
+        }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        trackEvent("email_submit_failed", {
+          source,
+          reason: data.error ?? "unknown_error",
+        });
+        setStatus("error");
+        setMessage(data.error ?? "That did not work. Please try again.");
+        return;
+      }
+
+      trackEvent("email_submitted", {
+        source,
+        storage_mode: data.mode ?? "configured_destination",
+      });
+      setStatus("success");
+      setMessage(data.message ?? "Done. You are on the list.");
+      setEmail("");
+    } catch {
+      trackEvent("email_submit_failed", {
+        source,
+        reason: "network_error",
+      });
+      setStatus("error");
+      setMessage("Network error. Please try again.");
+    }
+  }
+
+  const dark = variant === "dark";
+
+  return (
+    <div
+      className={`border p-4 sm:p-5 ${
+        dark
+          ? "border-white/10 bg-white/[0.05] text-[var(--slugger-bone)]"
+          : "border-[var(--slugger-ink)]/14 bg-[var(--slugger-bone)] text-[var(--slugger-ink)]"
+      }`}
+    >
+      <div className="flex items-start gap-3">
+        <span
+          className={`flex h-10 w-10 shrink-0 items-center justify-center ${
+            dark
+              ? "bg-[var(--slugger-brass)] text-[var(--slugger-bone)]"
+              : "bg-[var(--slugger-ink)] text-[var(--slugger-bone)]"
+          }`}
+        >
+          <Mail className="h-5 w-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h2 className="text-xl font-black uppercase leading-tight">
+            Want the beginner reset plan?
+          </h2>
+          <p
+            className={`mt-2 text-sm leading-6 ${
+              dark ? "text-[var(--slugger-panel)]" : "text-[var(--slugger-muted)]"
+            }`}
+          >
+            Leave your email and I&apos;ll send you simple Sofa2Slugger updates,
+            beginner tips, and launch offers. No spam.
+          </p>
+        </div>
+      </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto]"
+      >
+        <label className="sr-only" htmlFor={`email-capture-${source}`}>
+          Email address
+        </label>
+        <input
+          id={`email-capture-${source}`}
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+          placeholder="you@example.com"
+          className={`min-h-12 w-full border px-4 text-sm font-bold outline-none ${
+            dark
+              ? "border-white/15 bg-black/20 text-[var(--slugger-bone)] placeholder:text-white/35 focus:border-[var(--slugger-brass)]"
+              : "border-[var(--slugger-ink)]/18 bg-white text-[var(--slugger-ink)] placeholder:text-[var(--slugger-muted)]/60 focus:border-[var(--slugger-brass)]"
+          }`}
+        />
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className={`min-h-12 px-5 py-3 text-sm font-black uppercase transition disabled:opacity-60 ${
+            dark
+              ? "bg-[var(--slugger-bone)] text-[var(--slugger-ink)] hover:bg-white"
+              : "bg-[var(--slugger-ink)] text-[var(--slugger-bone)] hover:bg-[var(--slugger-brass)]"
+          }`}
+        >
+          {status === "loading" ? "Sending..." : "Send me the reset plan"}
+        </button>
+      </form>
+
+      {message && (
+        <p
+          className={`mt-3 text-sm font-bold ${
+            status === "success"
+              ? "text-[var(--slugger-signal)]"
+              : "text-[var(--slugger-action-hot)]"
+          }`}
+        >
+          {message}
+        </p>
+      )}
+    </div>
+  );
+}
