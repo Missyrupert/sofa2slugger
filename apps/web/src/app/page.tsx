@@ -6,6 +6,7 @@ import {
   Play,
   Dumbbell,
 } from "lucide-react";
+import { EmailCapture } from "@/components/email-capture";
 import { SESSIONS } from "@/lib/sessions";
 
 const journey = [
@@ -66,6 +67,11 @@ export default function HomePage() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/session/1"
+                  data-analytics-event="round_1_clicked"
+                  data-analytics-label="hero_cta"
+                  data-analytics-source="homepage"
+                  data-analytics-round-id="1"
+                  data-analytics-session-id="1"
                   className="inline-flex min-h-14 items-center justify-center gap-3 bg-[var(--slugger-bone)] px-6 py-4 text-sm font-black uppercase text-[var(--slugger-ink)] transition hover:bg-white"
                 >
                   <Play className="h-5 w-5" fill="currentColor" />
@@ -100,6 +106,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-b border-[var(--slugger-ink)]/12 bg-[var(--slugger-paper)] px-5 py-7 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-6xl">
+          <EmailCapture source="homepage" />
+        </div>
+      </section>
+
       <section
         id="intro-audio"
         className="border-y border-[var(--slugger-ink)]/12 bg-[var(--slugger-bone)] px-5 py-8 sm:px-8 lg:px-10"
@@ -125,7 +137,7 @@ export default function HomePage() {
               <div>
                 <p className="text-sm font-black uppercase">Course intro</p>
                 <p className="text-xs font-bold uppercase text-[var(--slugger-panel)]/70">
-                  Narrator with final music bed
+                  Two and a half minutes
                 </p>
               </div>
             </div>
@@ -200,6 +212,15 @@ export default function HomePage() {
                 <Link
                   key={session.id}
                   href={session.isFree ? `/session/${session.id}` : "/gym"}
+                  data-analytics-event={
+                    session.id === 1 ? "round_1_clicked" : undefined
+                  }
+                  data-analytics-label={
+                    session.id === 1 ? "homepage_round_card" : undefined
+                  }
+                  data-analytics-source={session.id === 1 ? "homepage" : undefined}
+                  data-analytics-round-id={session.id === 1 ? "1" : undefined}
+                  data-analytics-session-id={session.id === 1 ? "1" : undefined}
                   className="group/session flex min-h-44 flex-col items-start justify-between border border-[var(--slugger-ink)]/12 bg-[var(--slugger-bone)] p-5 transition hover:border-[var(--slugger-brass)] hover:bg-white"
                 >
                   <div>
