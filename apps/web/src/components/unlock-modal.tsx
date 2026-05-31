@@ -82,7 +82,7 @@ export function UnlockModal({ onClose }: UnlockModalProps) {
           data-analytics-label="unlock_modal_checkout"
           className="mt-6 w-full bg-[var(--slugger-brass)] py-4 font-black uppercase tracking-wide text-[var(--slugger-bone)] transition hover:bg-[var(--slugger-action-hot)] disabled:opacity-50"
         >
-          {loading ? "Redirecting..." : "Unlock for £9.99"}
+          {loading ? "Redirecting..." : "Unlock for £4.99"}
         </button>
       </div>
     </div>
