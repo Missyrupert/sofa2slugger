@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, CheckCircle2, Clock3, Headphones, ListChecks } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ChevronDown, Clock3, Headphones, ListChecks } from "lucide-react";
 import { AudioPlayer } from "@/components/audio/AudioPlayer";
 import { Session1CompleteModal } from "@/components/session1-complete-modal";
 import { getSessionAudioPath } from "@/content/audioMap";
@@ -19,6 +19,7 @@ export default function SessionPage() {
   const router = useRouter();
   const [completed, setCompleted] = useState(false);
   const [showTeaser, setShowTeaser] = useState(false);
+  const [showMobileProgram, setShowMobileProgram] = useState(false);
 
   const sessionId = parseInt(params.id as string, 10);
   const session = getSession(sessionId);
@@ -196,7 +197,17 @@ export default function SessionPage() {
           <p className="text-xs font-black uppercase text-[var(--slugger-brass)]">
             Program
           </p>
-          <div className="mt-4 flex flex-col gap-2">
+          <button
+            type="button"
+            onClick={() => setShowMobileProgram((value) => !value)}
+            className="mt-3 flex w-full items-center justify-between bg-[var(--slugger-paper)] px-3 py-3 text-left text-sm font-black uppercase text-[var(--slugger-ink)] lg:hidden"
+          >
+            View course
+            <ChevronDown
+              className={`h-4 w-4 transition ${showMobileProgram ? "rotate-180" : ""}`}
+            />
+          </button>
+          <div className={`mt-4 flex-col gap-2 lg:flex ${showMobileProgram ? "flex" : "hidden"}`}>
             {SESSIONS.map((item) => (
               <Link
                 key={item.id}

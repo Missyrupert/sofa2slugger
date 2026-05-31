@@ -38,11 +38,10 @@ export default function GymPage() {
               Your course
             </p>
             <h1 className="mt-3 max-w-full break-words text-4xl font-black uppercase leading-[0.92] sm:max-w-3xl sm:text-5xl lg:text-6xl">
-              Start with Round 1.
+              Take it one round at a time.
             </h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--slugger-panel)]">
-              The Base is open now. Rounds 2-12 unlock together as the full
-              course when you are ready to keep going.
+              The Base is open now. Rounds 2-12 unlock together when you are ready to build steady momentum.
             </p>
           </div>
           <div className="border border-white/14 bg-white/[0.05] p-5 backdrop-blur">
@@ -60,7 +59,7 @@ export default function GymPage() {
                 <span className="mr-2 text-[var(--slugger-action-hot)]">
                   02
                 </span>
-                The full 12-round card unlocks once.
+                The full course unlocks with one payment.
               </p>
               <p>
                 <span className="mr-2 text-[var(--slugger-action-hot)]">
@@ -79,12 +78,11 @@ export default function GymPage() {
             Course card
           </p>
           <h2 className="mt-2 text-3xl font-black uppercase leading-none">
-            Begin at the base.
+            Start where you are.
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--slugger-muted)]">
-            Round 1 is the starting point. The locked rounds show the path
-            ahead: fundamentals, defense, movement, rhythm, and a first full
-            round.
+            Round 1 is your starting point. The other rounds show the path
+            ahead: fundamentals, defense, movement, rhythm, and steady flow.
           </p>
         </div>
 

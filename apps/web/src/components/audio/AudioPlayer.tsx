@@ -215,6 +215,11 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
   return (
     <div className="flex flex-col items-center gap-7">
       <div className="relative flex items-center justify-center">
+        <img
+          src="/images/app-icon.png"
+          alt="Sofa2Slugger Logo"
+          className="absolute h-[190px] w-[190px] rounded-full object-cover opacity-18 pointer-events-none"
+        />
         <svg
           width={RING_SIZE}
           height={RING_SIZE}

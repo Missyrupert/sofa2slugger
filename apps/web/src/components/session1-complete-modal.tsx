@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { X } from "lucide-react";
 
 type Session1CompleteModalProps = {
@@ -69,15 +70,15 @@ export function Session1CompleteModal({ onClose }: Session1CompleteModalProps) {
 
         <h2
           id="teaser-modal-title"
-          className="mt-3 pr-8 text-3xl font-black uppercase tracking-tight text-[var(--slugger-bone)]"
+          className="mt-3 pr-8 text-3xl font-black uppercase tracking-tight text-[var(--slugger-bone)] text-balance"
         >
-          You finished round one.
+          You stood up and finished Round 1. That is the hardest part.
         </h2>
 
         <p className="mt-4 leading-7 text-[var(--slugger-panel)]">
-          That was just the warm-up. Rounds 2-12 take you from jabs and crosses
-          through to full round work: proper technique, real combinations, and
-          rounds that actually make you sweat.
+          You've broken the inertia. The next 11 rounds help you build on this
+          momentum: rhythm, balance, guard, control, and clean resets at your
+          own pace.
         </p>
 
         <div className="mt-6 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
@@ -150,7 +151,7 @@ export function Session1CompleteModal({ onClose }: Session1CompleteModalProps) {
         </div>
 
         <p className="mt-6 text-xs font-bold uppercase text-[var(--slugger-panel)]/68">
-          One payment. No subscription. Train whenever you want.
+          One simple payment. No subscription. Move at your own pace.
         </p>
 
         {error && (
@@ -175,9 +176,16 @@ export function Session1CompleteModal({ onClose }: Session1CompleteModalProps) {
             onClick={onClose}
             className="border border-white/15 px-6 py-4 text-sm font-black uppercase tracking-wide text-[var(--slugger-panel)] transition hover:bg-[var(--slugger-bone)] hover:text-[var(--slugger-ink)]"
           >
-            Maybe Later
+            Replay Round 1 tomorrow
           </button>
         </div>
+        <Link
+          href="/progress"
+          onClick={onClose}
+          className="mt-3 inline-flex w-full justify-center border border-white/10 px-4 py-3 text-sm font-black uppercase tracking-wide text-[var(--slugger-panel)] transition hover:bg-white/10"
+        >
+          Back to Progress
+        </Link>
       </div>
     </div>
   );

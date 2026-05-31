@@ -27,9 +27,11 @@ export default function RootLayout({
           <aside className="hidden w-68 shrink-0 flex-col overflow-hidden border border-white/10 bg-[var(--slugger-black)]/95 text-[var(--slugger-bone)] shadow-2xl shadow-black/35 md:sticky md:top-4 md:flex md:max-h-[calc(100vh-2rem)] md:overflow-y-auto">
             <div className="slugger-ring-lines flex min-h-48 flex-col justify-between border-b border-white/10 p-5">
               <Link href="/" className="group flex items-center gap-3">
-                <span className="slugger-two-mark h-11 w-14 text-sm font-black tracking-tight">
-                  S2S
-                </span>
+                <img
+                  src="/images/app-icon.png"
+                  alt="Sofa2Slugger Logo"
+                  className="h-11 w-11 rounded-lg border border-[var(--slugger-brass)] object-cover shadow-lg"
+                />
                 <span>
                   <span className="block text-lg font-black uppercase leading-none tracking-tight">
                     Sofa2Slugger
@@ -70,9 +72,11 @@ export default function RootLayout({
                 href="/"
                 className="flex items-center gap-2 text-base font-black uppercase tracking-tight text-[var(--slugger-ink)]"
               >
-                <span className="slugger-two-mark h-8 w-10 text-[11px]">
-                  S2S
-                </span>
+                <img
+                  src="/images/app-icon.png"
+                  alt="Sofa2Slugger Logo"
+                  className="h-8 w-8 rounded-md border border-[var(--slugger-brass)] object-cover"
+                />
                 Sofa2Slugger
               </Link>
             </header>

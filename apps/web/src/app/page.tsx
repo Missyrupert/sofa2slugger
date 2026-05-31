@@ -7,19 +7,20 @@ import {
   Dumbbell,
 } from "lucide-react";
 import { SESSIONS } from "@/lib/sessions";
+import { HomeResumeCta } from "@/components/home-resume-cta";
 
 const journey = [
-  {
-    title: "Listen first",
-    body: "A short intro sets the course, the promise, and the limits before you train.",
-    href: "#intro-audio",
-    action: "Play intro",
-  },
   {
     title: "Stand up",
     body: "Round one teaches the base: stance, guard, breathing, and calm movement.",
     href: "/session/1",
-    action: "Start free",
+    action: "Start Round 1 free",
+  },
+  {
+    title: "Move privately",
+    body: "Headphones on, no bag, no mirror, no audience. Just a private at-home round.",
+    href: "/session/1",
+    action: "Press play",
   },
   {
     title: "Earn the card",
@@ -59,9 +60,11 @@ export default function HomePage() {
                 No gym. No mirror. No camera.
               </p>
               <p className="mt-5 max-w-xl text-base leading-7 text-[var(--slugger-panel)]">
-                Just headphones on, stand up, and follow the first home
-                training round. Try it first. Upgrade only if you want Round 2.
+                Audio-guided beginner boxing at home. Headphones on, stand up,
+                and follow the first private round. Try it first. Upgrade only
+                if you want Round 2.
               </p>
+              <HomeResumeCta />
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
@@ -75,7 +78,7 @@ export default function HomePage() {
                   href="#intro-audio"
                   className="inline-flex min-h-14 items-center justify-center gap-3 border border-white/18 px-6 py-4 text-sm font-black uppercase text-[var(--slugger-bone)] transition hover:bg-white/10"
                 >
-                  Hear the idea
+                  2-min intro, if you want it
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
@@ -112,11 +115,11 @@ export default function HomePage() {
               Before round one
             </p>
             <h2 className="mt-3 text-4xl font-black uppercase leading-none">
-              Listen first. Then move.
+              Optional intro. Round 1 is ready.
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--slugger-muted)]">
               Two and a half minutes to understand what Sofa2Slugger is, what it
-              is not, and why the first win is simply standing up.
+              is not, and why the first beginner boxing win is simply standing up.
             </p>
           </div>
           <div className="border border-[var(--slugger-ink)]/14 bg-[var(--slugger-ink)] p-4 text-[var(--slugger-bone)]">
