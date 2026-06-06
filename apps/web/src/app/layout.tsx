@@ -58,7 +58,7 @@ export default function RootLayout({
                 href="/session/1"
                 data-analytics-event="Start Round 1 clicked"
                 data-analytics-label="sidebar_cta"
-                className="flex items-center justify-between bg-[var(--slugger-bone)] px-4 py-3 text-sm font-black uppercase tracking-wide text-[var(--slugger-ink)] transition hover:bg-white"
+                className="flex items-center justify-between bg-[var(--slugger-bone)] px-4 py-3 text-sm font-black uppercase tracking-wide text-[var(--slugger-black)] transition hover:bg-white"
               >
                 Start round 1
                 <ArrowRight className="h-4 w-4" />
@@ -81,8 +81,16 @@ export default function RootLayout({
               </Link>
             </header>
 
-            <main className="min-w-0 max-w-full flex-1 pb-24 md:pb-4">
-              {children}
+            <main className="min-w-0 max-w-full flex-1 pb-24 md:pb-4 flex flex-col justify-between">
+              <div className="flex-1">{children}</div>
+              <footer className="mt-auto border-t border-white/5 bg-black/10 px-5 py-6 text-center text-xs text-[var(--slugger-muted)]">
+                <div className="flex items-center justify-center gap-4 font-bold uppercase tracking-wider">
+                  <Link href="/privacy" className="hover:text-[var(--slugger-brass)] transition">Privacy Policy</Link>
+                  <span className="text-white/10">&bull;</span>
+                  <Link href="/terms" className="hover:text-[var(--slugger-brass)] transition">Terms of Service</Link>
+                </div>
+                <p className="mt-3 text-[10px]">&copy; {new Date().getFullYear()} Sofa2Slugger. All rights reserved. Coached at home.</p>
+              </footer>
             </main>
 
             <Nav variant="bottom" />

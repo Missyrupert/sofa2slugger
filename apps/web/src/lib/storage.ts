@@ -6,6 +6,8 @@ const SESSION1_TEASER_KEY = "s2s_session1_teaser_seen";
 
 export function hasUnlockedAll(): boolean {
   if (typeof window === "undefined") return false;
+  // Automatically unlock all rounds in local development for testing
+  if (process.env.NODE_ENV === "development") return true;
   try {
     return (
       window.localStorage.getItem(UNLOCK_KEY) === "true" ||

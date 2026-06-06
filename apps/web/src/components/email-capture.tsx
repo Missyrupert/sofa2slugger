@@ -73,29 +73,29 @@ export function EmailCapture({
 
   return (
     <div
-      className={`border p-4 sm:p-5 ${
+      className={`border rounded p-4 sm:p-5 shadow-lg ${
         dark
-          ? "border-white/10 bg-white/[0.05] text-[var(--slugger-bone)]"
+          ? "border-white/5 bg-[var(--slugger-panel)] text-[var(--slugger-bone)]"
           : "border-[var(--slugger-ink)]/14 bg-[var(--slugger-bone)] text-[var(--slugger-ink)]"
       }`}
     >
       <div className="flex items-start gap-3">
         <span
-          className={`flex h-10 w-10 shrink-0 items-center justify-center ${
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-sm ${
             dark
-              ? "bg-[var(--slugger-brass)] text-[var(--slugger-bone)]"
+              ? "bg-[var(--slugger-black)] border border-white/5 text-[var(--slugger-brass)]"
               : "bg-[var(--slugger-ink)] text-[var(--slugger-bone)]"
           }`}
         >
           <Mail className="h-5 w-5" />
         </span>
         <div className="min-w-0 flex-1">
-          <h2 className="text-xl font-black uppercase leading-tight">
+          <h2 className="text-xl font-black uppercase leading-tight tracking-tight">
             Want the beginner reset plan?
           </h2>
           <p
             className={`mt-2 text-sm leading-6 ${
-              dark ? "text-[var(--slugger-panel)]" : "text-[var(--slugger-muted)]"
+              dark ? "text-[var(--slugger-muted)]" : "text-[var(--slugger-muted)]"
             }`}
           >
             Leave your email and I&apos;ll send you simple Sofa2Slugger updates,
@@ -118,18 +118,18 @@ export function EmailCapture({
           onChange={(event) => setEmail(event.target.value)}
           required
           placeholder="you@example.com"
-          className={`min-h-12 w-full border px-4 text-sm font-bold outline-none ${
+          className={`min-h-12 w-full border px-4 text-sm font-bold outline-none rounded-sm ${
             dark
-              ? "border-white/15 bg-black/20 text-[var(--slugger-bone)] placeholder:text-white/35 focus:border-[var(--slugger-brass)]"
+              ? "border-white/10 bg-black/30 text-[var(--slugger-bone)] placeholder:text-white/20 focus:border-[var(--slugger-brass)]"
               : "border-[var(--slugger-ink)]/18 bg-white text-[var(--slugger-ink)] placeholder:text-[var(--slugger-muted)]/60 focus:border-[var(--slugger-brass)]"
           }`}
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className={`min-h-12 px-5 py-3 text-sm font-black uppercase transition disabled:opacity-60 ${
+          className={`min-h-12 px-5 py-3 text-sm font-black uppercase transition disabled:opacity-60 rounded-sm cursor-pointer ${
             dark
-              ? "bg-[var(--slugger-bone)] text-[var(--slugger-ink)] hover:bg-white"
+              ? "bg-[var(--slugger-brass)] text-[var(--slugger-black)] hover:bg-[var(--slugger-action-hot)] shadow-lg shadow-[var(--slugger-brass)]/15"
               : "bg-[var(--slugger-ink)] text-[var(--slugger-bone)] hover:bg-[var(--slugger-brass)]"
           }`}
         >

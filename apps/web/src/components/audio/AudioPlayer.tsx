@@ -251,7 +251,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
           type="button"
           onClick={togglePlay}
           aria-label={playing ? "Pause" : "Play"}
-          className="slugger-phone-pulse absolute flex h-24 w-24 items-center justify-center bg-[var(--slugger-brass)] text-[var(--slugger-bone)] shadow-2xl shadow-[var(--slugger-brass)]/25 transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--slugger-bone)] focus:ring-offset-2 focus:ring-offset-[var(--slugger-ink)]"
+          className="slugger-phone-pulse absolute flex h-24 w-24 items-center justify-center bg-[var(--slugger-brass)] text-[var(--slugger-black)] shadow-2xl shadow-[var(--slugger-brass)]/25 transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--slugger-bone)] focus:ring-offset-2 focus:ring-offset-[var(--slugger-ink)]"
         >
           {playing ? (
             <Pause className="h-10 w-10" strokeWidth={2.5} />
@@ -265,7 +265,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
         </button>
       </div>
 
-      <span className="border border-white/10 bg-white/8 px-4 py-2 font-mono text-lg text-white/72">
+      <span className="border border-white/10 bg-white/5 px-4 py-2 font-mono text-lg text-white/70">
         {formatTime(currentTime)} / {formatTime(duration || 0)}
       </span>
 
@@ -274,7 +274,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
           type="button"
           onClick={seekBack}
           aria-label="Rewind 15 seconds"
-          className="flex h-12 w-12 items-center justify-center border border-white/15 bg-white/8 text-white/70 transition hover:bg-[var(--slugger-bone)] hover:text-[var(--slugger-ink)]"
+          className="flex h-12 w-12 items-center justify-center border border-white/15 bg-white/5 text-white/70 transition hover:bg-[var(--slugger-bone)] hover:text-[var(--slugger-black)]"
         >
           <RotateCcw className="h-5 w-5" strokeWidth={2} />
         </button>
@@ -282,14 +282,14 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
           type="button"
           onClick={seekForward}
           aria-label="Forward 15 seconds"
-          className="flex h-12 w-12 items-center justify-center border border-white/15 bg-white/8 text-white/70 transition hover:bg-[var(--slugger-bone)] hover:text-[var(--slugger-ink)]"
+          className="flex h-12 w-12 items-center justify-center border border-white/15 bg-white/5 text-white/70 transition hover:bg-[var(--slugger-bone)] hover:text-[var(--slugger-black)]"
         >
           <RotateCw className="h-5 w-5" strokeWidth={2} />
         </button>
       </div>
 
       <div
-        className="flex items-center gap-1 border border-white/10 bg-white/8 p-1"
+        className="flex items-center gap-1 border border-white/10 bg-white/5 p-1"
         aria-label="Playback pace"
       >
         {PLAYBACK_RATES.map((rate) => (
@@ -301,7 +301,7 @@ export function AudioPlayer({ src, sessionId, onComplete }: AudioPlayerProps) {
             aria-pressed={playbackRate === rate}
             className={`h-9 min-w-14 px-3 text-sm font-bold transition ${
               playbackRate === rate
-                ? "bg-[var(--slugger-bone)] text-[var(--slugger-ink)]"
+                ? "bg-[var(--slugger-bone)] text-[var(--slugger-black)]"
                 : "text-white/65 hover:bg-white/10 hover:text-white"
             }`}
           >

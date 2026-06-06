@@ -74,14 +74,14 @@ export default function CornerPage() {
   return (
     <div className="flex flex-col bg-[var(--slugger-paper)] px-5 py-8 text-[var(--slugger-ink)] sm:px-8 lg:px-10">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_360px]">
-        <section className="slugger-ring border border-black/10 p-6 text-[var(--slugger-bone)] sm:p-8">
+        <section className="slugger-ring border border-white/5 p-6 text-[var(--slugger-bone)] sm:p-8 rounded">
           <p className="text-sm font-black uppercase text-[var(--slugger-action-hot)]">
             The Corner
           </p>
           <h1 className="mt-3 max-w-2xl text-4xl font-black uppercase leading-none tracking-tight sm:text-5xl">
             Clear answers before you start swinging.
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--slugger-panel)]">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--slugger-muted)]">
             Sofa2Slugger is a compact audio training program for beginners who
             want structure, technique, safety, and a reason to move today.
           </p>
@@ -92,17 +92,19 @@ export default function CornerPage() {
           </div>
         </section>
 
-        <section className="border border-black/10 bg-[var(--slugger-bone)]/78 p-6">
-          <h2 className="text-xl font-black uppercase tracking-tight text-[var(--slugger-ink)]">
-            Contact
-          </h2>
-          <p className="mt-3 text-sm leading-6 text-[var(--slugger-muted)]">
-            Questions, access issues, feedback, or something that needs a closer
-            look.
-          </p>
+        <section className="border border-white/5 bg-[var(--slugger-panel)] p-6 rounded flex flex-col justify-between">
+          <div>
+            <h2 className="text-xl font-black uppercase tracking-tight text-[var(--slugger-bone)]">
+              Contact
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-[var(--slugger-muted)]">
+              Questions, access issues, feedback, or something that needs a closer
+              look.
+            </p>
+          </div>
           <a
             href="mailto:sofa2slugger@gmail.com"
-            className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 bg-[var(--slugger-ink)] px-5 py-3 text-sm font-black uppercase tracking-wide text-[var(--slugger-bone)] transition hover:bg-[var(--slugger-steel)]"
+            className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 bg-[var(--slugger-brass)] px-5 py-3 text-sm font-black uppercase tracking-wide text-[var(--slugger-black)] transition hover:bg-[var(--slugger-action-hot)] shadow-lg shadow-[var(--slugger-brass)]/15 rounded-sm"
           >
             <Mail className="h-4 w-4" />
             Email us
@@ -110,13 +112,13 @@ export default function CornerPage() {
         </section>
       </div>
 
-      <section className="mt-6">
+      <section className="mt-8">
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
             <p className="text-sm font-black uppercase text-[var(--slugger-brass)]">
               FAQ
             </p>
-            <h2 className="mt-2 text-3xl font-black uppercase tracking-tight text-[var(--slugger-ink)]">
+            <h2 className="mt-2 text-3xl font-black uppercase tracking-tight text-[var(--slugger-bone)]">
               What people ask first.
             </h2>
           </div>
@@ -139,7 +141,7 @@ function CornerBadge({
   label: string;
 }) {
   return (
-    <div className="flex items-center gap-2 border border-white/10 bg-white/[0.04] px-3 py-3 text-sm font-bold text-white/78">
+    <div className="flex items-center gap-2 border border-white/10 bg-white/[0.04] px-3 py-3 text-sm font-bold text-white/78 rounded-sm">
       <Icon className="h-4 w-4 text-[var(--slugger-action-hot)]" />
       {label}
     </div>
@@ -157,23 +159,23 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   }
 
   return (
-    <div className="border border-black/10 bg-[var(--slugger-bone)]/78">
+    <div className="border border-white/5 bg-[var(--slugger-panel)] rounded-sm transition duration-200 hover:border-white/10">
       <button
         type="button"
         onClick={toggleOpen}
-        className="flex min-h-16 w-full items-center justify-between gap-4 px-4 py-4 text-left"
+        className="flex min-h-16 w-full items-center justify-between gap-4 px-4 py-4 text-left cursor-pointer"
       >
-        <span className="text-sm font-black uppercase leading-5 text-[var(--slugger-ink)]">
+        <span className="text-sm font-black uppercase leading-5 text-[var(--slugger-bone)]">
           {question}
         </span>
         {open ? (
-          <ChevronUp className="h-5 w-5 flex-shrink-0 text-[var(--slugger-muted)]" />
+          <ChevronUp className="h-5 w-5 flex-shrink-0 text-[var(--slugger-brass)]" />
         ) : (
           <ChevronDown className="h-5 w-5 flex-shrink-0 text-[var(--slugger-muted)]" />
         )}
       </button>
       {open && (
-        <div className="border-t border-black/8 px-4 pb-4 pt-3">
+        <div className="border-t border-white/5 px-4 pb-4 pt-3">
           <p className="text-sm leading-6 text-[var(--slugger-muted)]">
             {answer}
           </p>
