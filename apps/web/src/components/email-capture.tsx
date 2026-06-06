@@ -91,7 +91,7 @@ export function EmailCapture({
         </span>
         <div className="min-w-0 flex-1">
           <h2 className="text-xl font-black uppercase leading-tight tracking-tight">
-            Want the beginner reset plan?
+            Want beginner tips & updates?
           </h2>
           <p
             className={`mt-2 text-sm leading-6 ${
@@ -133,7 +133,7 @@ export function EmailCapture({
               : "bg-[var(--slugger-ink)] text-[var(--slugger-bone)] hover:bg-[var(--slugger-brass)]"
           }`}
         >
-          {status === "loading" ? "Sending..." : "Send me the reset plan"}
+          {status === "loading" ? "Sending..." : "Get updates"}
         </button>
       </form>
 

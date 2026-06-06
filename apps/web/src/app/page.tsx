@@ -85,7 +85,7 @@ export default function HomePage() {
                   href="#intro-audio"
                   className="inline-flex min-h-14 items-center justify-center gap-3 border border-white/10 px-6 py-4 text-sm font-black uppercase text-[var(--slugger-bone)] transition hover:bg-white/5"
                 >
-                  2-min intro, if you want it
+                  Intro, if you want it
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
@@ -130,7 +130,7 @@ export default function HomePage() {
               Optional intro. Round 1 is ready.
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--slugger-muted)]">
-              Two and a half minutes to understand what Sofa2Slugger is, what it
+              A quick intro to understand what Sofa2Slugger is, what it
               is not, and why the first beginner boxing win is simply standing up.
             </p>
           </div>
