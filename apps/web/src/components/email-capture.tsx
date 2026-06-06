@@ -57,8 +57,16 @@ export function EmailCapture({
         storage_mode: data.mode ?? "configured_destination",
       });
       setStatus("success");
-      setMessage(data.message ?? "Done. You are on the list.");
+      setMessage(data.message ?? "Done! Your Reset Plan is downloading.");
       setEmail("");
+
+      // Trigger automatic browser download of the PDF
+      const link = document.createElement("a");
+      link.href = "/downloads/sofa2slugger-reset-plan.pdf";
+      link.setAttribute("download", "sofa2slugger-reset-plan.pdf");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch {
       trackEvent("email_submit_failed", {
         source,
@@ -91,15 +99,14 @@ export function EmailCapture({
         </span>
         <div className="min-w-0 flex-1">
           <h2 className="text-xl font-black uppercase leading-tight tracking-tight">
-            Want beginner tips & updates?
+            Want the beginner reset plan?
           </h2>
           <p
             className={`mt-2 text-sm leading-6 ${
               dark ? "text-[var(--slugger-muted)]" : "text-[var(--slugger-muted)]"
             }`}
           >
-            Leave your email and I&apos;ll send you simple Sofa2Slugger updates,
-            beginner tips, and launch offers. No spam.
+            Enter your email and I&apos;ll send you the 3-step Sofa2Slugger Reset Plan to stance, guard, and breathing baseline.
           </p>
         </div>
       </div>
@@ -133,7 +140,7 @@ export function EmailCapture({
               : "bg-[var(--slugger-ink)] text-[var(--slugger-bone)] hover:bg-[var(--slugger-brass)]"
           }`}
         >
-          {status === "loading" ? "Sending..." : "Get updates"}
+          {status === "loading" ? "Sending..." : "Send me the reset plan"}
         </button>
       </form>
 
@@ -145,7 +152,20 @@ export function EmailCapture({
               : "text-[var(--slugger-action-hot)]"
           }`}
         >
-          {message}
+          {status === "success" ? (
+            <span>
+              {message}{" "}
+              <a
+                href="/downloads/sofa2slugger-reset-plan.pdf"
+                download
+                className="underline hover:text-[var(--slugger-brass)] ml-1"
+              >
+                Click here to download manually.
+              </a>
+            </span>
+          ) : (
+            message
+          )}
         </p>
       )}
     </div>
