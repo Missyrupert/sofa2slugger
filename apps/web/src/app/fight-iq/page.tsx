@@ -12,7 +12,9 @@ import {
   Activity,
   Footprints,
   Maximize2,
-  Lock,
+  Volume2,
+  VolumeX,
+  type LucideIcon,
 } from "lucide-react";
 
 type Category = "All" | "Stance & Guard" | "Punches" | "Defense" | "Movement" | "Concepts";
@@ -23,7 +25,7 @@ interface GlossaryTerm {
   title: string;
   subtitle: string;
   category: Exclude<Category, "All">;
-  icon: any;
+  icon: LucideIcon;
   what: string;
   how: string;
   why: string;
@@ -234,69 +236,9 @@ export default function FightIQPage() {
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col gap-8">
             {filteredTerms.length > 0 ? (
-              filteredTerms.map((term) => {
-                const IconComponent = term.icon;
-                return (
-                  <div
-                    key={term.id}
-                    className="grid gap-6 border border-white/5 bg-[var(--slugger-panel)] p-5 md:grid-cols-[1.2fr_0.8fr] lg:p-6 rounded shadow-lg transition duration-200 hover:border-white/10"
-                  >
-                    {/* Detail Breakdown */}
-                    <div className="flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-center gap-3">
-                          <span className="flex h-8 w-8 items-center justify-center bg-[var(--slugger-black)] border border-white/5 text-xs font-black text-[var(--slugger-brass)] rounded-sm">
-                            {term.num}
-                          </span>
-                          <span className="text-[10px] font-black uppercase tracking-wider bg-white/5 px-2.5 py-1 text-[var(--slugger-muted)] border border-white/5 rounded-sm">
-                            {term.category}
-                          </span>
-                        </div>
-                        <h2 className="mt-4 text-2xl font-black uppercase leading-tight text-[var(--slugger-bone)]">
-                          {term.title}
-                        </h2>
-                        <p className="text-xs font-bold uppercase text-[var(--slugger-muted)] mt-0.5">
-                          {term.subtitle}
-                        </p>
-
-                        <div className="mt-6 grid grid-cols-1 gap-4 text-sm leading-relaxed">
-                          <div>
-                            <span className="text-xs font-black uppercase tracking-wider text-[var(--slugger-brass)] block mb-1">What is it:</span>
-                            <p className="text-[var(--slugger-bone)]/85">{term.what}</p>
-                          </div>
-                          <div>
-                            <span className="text-xs font-black uppercase tracking-wider text-[var(--slugger-brass)] block mb-1">How to do it:</span>
-                            <p className="text-[var(--slugger-bone)]/85">{term.how}</p>
-                          </div>
-                          <div>
-                            <span className="text-xs font-black uppercase tracking-wider text-[var(--slugger-brass)] block mb-1">Why it works:</span>
-                            <p className="text-[var(--slugger-bone)]/85">{term.why}</p>
-                          </div>
-                          <div>
-                            <span className="text-xs font-black uppercase tracking-wider text-[var(--slugger-brass)] block mb-1">When to use it:</span>
-                            <p className="text-[var(--slugger-bone)]/85">{term.when}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Themed Visual Placeholder Box */}
-                    <div className="relative border border-dashed border-white/10 bg-[var(--slugger-black)]/40 min-h-[180px] flex flex-col items-center justify-center p-6 text-center rounded-sm">
-                      <IconComponent className="h-10 w-10 text-[var(--slugger-brass)] opacity-40 mb-3" />
-                      <p className="text-xs font-black uppercase tracking-wider text-[var(--slugger-bone)]">
-                        Visual Guide Placeholder
-                      </p>
-                      <p className="text-[11px] text-[var(--slugger-muted)] max-w-[200px] mt-1 leading-normal">
-                        {term.visualLabel}
-                      </p>
-                      <div className="absolute top-2 right-2 flex items-center gap-1.5 opacity-30">
-                        <Lock className="h-3 w-3 text-[var(--slugger-muted)]" />
-                        <span className="text-[9px] font-black uppercase tracking-wider text-[var(--slugger-muted)]">Future Visual</span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })
+              filteredTerms.map((term) => (
+                <GlossaryTermCard key={term.id} term={term} />
+              ))
             ) : (
               <div className="text-center py-12 border border-dashed border-white/5 bg-[var(--slugger-panel)]">
                 <p className="font-bold text-[var(--slugger-muted)]">No terms found in this category.</p>
@@ -331,6 +273,103 @@ export default function FightIQPage() {
           </section>
         </div>
       </section>
+    </div>
+  );
+}
+
+function GlossaryTermCard({ term }: { term: GlossaryTerm }) {
+  const [videoError, setVideoError] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isVideoVertical, setIsVideoVertical] = useState(false);
+  const hasVideo = ["stance", "guard", "jab", "cross", "hooks", "uppercuts", "slip", "roll", "pivot"].includes(term.id);
+  const videoUrl = hasVideo ? `/videos/${term.id}.mp4` : undefined;
+
+  const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget;
+    if (video.videoHeight > video.videoWidth) {
+      setIsVideoVertical(true);
+    }
+  };
+
+  const showVideo = videoUrl && !videoError;
+
+  return (
+    <div className={`border border-white/5 bg-[var(--slugger-panel)] p-5 lg:p-6 rounded shadow-lg transition duration-200 hover:border-white/10 ${
+      showVideo ? "grid gap-6 md:grid-cols-[1.2fr_0.8fr]" : "block"
+    }`}>
+      {/* Detail Breakdown */}
+      <div className="flex flex-col justify-between h-full">
+        <div>
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center bg-[var(--slugger-black)] border border-white/5 text-xs font-black text-[var(--slugger-brass)] rounded-sm">
+              {term.num}
+            </span>
+            <span className="text-[10px] font-black uppercase tracking-wider bg-white/5 px-2.5 py-1 text-[var(--slugger-muted)] border border-white/5 rounded-sm">
+              {term.category}
+            </span>
+          </div>
+          <h2 className="mt-4 text-2xl font-black uppercase leading-tight text-[var(--slugger-bone)]">
+            {term.title}
+          </h2>
+          <p className="text-xs font-bold uppercase text-[var(--slugger-muted)] mt-0.5">
+            {term.subtitle}
+          </p>
+
+          <div className={`mt-6 grid gap-4 text-sm leading-relaxed ${
+            showVideo ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+          }`}>
+            <div>
+              <span className="text-xs font-black uppercase tracking-wider text-[var(--slugger-brass)] block mb-1">What is it:</span>
+              <p className="text-[var(--slugger-bone)]/85">{term.what}</p>
+            </div>
+            <div>
+              <span className="text-xs font-black uppercase tracking-wider text-[var(--slugger-brass)] block mb-1">How to do it:</span>
+              <p className="text-[var(--slugger-bone)]/85">{term.how}</p>
+            </div>
+            <div>
+              <span className="text-xs font-black uppercase tracking-wider text-[var(--slugger-brass)] block mb-1">Why it works:</span>
+              <p className="text-[var(--slugger-bone)]/85">{term.why}</p>
+            </div>
+            <div>
+              <span className="text-xs font-black uppercase tracking-wider text-[var(--slugger-brass)] block mb-1">When to use it:</span>
+              <p className="text-[var(--slugger-bone)]/85">{term.when}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Themed Visual Box / Looping Video */}
+      {showVideo && (
+        <div className={`relative border border-white/10 bg-[var(--slugger-black)] overflow-hidden w-full flex flex-col items-center justify-center rounded-sm transition-all duration-300 ${
+          isVideoVertical ? "aspect-[3/4] md:max-h-[280px]" : "aspect-video"
+        }`}>
+          <video
+            src={videoUrl}
+            autoPlay
+            loop
+            muted={isMuted}
+            playsInline
+            onLoadedMetadata={handleLoadedMetadata}
+            onError={() => setVideoError(true)}
+            className="absolute inset-0 w-full h-full object-contain opacity-90"
+          />
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsMuted(!isMuted);
+            }}
+            className="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center bg-[var(--slugger-black)]/85 hover:bg-[var(--slugger-black)] border border-white/10 rounded-full text-[var(--slugger-bone)] transition shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
+            title={isMuted ? "Unmute sound" : "Mute sound"}
+          >
+            {isMuted ? (
+              <VolumeX className="h-4 w-4 text-[var(--slugger-muted)]" />
+            ) : (
+              <Volume2 className="h-4 w-4 text-[var(--slugger-brass)]" />
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

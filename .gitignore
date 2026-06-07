@@ -74,3 +74,11 @@ check-stripe-keys.js
 run-preview.cjs
 apps/web/.gitignore
 apps/web/README.md
+
+# Launch-kit media assets
+launch-kit/marketing/*.mp4
+launch-kit/marketing/*.wav
+launch-kit/marketing/*.mp3
+launch-kit/marketing/*.png
+launch-kit/marketing/__pycache__/
+
