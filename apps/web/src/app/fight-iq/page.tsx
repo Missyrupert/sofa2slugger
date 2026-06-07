@@ -14,6 +14,8 @@ import {
   Maximize2,
   Volume2,
   VolumeX,
+  Play,
+  X,
   type LucideIcon,
 } from "lucide-react";
 
@@ -279,8 +281,13 @@ export default function FightIQPage() {
 
 function GlossaryTermCard({ term }: { term: GlossaryTerm }) {
   const [videoError, setVideoError] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [isVideoVertical, setIsVideoVertical] = useState(false);
+  
+  // Stance, Guard, and Jab are vertical (720x1280)
+  const isVerticalVideo = ["stance", "guard", "jab"].includes(term.id);
+  const [isVideoVertical, setIsVideoVertical] = useState(isVerticalVideo);
+
   const hasVideo = ["stance", "guard", "jab", "cross", "hooks", "uppercuts", "slip", "roll", "pivot"].includes(term.id);
   const videoUrl = hasVideo ? `/videos/${term.id}.mp4` : undefined;
 
@@ -343,31 +350,76 @@ function GlossaryTermCard({ term }: { term: GlossaryTerm }) {
         <div className={`relative border border-white/10 bg-[var(--slugger-black)] overflow-hidden w-full flex flex-col items-center justify-center rounded-sm transition-all duration-300 ${
           isVideoVertical ? "aspect-[3/4] md:max-h-[280px]" : "aspect-video"
         }`}>
-          <video
-            src={videoUrl}
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-            onLoadedMetadata={handleLoadedMetadata}
-            onError={() => setVideoError(true)}
-            className="absolute inset-0 w-full h-full object-contain opacity-90"
-          />
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsMuted(!isMuted);
-            }}
-            className="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center bg-[var(--slugger-black)]/85 hover:bg-[var(--slugger-black)] border border-white/10 rounded-full text-[var(--slugger-bone)] transition shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
-            title={isMuted ? "Unmute sound" : "Mute sound"}
-          >
-            {isMuted ? (
-              <VolumeX className="h-4 w-4 text-[var(--slugger-muted)]" />
-            ) : (
-              <Volume2 className="h-4 w-4 text-[var(--slugger-brass)]" />
-            )}
-          </button>
+          {isPlaying ? (
+            <>
+              <video
+                src={videoUrl}
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                onLoadedMetadata={handleLoadedMetadata}
+                onError={() => setVideoError(true)}
+                className="absolute inset-0 w-full h-full object-contain opacity-90"
+              />
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMuted(!isMuted);
+                }}
+                className="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center bg-[var(--slugger-black)]/85 hover:bg-[var(--slugger-black)] border border-white/10 rounded-full text-[var(--slugger-bone)] transition shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
+                title={isMuted ? "Unmute sound" : "Mute sound"}
+              >
+                {isMuted ? (
+                  <VolumeX className="h-4 w-4 text-[var(--slugger-muted)]" />
+                ) : (
+                  <Volume2 className="h-4 w-4 text-[var(--slugger-brass)]" />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsPlaying(false);
+                }}
+                className="absolute top-3 left-3 z-10 flex h-9 w-9 items-center justify-center bg-[var(--slugger-black)]/85 hover:bg-[var(--slugger-black)] border border-white/10 rounded-full text-[var(--slugger-bone)] transition shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
+                title="Stop video"
+              >
+                <X className="h-4 w-4 text-[var(--slugger-muted)]" />
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsPlaying(true)}
+              className="absolute inset-0 w-full h-full flex flex-col items-center justify-center group cursor-pointer transition focus:outline-none"
+            >
+              {/* Trainer Watermark Background */}
+              <img
+                src="/images/trainer_base.png"
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover opacity-10 transition duration-300 group-hover:opacity-15 group-hover:scale-105"
+              />
+              {/* Radial Gradient overlay to make the center stand out */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--slugger-black)] via-[var(--slugger-black)]/45 to-transparent" />
+              
+              {/* Play button overlay */}
+              <div className="relative z-10 flex flex-col items-center gap-3">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--slugger-brass)] text-[var(--slugger-black)] transition duration-300 group-hover:bg-[var(--slugger-action-hot)] group-hover:scale-110 shadow-lg shadow-[var(--slugger-brass)]/20">
+                  <Play className="h-6 w-6 fill-current ml-0.5" />
+                </div>
+                <span className="text-xs font-black uppercase tracking-widest text-[var(--slugger-bone)] group-hover:text-[var(--slugger-brass)] transition duration-200">
+                  Watch Demo
+                </span>
+                {isVideoVertical && (
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--slugger-muted)] -mt-1 bg-white/5 px-2 py-0.5 rounded-sm border border-white/5">
+                    Vertical Video
+                  </span>
+                )}
+              </div>
+            </button>
+          )}
         </div>
       )}
     </div>
