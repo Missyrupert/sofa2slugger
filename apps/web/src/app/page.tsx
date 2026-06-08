@@ -55,7 +55,7 @@ export default function HomePage() {
             </div>
 
             <div className="my-12 max-w-3xl lg:my-16">
-              <h1 className="font-display text-6xl font-black uppercase leading-[0.82] tracking-tighter sm:text-7xl xl:text-8xl bg-gradient-to-r from-white via-[var(--slugger-bone)] to-[var(--slugger-action-hot)] bg-clip-text text-transparent">
+              <h1 className="font-display text-5xl font-black uppercase leading-[0.82] tracking-tighter sm:text-7xl xl:text-8xl bg-gradient-to-r from-white via-[var(--slugger-bone)] to-[var(--slugger-action-hot)] bg-clip-text text-transparent">
                 Sofa2Slugger
               </h1>
               <p className="mt-6 max-w-2xl text-2xl font-black leading-8 text-[var(--slugger-bone)] sm:text-3xl">
