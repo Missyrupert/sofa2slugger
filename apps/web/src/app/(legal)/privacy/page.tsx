@@ -41,9 +41,6 @@ export default function PrivacyPage() {
                 <strong className="text-[var(--slugger-bone)]">Account Details:</strong> Your email address when capturing interests or during the login process.
               </li>
               <li>
-                <strong className="text-[var(--slugger-bone)]">Payment Information:</strong> Processed entirely securely via Stripe. We do not store or collect your card number.
-              </li>
-              <li>
                 <strong className="text-[var(--slugger-bone)]">Playback Progress:</strong> Saved locally in your browser&apos;s localStorage to keep track of completed rounds and pace rates.
               </li>
             </ul>
@@ -57,8 +54,7 @@ export default function PrivacyPage() {
               Your details are used solely to:
             </p>
             <ul className="mt-4 list-disc pl-5 space-y-2">
-              <li>Grant secure access to the locked rounds (2-12).</li>
-              <li>Verify completed checkout transactions.</li>
+              <li>Send the optional reset-plan email if you ask for it.</li>
               <li>Improve page load times and app mechanics.</li>
             </ul>
           </section>
@@ -68,7 +64,7 @@ export default function PrivacyPage() {
               3. Data Retention &amp; Sharing
             </h2>
             <p className="mt-3">
-              We never sell your email or share data with advertising networks. We use Stripe for payment processing and Resend for transactional emails. Progress data resides strictly in your local browser storage.
+              We never sell your email or share data with advertising networks. We use Resend for transactional emails if you join the reset-plan list. Progress data resides strictly in your local browser storage.
             </p>
           </section>
 

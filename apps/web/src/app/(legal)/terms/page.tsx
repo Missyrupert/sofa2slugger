@@ -51,19 +51,19 @@ export default function TermsPage() {
 
           <section className="border border-white/5 bg-[var(--slugger-panel)] p-6 rounded shadow-lg">
             <h2 className="text-lg font-black uppercase text-[var(--slugger-bone)] tracking-tight">
-              2. License &amp; Purchase
+              2. License
             </h2>
             <p className="mt-3">
-              Purchasing the full course for a one-time fee of £4.99 grants you a personal, lifetime, non-transferable license to stream and use the audio rounds inside your browser. Re-selling, downloading for distribution, or playing the audio tracks in a commercial fitness class is strictly prohibited.
+              Sofa2Slugger is a free personal training experience. You may stream and use the audio rounds in your browser for personal, non-commercial use. Re-selling, downloading for distribution, or playing the audio tracks in a commercial fitness class is strictly prohibited.
             </p>
           </section>
 
           <section className="border border-white/5 bg-[var(--slugger-panel)] p-6 rounded shadow-lg">
             <h2 className="text-lg font-black uppercase text-[var(--slugger-bone)] tracking-tight">
-              3. Refunds &amp; Access
+              3. Access
             </h2>
             <p className="mt-3">
-              Since Round 1 is completely free to test, the one-time purchase for the remaining rounds is generally non-refundable. If you experience technical browser issues playing the audio tracks, reach out to us at{" "}
+              All 12 rounds are free. If you experience technical browser issues playing the audio tracks, reach out to us at{" "}
               <a
                 href="mailto:sofa2slugger@gmail.com"
                 className="text-[var(--slugger-brass)] font-bold hover:underline"

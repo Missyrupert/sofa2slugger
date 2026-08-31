@@ -41,12 +41,8 @@ const FAQS = [
     a: "Most rounds are compact enough to start easily and useful enough to repeat.",
   },
   {
-    q: "Is Round 1 really free?",
-    a: "Yes. No sign-up, no email, and no card details. Start Round 1 whenever you are ready.",
-  },
-  {
-    q: "What do I get for £4.99?",
-    a: "Lifetime access to rounds 2 through 12 in this browser. One low-friction payment, no subscription and no recurring charge.",
+    q: "Is this free?",
+    a: "Yes. All 12 rounds are free. No sign-up, no email, and no card details. Start whenever you are ready.",
   },
   {
     q: "Can I replay rounds?",

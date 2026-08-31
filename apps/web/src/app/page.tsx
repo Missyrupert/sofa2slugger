@@ -16,7 +16,7 @@ const journey = [
     title: "Stand up",
     body: "Round one teaches the base: stance, guard, breathing, and calm movement.",
     href: "/session/1",
-    action: "Start Round 1 free",
+    action: "Start Round 1",
   },
   {
     title: "Move privately",
@@ -32,13 +32,6 @@ const journey = [
   },
 ] as const;
 
-const included = [
-  "Round 1 free",
-  "Rounds 2-12 optional",
-  "One payment",
-  "No subscription",
-] as const;
-
 export default function HomePage() {
   return (
     <div className="bg-[var(--slugger-paper)] text-[var(--slugger-ink)] min-h-screen">
@@ -51,7 +44,7 @@ export default function HomePage() {
               <span className="slugger-phone-pulse flex h-9 w-9 items-center justify-center bg-[var(--slugger-steel)] text-[var(--slugger-bone)]">
                 <Dumbbell className="h-4 w-4" />
               </span>
-              Start Round 1 free
+              Free 12-round course
             </div>
 
             <div className="my-12 max-w-3xl lg:my-16">
@@ -63,8 +56,7 @@ export default function HomePage() {
               </p>
               <p className="mt-5 max-w-xl text-base leading-7 text-[var(--slugger-muted)]">
                 Audio-guided beginner boxing at home. Headphones on, stand up,
-                and follow the first private round. Try it first. Upgrade only
-                if you want Round 2.
+                and follow the first private round. All 12 rounds are free.
               </p>
               <HomeResumeCta />
 
@@ -79,7 +71,7 @@ export default function HomePage() {
                   className="inline-flex min-h-14 items-center justify-center gap-3 bg-[var(--slugger-brass)] px-6 py-4 text-sm font-black uppercase text-[var(--slugger-black)] transition hover:bg-[var(--slugger-action-hot)] shadow-lg shadow-[var(--slugger-brass)]/20"
                 >
                   <Play className="h-5 w-5" fill="currentColor" />
-                  Start Round 1 free
+                  Free 12-round course
                 </Link>
                 <Link
                   href="#intro-audio"
@@ -92,7 +84,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid max-w-xl grid-cols-3 border border-white/5 bg-white/[0.03] backdrop-blur">
-              <Metric value="Free" label="Round 1" />
+              <Metric value="Free" label="All 12 rounds" />
               <Metric value="12" label="Guided rounds" />
               <Metric value="No" label="Kit or camera" />
             </div>
@@ -182,7 +174,7 @@ export default function HomePage() {
               <ul className="mt-6 grid gap-3 text-sm font-bold text-[var(--slugger-bone)]">
                 <li className="flex gap-2">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 text-[var(--slugger-signal)]" />
-                  Round 1 is free.
+                  All 12 rounds are free.
                 </li>
                 <li className="flex gap-2">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 text-[var(--slugger-signal)]" />
@@ -199,7 +191,7 @@ export default function HomePage() {
               {SESSIONS.map((session) => (
                 <Link
                   key={session.id}
-                  href={session.isFree ? `/session/${session.id}` : "/gym"}
+                  href={`/session/${session.id}`}
                   data-analytics-event={
                     session.id === 1 ? "round_1_clicked" : undefined
                   }
@@ -223,7 +215,7 @@ export default function HomePage() {
                     </p>
                   </div>
                   <span className="mt-5 inline-flex items-center gap-2 text-xs font-black uppercase text-[var(--slugger-action-hot)] opacity-0 transition group-hover/session:opacity-100">
-                    {session.isFree ? "Start free" : "View round"}
+                    Play round
                     <ArrowRight className="h-4 w-4" />
                   </span>
                 </Link>
@@ -236,38 +228,22 @@ export default function HomePage() {
             <div className="relative grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--slugger-action-hot)]">
-                  After Round 1
+                  Free course
                 </p>
                 <h2 className="font-display mt-3 text-3xl font-black uppercase leading-tight sm:text-4xl text-[var(--slugger-bone)]">
-                  Round 1 is free. Start today for the rest.
+                  All 12 rounds are open.
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-[var(--slugger-muted)]">
-                  If the first round gives you something useful, unlock rounds
-                  2-12 for {"\u00a34.99"}. One payment. No subscription.
+                  Every round is open. Train whenever you want.
                 </p>
               </div>
-              <div className="grid gap-3 sm:grid-cols-[auto_1fr] sm:items-center">
-                <p className="font-display text-5xl font-black leading-none text-[var(--slugger-action-hot)]">
-                  {"\u00a34.99"}
-                </p>
-                <div className="grid grid-cols-2 gap-2 text-xs font-black uppercase text-[var(--slugger-muted)]">
-                  {included.map((item) => (
-                    <span
-                      key={item}
-                      className="border border-white/5 bg-black/20 px-2 py-2 text-center"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-                <Link
-                  href="/gym"
-                  className="inline-flex min-h-12 items-center justify-center gap-3 bg-[var(--slugger-brass)] px-5 py-3 text-sm font-black uppercase text-[var(--slugger-black)] transition hover:bg-[var(--slugger-action-hot)] sm:col-span-2 shadow-lg shadow-[var(--slugger-brass)]/20"
-                >
-                  See rounds 2-12
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
+              <Link
+                href="/gym"
+                className="inline-flex min-h-12 items-center justify-center gap-3 bg-[var(--slugger-brass)] px-5 py-3 text-sm font-black uppercase text-[var(--slugger-black)] transition hover:bg-[var(--slugger-action-hot)] shadow-lg shadow-[var(--slugger-brass)]/20"
+              >
+                Open the course
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </section>
         </div>

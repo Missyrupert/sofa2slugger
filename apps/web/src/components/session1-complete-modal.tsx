@@ -9,8 +9,6 @@ type Session1CompleteModalProps = {
 };
 
 export function Session1CompleteModal({ onClose }: Session1CompleteModalProps) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -26,34 +24,16 @@ export function Session1CompleteModal({ onClose }: Session1CompleteModalProps) {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [onClose]);
 
-  async function handleCheckout() {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/checkout", { method: "POST" });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        setError(data.error ?? "Something went wrong");
-        setLoading(false);
-      }
-    } catch {
-      setError("Network error. Please try again.");
-      setLoading(false);
-    }
-  }
-
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 transition-opacity duration-500 backdrop-blur-sm ${visible ? "opacity-100" : "opacity-0"}`}
       role="dialog"
       aria-modal="true"
-      aria-labelledby="teaser-modal-title"
+      aria-labelledby="round1-complete-title"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div
-        className={`relative w-full max-w-2xl border border-white/5 bg-[var(--slugger-panel)] p-8 text-[var(--slugger-bone)] shadow-2xl transition-all duration-500 rounded ${visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+        className={`relative w-full max-w-xl border border-white/5 bg-[var(--slugger-panel)] p-8 text-[var(--slugger-bone)] shadow-2xl transition-all duration-500 rounded ${visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
       >
         <button
           type="button"
@@ -69,122 +49,40 @@ export function Session1CompleteModal({ onClose }: Session1CompleteModalProps) {
         </p>
 
         <h2
-          id="teaser-modal-title"
+          id="round1-complete-title"
           className="mt-3 pr-8 text-3xl font-black uppercase tracking-tight text-[var(--slugger-bone)] text-balance bg-gradient-to-r from-white via-[var(--slugger-bone)] to-[var(--slugger-brass)] bg-clip-text text-transparent"
         >
           You stood up and finished Round 1. That is the hardest part.
         </h2>
 
         <p className="mt-4 leading-7 text-[var(--slugger-muted)]">
-          You've broken the inertia. The next 11 rounds help you build on this
-          momentum: rhythm, balance, guard, control, and clean resets at your
-          own pace.
+          You&apos;ve set your stance, guard, breathing, and first calm
+          movement. That is the first round of the free 12-round sofa boxing
+          programme. Next is The Jab. Same space, same pace.
         </p>
-
-        <div className="mt-6 grid grid-cols-1 gap-2.5 text-sm sm:grid-cols-2">
-          <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)] text-xs">
-              02
-            </span>{" "}
-            The Jab
-          </div>
-          <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)] text-xs">
-              03
-            </span>{" "}
-            The Cross
-          </div>
-          <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)] text-xs">
-              04
-            </span>{" "}
-            One-Two &amp; Exit
-          </div>
-          <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)] text-xs">
-              05
-            </span>{" "}
-            Hooks
-          </div>
-          <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)] text-xs">
-              06
-            </span>{" "}
-            Uppercuts
-          </div>
-          <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)] text-xs">
-              07
-            </span>{" "}
-            Basic Defense
-          </div>
-          <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)] text-xs">
-              08
-            </span>{" "}
-            Footwork &amp; Angles
-          </div>
-          <div className="flex items-center gap-2 text-[var(--slugger-bone)]">
-            <span className="font-black text-[var(--slugger-action-hot)] text-xs">
-              09
-            </span>{" "}
-            Attack &amp; Defense
-          </div>
-          <div className="flex items-center gap-2 text-white/40">
-            <span className="font-black text-[var(--slugger-action-hot)]/40 text-xs">
-              10
-            </span>{" "}
-            Rhythm &amp; Tempo
-          </div>
-          <div className="flex items-center gap-2 text-white/40">
-            <span className="font-black text-[var(--slugger-action-hot)]/40 text-xs">
-              11
-            </span>{" "}
-            Round Builder
-          </div>
-          <div className="flex items-center gap-2 text-white/40">
-            <span className="font-black text-[var(--slugger-action-hot)]/40 text-xs">
-              12
-            </span>{" "}
-            First Full Round
-          </div>
-        </div>
-
-        <p className="mt-6 text-xs font-black uppercase text-[var(--slugger-muted)]">
-          One simple payment. No subscription. Move at your own pace.
-        </p>
-
-        {error && (
-          <p className="mt-3 text-sm font-bold text-[var(--slugger-action-hot)]">
-            {error}
-          </p>
-        )}
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <button
-            type="button"
-            onClick={handleCheckout}
-            disabled={loading}
-            data-analytics-event="Unlock full course clicked"
-            data-analytics-label="round_1_complete_modal_checkout"
-            className="flex-1 bg-[var(--slugger-brass)] py-4 font-black uppercase tracking-wide text-[var(--slugger-black)] transition hover:bg-[var(--slugger-action-hot)] disabled:opacity-50 shadow-lg shadow-[var(--slugger-brass)]/15 rounded-sm cursor-pointer"
+          <Link
+            href="/session/2"
+            onClick={onClose}
+            className="flex-1 bg-[var(--slugger-brass)] py-4 text-center font-black uppercase tracking-wide text-[var(--slugger-black)] transition hover:bg-[var(--slugger-action-hot)] shadow-lg shadow-[var(--slugger-brass)]/15 rounded-sm"
           >
-            {loading ? "Redirecting..." : "Unlock full course - £4.99"}
-          </button>
+            Continue to Round 2
+          </Link>
           <button
             type="button"
             onClick={onClose}
             className="border border-white/10 px-6 py-4 text-sm font-black uppercase tracking-wide text-[var(--slugger-bone)] transition hover:bg-white/5 cursor-pointer rounded-sm"
           >
-            Replay Round 1 tomorrow
+            Stay here
           </button>
         </div>
         <Link
-          href="/progress"
+          href="/gym"
           onClick={onClose}
           className="mt-4 inline-flex w-full justify-center text-sm font-black uppercase tracking-wide text-[var(--slugger-muted)] transition hover:text-white text-center"
         >
-          Back to Progress
+          See the full programme
         </Link>
       </div>
     </div>
