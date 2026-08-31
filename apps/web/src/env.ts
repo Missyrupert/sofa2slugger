@@ -1,4 +1,4 @@
-/** Kept so instrumentation can still boot. No payment env is required. */
+/** Minimal env check - no DB or auth required for static site. */
 export function getEnv(): Record<string, unknown> {
   return {};
 }

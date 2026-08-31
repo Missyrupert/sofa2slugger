@@ -5,12 +5,14 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ArrowLeft, CheckCircle2, ChevronDown, Clock3, Headphones, ListChecks } from "lucide-react";
 import { AudioPlayer } from "@/components/audio/AudioPlayer";
+import { Session1CompleteModal } from "@/components/session1-complete-modal";
 import { getSessionAudioPath } from "@/content/audioMap";
 import { SESSIONS, formatDuration, getSession } from "@/lib/sessions";
 
 export default function SessionPage() {
   const params = useParams();
   const [completed, setCompleted] = useState(false);
+  const [showRound1Complete, setShowRound1Complete] = useState(false);
   const [showMobileProgram, setShowMobileProgram] = useState(false);
 
   const sessionId = parseInt(params.id as string, 10);
@@ -100,7 +102,11 @@ export default function SessionPage() {
                     src={src}
                     sessionId={sessionId}
                     onComplete={() => {
-                      setCompleted(true);
+                      if (sessionId === 1) {
+                        setShowRound1Complete(true);
+                      } else {
+                        setCompleted(true);
+                      }
                     }}
                   />
                 ) : (
@@ -224,6 +230,14 @@ export default function SessionPage() {
         </div>
       </aside>
 
+      {showRound1Complete && (
+        <Session1CompleteModal
+          onClose={() => {
+            setShowRound1Complete(false);
+            setCompleted(true);
+          }}
+        />
+      )}
     </div>
   );
 }

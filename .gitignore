@@ -69,6 +69,8 @@ apps/web/public/window.svg
 .env.example
 README.md
 SECURITY.md
+STRIPE_KEY_ROTATION.md
+check-stripe-keys.js
 run-preview.cjs
 apps/web/.gitignore
 apps/web/README.md
