@@ -5,24 +5,18 @@ import Link from "next/link";
 import {
   CheckCircle2,
   Clock3,
-  Lock,
   Play,
-  Sparkles,
   TimerReset,
   Dumbbell,
 } from "lucide-react";
 import { SESSIONS, formatDuration } from "@/lib/sessions";
-import { hasUnlockedAll, getCompletedSessions } from "@/lib/storage";
-import { UnlockModal } from "@/components/unlock-modal";
+import { getCompletedSessions } from "@/lib/storage";
 
 export default function GymPage() {
-  const [showUnlock, setShowUnlock] = useState(false);
-  const [unlocked, setUnlocked] = useState(false);
   const [completed, setCompleted] = useState<number[]>([]);
 
   useEffect(() => {
     const id = window.setTimeout(() => {
-      setUnlocked(hasUnlockedAll());
       setCompleted(getCompletedSessions());
     }, 0);
     return () => window.clearTimeout(id);
@@ -41,31 +35,31 @@ export default function GymPage() {
               Take it one round at a time.
             </h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--slugger-muted)]">
-              The Base is open now. Rounds 2-12 unlock together when you are ready to build steady momentum.
+              All 12 rounds are free. Start with The Base, then move through punches, defense, movement, and a full shadowboxing round.
             </p>
           </div>
           <div className="border border-white/5 bg-white/[0.02] p-5 backdrop-blur">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--slugger-action-hot)]">
-              How it opens
+              How it works
             </p>
             <div className="mt-4 grid gap-3 text-sm font-semibold text-[var(--slugger-bone)]">
               <p>
                 <span className="mr-2 text-[var(--slugger-brass)] font-black">
                   01
                 </span>
-                Round 1 is free.
+                Every round is open.
               </p>
               <p>
                 <span className="mr-2 text-[var(--slugger-brass)] font-black">
                   02
                 </span>
-                The full course unlocks with one payment.
+                Audio leads. The screen supports.
               </p>
               <p>
                 <span className="mr-2 text-[var(--slugger-brass)] font-black">
                   03
                 </span>
-                Your completed rounds appear on Progress.
+                Completed rounds appear on Progress.
               </p>
             </div>
           </div>
@@ -81,7 +75,7 @@ export default function GymPage() {
             Start where you are.
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--slugger-muted)]">
-            Round 1 is your starting point. The other rounds show the path
+            Round 1 is a clean starting point. The other rounds show the path
             ahead: fundamentals, defense, movement, rhythm, and steady flow.
           </p>
         </div>
@@ -91,114 +85,74 @@ export default function GymPage() {
             <SessionCard
               key={session.id}
               session={session}
-              unlocked={unlocked}
               isCompleted={completed.includes(session.id)}
-              onLockedClick={() => setShowUnlock(true)}
             />
           ))}
         </div>
       </section>
-
-      {showUnlock && <UnlockModal onClose={() => setShowUnlock(false)} />}
     </div>
   );
 }
 
 function SessionCard({
   session,
-  unlocked,
   isCompleted,
-  onLockedClick,
 }: {
   session: (typeof SESSIONS)[0];
-  unlocked: boolean;
   isCompleted: boolean;
-  onLockedClick: () => void;
 }) {
-  const accessible = session.isFree || unlocked;
-
-  const card = (
-    <div className="group relative flex min-h-64 flex-col overflow-hidden border border-white/5 bg-[var(--slugger-panel)] p-5 text-left transition duration-300 hover:-translate-y-1 hover:border-[var(--slugger-brass)]/30 hover:shadow-xl">
-      <div className="absolute right-4 top-4 text-7xl font-black leading-none text-white/[0.02]">
-        {session.id.toString().padStart(2, "0")}
-      </div>
-      <div className="relative flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--slugger-muted)]">
-            Round {session.id.toString().padStart(2, "0")}
-          </p>
-          <h2 className="font-display mt-2 text-2xl font-black uppercase leading-6 text-[var(--slugger-bone)]">
-            {session.title}
-          </h2>
+  return (
+    <Link
+      href={`/session/${session.id}`}
+      data-analytics-event={
+        session.id === 1 ? "Start Round 1 clicked" : undefined
+      }
+      data-analytics-label={session.id === 1 ? "gym_round_card" : undefined}
+    >
+      <div className="group relative flex min-h-64 flex-col overflow-hidden border border-white/5 bg-[var(--slugger-panel)] p-5 text-left transition duration-300 hover:-translate-y-1 hover:border-[var(--slugger-brass)]/30 hover:shadow-xl">
+        <div className="absolute right-4 top-4 text-7xl font-black leading-none text-white/[0.02]">
+          {session.id.toString().padStart(2, "0")}
         </div>
-        {isCompleted ? (
-          <CheckCircle2 className="h-6 w-6 flex-shrink-0 text-[var(--slugger-signal)]" />
-        ) : accessible ? (
-          <span className="bg-[var(--slugger-brass)] px-3 py-1 text-[11px] font-black uppercase text-[var(--slugger-black)]">
-            {session.isFree ? "Free" : "Open"}
+        <div className="relative flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--slugger-muted)]">
+              Round {session.id.toString().padStart(2, "0")}
+            </p>
+            <h2 className="font-display mt-2 text-2xl font-black uppercase leading-6 text-[var(--slugger-bone)]">
+              {session.title}
+            </h2>
+          </div>
+          {isCompleted ? (
+            <CheckCircle2 className="h-6 w-6 flex-shrink-0 text-[var(--slugger-signal)]" />
+          ) : (
+            <span className="bg-[var(--slugger-brass)] px-3 py-1 text-[11px] font-black uppercase text-[var(--slugger-black)]">
+              Open
+            </span>
+          )}
+        </div>
+
+        <p className="relative mt-4 flex-1 text-sm leading-6 text-[var(--slugger-muted)]">
+          {session.summary}
+        </p>
+
+        <div className="relative mt-5 grid grid-cols-2 gap-2 text-xs font-bold uppercase text-[var(--slugger-muted)]">
+          <span className="inline-flex items-center gap-2 bg-[var(--slugger-black)] px-3 py-2 border border-white/[0.02]">
+            <Clock3 className="h-4 w-4 text-[var(--slugger-brass)]" />
+            {formatDuration(session.durationSec)}
           </span>
-        ) : (
-          <Lock className="h-5 w-5 flex-shrink-0 text-[var(--slugger-muted)]" />
-        )}
-      </div>
+          <span className="inline-flex items-center gap-2 bg-[var(--slugger-black)] px-3 py-2 border border-white/[0.02]">
+            <TimerReset className="h-4 w-4 text-[var(--slugger-brass)]" />
+            {session.intensity}
+          </span>
+        </div>
 
-      <p className="relative mt-4 flex-1 text-sm leading-6 text-[var(--slugger-muted)]">
-        {session.summary}
-      </p>
-
-      <div className="relative mt-5 grid grid-cols-2 gap-2 text-xs font-bold uppercase text-[var(--slugger-muted)]">
-        <span className="inline-flex items-center gap-2 bg-[var(--slugger-black)] px-3 py-2 border border-white/[0.02]">
-          <Clock3 className="h-4 w-4 text-[var(--slugger-brass)]" />
-          {formatDuration(session.durationSec)}
-        </span>
-        <span className="inline-flex items-center gap-2 bg-[var(--slugger-black)] px-3 py-2 border border-white/[0.02]">
-          <TimerReset className="h-4 w-4 text-[var(--slugger-brass)]" />
-          {session.intensity}
-        </span>
-      </div>
-
-      <div className="relative mt-5">
-        {accessible ? (
+        <div className="relative mt-5">
           <span className="inline-flex min-h-11 w-full items-center justify-center gap-2 bg-[var(--slugger-brass)] px-4 py-3 text-sm font-black uppercase text-[var(--slugger-black)] transition duration-300 group-hover:bg-[var(--slugger-action-hot)]">
             <Play className="h-4 w-4" strokeWidth={2.5} fill="currentColor" />
             Play round
           </span>
-        ) : (
-          <span
-            data-testid={`unlock-btn-${session.id}`}
-            className="inline-flex min-h-11 w-full items-center justify-center gap-2 border border-white/10 px-4 py-3 text-sm font-black uppercase text-[var(--slugger-bone)] transition duration-300 group-hover:border-[var(--slugger-brass)]/40 group-hover:text-[var(--slugger-brass)]"
-          >
-            <Sparkles className="h-4 w-4 text-[var(--slugger-action-hot)]" />
-            Unlock full course
-          </span>
-        )}
+        </div>
       </div>
-    </div>
-  );
-
-  if (accessible) {
-    return (
-      <Link
-        href={`/session/${session.id}`}
-        data-analytics-event={
-          session.id === 1 ? "Start Round 1 clicked" : undefined
-        }
-        data-analytics-label={session.id === 1 ? "gym_round_card" : undefined}
-      >
-        {card}
-      </Link>
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={onLockedClick}
-      data-analytics-event="Unlock full course clicked"
-      data-analytics-label={`locked_round_${session.id}`}
-      className="w-full"
-    >
-      {card}
-    </button>
+    </Link>
   );
 }

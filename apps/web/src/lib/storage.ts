@@ -1,34 +1,4 @@
-const UNLOCK_KEY = "s2s_unlocked";
-const PREMIUM_ACCESS_KEY = "s2s_premium_access";
-const FULL_ACCESS_KEY = "s2s_full_access";
 const COMPLETED_KEY = "s2s_completed";
-const SESSION1_TEASER_KEY = "s2s_session1_teaser_seen";
-
-export function hasUnlockedAll(): boolean {
-  if (typeof window === "undefined") return false;
-  // Automatically unlock all rounds in local development for testing
-  if (process.env.NODE_ENV === "development") return true;
-  try {
-    return (
-      window.localStorage.getItem(UNLOCK_KEY) === "true" ||
-      window.localStorage.getItem(PREMIUM_ACCESS_KEY) === "true" ||
-      window.localStorage.getItem(FULL_ACCESS_KEY) === "true"
-    );
-  } catch {
-    return false;
-  }
-}
-
-export function unlockAllSessions(): void {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.setItem(UNLOCK_KEY, "true");
-    window.localStorage.setItem(PREMIUM_ACCESS_KEY, "true");
-    window.localStorage.setItem(FULL_ACCESS_KEY, "true");
-  } catch {
-    /* ignore */
-  }
-}
 
 export function markSessionComplete(id: number): void {
   if (typeof window === "undefined") return;
@@ -66,24 +36,6 @@ export function getSessionProgress(id: number): {
     lastPlayed: entry.lastPlayed,
     count: entry.count,
   };
-}
-
-export function hasSeenSession1Teaser(): boolean {
-  if (typeof window === "undefined") return false;
-  try {
-    return window.localStorage.getItem(SESSION1_TEASER_KEY) === "true";
-  } catch {
-    return false;
-  }
-}
-
-export function markSession1TeaserSeen(): void {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.setItem(SESSION1_TEASER_KEY, "true");
-  } catch {
-    /* ignore */
-  }
 }
 
 type SessionEntry = {

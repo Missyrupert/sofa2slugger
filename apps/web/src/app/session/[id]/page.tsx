@@ -1,37 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { ArrowLeft, CheckCircle2, ChevronDown, Clock3, Headphones, ListChecks } from "lucide-react";
 import { AudioPlayer } from "@/components/audio/AudioPlayer";
-import { Session1CompleteModal } from "@/components/session1-complete-modal";
 import { getSessionAudioPath } from "@/content/audioMap";
 import { SESSIONS, formatDuration, getSession } from "@/lib/sessions";
-import {
-  hasSeenSession1Teaser,
-  hasUnlockedAll,
-  markSession1TeaserSeen,
-} from "@/lib/storage";
 
 export default function SessionPage() {
   const params = useParams();
-  const router = useRouter();
   const [completed, setCompleted] = useState(false);
-  const [showTeaser, setShowTeaser] = useState(false);
   const [showMobileProgram, setShowMobileProgram] = useState(false);
 
   const sessionId = parseInt(params.id as string, 10);
   const session = getSession(sessionId);
   const src = getSessionAudioPath(sessionId);
   const nextSession = SESSIONS.find((item) => item.id === sessionId + 1);
-
-  useEffect(() => {
-    if (!session) return;
-    if (!session.isFree && !hasUnlockedAll()) {
-      router.replace("/gym");
-    }
-  }, [session, router]);
 
   if (!session) {
     return (
@@ -115,16 +100,7 @@ export default function SessionPage() {
                     src={src}
                     sessionId={sessionId}
                     onComplete={() => {
-                      if (
-                        sessionId === 1 &&
-                        !hasUnlockedAll() &&
-                        !hasSeenSession1Teaser()
-                      ) {
-                        markSession1TeaserSeen();
-                        setShowTeaser(true);
-                      } else {
-                        setCompleted(true);
-                      }
+                      setCompleted(true);
                     }}
                   />
                 ) : (
@@ -248,14 +224,6 @@ export default function SessionPage() {
         </div>
       </aside>
 
-      {showTeaser && (
-        <Session1CompleteModal
-          onClose={() => {
-            setShowTeaser(false);
-            setCompleted(true);
-          }}
-        />
-      )}
     </div>
   );
 }

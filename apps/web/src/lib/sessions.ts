@@ -15,7 +15,6 @@ export type Session = {
   milestone: "Base" | "Straight Punches" | "Inside Work" | "Defense" | "Movement" | "Full Round";
   intensity: "Base" | "Build" | "Burn";
   durationSec: number;
-  isFree: boolean;
 };
 
 export const SESSIONS: Session[] = [
@@ -31,7 +30,6 @@ export const SESSIONS: Session[] = [
     milestone: "Base",
     intensity: "Base",
     durationSec: 558,
-    isFree: true,
   },
   {
     id: 2,
@@ -45,7 +43,6 @@ export const SESSIONS: Session[] = [
     milestone: "Straight Punches",
     intensity: "Base",
     durationSec: 664,
-    isFree: false,
   },
   {
     id: 3,
@@ -59,7 +56,6 @@ export const SESSIONS: Session[] = [
     milestone: "Straight Punches",
     intensity: "Base",
     durationSec: 556,
-    isFree: false,
   },
   {
     id: 4,
@@ -73,7 +69,6 @@ export const SESSIONS: Session[] = [
     milestone: "Straight Punches",
     intensity: "Build",
     durationSec: 599,
-    isFree: false,
   },
   {
     id: 5,
@@ -87,7 +82,6 @@ export const SESSIONS: Session[] = [
     milestone: "Inside Work",
     intensity: "Build",
     durationSec: 618,
-    isFree: false,
   },
   {
     id: 6,
@@ -101,7 +95,6 @@ export const SESSIONS: Session[] = [
     milestone: "Inside Work",
     intensity: "Build",
     durationSec: 728,
-    isFree: false,
   },
   {
     id: 7,
@@ -115,7 +108,6 @@ export const SESSIONS: Session[] = [
     milestone: "Defense",
     intensity: "Build",
     durationSec: 667,
-    isFree: false,
   },
   {
     id: 8,
@@ -129,7 +121,6 @@ export const SESSIONS: Session[] = [
     milestone: "Movement",
     intensity: "Build",
     durationSec: 633,
-    isFree: false,
   },
   {
     id: 9,
@@ -143,7 +134,6 @@ export const SESSIONS: Session[] = [
     milestone: "Defense",
     intensity: "Burn",
     durationSec: 595,
-    isFree: false,
   },
   {
     id: 10,
@@ -157,7 +147,6 @@ export const SESSIONS: Session[] = [
     milestone: "Movement",
     intensity: "Burn",
     durationSec: 614,
-    isFree: false,
   },
   {
     id: 11,
@@ -171,7 +160,6 @@ export const SESSIONS: Session[] = [
     milestone: "Full Round",
     intensity: "Burn",
     durationSec: 520,
-    isFree: false,
   },
   {
     id: 12,
@@ -185,7 +173,6 @@ export const SESSIONS: Session[] = [
     milestone: "Full Round",
     intensity: "Burn",
     durationSec: 616,
-    isFree: false,
   },
 ];
 
